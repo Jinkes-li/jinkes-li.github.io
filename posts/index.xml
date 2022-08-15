@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 19 Jul 2022 16:19:53 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kubernetes Coredns 服务发现</title>
-      <link>https://jinkes-li.github.io/posts/kubernetes-coredns-%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</link>
+      <link>https://jinkes-li.github.io/posts/kubernetes-coredns-%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E6%B5%8B%E8%AF%95/</link>
       <pubDate>Tue, 19 Jul 2022 16:19:53 +0800</pubDate>
       
-      <guid>https://jinkes-li.github.io/posts/kubernetes-coredns-%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</guid>
+      <guid>https://jinkes-li.github.io/posts/kubernetes-coredns-%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E6%B5%8B%E8%AF%95/</guid>
       <description>服务发现是指服务之间的通讯联通，对于Kubernetes来说服务发现具有3个痛点
 服务的动态性强 服务更新发布频繁 服务支持自动伸缩 Kubernetes中的PODIP是不断变化的，这里如何以不变应万变呢，以下两组概念就可以解决这个问题
 Kubernetes中抽象出来Service资源，通过标签选择器来关联一组POD Kubernetes中抽象出来了集群网络，通过相对固定的集群IP，使服务的接入点固定 那么如何自动关联Service资源的“名称”和“集群网络IP”，从而达到服务被集群自动发现的目的？
