@@ -13,7 +13,7 @@
       <pubDate>Tue, 19 Jul 2022 16:19:53 +0800</pubDate>
       
       <guid>https://jinkes-li.github.io/posts/kubernetes-coredns-%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E6%B5%8B%E8%AF%95/</guid>
-      <description>服务发现是指服务之间的通讯联通，对于Kubernetes来说服务发现具有3个痛点
+      <description>测试 1111服务发现是指服务之间的通讯联通，对于Kubernetes来说服务发现具有3个痛点
 服务的动态性强 服务更新发布频繁 服务支持自动伸缩 Kubernetes中的PODIP是不断变化的，这里如何以不变应万变呢，以下两组概念就可以解决这个问题
 Kubernetes中抽象出来Service资源，通过标签选择器来关联一组POD Kubernetes中抽象出来了集群网络，通过相对固定的集群IP，使服务的接入点固定 那么如何自动关联Service资源的“名称”和“集群网络IP”，从而达到服务被集群自动发现的目的？
 我们可以考虑一下传统的NDS模型： baidu.com —&amp;gt; 111.213.123.1
@@ -21,6 +21,30 @@ Kubernetes这里通过Coredns也去建立类似于传统DNS的模型，实现域
 部署Coredns
 在hdss7-200.host.com上，配置一个NGINX，用以提供kubernetes统一的访问资源清单入口
 [root@hdss7-200 ~]# vim /etc/nginx/conf.d/k8s-yaml.od.com.conf server { listen 80; server_name k8s-yaml.od.com; location / { autoindex on; default_type text/plain; root /data/k8s-yaml; } } [root@hdss7-200 html]# cd /data [root@hdss7-200 data]# mkdir k8s-yaml [root@hdss7-200 data]# cd k8s-yaml/ [root@hdss7-200 k8s-yaml]# mkdir coredns [root@hdss7-200 k8s-yaml]# nginx -t nginx: the configuration file /etc/nginx/nginx.conf syntax is ok nginx: configuration file /etc/nginx/nginx.conf test is successful [root@hdss7-200 k8s-yaml]# nginx -s reload [root@hdss7-200 k8s-yaml]# nginx配置中使用了新的域名，需要在内网DNS服务器上配置解析</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes Coredns 服务发现</title>
+      <link>https://jinkes-li.github.io/posts/%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Tue, 19 Jul 2022 16:19:53 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/posts/%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83/</guid>
+      <description>####BI 项目启动环境
+此项目使用的是Centos7.9 内核版本5.19，升级历史操作如下 [可参考]
+17 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org 18 rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm 19 yum --disablerepo=&amp;#34;*&amp;#34; --enablerepo=&amp;#34;elrepo-kernel&amp;#34; list available 20 $ yum --enablerepo=elrepo-kernel install kernel-ml 21 yum --enablerepo=elrepo-kernel install kernel-ml 22 awk -F\&amp;#39; &amp;#39;$1==&amp;#34;menuentry &amp;#34; {print i++ &amp;#34; : &amp;#34; $2}&amp;#39; /etc/grub2.cfg 23 grub2-set-default 0 24 reboot 25 uname -a 26 history ####基本环境安装
+install git
+[root@web ~]# yum install git -y install docker
+安装教程
+[root@web ~]# yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine [root@web ~]# yum install -y yum-utils [root@web ~]# yum-config-manager \ --add-repo \ https://download.</description>
+    </item>
+    
+    <item>
+      <title>荒唐</title>
+      <link>https://jinkes-li.github.io/posts/nginx%E8%BD%AC%E5%8F%91/</link>
+      <pubDate>Tue, 19 Jul 2022 16:19:53 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/posts/nginx%E8%BD%AC%E5%8F%91/</guid>
+      <description>这真的很荒唐</description>
     </item>
     
   </channel>
