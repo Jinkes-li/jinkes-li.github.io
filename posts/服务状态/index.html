@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 服务状态 | My New Hugo Site</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/posts/%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="服务状态" />
+<meta property="og:description" content="###服务状体
+####常常听到的服务状态是什么意思？ 什么是无服务状态和什么是有服务状态
+无状态服务
+无状态服务不会在本地存储持久化数据.多个服务实例对于同一个用户请求的响应结果是完全一致的.这种多服务实例之间是没有依赖关系,比如web应用,在k8s控制器 中动态启停无状态服务的pod并不会对其它的pod产生影响.
+有状态服务
+有状态服务需要在本地存储持久化数据,典型的是分布式数据库的应用,分布式节点实例之间有依赖的拓扑关系.比如,主从关系. 如果K8S停止分布式集群中任 一实例pod,就可能会导致数据丢失或者集群的crash.
+了解这个之后我们提出一个问题， Deployment部署的问题?
+Deployment被设计用来管理无状态服务的pod,每个pod完全一致.什么意思呢?
+无状态服务内的多个Pod创建的顺序是没有顺序的. 无状态服务内的多个Pod的名称是随机的.pod被重新启动调度后,它的名称与IP都会发生变化. 无状态服务内的多个Pod背后是共享存储的.
+现在看一个新的问题？
+对于数据库有状态的服务容器编排,Deployment解决方案就变得无能为力了. 比如,Redis是主从的架构,只能允许集群中出现一个主节点提供写,其它节点提供读能力.如果同时出现二个主节点后,必须会出现并发写的 操作,进一步导致集群写数据的不一致. 所以问题来了,针对Redis这种有状态的服务,它管理的多个Pod(代表master/slave角色)必须有自己独立的持久化存储组件. 有状态的服务Pod是用来运行有状态应用的,其在数据卷上存储的数据非常重要,因为Stateful就是要依赖存储数据卷上对每个Pod的状态进行建模与存储. 所以K8S提供了一个新的工具——StatefulSet来统一解决问题.
+Deployment组件是为无状态服务而设计的,其中的Pod名称,主机名,存储都是随机,不稳定的,并且Pod的创建与销毁也是无序的.这个设计决定了无状态服务并 不适合数据库领域的应用.
+而Stateful管理有状态的应用,它的Pod有如下特征:
+唯一性: 每个Pod会被分配一个唯一序号. 顺序性: Pod启动,更新,销毁是按顺序进行. 稳定的网络标识: Pod主机名,DNS地址不会随着Pod被重新调度而发生变化. 稳定的持久化存储: Pod被重新调度后,仍然能挂载原有的PV,从而保证了数据的完整性和一致性.
+等待更新···" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/posts/%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81/" /><meta property="article:section" content="posts" />
+
+
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="服务状态"/>
+<meta name="twitter:description" content="###服务状体
+####常常听到的服务状态是什么意思？ 什么是无服务状态和什么是有服务状态
+无状态服务
+无状态服务不会在本地存储持久化数据.多个服务实例对于同一个用户请求的响应结果是完全一致的.这种多服务实例之间是没有依赖关系,比如web应用,在k8s控制器 中动态启停无状态服务的pod并不会对其它的pod产生影响.
+有状态服务
+有状态服务需要在本地存储持久化数据,典型的是分布式数据库的应用,分布式节点实例之间有依赖的拓扑关系.比如,主从关系. 如果K8S停止分布式集群中任 一实例pod,就可能会导致数据丢失或者集群的crash.
+了解这个之后我们提出一个问题， Deployment部署的问题?
+Deployment被设计用来管理无状态服务的pod,每个pod完全一致.什么意思呢?
+无状态服务内的多个Pod创建的顺序是没有顺序的. 无状态服务内的多个Pod的名称是随机的.pod被重新启动调度后,它的名称与IP都会发生变化. 无状态服务内的多个Pod背后是共享存储的.
+现在看一个新的问题？
+对于数据库有状态的服务容器编排,Deployment解决方案就变得无能为力了. 比如,Redis是主从的架构,只能允许集群中出现一个主节点提供写,其它节点提供读能力.如果同时出现二个主节点后,必须会出现并发写的 操作,进一步导致集群写数据的不一致. 所以问题来了,针对Redis这种有状态的服务,它管理的多个Pod(代表master/slave角色)必须有自己独立的持久化存储组件. 有状态的服务Pod是用来运行有状态应用的,其在数据卷上存储的数据非常重要,因为Stateful就是要依赖存储数据卷上对每个Pod的状态进行建模与存储. 所以K8S提供了一个新的工具——StatefulSet来统一解决问题.
+Deployment组件是为无状态服务而设计的,其中的Pod名称,主机名,存储都是随机,不稳定的,并且Pod的创建与销毁也是无序的.这个设计决定了无状态服务并 不适合数据库领域的应用.
+而Stateful管理有状态的应用,它的Pod有如下特征:
+唯一性: 每个Pod会被分配一个唯一序号. 顺序性: Pod启动,更新,销毁是按顺序进行. 稳定的网络标识: Pod主机名,DNS地址不会随着Pod被重新调度而发生变化. 稳定的持久化存储: Pod被重新调度后,仍然能挂载原有的PV,从而保证了数据的完整性和一致性.
+等待更新···"/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" https://jinkes-li.github.io/posts/%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="https://jinkes-li.github.io/posts/kubernetes-coredns-%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E6%B5%8B%E8%AF%95/" aria-label="Next">
+            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
+          </a>
+        </li>
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f&text=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f&title=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f&is_video=false&description=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81&body=Check out this article: https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f&title=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f&title=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f&name=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81&description=%23%23%23%e6%9c%8d%e5%8a%a1%e7%8a%b6%e4%bd%93%0a%23%23%23%23%e5%b8%b8%e5%b8%b8%e5%90%ac%e5%88%b0%e7%9a%84%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81%e6%98%af%e4%bb%80%e4%b9%88%e6%84%8f%e6%80%9d%ef%bc%9f%20%e4%bb%80%e4%b9%88%e6%98%af%e6%97%a0%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81%e5%92%8c%e4%bb%80%e4%b9%88%e6%98%af%e6%9c%89%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81%0a%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%0a%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e4%b8%8d%e4%bc%9a%e5%9c%a8%e6%9c%ac%e5%9c%b0%e5%ad%98%e5%82%a8%e6%8c%81%e4%b9%85%e5%8c%96%e6%95%b0%e6%8d%ae.%e5%a4%9a%e4%b8%aa%e6%9c%8d%e5%8a%a1%e5%ae%9e%e4%be%8b%e5%af%b9%e4%ba%8e%e5%90%8c%e4%b8%80%e4%b8%aa%e7%94%a8%e6%88%b7%e8%af%b7%e6%b1%82%e7%9a%84%e5%93%8d%e5%ba%94%e7%bb%93%e6%9e%9c%e6%98%af%e5%ae%8c%e5%85%a8%e4%b8%80%e8%87%b4%e7%9a%84.%e8%bf%99%e7%a7%8d%e5%a4%9a%e6%9c%8d%e5%8a%a1%e5%ae%9e%e4%be%8b%e4%b9%8b%e9%97%b4%e6%98%af%e6%b2%a1%e6%9c%89%e4%be%9d%e8%b5%96%e5%85%b3%e7%b3%bb%2c%e6%af%94%e5%a6%82web%e5%ba%94%e7%94%a8%2c%e5%9c%a8k8s%e6%8e%a7%e5%88%b6%e5%99%a8%20%e4%b8%ad%e5%8a%a8%e6%80%81%e5%90%af%e5%81%9c%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e7%9a%84pod%e5%b9%b6%e4%b8%8d%e4%bc%9a%e5%af%b9%e5%85%b6%e5%ae%83%e7%9a%84pod%e4%ba%a7%e7%94%9f%e5%bd%b1%e5%93%8d.%0a%e6%9c%89%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%0a%e6%9c%89%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e9%9c%80%e8%a6%81%e5%9c%a8%e6%9c%ac%e5%9c%b0%e5%ad%98%e5%82%a8%e6%8c%81%e4%b9%85%e5%8c%96%e6%95%b0%e6%8d%ae%2c%e5%85%b8%e5%9e%8b%e7%9a%84%e6%98%af%e5%88%86%e5%b8%83%e5%bc%8f%e6%95%b0%e6%8d%ae%e5%ba%93%e7%9a%84%e5%ba%94%e7%94%a8%2c%e5%88%86%e5%b8%83%e5%bc%8f%e8%8a%82%e7%82%b9%e5%ae%9e%e4%be%8b%e4%b9%8b%e9%97%b4%e6%9c%89%e4%be%9d%e8%b5%96%e7%9a%84%e6%8b%93%e6%89%91%e5%85%b3%e7%b3%bb.%e6%af%94%e5%a6%82%2c%e4%b8%bb%e4%bb%8e%e5%85%b3%e7%b3%bb.%20%e5%a6%82%e6%9e%9cK8S%e5%81%9c%e6%ad%a2%e5%88%86%e5%b8%83%e5%bc%8f%e9%9b%86%e7%be%a4%e4%b8%ad%e4%bb%bb%20%e4%b8%80%e5%ae%9e%e4%be%8bpod%2c%e5%b0%b1%e5%8f%af%e8%83%bd%e4%bc%9a%e5%af%bc%e8%87%b4%e6%95%b0%e6%8d%ae%e4%b8%a2%e5%a4%b1%e6%88%96%e8%80%85%e9%9b%86%e7%be%a4%e7%9a%84crash.%0a%e4%ba%86%e8%a7%a3%e8%bf%99%e4%b8%aa%e4%b9%8b%e5%90%8e%e6%88%91%e4%bb%ac%e6%8f%90%e5%87%ba%e4%b8%80%e4%b8%aa%e9%97%ae%e9%a2%98%ef%bc%8c%20Deployment%e9%83%a8%e7%bd%b2%e7%9a%84%e9%97%ae%e9%a2%98%3f%0aDeployment%e8%a2%ab%e8%ae%be%e8%ae%a1%e7%94%a8%e6%9d%a5%e7%ae%a1%e7%90%86%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e7%9a%84pod%2c%e6%af%8f%e4%b8%aapod%e5%ae%8c%e5%85%a8%e4%b8%80%e8%87%b4.%e4%bb%80%e4%b9%88%e6%84%8f%e6%80%9d%e5%91%a2%3f%0a%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e5%86%85%e7%9a%84%e5%a4%9a%e4%b8%aaPod%e5%88%9b%e5%bb%ba%e7%9a%84%e9%a1%ba%e5%ba%8f%e6%98%af%e6%b2%a1%e6%9c%89%e9%a1%ba%e5%ba%8f%e7%9a%84.%20%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e5%86%85%e7%9a%84%e5%a4%9a%e4%b8%aaPod%e7%9a%84%e5%90%8d%e7%a7%b0%e6%98%af%e9%9a%8f%e6%9c%ba%e7%9a%84.pod%e8%a2%ab%e9%87%8d%e6%96%b0%e5%90%af%e5%8a%a8%e8%b0%83%e5%ba%a6%e5%90%8e%2c%e5%ae%83%e7%9a%84%e5%90%8d%e7%a7%b0%e4%b8%8eIP%e9%83%bd%e4%bc%9a%e5%8f%91%e7%94%9f%e5%8f%98%e5%8c%96.%20%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e5%86%85%e7%9a%84%e5%a4%9a%e4%b8%aaPod%e8%83%8c%e5%90%8e%e6%98%af%e5%85%b1%e4%ba%ab%e5%ad%98%e5%82%a8%e7%9a%84.%0a%e7%8e%b0%e5%9c%a8%e7%9c%8b%e4%b8%80%e4%b8%aa%e6%96%b0%e7%9a%84%e9%97%ae%e9%a2%98%ef%bc%9f%0a%e5%af%b9%e4%ba%8e%e6%95%b0%e6%8d%ae%e5%ba%93%e6%9c%89%e7%8a%b6%e6%80%81%e7%9a%84%e6%9c%8d%e5%8a%a1%e5%ae%b9%e5%99%a8%e7%bc%96%e6%8e%92%2cDeployment%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88%e5%b0%b1%e5%8f%98%e5%be%97%e6%97%a0%e8%83%bd%e4%b8%ba%e5%8a%9b%e4%ba%86.%20%e6%af%94%e5%a6%82%2cRedis%e6%98%af%e4%b8%bb%e4%bb%8e%e7%9a%84%e6%9e%b6%e6%9e%84%2c%e5%8f%aa%e8%83%bd%e5%85%81%e8%ae%b8%e9%9b%86%e7%be%a4%e4%b8%ad%e5%87%ba%e7%8e%b0%e4%b8%80%e4%b8%aa%e4%b8%bb%e8%8a%82%e7%82%b9%e6%8f%90%e4%be%9b%e5%86%99%2c%e5%85%b6%e5%ae%83%e8%8a%82%e7%82%b9%e6%8f%90%e4%be%9b%e8%af%bb%e8%83%bd%e5%8a%9b.%e5%a6%82%e6%9e%9c%e5%90%8c%e6%97%b6%e5%87%ba%e7%8e%b0%e4%ba%8c%e4%b8%aa%e4%b8%bb%e8%8a%82%e7%82%b9%e5%90%8e%2c%e5%bf%85%e9%a1%bb%e4%bc%9a%e5%87%ba%e7%8e%b0%e5%b9%b6%e5%8f%91%e5%86%99%e7%9a%84%20%e6%93%8d%e4%bd%9c%2c%e8%bf%9b%e4%b8%80%e6%ad%a5%e5%af%bc%e8%87%b4%e9%9b%86%e7%be%a4%e5%86%99%e6%95%b0%e6%8d%ae%e7%9a%84%e4%b8%8d%e4%b8%80%e8%87%b4.%20%e6%89%80%e4%bb%a5%e9%97%ae%e9%a2%98%e6%9d%a5%e4%ba%86%2c%e9%92%88%e5%af%b9Redis%e8%bf%99%e7%a7%8d%e6%9c%89%e7%8a%b6%e6%80%81%e7%9a%84%e6%9c%8d%e5%8a%a1%2c%e5%ae%83%e7%ae%a1%e7%90%86%e7%9a%84%e5%a4%9a%e4%b8%aaPod%28%e4%bb%a3%e8%a1%a8master%2fslave%e8%a7%92%e8%89%b2%29%e5%bf%85%e9%a1%bb%e6%9c%89%e8%87%aa%e5%b7%b1%e7%8b%ac%e7%ab%8b%e7%9a%84%e6%8c%81%e4%b9%85%e5%8c%96%e5%ad%98%e5%82%a8%e7%bb%84%e4%bb%b6.%20%e6%9c%89%e7%8a%b6%e6%80%81%e7%9a%84%e6%9c%8d%e5%8a%a1Pod%e6%98%af%e7%94%a8%e6%9d%a5%e8%bf%90%e8%a1%8c%e6%9c%89%e7%8a%b6%e6%80%81%e5%ba%94%e7%94%a8%e7%9a%84%2c%e5%85%b6%e5%9c%a8%e6%95%b0%e6%8d%ae%e5%8d%b7%e4%b8%8a%e5%ad%98%e5%82%a8%e7%9a%84%e6%95%b0%e6%8d%ae%e9%9d%9e%e5%b8%b8%e9%87%8d%e8%a6%81%2c%e5%9b%a0%e4%b8%baStateful%e5%b0%b1%e6%98%af%e8%a6%81%e4%be%9d%e8%b5%96%e5%ad%98%e5%82%a8%e6%95%b0%e6%8d%ae%e5%8d%b7%e4%b8%8a%e5%af%b9%e6%af%8f%e4%b8%aaPod%e7%9a%84%e7%8a%b6%e6%80%81%e8%bf%9b%e8%a1%8c%e5%bb%ba%e6%a8%a1%e4%b8%8e%e5%ad%98%e5%82%a8.%20%e6%89%80%e4%bb%a5K8S%e6%8f%90%e4%be%9b%e4%ba%86%e4%b8%80%e4%b8%aa%e6%96%b0%e7%9a%84%e5%b7%a5%e5%85%b7%e2%80%94%e2%80%94StatefulSet%e6%9d%a5%e7%bb%9f%e4%b8%80%e8%a7%a3%e5%86%b3%e9%97%ae%e9%a2%98.%0aDeployment%e7%bb%84%e4%bb%b6%e6%98%af%e4%b8%ba%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e8%80%8c%e8%ae%be%e8%ae%a1%e7%9a%84%2c%e5%85%b6%e4%b8%ad%e7%9a%84Pod%e5%90%8d%e7%a7%b0%2c%e4%b8%bb%e6%9c%ba%e5%90%8d%2c%e5%ad%98%e5%82%a8%e9%83%bd%e6%98%af%e9%9a%8f%e6%9c%ba%2c%e4%b8%8d%e7%a8%b3%e5%ae%9a%e7%9a%84%2c%e5%b9%b6%e4%b8%94Pod%e7%9a%84%e5%88%9b%e5%bb%ba%e4%b8%8e%e9%94%80%e6%af%81%e4%b9%9f%e6%98%af%e6%97%a0%e5%ba%8f%e7%9a%84.%e8%bf%99%e4%b8%aa%e8%ae%be%e8%ae%a1%e5%86%b3%e5%ae%9a%e4%ba%86%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e5%b9%b6%20%e4%b8%8d%e9%80%82%e5%90%88%e6%95%b0%e6%8d%ae%e5%ba%93%e9%a2%86%e5%9f%9f%e7%9a%84%e5%ba%94%e7%94%a8.%0a%e8%80%8cStateful%e7%ae%a1%e7%90%86%e6%9c%89%e7%8a%b6%e6%80%81%e7%9a%84%e5%ba%94%e7%94%a8%2c%e5%ae%83%e7%9a%84Pod%e6%9c%89%e5%a6%82%e4%b8%8b%e7%89%b9%e5%be%81%3a%0a%e5%94%af%e4%b8%80%e6%80%a7%3a%20%e6%af%8f%e4%b8%aaPod%e4%bc%9a%e8%a2%ab%e5%88%86%e9%85%8d%e4%b8%80%e4%b8%aa%e5%94%af%e4%b8%80%e5%ba%8f%e5%8f%b7.%20%e9%a1%ba%e5%ba%8f%e6%80%a7%3a%20Pod%e5%90%af%e5%8a%a8%2c%e6%9b%b4%e6%96%b0%2c%e9%94%80%e6%af%81%e6%98%af%e6%8c%89%e9%a1%ba%e5%ba%8f%e8%bf%9b%e8%a1%8c.%20%e7%a8%b3%e5%ae%9a%e7%9a%84%e7%bd%91%e7%bb%9c%e6%a0%87%e8%af%86%3a%20Pod%e4%b8%bb%e6%9c%ba%e5%90%8d%2cDNS%e5%9c%b0%e5%9d%80%e4%b8%8d%e4%bc%9a%e9%9a%8f%e7%9d%80Pod%e8%a2%ab%e9%87%8d%e6%96%b0%e8%b0%83%e5%ba%a6%e8%80%8c%e5%8f%91%e7%94%9f%e5%8f%98%e5%8c%96.%20%e7%a8%b3%e5%ae%9a%e7%9a%84%e6%8c%81%e4%b9%85%e5%8c%96%e5%ad%98%e5%82%a8%3a%20Pod%e8%a2%ab%e9%87%8d%e6%96%b0%e8%b0%83%e5%ba%a6%e5%90%8e%2c%e4%bb%8d%e7%84%b6%e8%83%bd%e6%8c%82%e8%bd%bd%e5%8e%9f%e6%9c%89%e7%9a%84PV%2c%e4%bb%8e%e8%80%8c%e4%bf%9d%e8%af%81%e4%ba%86%e6%95%b0%e6%8d%ae%e7%9a%84%e5%ae%8c%e6%95%b4%e6%80%a7%e5%92%8c%e4%b8%80%e8%87%b4%e6%80%a7.%0a%e7%ad%89%e5%be%85%e6%9b%b4%e6%96%b0%c2%b7%c2%b7%c2%b7" aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f&t=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    
+    <div id="toc">
+      <nav id="TableOfContents"></nav>
+    </div>
+    
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        服务状态
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="0001-01-01 00:00:00 &#43;0000 UTC" itemprop="datePublished">0001-01-01</time>
+          
+        </div>
+        
+        
+        
+        
+      </div>
+    </header>
+
+  
+    
+    <div class="content" itemprop="articleBody">
+      <p>###服务状体</p>
+<p>####常常听到的服务状态是什么意思？ 什么是无服务状态和什么是有服务状态</p>
+<p>无状态服务</p>
+<p>无状态服务不会在本地存储持久化数据.多个服务实例对于同一个用户请求的响应结果是完全一致的.这种多服务实例之间是没有依赖关系,比如web应用,在k8s控制器 中动态启停无状态服务的pod并不会对其它的pod产生影响.</p>
+<p>有状态服务</p>
+<p>有状态服务需要在本地存储持久化数据,典型的是分布式数据库的应用,分布式节点实例之间有依赖的拓扑关系.比如,主从关系. 如果K8S停止分布式集群中任 一实例pod,就可能会导致数据丢失或者集群的crash.</p>
+<p>了解这个之后我们提出一个问题， Deployment部署的问题?</p>
+<p><img src="https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/2022-08-28%2001.19.12.png?raw=true" alt=""></p>
+<p>Deployment被设计用来管理无状态服务的pod,每个pod完全一致.什么意思呢?</p>
+<p>无状态服务内的多个Pod创建的顺序是没有顺序的.
+无状态服务内的多个Pod的名称是随机的.pod被重新启动调度后,它的名称与IP都会发生变化.
+无状态服务内的多个Pod背后是共享存储的.</p>
+<p>现在看一个新的问题？</p>
+<p><img src="https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/2022-08-28%2001.30.29.png?raw=true" alt=""></p>
+<p>对于数据库有状态的服务容器编排,Deployment解决方案就变得无能为力了.
+比如,Redis是主从的架构,只能允许集群中出现一个主节点提供写,其它节点提供读能力.如果同时出现二个主节点后,必须会出现并发写的 操作,进一步导致集群写数据的不一致.
+所以问题来了,针对Redis这种有状态的服务,它管理的多个Pod(代表master/slave角色)必须有自己独立的持久化存储组件.
+有状态的服务Pod是用来运行有状态应用的,其在数据卷上存储的数据非常重要,因为Stateful就是要依赖存储数据卷上对每个Pod的状态进行建模与存储.
+所以K8S提供了一个新的工具——StatefulSet来统一解决问题.</p>
+<p>Deployment组件是为无状态服务而设计的,其中的Pod名称,主机名,存储都是随机,不稳定的,并且Pod的创建与销毁也是无序的.这个设计决定了无状态服务并 不适合数据库领域的应用.</p>
+<p>而Stateful管理有状态的应用,它的Pod有如下特征:</p>
+<p>唯一性: 每个Pod会被分配一个唯一序号.
+顺序性: Pod启动,更新,销毁是按顺序进行.
+稳定的网络标识: Pod主机名,DNS地址不会随着Pod被重新调度而发生变化.
+稳定的持久化存储: Pod被重新调度后,仍然能挂载原有的PV,从而保证了数据的完整性和一致性.</p>
+<p>等待更新···</p>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/posts/">All posts</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/about">About</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents"></nav>
+    </div>
+    
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f&text=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f&title=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f&is_video=false&description=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81&body=Check out this article: https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f&title=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f&title=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f&name=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81&description=%23%23%23%e6%9c%8d%e5%8a%a1%e7%8a%b6%e4%bd%93%0a%23%23%23%23%e5%b8%b8%e5%b8%b8%e5%90%ac%e5%88%b0%e7%9a%84%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81%e6%98%af%e4%bb%80%e4%b9%88%e6%84%8f%e6%80%9d%ef%bc%9f%20%e4%bb%80%e4%b9%88%e6%98%af%e6%97%a0%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81%e5%92%8c%e4%bb%80%e4%b9%88%e6%98%af%e6%9c%89%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81%0a%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%0a%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e4%b8%8d%e4%bc%9a%e5%9c%a8%e6%9c%ac%e5%9c%b0%e5%ad%98%e5%82%a8%e6%8c%81%e4%b9%85%e5%8c%96%e6%95%b0%e6%8d%ae.%e5%a4%9a%e4%b8%aa%e6%9c%8d%e5%8a%a1%e5%ae%9e%e4%be%8b%e5%af%b9%e4%ba%8e%e5%90%8c%e4%b8%80%e4%b8%aa%e7%94%a8%e6%88%b7%e8%af%b7%e6%b1%82%e7%9a%84%e5%93%8d%e5%ba%94%e7%bb%93%e6%9e%9c%e6%98%af%e5%ae%8c%e5%85%a8%e4%b8%80%e8%87%b4%e7%9a%84.%e8%bf%99%e7%a7%8d%e5%a4%9a%e6%9c%8d%e5%8a%a1%e5%ae%9e%e4%be%8b%e4%b9%8b%e9%97%b4%e6%98%af%e6%b2%a1%e6%9c%89%e4%be%9d%e8%b5%96%e5%85%b3%e7%b3%bb%2c%e6%af%94%e5%a6%82web%e5%ba%94%e7%94%a8%2c%e5%9c%a8k8s%e6%8e%a7%e5%88%b6%e5%99%a8%20%e4%b8%ad%e5%8a%a8%e6%80%81%e5%90%af%e5%81%9c%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e7%9a%84pod%e5%b9%b6%e4%b8%8d%e4%bc%9a%e5%af%b9%e5%85%b6%e5%ae%83%e7%9a%84pod%e4%ba%a7%e7%94%9f%e5%bd%b1%e5%93%8d.%0a%e6%9c%89%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%0a%e6%9c%89%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e9%9c%80%e8%a6%81%e5%9c%a8%e6%9c%ac%e5%9c%b0%e5%ad%98%e5%82%a8%e6%8c%81%e4%b9%85%e5%8c%96%e6%95%b0%e6%8d%ae%2c%e5%85%b8%e5%9e%8b%e7%9a%84%e6%98%af%e5%88%86%e5%b8%83%e5%bc%8f%e6%95%b0%e6%8d%ae%e5%ba%93%e7%9a%84%e5%ba%94%e7%94%a8%2c%e5%88%86%e5%b8%83%e5%bc%8f%e8%8a%82%e7%82%b9%e5%ae%9e%e4%be%8b%e4%b9%8b%e9%97%b4%e6%9c%89%e4%be%9d%e8%b5%96%e7%9a%84%e6%8b%93%e6%89%91%e5%85%b3%e7%b3%bb.%e6%af%94%e5%a6%82%2c%e4%b8%bb%e4%bb%8e%e5%85%b3%e7%b3%bb.%20%e5%a6%82%e6%9e%9cK8S%e5%81%9c%e6%ad%a2%e5%88%86%e5%b8%83%e5%bc%8f%e9%9b%86%e7%be%a4%e4%b8%ad%e4%bb%bb%20%e4%b8%80%e5%ae%9e%e4%be%8bpod%2c%e5%b0%b1%e5%8f%af%e8%83%bd%e4%bc%9a%e5%af%bc%e8%87%b4%e6%95%b0%e6%8d%ae%e4%b8%a2%e5%a4%b1%e6%88%96%e8%80%85%e9%9b%86%e7%be%a4%e7%9a%84crash.%0a%e4%ba%86%e8%a7%a3%e8%bf%99%e4%b8%aa%e4%b9%8b%e5%90%8e%e6%88%91%e4%bb%ac%e6%8f%90%e5%87%ba%e4%b8%80%e4%b8%aa%e9%97%ae%e9%a2%98%ef%bc%8c%20Deployment%e9%83%a8%e7%bd%b2%e7%9a%84%e9%97%ae%e9%a2%98%3f%0aDeployment%e8%a2%ab%e8%ae%be%e8%ae%a1%e7%94%a8%e6%9d%a5%e7%ae%a1%e7%90%86%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e7%9a%84pod%2c%e6%af%8f%e4%b8%aapod%e5%ae%8c%e5%85%a8%e4%b8%80%e8%87%b4.%e4%bb%80%e4%b9%88%e6%84%8f%e6%80%9d%e5%91%a2%3f%0a%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e5%86%85%e7%9a%84%e5%a4%9a%e4%b8%aaPod%e5%88%9b%e5%bb%ba%e7%9a%84%e9%a1%ba%e5%ba%8f%e6%98%af%e6%b2%a1%e6%9c%89%e9%a1%ba%e5%ba%8f%e7%9a%84.%20%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e5%86%85%e7%9a%84%e5%a4%9a%e4%b8%aaPod%e7%9a%84%e5%90%8d%e7%a7%b0%e6%98%af%e9%9a%8f%e6%9c%ba%e7%9a%84.pod%e8%a2%ab%e9%87%8d%e6%96%b0%e5%90%af%e5%8a%a8%e8%b0%83%e5%ba%a6%e5%90%8e%2c%e5%ae%83%e7%9a%84%e5%90%8d%e7%a7%b0%e4%b8%8eIP%e9%83%bd%e4%bc%9a%e5%8f%91%e7%94%9f%e5%8f%98%e5%8c%96.%20%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e5%86%85%e7%9a%84%e5%a4%9a%e4%b8%aaPod%e8%83%8c%e5%90%8e%e6%98%af%e5%85%b1%e4%ba%ab%e5%ad%98%e5%82%a8%e7%9a%84.%0a%e7%8e%b0%e5%9c%a8%e7%9c%8b%e4%b8%80%e4%b8%aa%e6%96%b0%e7%9a%84%e9%97%ae%e9%a2%98%ef%bc%9f%0a%e5%af%b9%e4%ba%8e%e6%95%b0%e6%8d%ae%e5%ba%93%e6%9c%89%e7%8a%b6%e6%80%81%e7%9a%84%e6%9c%8d%e5%8a%a1%e5%ae%b9%e5%99%a8%e7%bc%96%e6%8e%92%2cDeployment%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88%e5%b0%b1%e5%8f%98%e5%be%97%e6%97%a0%e8%83%bd%e4%b8%ba%e5%8a%9b%e4%ba%86.%20%e6%af%94%e5%a6%82%2cRedis%e6%98%af%e4%b8%bb%e4%bb%8e%e7%9a%84%e6%9e%b6%e6%9e%84%2c%e5%8f%aa%e8%83%bd%e5%85%81%e8%ae%b8%e9%9b%86%e7%be%a4%e4%b8%ad%e5%87%ba%e7%8e%b0%e4%b8%80%e4%b8%aa%e4%b8%bb%e8%8a%82%e7%82%b9%e6%8f%90%e4%be%9b%e5%86%99%2c%e5%85%b6%e5%ae%83%e8%8a%82%e7%82%b9%e6%8f%90%e4%be%9b%e8%af%bb%e8%83%bd%e5%8a%9b.%e5%a6%82%e6%9e%9c%e5%90%8c%e6%97%b6%e5%87%ba%e7%8e%b0%e4%ba%8c%e4%b8%aa%e4%b8%bb%e8%8a%82%e7%82%b9%e5%90%8e%2c%e5%bf%85%e9%a1%bb%e4%bc%9a%e5%87%ba%e7%8e%b0%e5%b9%b6%e5%8f%91%e5%86%99%e7%9a%84%20%e6%93%8d%e4%bd%9c%2c%e8%bf%9b%e4%b8%80%e6%ad%a5%e5%af%bc%e8%87%b4%e9%9b%86%e7%be%a4%e5%86%99%e6%95%b0%e6%8d%ae%e7%9a%84%e4%b8%8d%e4%b8%80%e8%87%b4.%20%e6%89%80%e4%bb%a5%e9%97%ae%e9%a2%98%e6%9d%a5%e4%ba%86%2c%e9%92%88%e5%af%b9Redis%e8%bf%99%e7%a7%8d%e6%9c%89%e7%8a%b6%e6%80%81%e7%9a%84%e6%9c%8d%e5%8a%a1%2c%e5%ae%83%e7%ae%a1%e7%90%86%e7%9a%84%e5%a4%9a%e4%b8%aaPod%28%e4%bb%a3%e8%a1%a8master%2fslave%e8%a7%92%e8%89%b2%29%e5%bf%85%e9%a1%bb%e6%9c%89%e8%87%aa%e5%b7%b1%e7%8b%ac%e7%ab%8b%e7%9a%84%e6%8c%81%e4%b9%85%e5%8c%96%e5%ad%98%e5%82%a8%e7%bb%84%e4%bb%b6.%20%e6%9c%89%e7%8a%b6%e6%80%81%e7%9a%84%e6%9c%8d%e5%8a%a1Pod%e6%98%af%e7%94%a8%e6%9d%a5%e8%bf%90%e8%a1%8c%e6%9c%89%e7%8a%b6%e6%80%81%e5%ba%94%e7%94%a8%e7%9a%84%2c%e5%85%b6%e5%9c%a8%e6%95%b0%e6%8d%ae%e5%8d%b7%e4%b8%8a%e5%ad%98%e5%82%a8%e7%9a%84%e6%95%b0%e6%8d%ae%e9%9d%9e%e5%b8%b8%e9%87%8d%e8%a6%81%2c%e5%9b%a0%e4%b8%baStateful%e5%b0%b1%e6%98%af%e8%a6%81%e4%be%9d%e8%b5%96%e5%ad%98%e5%82%a8%e6%95%b0%e6%8d%ae%e5%8d%b7%e4%b8%8a%e5%af%b9%e6%af%8f%e4%b8%aaPod%e7%9a%84%e7%8a%b6%e6%80%81%e8%bf%9b%e8%a1%8c%e5%bb%ba%e6%a8%a1%e4%b8%8e%e5%ad%98%e5%82%a8.%20%e6%89%80%e4%bb%a5K8S%e6%8f%90%e4%be%9b%e4%ba%86%e4%b8%80%e4%b8%aa%e6%96%b0%e7%9a%84%e5%b7%a5%e5%85%b7%e2%80%94%e2%80%94StatefulSet%e6%9d%a5%e7%bb%9f%e4%b8%80%e8%a7%a3%e5%86%b3%e9%97%ae%e9%a2%98.%0aDeployment%e7%bb%84%e4%bb%b6%e6%98%af%e4%b8%ba%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e8%80%8c%e8%ae%be%e8%ae%a1%e7%9a%84%2c%e5%85%b6%e4%b8%ad%e7%9a%84Pod%e5%90%8d%e7%a7%b0%2c%e4%b8%bb%e6%9c%ba%e5%90%8d%2c%e5%ad%98%e5%82%a8%e9%83%bd%e6%98%af%e9%9a%8f%e6%9c%ba%2c%e4%b8%8d%e7%a8%b3%e5%ae%9a%e7%9a%84%2c%e5%b9%b6%e4%b8%94Pod%e7%9a%84%e5%88%9b%e5%bb%ba%e4%b8%8e%e9%94%80%e6%af%81%e4%b9%9f%e6%98%af%e6%97%a0%e5%ba%8f%e7%9a%84.%e8%bf%99%e4%b8%aa%e8%ae%be%e8%ae%a1%e5%86%b3%e5%ae%9a%e4%ba%86%e6%97%a0%e7%8a%b6%e6%80%81%e6%9c%8d%e5%8a%a1%e5%b9%b6%20%e4%b8%8d%e9%80%82%e5%90%88%e6%95%b0%e6%8d%ae%e5%ba%93%e9%a2%86%e5%9f%9f%e7%9a%84%e5%ba%94%e7%94%a8.%0a%e8%80%8cStateful%e7%ae%a1%e7%90%86%e6%9c%89%e7%8a%b6%e6%80%81%e7%9a%84%e5%ba%94%e7%94%a8%2c%e5%ae%83%e7%9a%84Pod%e6%9c%89%e5%a6%82%e4%b8%8b%e7%89%b9%e5%be%81%3a%0a%e5%94%af%e4%b8%80%e6%80%a7%3a%20%e6%af%8f%e4%b8%aaPod%e4%bc%9a%e8%a2%ab%e5%88%86%e9%85%8d%e4%b8%80%e4%b8%aa%e5%94%af%e4%b8%80%e5%ba%8f%e5%8f%b7.%20%e9%a1%ba%e5%ba%8f%e6%80%a7%3a%20Pod%e5%90%af%e5%8a%a8%2c%e6%9b%b4%e6%96%b0%2c%e9%94%80%e6%af%81%e6%98%af%e6%8c%89%e9%a1%ba%e5%ba%8f%e8%bf%9b%e8%a1%8c.%20%e7%a8%b3%e5%ae%9a%e7%9a%84%e7%bd%91%e7%bb%9c%e6%a0%87%e8%af%86%3a%20Pod%e4%b8%bb%e6%9c%ba%e5%90%8d%2cDNS%e5%9c%b0%e5%9d%80%e4%b8%8d%e4%bc%9a%e9%9a%8f%e7%9d%80Pod%e8%a2%ab%e9%87%8d%e6%96%b0%e8%b0%83%e5%ba%a6%e8%80%8c%e5%8f%91%e7%94%9f%e5%8f%98%e5%8c%96.%20%e7%a8%b3%e5%ae%9a%e7%9a%84%e6%8c%81%e4%b9%85%e5%8c%96%e5%ad%98%e5%82%a8%3a%20Pod%e8%a2%ab%e9%87%8d%e6%96%b0%e8%b0%83%e5%ba%a6%e5%90%8e%2c%e4%bb%8d%e7%84%b6%e8%83%bd%e6%8c%82%e8%bd%bd%e5%8e%9f%e6%9c%89%e7%9a%84PV%2c%e4%bb%8e%e8%80%8c%e4%bf%9d%e8%af%81%e4%ba%86%e6%95%b0%e6%8d%ae%e7%9a%84%e5%ae%8c%e6%95%b4%e6%80%a7%e5%92%8c%e4%b8%80%e8%87%b4%e6%80%a7.%0a%e7%ad%89%e5%be%85%e6%9b%b4%e6%96%b0%c2%b7%c2%b7%c2%b7" aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E6%259C%258D%25E5%258A%25A1%25E7%258A%25B6%25E6%2580%2581%2f&t=%e6%9c%8d%e5%8a%a1%e7%8a%b6%e6%80%81" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  My New Hugo Site 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+<script src=/js/code-copy.js></script>
+
+
+
+
+</html>
