@@ -8,12 +8,15 @@
     <language>en-us</language>
     <lastBuildDate>Fri, 19 Aug 2022 16:19:53 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>荒唐</title>
-      <link>https://jinkes-li.github.io/posts/nginx%E8%BD%AC%E5%8F%91/</link>
+      <title>Mac设置不休眠</title>
+      <link>https://jinkes-li.github.io/posts/mac%E8%AE%BE%E7%BD%AE%E4%B8%8D%E4%BC%91%E7%9C%A0/</link>
       <pubDate>Fri, 19 Aug 2022 16:19:53 +0800</pubDate>
       
-      <guid>https://jinkes-li.github.io/posts/nginx%E8%BD%AC%E5%8F%91/</guid>
-      <description>这真的很荒唐</description>
+      <guid>https://jinkes-li.github.io/posts/mac%E8%AE%BE%E7%BD%AE%E4%B8%8D%E4%BC%91%E7%9C%A0/</guid>
+      <description>Mac默认情况下合上盖子就会进入休眠状态，正在进行的任务也会停止。我们在终端执行两条命令来将Mac设置为合盖不休眠。
+打开Terminal，执行如下两条语句：
+sudo pmset -b sleep 0 sudo pmset -b disablesleep 1 若需要恢复原有合盖自动休眠的设置，则执行如下两条语句：
+sudo pmset -b sleep 5 sudo pmset -b disablesleep 0 关于pmset命令更多的用法可以在终端执行man pmset来查看。</description>
     </item>
     
     <item>
