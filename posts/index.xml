@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on My New Hugo Site</title>
+    <title>Posts on self-salvation</title>
     <link>https://jinkes-li.github.io/posts/</link>
-    <description>Recent content in Posts on My New Hugo Site</description>
+    <description>Recent content in Posts on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 19 Aug 2022 16:19:53 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
@@ -41,8 +41,8 @@ Kubernetes这里通过Coredns也去建立类似于传统DNS的模型，实现域
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://jinkes-li.github.io/posts/%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81/</guid>
-      <description>###服务状体
-####常常听到的服务状态是什么意思？ 什么是无服务状态和什么是有服务状态
+      <description>服务状体
+常常听到的服务状态是什么意思？ 什么是无服务状态和什么是有服务状态
 无状态服务
 无状态服务不会在本地存储持久化数据.多个服务实例对于同一个用户请求的响应结果是完全一致的.这种多服务实例之间是没有依赖关系,比如web应用,在k8s控制器 中动态启停无状态服务的pod并不会对其它的pod产生影响.
 有状态服务
