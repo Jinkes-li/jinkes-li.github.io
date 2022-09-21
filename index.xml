@@ -6,7 +6,25 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Aug 2022 16:19:53 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Sep 2022 16:17:14 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>计算机基础及Markdown基础</title>
+      <link>https://jinkes-li.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%8F%8Amarkdown%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Wed, 21 Sep 2022 16:17:14 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%8F%8Amarkdown%E5%9F%BA%E7%A1%80/</guid>
+      <description>引言： 干活干活～
+整理一下Markdown一些常见的用法 再来一点计算机基础，ok ，现在开始。
+计算机基础 想了想还是吧计算机基础写在前面吧，后续更新python慢慢深入哈～
+​	世界上第一台通用计算机“ENIAC”于1946年2月14日在美国宾夕法尼亚大学诞生。发明人是美国人莫克利（JohnW.Mauchly）和艾克特（J.PresperEckert）。
+​	对于我们来说计算机到底是什么，为什么说计算机是互联网世界的基石呢，首先我们需要理解计算机创造之初的设计理念。
+由于在人类社会中存在大量重复性工作，以及随着文明的进步衍生出许许多多需要海量计算的数据，那这些数据依靠人脑需要计算几十上百年甚至是上万年才能被计算出来，由此计算机参照人类本身的行为逻辑应运而出。
+我们需要先了解计算机的核心硬件：
+控制器-CPU （相当于人类的大脑，用于协调身体的各个器官合作工作） 运算器-RAM （这个也相当于人类的大脑思考如何解决这个问题并给出解决方案） 存储器-DISK （相当于记忆，区分为短暂记忆和永久记忆） 输入设备-键盘 （比如耳朵，眼睛，嗅觉等，只用于接收信息由大脑处理） 输出设备-显示屏（比如嘴巴，教师向学生授课就想当于输出，学生们就相当于被灌输知识，这里也就是输入） 说完计算机的基本组成，我们再浅谈一下计算机是如何工作的。
+​	人不吃饭不行，计算机主要依靠电信号，离开了电当然也是不可以的，是依靠着高低电频来组成不同的信息，这个电频不是高就是低，感觉能组成的信息太少了怎么办，这就不得不说一下进制的概念了
+进制 二进制	0 1（逢二进一 0 1 10） 八进制 0 1 2 3 4 5 6 7 （逢八进一） 十进制 0 1 2 3 4 5 6 7 8 9 （逢十进一） 十六进制 0 1 2 3 4 5 6 7 8 9 a b c d e f （逢十六进一） ​	其中十进制和十六进制一半用于各种电子设备的IP地址，二进制一半是二进制文件，至于八进制 en&amp;hellip;好像没怎么遇到过，这里顺便加一下存储的单位转换。然后说一下计算机如何通过路径找文件，对于人来说哈。</description>
+    </item>
+    
     <item>
       <title>Mac设置不休眠</title>
       <link>https://jinkes-li.github.io/posts/mac%E8%AE%BE%E7%BD%AE%E4%B8%8D%E4%BC%91%E7%9C%A0/</link>
