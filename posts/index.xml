@@ -57,9 +57,24 @@ Kubernetes这里通过Coredns也去建立类似于传统DNS的模型，实现域
     </item>
     
     <item>
+      <title>项目环境</title>
+      <link>https://jinkes-li.github.io/posts/%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Wed, 26 May 2021 16:19:53 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/posts/%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83/</guid>
+      <description>####BI 项目启动环境
+此项目使用的是Centos7.9 内核版本5.19，升级历史操作如下 [可参考]
+17 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org 18 rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm 19 yum --disablerepo=&amp;#34;*&amp;#34; --enablerepo=&amp;#34;elrepo-kernel&amp;#34; list available 20 $ yum --enablerepo=elrepo-kernel install kernel-ml 21 yum --enablerepo=elrepo-kernel install kernel-ml 22 awk -F\&amp;#39; &amp;#39;$1==&amp;#34;menuentry &amp;#34; {print i++ &amp;#34; : &amp;#34; $2}&amp;#39; /etc/grub2.cfg 23 grub2-set-default 0 24 reboot 25 uname -a 26 history ####基本环境安装
+install git
+[root@web ~]# yum install git -y install docker
+安装教程
+[root@web ~]# yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine [root@web ~]# yum install -y yum-utils [root@web ~]# yum-config-manager \ --add-repo \ https://download.</description>
+    </item>
+    
+    <item>
       <title>服务状态</title>
       <link>https://jinkes-li.github.io/posts/%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 21 Jan 2020 16:19:53 +0800</pubDate>
       
       <guid>https://jinkes-li.github.io/posts/%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81/</guid>
       <description>服务状体
@@ -77,21 +92,6 @@ Deployment组件是为无状态服务而设计的,其中的Pod名称,主机名,�
 而Stateful管理有状态的应用,它的Pod有如下特征:
 唯一性: 每个Pod会被分配一个唯一序号. 顺序性: Pod启动,更新,销毁是按顺序进行. 稳定的网络标识: Pod主机名,DNS地址不会随着Pod被重新调度而发生变化. 稳定的持久化存储: Pod被重新调度后,仍然能挂载原有的PV,从而保证了数据的完整性和一致性.
 等待更新···</description>
-    </item>
-    
-    <item>
-      <title>项境</title>
-      <link>https://jinkes-li.github.io/posts/%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://jinkes-li.github.io/posts/%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83/</guid>
-      <description>####BI 项目启动环境
-此项目使用的是Centos7.9 内核版本5.19，升级历史操作如下 [可参考]
-17 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org 18 rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm 19 yum --disablerepo=&amp;#34;*&amp;#34; --enablerepo=&amp;#34;elrepo-kernel&amp;#34; list available 20 $ yum --enablerepo=elrepo-kernel install kernel-ml 21 yum --enablerepo=elrepo-kernel install kernel-ml 22 awk -F\&amp;#39; &amp;#39;$1==&amp;#34;menuentry &amp;#34; {print i++ &amp;#34; : &amp;#34; $2}&amp;#39; /etc/grub2.cfg 23 grub2-set-default 0 24 reboot 25 uname -a 26 history ####基本环境安装
-install git
-[root@web ~]# yum install git -y install docker
-安装教程
-[root@web ~]# yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine [root@web ~]# yum install -y yum-utils [root@web ~]# yum-config-manager \ --add-repo \ https://download.</description>
     </item>
     
   </channel>
