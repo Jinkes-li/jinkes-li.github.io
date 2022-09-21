@@ -63,8 +63,7 @@ Kubernetes这里通过Coredns也去建立类似于传统DNS的模型，实现域
       
       <guid>https://jinkes-li.github.io/posts/%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83/</guid>
       <description>BI 项目启动环境 此项目使用的是Centos7.9 内核版本5.19，升级历史操作如下 [可参考]
-17 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org 18 rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm 19 yum --disablerepo=&amp;#34;*&amp;#34; --enablerepo=&amp;#34;elrepo-kernel&amp;#34; list available 20 $ yum --enablerepo=elrepo-kernel install kernel-ml 21 yum --enablerepo=elrepo-kernel install kernel-ml 22 awk -F\&amp;#39; &amp;#39;$1==&amp;#34;menuentry &amp;#34; {print i++ &amp;#34; : &amp;#34; $2}&amp;#39; /etc/grub2.cfg 23 grub2-set-default 0 24 reboot 25 uname -a 26 history ####基本环境安装
-install git
+17 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org 18 rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm 19 yum --disablerepo=&amp;#34;*&amp;#34; --enablerepo=&amp;#34;elrepo-kernel&amp;#34; list available 20 $ yum --enablerepo=elrepo-kernel install kernel-ml 21 yum --enablerepo=elrepo-kernel install kernel-ml 22 awk -F\&amp;#39; &amp;#39;$1==&amp;#34;menuentry &amp;#34; {print i++ &amp;#34; : &amp;#34; $2}&amp;#39; /etc/grub2.cfg 23 grub2-set-default 0 24 reboot 25 uname -a 26 history 基本环境安装 install git
 [root@web ~]# yum install git -y install docker
 安装教程
 [root@web ~]# yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine [root@web ~]# yum install -y yum-utils [root@web ~]# yum-config-manager \ --add-repo \ https://download.</description>
