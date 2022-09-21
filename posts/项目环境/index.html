@@ -16,8 +16,7 @@
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
   <meta property="og:title" content="项目环境" />
-<meta property="og:description" content="####BI 项目启动环境
-此项目使用的是Centos7.9 内核版本5.19，升级历史操作如下 [可参考]
+<meta property="og:description" content="BI 项目启动环境 此项目使用的是Centos7.9 内核版本5.19，升级历史操作如下 [可参考]
 17 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org 18 rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm 19 yum --disablerepo=&#34;*&#34; --enablerepo=&#34;elrepo-kernel&#34; list available 20 $ yum --enablerepo=elrepo-kernel install kernel-ml 21 yum --enablerepo=elrepo-kernel install kernel-ml 22 awk -F\&#39; &#39;$1==&#34;menuentry &#34; {print i&#43;&#43; &#34; : &#34; $2}&#39; /etc/grub2.cfg 23 grub2-set-default 0 24 reboot 25 uname -a 26 history ####基本环境安装
 install git
 [root@web ~]# yum install git -y install docker
@@ -31,8 +30,7 @@ install git
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="项目环境"/>
-<meta name="twitter:description" content="####BI 项目启动环境
-此项目使用的是Centos7.9 内核版本5.19，升级历史操作如下 [可参考]
+<meta name="twitter:description" content="BI 项目启动环境 此项目使用的是Centos7.9 内核版本5.19，升级历史操作如下 [可参考]
 17 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org 18 rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm 19 yum --disablerepo=&#34;*&#34; --enablerepo=&#34;elrepo-kernel&#34; list available 20 $ yum --enablerepo=elrepo-kernel install kernel-ml 21 yum --enablerepo=elrepo-kernel install kernel-ml 22 awk -F\&#39; &#39;$1==&#34;menuentry &#34; {print i&#43;&#43; &#34; : &#34; $2}&#39; /etc/grub2.cfg 23 grub2-set-default 0 24 reboot 25 uname -a 26 history ####基本环境安装
 install git
 [root@web ~]# yum install git -y install docker
@@ -161,7 +159,7 @@ install git
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E9%25A1%25B9%25E7%259B%25AE%25E7%258E%25AF%25E5%25A2%2583%2f&name=%e9%a1%b9%e7%9b%ae%e7%8e%af%e5%a2%83&description=%23%23%23%23BI%20%e9%a1%b9%e7%9b%ae%e5%90%af%e5%8a%a8%e7%8e%af%e5%a2%83%0a%e6%ad%a4%e9%a1%b9%e7%9b%ae%e4%bd%bf%e7%94%a8%e7%9a%84%e6%98%afCentos7.9%20%e5%86%85%e6%a0%b8%e7%89%88%e6%9c%ac5.19%ef%bc%8c%e5%8d%87%e7%ba%a7%e5%8e%86%e5%8f%b2%e6%93%8d%e4%bd%9c%e5%a6%82%e4%b8%8b%20%5b%e5%8f%af%e5%8f%82%e8%80%83%5d%0a17%20rpm%20--import%20https%3a%2f%2fwww.elrepo.org%2fRPM-GPG-KEY-elrepo.org%2018%20rpm%20-Uvh%20http%3a%2f%2fwww.elrepo.org%2felrepo-release-7.0-3.el7.elrepo.noarch.rpm%2019%20yum%20--disablerepo%3d%26%2334%3b%2a%26%2334%3b%20--enablerepo%3d%26%2334%3belrepo-kernel%26%2334%3b%20list%20available%2020%20%24%20yum%20--enablerepo%3delrepo-kernel%20install%20kernel-ml%2021%20yum%20--enablerepo%3delrepo-kernel%20install%20kernel-ml%2022%20awk%20-F%5c%26%2339%3b%20%26%2339%3b%241%3d%3d%26%2334%3bmenuentry%20%26%2334%3b%20%7bprint%20i%2b%2b%20%26%2334%3b%20%3a%20%26%2334%3b%20%242%7d%26%2339%3b%20%2fetc%2fgrub2.cfg%2023%20grub2-set-default%200%2024%20reboot%2025%20uname%20-a%2026%20history%20%23%23%23%23%e5%9f%ba%e6%9c%ac%e7%8e%af%e5%a2%83%e5%ae%89%e8%a3%85%0ainstall%20git%0a%5broot%40web%20~%5d%23%20yum%20install%20git%20-y%20install%20docker%0a%e5%ae%89%e8%a3%85%e6%95%99%e7%a8%8b%0a%5broot%40web%20~%5d%23%20yum%20remove%20docker%20%5c%20docker-client%20%5c%20docker-client-latest%20%5c%20docker-common%20%5c%20docker-latest%20%5c%20docker-latest-logrotate%20%5c%20docker-logrotate%20%5c%20docker-engine%20%5broot%40web%20~%5d%23%20yum%20install%20-y%20yum-utils%20%5broot%40web%20~%5d%23%20yum-config-manager%20%5c%20--add-repo%20%5c%20https%3a%2f%2fdownload." aria-label="Tumblr">
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E9%25A1%25B9%25E7%259B%25AE%25E7%258E%25AF%25E5%25A2%2583%2f&name=%e9%a1%b9%e7%9b%ae%e7%8e%af%e5%a2%83&description=BI%20%e9%a1%b9%e7%9b%ae%e5%90%af%e5%8a%a8%e7%8e%af%e5%a2%83%20%e6%ad%a4%e9%a1%b9%e7%9b%ae%e4%bd%bf%e7%94%a8%e7%9a%84%e6%98%afCentos7.9%20%e5%86%85%e6%a0%b8%e7%89%88%e6%9c%ac5.19%ef%bc%8c%e5%8d%87%e7%ba%a7%e5%8e%86%e5%8f%b2%e6%93%8d%e4%bd%9c%e5%a6%82%e4%b8%8b%20%5b%e5%8f%af%e5%8f%82%e8%80%83%5d%0a17%20rpm%20--import%20https%3a%2f%2fwww.elrepo.org%2fRPM-GPG-KEY-elrepo.org%2018%20rpm%20-Uvh%20http%3a%2f%2fwww.elrepo.org%2felrepo-release-7.0-3.el7.elrepo.noarch.rpm%2019%20yum%20--disablerepo%3d%26%2334%3b%2a%26%2334%3b%20--enablerepo%3d%26%2334%3belrepo-kernel%26%2334%3b%20list%20available%2020%20%24%20yum%20--enablerepo%3delrepo-kernel%20install%20kernel-ml%2021%20yum%20--enablerepo%3delrepo-kernel%20install%20kernel-ml%2022%20awk%20-F%5c%26%2339%3b%20%26%2339%3b%241%3d%3d%26%2334%3bmenuentry%20%26%2334%3b%20%7bprint%20i%2b%2b%20%26%2334%3b%20%3a%20%26%2334%3b%20%242%7d%26%2339%3b%20%2fetc%2fgrub2.cfg%2023%20grub2-set-default%200%2024%20reboot%2025%20uname%20-a%2026%20history%20%23%23%23%23%e5%9f%ba%e6%9c%ac%e7%8e%af%e5%a2%83%e5%ae%89%e8%a3%85%0ainstall%20git%0a%5broot%40web%20~%5d%23%20yum%20install%20git%20-y%20install%20docker%0a%e5%ae%89%e8%a3%85%e6%95%99%e7%a8%8b%0a%5broot%40web%20~%5d%23%20yum%20remove%20docker%20%5c%20docker-client%20%5c%20docker-client-latest%20%5c%20docker-common%20%5c%20docker-latest%20%5c%20docker-latest-logrotate%20%5c%20docker-logrotate%20%5c%20docker-engine%20%5broot%40web%20~%5d%23%20yum%20install%20-y%20yum-utils%20%5broot%40web%20~%5d%23%20yum-config-manager%20%5c%20--add-repo%20%5c%20https%3a%2f%2fdownload." aria-label="Tumblr">
       <i class="fab fa-tumblr " aria-hidden="true"></i>
     </a>
   </li>
@@ -175,7 +173,15 @@ install git
     </div>
     
     <div id="toc">
-      <nav id="TableOfContents"></nav>
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
     
   </span>
@@ -204,7 +210,7 @@ install git
   
     
     <div class="content" itemprop="articleBody">
-      <p>####BI 项目启动环境</p>
+      <h4 id="bi-项目启动环境">BI 项目启动环境</h4>
 <blockquote>
 <p>此项目使用的是Centos7.9 内核版本5.19，升级历史操作如下 [可参考]</p>
 </blockquote>
@@ -329,7 +335,15 @@ install git
 
     
     <div id="toc-footer" style="display: none">
-      <nav id="TableOfContents"></nav>
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
     
 
@@ -377,7 +391,7 @@ install git
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E9%25A1%25B9%25E7%259B%25AE%25E7%258E%25AF%25E5%25A2%2583%2f&name=%e9%a1%b9%e7%9b%ae%e7%8e%af%e5%a2%83&description=%23%23%23%23BI%20%e9%a1%b9%e7%9b%ae%e5%90%af%e5%8a%a8%e7%8e%af%e5%a2%83%0a%e6%ad%a4%e9%a1%b9%e7%9b%ae%e4%bd%bf%e7%94%a8%e7%9a%84%e6%98%afCentos7.9%20%e5%86%85%e6%a0%b8%e7%89%88%e6%9c%ac5.19%ef%bc%8c%e5%8d%87%e7%ba%a7%e5%8e%86%e5%8f%b2%e6%93%8d%e4%bd%9c%e5%a6%82%e4%b8%8b%20%5b%e5%8f%af%e5%8f%82%e8%80%83%5d%0a17%20rpm%20--import%20https%3a%2f%2fwww.elrepo.org%2fRPM-GPG-KEY-elrepo.org%2018%20rpm%20-Uvh%20http%3a%2f%2fwww.elrepo.org%2felrepo-release-7.0-3.el7.elrepo.noarch.rpm%2019%20yum%20--disablerepo%3d%26%2334%3b%2a%26%2334%3b%20--enablerepo%3d%26%2334%3belrepo-kernel%26%2334%3b%20list%20available%2020%20%24%20yum%20--enablerepo%3delrepo-kernel%20install%20kernel-ml%2021%20yum%20--enablerepo%3delrepo-kernel%20install%20kernel-ml%2022%20awk%20-F%5c%26%2339%3b%20%26%2339%3b%241%3d%3d%26%2334%3bmenuentry%20%26%2334%3b%20%7bprint%20i%2b%2b%20%26%2334%3b%20%3a%20%26%2334%3b%20%242%7d%26%2339%3b%20%2fetc%2fgrub2.cfg%2023%20grub2-set-default%200%2024%20reboot%2025%20uname%20-a%2026%20history%20%23%23%23%23%e5%9f%ba%e6%9c%ac%e7%8e%af%e5%a2%83%e5%ae%89%e8%a3%85%0ainstall%20git%0a%5broot%40web%20~%5d%23%20yum%20install%20git%20-y%20install%20docker%0a%e5%ae%89%e8%a3%85%e6%95%99%e7%a8%8b%0a%5broot%40web%20~%5d%23%20yum%20remove%20docker%20%5c%20docker-client%20%5c%20docker-client-latest%20%5c%20docker-common%20%5c%20docker-latest%20%5c%20docker-latest-logrotate%20%5c%20docker-logrotate%20%5c%20docker-engine%20%5broot%40web%20~%5d%23%20yum%20install%20-y%20yum-utils%20%5broot%40web%20~%5d%23%20yum-config-manager%20%5c%20--add-repo%20%5c%20https%3a%2f%2fdownload." aria-label="Tumblr">
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fjinkes-li.github.io%2fposts%2f%25E9%25A1%25B9%25E7%259B%25AE%25E7%258E%25AF%25E5%25A2%2583%2f&name=%e9%a1%b9%e7%9b%ae%e7%8e%af%e5%a2%83&description=BI%20%e9%a1%b9%e7%9b%ae%e5%90%af%e5%8a%a8%e7%8e%af%e5%a2%83%20%e6%ad%a4%e9%a1%b9%e7%9b%ae%e4%bd%bf%e7%94%a8%e7%9a%84%e6%98%afCentos7.9%20%e5%86%85%e6%a0%b8%e7%89%88%e6%9c%ac5.19%ef%bc%8c%e5%8d%87%e7%ba%a7%e5%8e%86%e5%8f%b2%e6%93%8d%e4%bd%9c%e5%a6%82%e4%b8%8b%20%5b%e5%8f%af%e5%8f%82%e8%80%83%5d%0a17%20rpm%20--import%20https%3a%2f%2fwww.elrepo.org%2fRPM-GPG-KEY-elrepo.org%2018%20rpm%20-Uvh%20http%3a%2f%2fwww.elrepo.org%2felrepo-release-7.0-3.el7.elrepo.noarch.rpm%2019%20yum%20--disablerepo%3d%26%2334%3b%2a%26%2334%3b%20--enablerepo%3d%26%2334%3belrepo-kernel%26%2334%3b%20list%20available%2020%20%24%20yum%20--enablerepo%3delrepo-kernel%20install%20kernel-ml%2021%20yum%20--enablerepo%3delrepo-kernel%20install%20kernel-ml%2022%20awk%20-F%5c%26%2339%3b%20%26%2339%3b%241%3d%3d%26%2334%3bmenuentry%20%26%2334%3b%20%7bprint%20i%2b%2b%20%26%2334%3b%20%3a%20%26%2334%3b%20%242%7d%26%2339%3b%20%2fetc%2fgrub2.cfg%2023%20grub2-set-default%200%2024%20reboot%2025%20uname%20-a%2026%20history%20%23%23%23%23%e5%9f%ba%e6%9c%ac%e7%8e%af%e5%a2%83%e5%ae%89%e8%a3%85%0ainstall%20git%0a%5broot%40web%20~%5d%23%20yum%20install%20git%20-y%20install%20docker%0a%e5%ae%89%e8%a3%85%e6%95%99%e7%a8%8b%0a%5broot%40web%20~%5d%23%20yum%20remove%20docker%20%5c%20docker-client%20%5c%20docker-client-latest%20%5c%20docker-common%20%5c%20docker-latest%20%5c%20docker-latest-logrotate%20%5c%20docker-logrotate%20%5c%20docker-engine%20%5broot%40web%20~%5d%23%20yum%20install%20-y%20yum-utils%20%5broot%40web%20~%5d%23%20yum-config-manager%20%5c%20--add-repo%20%5c%20https%3a%2f%2fdownload." aria-label="Tumblr">
       <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
     </a>
   </li>
