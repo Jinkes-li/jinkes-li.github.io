@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Abouts on self-salvation</title>
+    <link>https://jinkes-li.github.io/about/</link>
+    <description>Recent content in Abouts on self-salvation</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 21 Sep 2022 19:37:41 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/about/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于博主</title>
+      <link>https://jinkes-li.github.io/about/%E5%85%B3%E4%BA%8E%E5%8D%9A%E4%B8%BB/</link>
+      <pubDate>Wed, 21 Sep 2022 19:37:41 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/about/%E5%85%B3%E4%BA%8E%E5%8D%9A%E4%B8%BB/</guid>
+      <description>关于博主： ​	博主不是一个技术大牛，只是一个拥抱开源技术的爱好者，目前正在从事运维开发工作，希望在闲暇时间可以将好的项目和技术知识对大家进行分享，除此之外也是一名自我救赎者。
+​	&amp;ndash;来自一名互联网的小透明</description>
+    </item>
+    
+  </channel>
+</rss>
