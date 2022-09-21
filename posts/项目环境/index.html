@@ -208,76 +208,76 @@ install git
 <blockquote>
 <p>此项目使用的是Centos7.9 内核版本5.19，升级历史操作如下 [可参考]</p>
 </blockquote>
-<pre tabindex="0"><code>   17  rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
-   18  rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
-   19  yum --disablerepo=&#34;*&#34; --enablerepo=&#34;elrepo-kernel&#34; list available
-   20  $ yum --enablerepo=elrepo-kernel install kernel-ml
-   21   yum --enablerepo=elrepo-kernel install kernel-ml
-   22  awk -F\&#39; &#39;$1==&#34;menuentry &#34; {print i++ &#34; : &#34; $2}&#39; /etc/grub2.cfg
-   23  grub2-set-default 0
-   24  reboot
-   25  uname -a
-   26  history
-</code></pre><p>####基本环境安装</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>   <span style="color:#ae81ff">17</span>  rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">18</span>  rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">19</span>  yum --disablerepo<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;*&#34;</span> --enablerepo<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;elrepo-kernel&#34;</span> list available
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">20</span>  $ yum --enablerepo<span style="color:#f92672">=</span>elrepo-kernel install kernel-ml
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">21</span>   yum --enablerepo<span style="color:#f92672">=</span>elrepo-kernel install kernel-ml
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">22</span>  awk -F<span style="color:#ae81ff">\&#39;</span> <span style="color:#e6db74">&#39;$1==&#34;menuentry &#34; {print i++ &#34; : &#34; $2}&#39;</span> /etc/grub2.cfg
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">23</span>  grub2-set-default <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">24</span>  reboot
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">25</span>  uname -a
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">26</span>  history
+</span></span></code></pre></div><p>####基本环境安装</p>
 <p>install git</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@web ~<span style="color:#f92672">]</span><span style="color:#75715e"># yum install git -y</span>
 </span></span></code></pre></div><p>install docker</p>
 <p><a href="https://docs.docker.com/engine/install/centos/">安装教程</a></p>
-<pre tabindex="0"><code>[root@web ~]#  yum remove docker \
-                   docker-client \
-                   docker-client-latest \
-                   docker-common \
-                   docker-latest \
-                   docker-latest-logrotate \
-                   docker-logrotate \
-                   docker-engine
-[root@web ~]# yum install -y yum-utils
-[root@web ~]# yum-config-manager \
-     --add-repo \
-     https://download.docker.com/linux/centos/docker-ce.repo
-[root@web ~]# yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-
-#查看安装是否成功
-
-#启动docker服务  「参数可选 」[  stop start restart ]
-[root@web ~]# systemctl start docker
-
-[root@web ~]# docker version
-Client: Docker Engine - Community
- Version:           20.10.17
- API version:       1.41
- Go version:        go1.17.11
- Git commit:        100c701
- Built:             Mon Jun  6 23:05:12 2022
- OS/Arch:           linux/amd64
- Context:           default
- Experimental:      true
-
-Server: Docker Engine - Community
- Engine:
-  Version:          20.10.17
-  API version:      1.41 (minimum version 1.12)
-  Go version:       go1.17.11
-  Git commit:       a89b842
-  Built:            Mon Jun  6 23:03:33 2022
-  OS/Arch:          linux/amd64
-  Experimental:     false
- containerd:
-  Version:          1.6.7
-  GitCommit:        0197261a30bf81f1ee8e6a4dd2dea0ef95d67ccb
- runc:
-  Version:          1.1.3
-  GitCommit:        v1.1.3-0-g6724737
- docker-init:
-  Version:          0.19.0
-  GitCommit:        de40ad0
-[root@web ~]#
-</code></pre><p>install  docker-compose    安装教程同docker里寻找</p>
-<pre tabindex="0"><code>[root@web ~]# docker-compose -v
-docker-compose version 1.28.2, build 67630359
-[root@web ~]#
-</code></pre><p>install node</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@web ~<span style="color:#f92672">]</span><span style="color:#75715e">#  yum remove docker \</span>
+</span></span><span style="display:flex;"><span>                   docker-client <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                   docker-client-latest <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                   docker-common <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                   docker-latest <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                   docker-latest-logrotate <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                   docker-logrotate <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                   docker-engine
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@web ~<span style="color:#f92672">]</span><span style="color:#75715e"># yum install -y yum-utils</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@web ~<span style="color:#f92672">]</span><span style="color:#75715e"># yum-config-manager \</span>
+</span></span><span style="display:flex;"><span>     --add-repo <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>     https://download.docker.com/linux/centos/docker-ce.repo
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@web ~<span style="color:#f92672">]</span><span style="color:#75715e"># yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#查看安装是否成功</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#启动docker服务  「参数可选 」[  stop start restart ]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@web ~<span style="color:#f92672">]</span><span style="color:#75715e"># systemctl start docker</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@web ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker version</span>
+</span></span><span style="display:flex;"><span>Client: Docker Engine - Community
+</span></span><span style="display:flex;"><span> Version:           20.10.17
+</span></span><span style="display:flex;"><span> API version:       1.41
+</span></span><span style="display:flex;"><span> Go version:        go1.17.11
+</span></span><span style="display:flex;"><span> Git commit:        100c701
+</span></span><span style="display:flex;"><span> Built:             Mon Jun  <span style="color:#ae81ff">6</span> 23:05:12 <span style="color:#ae81ff">2022</span>
+</span></span><span style="display:flex;"><span> OS/Arch:           linux/amd64
+</span></span><span style="display:flex;"><span> Context:           default
+</span></span><span style="display:flex;"><span> Experimental:      true
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Server: Docker Engine - Community
+</span></span><span style="display:flex;"><span> Engine:
+</span></span><span style="display:flex;"><span>  Version:          20.10.17
+</span></span><span style="display:flex;"><span>  API version:      1.41 <span style="color:#f92672">(</span>minimum version 1.12<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  Go version:       go1.17.11
+</span></span><span style="display:flex;"><span>  Git commit:       a89b842
+</span></span><span style="display:flex;"><span>  Built:            Mon Jun  <span style="color:#ae81ff">6</span> 23:03:33 <span style="color:#ae81ff">2022</span>
+</span></span><span style="display:flex;"><span>  OS/Arch:          linux/amd64
+</span></span><span style="display:flex;"><span>  Experimental:     false
+</span></span><span style="display:flex;"><span> containerd:
+</span></span><span style="display:flex;"><span>  Version:          1.6.7
+</span></span><span style="display:flex;"><span>  GitCommit:        0197261a30bf81f1ee8e6a4dd2dea0ef95d67ccb
+</span></span><span style="display:flex;"><span> runc:
+</span></span><span style="display:flex;"><span>  Version:          1.1.3
+</span></span><span style="display:flex;"><span>  GitCommit:        v1.1.3-0-g6724737
+</span></span><span style="display:flex;"><span> docker-init:
+</span></span><span style="display:flex;"><span>  Version:          0.19.0
+</span></span><span style="display:flex;"><span>  GitCommit:        de40ad0
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@web ~<span style="color:#f92672">]</span><span style="color:#75715e">#</span>
+</span></span></code></pre></div><p>install  docker-compose    安装教程同docker里寻找</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@web ~<span style="color:#f92672">]</span><span style="color:#75715e"># docker-compose -v</span>
+</span></span><span style="display:flex;"><span>docker-compose version 1.28.2, build <span style="color:#ae81ff">67630359</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@web ~<span style="color:#f92672">]</span><span style="color:#75715e">#</span>
+</span></span></code></pre></div><p>install node</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@web ~<span style="color:#f92672">]</span><span style="color:#75715e"># wget https://nodejs.org/dist/v14.18.1/node-v14.18.1-linux-x64.tar.xz</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@web ~<span style="color:#f92672">]</span><span style="color:#75715e"># tar xf node-v14.18.1-linux-x64.tar.xz</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@web ~<span style="color:#f92672">]</span><span style="color:#75715e"># mv node-v14.18.1-linux-x64 /usr/local/node-v14.18.1</span>
@@ -294,9 +294,9 @@ docker-compose version 1.28.2, build 67630359
 </span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@web ~<span style="color:#f92672">]</span><span style="color:#75715e">#</span>
 </span></span></code></pre></div><p>install yarn
 <a href="http://yarnpkg.top/Installation.html">yarn官网教程</a></p>
-<pre tabindex="0"><code>安装前需要node环境
-[root@web ~]# yum install yarn
-</code></pre><p>install python&gt;3.6 [这里系统自带]</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>安装前需要node环境
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@web ~<span style="color:#f92672">]</span><span style="color:#75715e"># yum install yarn</span>
+</span></span></code></pre></div><p>install python&gt;3.6 [这里系统自带]</p>
 <p>install java8 [暂时不安装]</p>
 
     </div>
