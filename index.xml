@@ -6,7 +6,52 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Sep 2022 20:12:55 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Sep 2022 19:12:39 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>遇见Python</title>
+      <link>https://jinkes-li.github.io/python/%E9%81%87%E8%A7%81python/</link>
+      <pubDate>Fri, 23 Sep 2022 19:12:39 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E9%81%87%E8%A7%81python/</guid>
+      <description>遇见Python 引言：
+接下来本文开始将在学习和工作中记录Python的使用
+本文内容
+Python语法-注释
+关键字
+变量与常量
+​	变量与常量的基本使用
+​	变量规范和命名规则
+数据类型
+​	整型（int）
+​	浮点型（float）
+​	字符串（str）
+​	列表（list）
+​	字典（dict）
+PEP8规范
+Python语法-注释
+注释的意思就是被注释的代码不执行，参见下列示例
+注释符号 # &amp;#39;&amp;#39;&amp;#39; &amp;#39;&amp;#39;&amp;#39; &amp;#34;&amp;#34;&amp;#34; &amp;#34;&amp;#34;&amp;#34; # 打印123 print(123) # 这一行是代码，代码后面也可以加注释 &amp;#39;&amp;#39;&amp;#39; 123 456 这是多行注释，被包含的内容都不执行 &amp;#39;&amp;#39;&amp;#39; &amp;#34;&amp;#34;&amp;#34; 666 这也是多行注释，被包含的内容都不执行 &amp;#34;&amp;#34;&amp;#34; 关键字 # 具有一定功能的特定单词，例如 print(&amp;#39;打印&amp;#39;) print(&amp;#39;123&amp;#39;) 123 # 查看数据类型 type() name = &amp;#39;wesley&amp;#39; print(type(name)) &amp;lt;class &amp;#39;str&amp;#39;&amp;gt; # 通过输出结果可以看出数据类型为str 也就是字符串 变量与常量
+变量就是会变化的量，常量就是不会变化的量或者说长时间不会改变的量
+​	变量：比如说我们的年龄会随着每年增涨，今年18，明年19，年龄在不断发生变化，这就是变量
+​	常量：比如我们的身份证号码就属于常量，无论什么时间身份证号都不会发生变化，这就是常量
+变量的命名规则和特性</description>
+    </item>
+    
+    <item>
+      <title>JetBrains IDE 产品使用</title>
+      <link>https://jinkes-li.github.io/python/jetbrains-ide-%E4%BA%A7%E5%93%81%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 23 Sep 2022 19:03:58 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/jetbrains-ide-%E4%BA%A7%E5%93%81%E4%BD%BF%E7%94%A8/</guid>
+      <description>JetBrains IDE 产品使用（Pycharm ） ​	引言：本文使用的系统为 MacOS 12.5 M1
+接下来我们需要写Python相关的代码这里强烈推荐使用Pycharm，由于免费的社区版某些功能没有，这里我们使用Pycharm专业版（仅测试使用）
+JetBrains官网 下载安装你需要的 IDE这里下载PyCharm，下载完成后直接双击安装 下载 Jetbrains.zip，下载后解压，得到 fineagent.jar，将该文件复制到 /Users/你的用户名/ 文件夹下
+#使用cd进入到Users下面的你电脑的用户名下 wesley@wesleydeMacBook-Pro ⮀ ~ ⮀ cd /Users/wesley/ #将下载的fineagent.zip 复制到当前目录并解压，注意：我这里是吧fineagent.zip下载到了Downloads这个目录下，请以你的下载目录为准 wesley@wesleydeMacBook-Pro ⮀ ~ ⮀ cp /Users/wesley/Downloads/fineagent.zip ./ &amp;amp;&amp;amp; unzip fineagent.zip &amp;amp;&amp;amp; ll -rw-r--r--@ 1 wesley staff 35K Aug 15 10:21 fineagent.jar wesley@wesleydeMacBook-Pro ⮀ ~ ⮀ 打开访达，点击左侧的 应用程序 找到 PyCharm，在 PyCharm 图标上右键，点击 显示包内容
+进入 Contents 目录，再进入 bin 目录，使用文本编辑器打开 pycharm.vmoptions 文件
+5.在最后面添加 -javaagent:/Users/你的用户名/fineagent.jar，记得修改一下你的用户名。
+![](https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/image-20220923152450707.png?raw=true) 运行 PyCharm, 选择 Activate PyCharm，再点击 Activation Code</description>
+    </item>
+    
     <item>
       <title>基础和py解释器</title>
       <link>https://jinkes-li.github.io/python/%E5%9F%BA%E7%A1%80%E5%92%8Cpy%E8%A7%A3%E9%87%8A%E5%99%A8/</link>

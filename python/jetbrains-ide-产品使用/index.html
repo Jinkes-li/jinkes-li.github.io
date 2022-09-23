@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> JetBrains IDE 产品使用 | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/python/jetbrains-ide-%E4%BA%A7%E5%93%81%E4%BD%BF%E7%94%A8/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="JetBrains IDE 产品使用" />
+<meta property="og:description" content="JetBrains IDE 产品使用（Pycharm ） ​	引言：本文使用的系统为 MacOS 12.5 M1
+接下来我们需要写Python相关的代码这里强烈推荐使用Pycharm，由于免费的社区版某些功能没有，这里我们使用Pycharm专业版（仅测试使用）
+JetBrains官网 下载安装你需要的 IDE这里下载PyCharm，下载完成后直接双击安装 下载 Jetbrains.zip，下载后解压，得到 fineagent.jar，将该文件复制到 /Users/你的用户名/ 文件夹下
+#使用cd进入到Users下面的你电脑的用户名下 wesley@wesleydeMacBook-Pro ⮀ ~ ⮀ cd /Users/wesley/ #将下载的fineagent.zip 复制到当前目录并解压，注意：我这里是吧fineagent.zip下载到了Downloads这个目录下，请以你的下载目录为准 wesley@wesleydeMacBook-Pro ⮀ ~ ⮀ cp /Users/wesley/Downloads/fineagent.zip ./ &amp;&amp; unzip fineagent.zip &amp;&amp; ll -rw-r--r--@ 1 wesley staff 35K Aug 15 10:21 fineagent.jar wesley@wesleydeMacBook-Pro ⮀ ~ ⮀ 打开访达，点击左侧的 应用程序 找到 PyCharm，在 PyCharm 图标上右键，点击 显示包内容
+进入 Contents 目录，再进入 bin 目录，使用文本编辑器打开 pycharm.vmoptions 文件
+5.在最后面添加 -javaagent:/Users/你的用户名/fineagent.jar，记得修改一下你的用户名。
+![](https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/image-20220923152450707.png?raw=true) 运行 PyCharm, 选择 Activate PyCharm，再点击 Activation Code" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/python/jetbrains-ide-%E4%BA%A7%E5%93%81%E4%BD%BF%E7%94%A8/" /><meta property="article:section" content="python" />
+<meta property="article:published_time" content="2022-09-23T19:03:58+08:00" />
+<meta property="article:modified_time" content="2022-09-23T19:03:58+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JetBrains IDE 产品使用"/>
+<meta name="twitter:description" content="JetBrains IDE 产品使用（Pycharm ） ​	引言：本文使用的系统为 MacOS 12.5 M1
+接下来我们需要写Python相关的代码这里强烈推荐使用Pycharm，由于免费的社区版某些功能没有，这里我们使用Pycharm专业版（仅测试使用）
+JetBrains官网 下载安装你需要的 IDE这里下载PyCharm，下载完成后直接双击安装 下载 Jetbrains.zip，下载后解压，得到 fineagent.jar，将该文件复制到 /Users/你的用户名/ 文件夹下
+#使用cd进入到Users下面的你电脑的用户名下 wesley@wesleydeMacBook-Pro ⮀ ~ ⮀ cd /Users/wesley/ #将下载的fineagent.zip 复制到当前目录并解压，注意：我这里是吧fineagent.zip下载到了Downloads这个目录下，请以你的下载目录为准 wesley@wesleydeMacBook-Pro ⮀ ~ ⮀ cp /Users/wesley/Downloads/fineagent.zip ./ &amp;&amp; unzip fineagent.zip &amp;&amp; ll -rw-r--r--@ 1 wesley staff 35K Aug 15 10:21 fineagent.jar wesley@wesleydeMacBook-Pro ⮀ ~ ⮀ 打开访达，点击左侧的 应用程序 找到 PyCharm，在 PyCharm 图标上右键，点击 显示包内容
+进入 Contents 目录，再进入 bin 目录，使用文本编辑器打开 pycharm.vmoptions 文件
+5.在最后面添加 -javaagent:/Users/你的用户名/fineagent.jar，记得修改一下你的用户名。
+![](https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/image-20220923152450707.png?raw=true) 运行 PyCharm, 选择 Activate PyCharm，再点击 Activation Code"/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h3 id="jetbrains-ide-产品使用pycharm-">JetBrains IDE 产品使用（Pycharm ）</h3>
+<p>​		引言：本文使用的系统为 MacOS 12.5 M1</p>
+<blockquote>
+<p>接下来我们需要写Python相关的代码这里强烈推荐使用Pycharm，由于免费的社区版某些功能没有，这里我们使用Pycharm专业版（仅测试使用）</p>
+</blockquote>
+<ol>
+<li>
+<p><a href="https://www.jetbrains.com/">JetBrains官网</a> 下载安装你需要的 IDE这里下载PyCharm，下载完成后直接双击安装
+<img src="https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/image-20220923151316169?raw=true" alt=""></p>
+</li>
+<li>
+<p>下载 <a href="https://macwk.lanzouo.com/i8eElxh573a">Jetbrains.zip</a>，下载后解压，得到 fineagent.jar，将该文件复制到 <code>/Users/你的用户名/</code> 文件夹下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> <span style="color:#75715e">#使用cd进入到Users下面的你电脑的用户名下</span>
+</span></span><span style="display:flex;"><span> wesley@wesleydeMacBook-Pro ⮀ ~ ⮀ cd /Users/wesley/
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#将下载的fineagent.zip 复制到当前目录并解压，注意：我这里是吧fineagent.zip下载到了Downloads这个目录下，请以你的下载目录为准</span>
+</span></span><span style="display:flex;"><span> wesley@wesleydeMacBook-Pro ⮀ ~ ⮀ cp /Users/wesley/Downloads/fineagent.zip ./  <span style="color:#f92672">&amp;&amp;</span> unzip fineagent.zip <span style="color:#f92672">&amp;&amp;</span> ll
+</span></span><span style="display:flex;"><span>-rw-r--r--@  <span style="color:#ae81ff">1</span> wesley  staff    35K Aug <span style="color:#ae81ff">15</span> 10:21 fineagent.jar
+</span></span><span style="display:flex;"><span> wesley@wesleydeMacBook-Pro ⮀ ~ ⮀
+</span></span></code></pre></div></li>
+<li>
+<p>打开访达，点击左侧的 <code>应用程序</code> 找到 <code>PyCharm</code>，在 PyCharm 图标上右键，点击 <code>显示包内容</code></p>
+<p><img src="https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/image-20220923152235206.png?raw=true" alt=""></p>
+</li>
+<li>
+<p>进入 <code>Contents</code> 目录，再进入 <code>bin</code> 目录，使用文本编辑器打开 <code>pycharm.vmoptions</code> 文件</p>
+<p><img src="https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/image-20220923152348187.png?raw=true" alt=""></p>
+</li>
+</ol>
+<p>5.在最后面添加 <code>-javaagent:/Users/你的用户名/fineagent.jar</code>，记得修改一下你的用户名。</p>
+<pre><code>![](https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/image-20220923152450707.png?raw=true)
+</code></pre>
+<ol start="6">
+<li>
+<p>运行 PyCharm, 选择 <code>Activate PyCharm</code>，再点击 <code>Activation Code</code></p>
+</li>
+<li>
+<p>复制下面的的激活码粘贴到激活窗口的输入框中，点击 <code>Activate</code>。可以用到 2099 年！</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>5AYV1D1RE5-eyJsaWNlbnNlSWQiOiI1QVlWMUQxUkU1IiwibGljZW5zZWVOYW1lIjoiaHR0cHM6Ly93d3cuaml3ZWljaGVuZ3podS5jb20iLCJhc3NpZ25lZU5hbWUiOiIiLCJhc3NpZ25lZUVtYWlsIjoiIiwibGljZW5zZVJlc3RyaWN0aW9uIjoiIiwiY2hlY2tDb25jdXJyZW50VXNlIjpmYWxzZSwicHJvZHVjdHMiOlt7ImNvZGUiOiJJSSIsImZhbGxiYWNrRGF0ZSI6IjIwOTktMTItMzEiLCJwYWlkVXBUbyI6IjIwOTktMTItMzEifSx7ImNvZGUiOiJBQyIsImZhbGxiYWNrRGF0ZSI6IjIwOTktMTItMzEiLCJwYWlkVXBUbyI6IjIwOTktMTItMzEifSx7ImNvZGUiOiJEUE4iLCJmYWxsYmFja0RhdGUiOiIyMDk5LTEyLTMxIiwicGFpZFVwVG8iOiIyMDk5LTEyLTMxIn0seyJjb2RlIjoiUFMiLCJmYWxsYmFja0RhdGUiOiIyMDk5LTEyLTMxIiwicGFpZFVwVG8iOiIyMDk5LTEyLTMxIn0seyJjb2RlIjoiR08iLCJmYWxsYmFja0RhdGUiOiIyMDk5LTEyLTMxIiwicGFpZFVwVG8iOiIyMDk5LTEyLTMxIn0seyJjb2RlIjoiRE0iLCJmYWxsYmFja0RhdGUiOiIyMDk5LTEyLTMxIiwicGFpZFVwVG8iOiIyMDk5LTEyLTMxIn0seyJjb2RlIjoiQ0wiLCJmYWxsYmFja0RhdGUiOiIyMDk5LTEyLTMxIiwicGFpZFVwVG8iOiIyMDk5LTEyLTMxIn0seyJjb2RlIjoiUlMwIiwiZmFsbGJhY2tEYXRlIjoiMjA5OS0xMi0zMSIsInBhaWRVcFRvIjoiMjA5OS0xMi0zMSJ9LHsiY29kZSI6IlJDIiwiZmFsbGJhY2tEYXRlIjoiMjA5OS0xMi0zMSIsInBhaWRVcFRvIjoiMjA5OS0xMi0zMSJ9LHsiY29kZSI6IlJEIiwiZmFsbGJhY2tEYXRlIjoiMjA5OS0xMi0zMSIsInBhaWRVcFRvIjoiMjA5OS0xMi0zMSJ9LHsiY29kZSI6IlBDIiwiZmFsbGJhY2tEYXRlIjoiMjA5OS0xMi0zMSIsInBhaWRVcFRvIjoiMjA5OS0xMi0zMSJ9LHsiY29kZSI6IlJNIiwiZmFsbGJhY2tEYXRlIjoiMjA5OS0xMi0zMSIsInBhaWRVcFRvIjoiMjA5OS0xMi0zMSJ9LHsiY29kZSI6IldTIiwiZmFsbGJhY2tEYXRlIjoiMjA5OS0xMi0zMSIsInBhaWRVcFRvIjoiMjA5OS0xMi0zMSJ9LHsiY29kZSI6IkRCIiwiZmFsbGJhY2tEYXRlIjoiMjA5OS0xMi0zMSIsInBhaWRVcFRvIjoiMjA5OS0xMi0zMSJ9LHsiY29kZSI6IkRDIiwiZmFsbGJhY2tEYXRlIjoiMjA5OS0xMi0zMSIsInBhaWRVcFRvIjoiMjA5OS0xMi0zMSJ9LHsiY29kZSI6IlJTVSIsImZhbGxiYWNrRGF0ZSI6IjIwOTktMTItMzEiLCJwYWlkVXBUbyI6IjIwOTktMTItMzEifV0sImhhc2giOiIxMjc5Njg3Ny8wIiwiZ3JhY2VQZXJpb2REYXlzIjo3LCJhdXRvUHJvbG9uZ2F0ZWQiOmZhbHNlLCJpc0F1dG9Qcm9sb25nYXRlZCI6ZmFsc2V9-HNPogO0kWkHCVMnsjmBXUqQt87UPHqdkYqZGveSJtu8hb2V2Yq7gHsHenp4UuEd3jwEwC+YrUIf7U5yDA/56F5Sdn0RLUHZX5DHeQbJPbmYCBsDRT7m8rnmMFOSZn3vwNatvv1cooZbcGOk3Wwxx6bF7XcgaIrmXRcmZMZgv2PZehr0WS1HxNKe3X4nbGP3MwiSbg4ypmxNDrljmgv+Si9QDDwNLDffqeO0Lce0FqEJuMWmvBS42S0aeIYF8IS5bp4+LFKLJ8T7tF40OxKYDurBb9+9c43GZBscM/eLB8Jos66jNGFwgebFUlvhzJKVHZtuc/N8zGeEnTq6K0T/B8w<span style="color:#f92672">==</span>-MIIDTjCCAjagAwIBAgIBDTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBMCAXDTE4MTEwMTEyMjk0NloYDzIwOTkwODA5MDIyNjA3WjAfMR0wGwYDVQQDDBRwcm9kMnktZnJvbS0yMDIwMTAxOTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMK3eyr0+Oys/TwcQO+qYaXWGBmXcEP4fR0bHHzZd/4WNGltXhecM80OWthA38BQRYAJBCKz/dSkO2Kj1H2y+7KB5cIaOiJEyTESfTSgzQdot6laRBU8oxy9mmagI46M8zEEmplPybY4YJj4HOwZiBsMQEMxoTgMDLpuHX6uASoVhSj6koB55lOj4wEgsQBeAMWTAXmTl88ixE179J8aBUkBGpL8w/tZzl9BJXZNF15gPfkS58rw8cdPzXLS0Yym37A2/KKFhfHzJc5KhbaxqYzmkAfTMqPsIqCQ1lQUAqfiPn2gN2I1Z3/cQuEW27M55fXVr2DduQe5DWzYJs85L50CAwEAAaOBmTCBljAJBgNVHRMEAjAAMB0GA1UdDgQWBBQk2hEilvWFQcCTR+gxI0z0wIQC/zBIBgNVHSMEQTA/gBSjnrZIZ0ISNkG9beC5tKBSi5fxs6EcpBowGDEWMBQGA1UEAwwNSmV0UHJvZmlsZSBDQYIJANJssYOyg3nhMBMGA1UdJQQMMAoGCCsGAQUFBwMBMAsGA1UdDwQEAwIFoDANBgkqhkiG9w0BAQsFAAOCAQEAsCQBjO5wttco/Z5cj/o4GBrku8UtBBBVFq4xsBanshTHm4deVxcTvta4aScV0TPKcaLqGqWx8A9v8XXO8dBbCuyXvWZteZ/C2Covg1xXiM99lz7VxqpjVmLdKanZn5u0gQSiYJdcfF+TdbmEIeSOnN/kLXNq2hXdJQK2zk2J25UZqu5EibRtTbdOzw6ZcfwJ8uOntXfsmAhnNICP3Wf/4wR/mwB0Ka4S+JA3IbF5MUmUZ/fjUaFarnin70us+Vxf/sZUi7u67wilvwVV0NAqDpthHUV0NRc4q+yOr2Dt/uCHdy4XRXLJfAv/z9/xBwNZZALNz3EtQL6IeIWWJByl3g<span style="color:#f92672">==</span>
+</span></span></code></pre></div><ol start="8">
+<li>
+<p>这里激活结束后我们来查看一下到期日期，可以看到已经激活到2099年了直接用到人成灰灰～</p>
+<p><img src="https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/image-20220923153123332.png?raw=true" alt=""></p>
+</li>
+</ol>
+<ul>
+<li>PyCharm 基本配置</li>
+</ul>
+<ol>
+<li>
+<p>新建项目并使用本地python3.8环境</p>
+<p><img src="https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/image-20220923153706726.png?raw=true" alt=""></p>
+<p><img src="https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/image-20220923153910531.png?raw=true" alt=""></p>
+<p><img src="https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/image-20220923154418427.png?raw=true" alt=""></p>
+<p>点击ok后，点击Create项目，这时会提示我们是打开一个新的窗口还是覆盖旧的，这里我们选择覆盖旧窗口</p>
+<p><img src="https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/image-20220923154727064.png?raw=true" alt=""></p>
+<p>到此新的项目已经创建完毕。</p>
+<p>Pycharm 里的字体如何调节，Mac系统左上角选择PyCharm-&gt;Preferences，打开如下，勾选Mouse Control 可以使用comand键加鼠标滚轮进行放大缩小</p>
+<p><img src="https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/image-20220923155449858.png?raw=true" alt=""></p>
+</li>
+</ol>
+
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
