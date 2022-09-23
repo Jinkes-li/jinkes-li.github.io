@@ -47,7 +47,7 @@ Python语法-注释
 接下来我们需要写Python相关的代码这里强烈推荐使用Pycharm，由于免费的社区版某些功能没有，这里我们使用Pycharm专业版（仅测试使用）
 JetBrains官网 下载安装你需要的 IDE这里下载PyCharm，下载完成后直接双击安装 下载 Jetbrains.zip，下载后解压，得到 fineagent.jar，将该文件复制到 /Users/你的用户名/ 文件夹下
 #使用cd进入到Users下面的你电脑的用户名下 wesley@wesleydeMacBook-Pro ⮀ ~ ⮀ cd /Users/wesley/ #将下载的fineagent.zip 复制到当前目录并解压，注意：我这里是吧fineagent.zip下载到了Downloads这个目录下，请以你的下载目录为准 wesley@wesleydeMacBook-Pro ⮀ ~ ⮀ cp /Users/wesley/Downloads/fineagent.zip ./ &amp;amp;&amp;amp; unzip fineagent.zip &amp;amp;&amp;amp; ll -rw-r--r--@ 1 wesley staff 35K Aug 15 10:21 fineagent.jar wesley@wesleydeMacBook-Pro ⮀ ~ ⮀ 打开访达，点击左侧的 应用程序 找到 PyCharm，在 PyCharm 图标上右键，点击 显示包内容
-进入 Contents 目录，再进入 bin 目录，使用文本编辑器打开 pycharm.vmoptions 文件
+进入 Contents 目录，再进入 bin 目录，使用文本编辑器打开 pycharm.vmoptions文件
 5.在最后面添加 -javaagent:/Users/你的用户名/fineagent.jar，记得修改一下你的用户名。
 运行 PyCharm, 选择 Activate PyCharm，再点击 Activation Code</description>
     </item>
