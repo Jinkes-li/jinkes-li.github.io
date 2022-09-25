@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 周末总结 | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/python/%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="周末总结" />
+<meta property="og:description" content="周末总结 硬件总结 计算机基础知识 安装Pycharm 遇见Python Markdown文档编写 计算机基础硬件 CPU
+控制器
+调度计算机硬件之间的工作，相当于人类的大脑
+运算器
+在计算机中负责数学运算以及逻辑运算，同样相当于人类的大脑
+存储
+内存
+基于电工作，内存将磁盘中的数据加载到自身于CPU交互，数据仅次于 CPU，但是断电未持久化的数据将会丢失
+磁盘 将内存需要存储的数据，在磁盘中永久的存储下去
+输入设备 计算机中的键盘鼠标，扫描仪等，都属于输入设备，是将外界信息录入计算机的一种设备
+输出设备 将计算机中的数据输出的设备被称为输出设备，例如显示器，投影机等
+计算机基础知识 路径 路径就是计算机中用来定位资源的路径，C:\user\admin\a.txt 这就是一个文件的路径
+相对路径 相对路径就是具有参照物的路径，可以不用从根目录开始寻找 绝对路径 绝对路径就是需要从根路径开始寻找 环境变量 当系统需要寻找一个文件时会先寻找当前路径，如果当前路径寻找不到就	会寻找系统中的环境变量，环境变量相当于告诉计算机，如果这个文件找不	到就去环境变量的这个文件下寻找
+进制
+二进制 0 1 10 11 ，0和1 就是二进制用来表示高低电平，可以直接被计算机识别，二进制逢二进一 八进制 0 1 2 3 4 5 6 7 ，0到7就是八进制，逢八进一 十进制 0 1 2 3 4 5 6 7 8 9 ，0-9时十进制，逢十进一 十六进制 0 1 2 3 4 5 6 7 8 9 a b c d e f ，0 -f是十六进制，逢十六进一 单位换算" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/python/%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93/" /><meta property="article:section" content="python" />
+<meta property="article:published_time" content="2022-09-25T15:43:19+08:00" />
+<meta property="article:modified_time" content="2022-09-25T15:43:19+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="周末总结"/>
+<meta name="twitter:description" content="周末总结 硬件总结 计算机基础知识 安装Pycharm 遇见Python Markdown文档编写 计算机基础硬件 CPU
+控制器
+调度计算机硬件之间的工作，相当于人类的大脑
+运算器
+在计算机中负责数学运算以及逻辑运算，同样相当于人类的大脑
+存储
+内存
+基于电工作，内存将磁盘中的数据加载到自身于CPU交互，数据仅次于 CPU，但是断电未持久化的数据将会丢失
+磁盘 将内存需要存储的数据，在磁盘中永久的存储下去
+输入设备 计算机中的键盘鼠标，扫描仪等，都属于输入设备，是将外界信息录入计算机的一种设备
+输出设备 将计算机中的数据输出的设备被称为输出设备，例如显示器，投影机等
+计算机基础知识 路径 路径就是计算机中用来定位资源的路径，C:\user\admin\a.txt 这就是一个文件的路径
+相对路径 相对路径就是具有参照物的路径，可以不用从根目录开始寻找 绝对路径 绝对路径就是需要从根路径开始寻找 环境变量 当系统需要寻找一个文件时会先寻找当前路径，如果当前路径寻找不到就	会寻找系统中的环境变量，环境变量相当于告诉计算机，如果这个文件找不	到就去环境变量的这个文件下寻找
+进制
+二进制 0 1 10 11 ，0和1 就是二进制用来表示高低电平，可以直接被计算机识别，二进制逢二进一 八进制 0 1 2 3 4 5 6 7 ，0到7就是八进制，逢八进一 十进制 0 1 2 3 4 5 6 7 8 9 ，0-9时十进制，逢十进一 十六进制 0 1 2 3 4 5 6 7 8 9 a b c d e f ，0 -f是十六进制，逢十六进一 单位换算"/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h2 id="周末总结">周末总结</h2>
+<ul>
+<li>
+<h3 id="硬件总结">硬件总结</h3>
+</li>
+<li>
+<h3 id="计算机基础知识">计算机基础知识</h3>
+</li>
+<li>
+<h3 id="安装pycharm">安装Pycharm</h3>
+</li>
+<li>
+<h3 id="遇见python">遇见Python</h3>
+</li>
+<li>
+<h3 id="markdown文档编写">Markdown文档编写</h3>
+</li>
+</ul>
+<h3 id="计算机基础硬件">计算机基础硬件</h3>
+<ul>
+<li>
+<p>CPU</p>
+<ul>
+<li>
+<p>控制器</p>
+<p>调度计算机硬件之间的工作，相当于人类的大脑</p>
+</li>
+<li>
+<p>运算器</p>
+<p>在计算机中负责数学运算以及逻辑运算，同样相当于人类的大脑</p>
+</li>
+</ul>
+</li>
+<li>
+<p>存储</p>
+<ul>
+<li>
+<p>内存</p>
+<p>基于电工作，内存将磁盘中的数据加载到自身于CPU交互，数据仅次于  CPU，但是断电未持久化的数据将会丢失</p>
+</li>
+<li>
+<p>磁盘
+将内存需要存储的数据，在磁盘中永久的存储下去</p>
+</li>
+</ul>
+</li>
+<li>
+<p>输入设备
+计算机中的键盘鼠标，扫描仪等，都属于输入设备，是将外界信息录入计算机的一种设备</p>
+</li>
+<li>
+<p>输出设备
+将计算机中的数据输出的设备被称为输出设备，例如显示器，投影机等</p>
+</li>
+</ul>
+<h3 id="计算机基础知识-1">计算机基础知识</h3>
+<ul>
+<li>
+<p>路径
+路径就是计算机中用来定位资源的路径，C:\user\admin\a.txt  这就是一个文件的路径</p>
+<ul>
+<li>相对路径
+相对路径就是具有参照物的路径，可以不用从根目录开始寻找</li>
+<li>绝对路径
+绝对路径就是需要从根路径开始寻找</li>
+</ul>
+</li>
+<li>
+<p>环境变量
+当系统需要寻找一个文件时会先寻找当前路径，如果当前路径寻找不到就	会寻找系统中的环境变量，环境变量相当于告诉计算机，如果这个文件找不		到就去环境变量的这个文件下寻找</p>
+</li>
+<li>
+<p>进制</p>
+<ul>
+<li>二进制
+0 1 10 11 ，0和1 就是二进制用来表示高低电平，可以直接被计算机识别，二进制逢二进一</li>
+<li>八进制
+0 1 2 3 4 5 6 7 ，0到7就是八进制，逢八进一</li>
+<li>十进制
+0 1 2 3 4 5 6 7 8 9 ，0-9时十进制，逢十进一</li>
+<li>十六进制
+0 1 2 3 4 5 6 7 8 9 a b c d e f ，0 -f是十六进制，逢十六进一</li>
+</ul>
+</li>
+<li>
+<p>单位换算</p>
+<table>
+<thead>
+<tr>
+<th>比特位（bit）</th>
+<th>=</th>
+<th>1bit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8bit</td>
+<td>=</td>
+<td>1bytes字节</td>
+</tr>
+<tr>
+<td>1024bytes</td>
+<td>=</td>
+<td>1KB</td>
+</tr>
+<tr>
+<td>1024KB</td>
+<td>=</td>
+<td>1MB</td>
+</tr>
+<tr>
+<td>1024MB</td>
+<td>=</td>
+<td>1GB</td>
+</tr>
+<tr>
+<td>1024GB</td>
+<td>=</td>
+<td>1TB</td>
+</tr>
+<tr>
+<td>1024TB</td>
+<td>=</td>
+<td>1PB</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>编程与编程语言</p>
+<ul>
+<li>编程
+编程就是程序员将自身的思想以代码的形式编写的过程</li>
+<li>编程语言
+<ul>
+<li>机器语言 [0 1]
+机器语言是可以直接被计算机识别的语言，优点是执行效率高，缺点是 可维护低，开发效率低，可移植性低，可读性低</li>
+<li>汇编语言 a x
+用字母代替了机器语言中的高低电平，使得代码的的可读性提高，优点 和缺点和机器语言一样</li>
+<li>高级语言
+高级语言对于人类来说，符合人类的思维逻辑，可读性高，可移植，缺 点是相对于机器语言和汇编语言效率降低
+<ul>
+<li>编译型 Golong , C ,C# ,C++
+编译型语言是编程结束后需要对代码进行编译打包，整体运行，优点 是对于解释型语言来说效率高</li>
+<li>解释型 Python BashShell
+解释型语言是在代码执行过程中需要解释器对其进行逐行翻译执行的 语言，优点是便于Debug，缺点是相对上列语言执行效率较慢</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="安装pycharm-1">安装Pycharm</h3>
+<p><a href="https://jinkes-li.github.io/python/jetbrains-ide-%E4%BA%A7%E5%93%81%E4%BD%BF%E7%94%A8/">MacOs</a></p>
+<p><a href="www.baidu.com">Windows</a></p>
+<h3 id="遇见python-1">遇见Python</h3>
+<ul>
+<li>
+<p>Python注释</p>
+<ul>
+<li>
+<p>单行注释</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 这个是单行注释</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#ae81ff">123</span>)  <span style="color:#75715e"># 单行注释也可以写在代码后面</span>
+</span></span></code></pre></div></li>
+<li>
+<p>多行注释</p>
+<ul>
+<li>使用三个单引号和三个双引号进行注释</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 单引号</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">这个是多行注释
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">123
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">123
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>双引号
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">这个也是多行注释
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">123
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">123
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p>变量与常量</p>
+<ul>
+<li>变量
+<ul>
+<li>变量就是随时会发生变化的量，比如年纪，成绩</li>
+<li>变量的代码应用
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># [变量名 赋值符号 变量值]</span>
+</span></span><span style="display:flex;"><span>name <span style="color:#f92672">=</span> Wesley
+</span></span></code></pre></div></li>
+<li>变量的命名规范
+变量名的命名
+<ul>
+<li>尽量的见名知意</li>
+<li>变量名可以用字母数字和下划线，需要注意不可以直接使用数字开头</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 代码实例</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用字母开头定义</span>
+</span></span><span style="display:flex;"><span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wesley&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用下划线开头</span>
+</span></span><span style="display:flex;"><span>_age <span style="color:#f92672">=</span> <span style="color:#ae81ff">18</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>常量
+<ul>
+<li>常量就是一直不变的量，比如身份证号码</li>
+<li>在Python中并没有明确定义常量，所以Python程序员默认遵守，若变量名全部使用大写，就默认为常量</li>
+</ul>
+<pre tabindex="0"><code class="language-ptyhon" data-lang="ptyhon"># 代码实例
+# 这是一个常量
+HOST = &#39;127.0.0.1&#39;
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Python关键字</p>
+<ul>
+<li>打印（print）
+Python自带的关键字
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 代码实例</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">123</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> 查看数据类型<span style="color:#960050;background-color:#1e0010">（</span>type<span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span>Python自带的关键字
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>python
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 代码实例</span>
+</span></span><span style="display:flex;"><span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wesley&#39;</span>
+</span></span><span style="display:flex;"><span>print(type(name))
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">str</span><span style="color:#e6db74">&#39;&gt;</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>Python的数据类型
+不同的数据可以存放在不同的数据类型里，比如年纪可以使用整型存放</p>
+<ul>
+<li>整型（int）
+<ul>
+<li>定义：整数
+代码实例
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>int_num <span style="color:#f92672">=</span> <span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>print(type(int_num))
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">int</span><span style="color:#e6db74">&#39;&gt;</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>浮点型（float）
+<ul>
+<li>定义：小数
+代码实例
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>float_num <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.14</span>
+</span></span><span style="display:flex;"><span>print(type(float_num))
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">float</span><span style="color:#e6db74">&#39;&gt;</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>字符串 （str）
+<ul>
+<li>定义： 字符串，文本数据
+代码实例
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 注意，在定义字符串时需要注意，如果变量值的最外面使用的双引号，那么变量值的里面必须使用单引号，反之亦然</span>
+</span></span><span style="display:flex;"><span>str_doc <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;这是一个文本数据&#39;</span>
+</span></span><span style="display:flex;"><span>str_doc1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Andy说：&#34;你这么早下班回去干嘛&#34;&#39;</span>
+</span></span><span style="display:flex;"><span>print(type(str_doc))
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">str</span><span style="color:#e6db74">&#39;&gt;</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>列表（list）
+<ul>
+<li>定义：列表里可以存放任何类型的数据，具有与数组一致的索引属性
+代码实例
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>list_1 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#e6db74">&#39;wesley&#39;</span>, [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>]]
+</span></span><span style="display:flex;"><span>print(type(list_1))
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">list</span><span style="color:#e6db74">&#39;&gt;</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>字典（dict）
+<ul>
+<li>定义： 使用键值对的方式存储，字典是无序的
+代码实例
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dict_1 <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;wesley&#34;</span>: <span style="color:#ae81ff">18</span>, <span style="color:#e6db74">&#34;kimi&#34;</span>: <span style="color:#ae81ff">19</span>, <span style="color:#e6db74">&#34;Andy&#34;</span>: <span style="color:#ae81ff">35</span>}
+</span></span><span style="display:flex;"><span>print(type(dict_1))
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">dict</span><span style="color:#e6db74">&#39;&gt;</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="markdown文档编写-1">Markdown文档编写</h3>
+<p>Markdown是一种备受IT人员喜爱的一种文档书写格式，具有丰富的语法格式</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>作用</th>
+<th>用法</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>#</td>
+<td>标题</td>
+<td>### 标题名</td>
+<td>三个井号就是3级标题，最高位六级标题</td>
+</tr>
+<tr>
+<td>```</td>
+<td>书写python代码的环境</td>
+<td>```Python</td>
+<td>python代码的环境,反应号后面跟什么语言就是什么环境</td>
+</tr>
+<tr>
+<td>****</td>
+<td>字体加粗</td>
+<td><strong>加粗</strong></td>
+<td>将字体写在两个星号中间，可以使字体加粗</td>
+</tr>
+<tr>
+<td>-</td>
+<td>无序小标题</td>
+<td>- 列表</td>
+<td>不使用数字作为小标题</td>
+</tr>
+<tr>
+<td>！<a href=""></a></td>
+<td>图片链接</td>
+<td>！<a href="%E5%9B%BE%E7%89%87URL"></a></td>
+<td>引用互联网图片</td>
+</tr>
+<tr>
+<td>[]（）</td>
+<td>超链接</td>
+<td>[百度]（www.baidu.com）</td>
+<td>百度超链接</td>
+</tr>
+<tr>
+<td>\</td>
+<td>转义符号</td>
+<td>\！</td>
+<td>用来转义！号，仅作为普通字符使用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pep8标准">PEP8标准</h3>
+<p>PEP8规范</p>
+<p>1.逗号后面与数据值空一格
+2.赋值符号左右都得空一格
+3.单行注释如果跟在代码之后
+4.那么警号与代码之间需要空两格 内容与警号空一格
+5.如果单行注释自成一行 那么内容与警号空一格
+6.在 list, dict, tuple, set, 参数列表的 , 后面加一个空格
+7.在 dict 的 : 后面加一个空格
+8.在注释符号 # 后面加一个空格，但是 #!/usr/bin/python 的 # 后不能有空格
+9.操作符两端加一个空格，如 +, -, *, /, |, &amp;, =
+10.接上一条，在参数列表里的 = 两端不需要空格
+11.括号（(), {}, []）内的两端不需要空格</p>
+
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
