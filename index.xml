@@ -6,7 +6,26 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Sep 2022 17:05:19 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Sep 2022 21:25:44 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用户交互与格式化输出运算符</title>
+      <link>https://jinkes-li.github.io/python/%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E4%B8%8E%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
+      <pubDate>Mon, 26 Sep 2022 21:25:44 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E4%B8%8E%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6/</guid>
+      <description>Python 本篇文章接着上一个文章继续介绍Python
+Python基本的数据类型
+与用户交互
+格式化输出
+基本运算符
+多种赋值方式
+逻辑运算符
+成员运算符
+身份运算符
+1. Python基本数据类型 布尔值 （bool） 定义：用来判断事务的对错，是否可行，应用与流程控制中 布尔值只有两种状态 True 真的，可行的，对的 False 假的，不可行的，错的 Python中所有的数据都是自带布尔值的，自带布尔值的数据有下列两种 布尔值默认为False的数据有：0 None &amp;rsquo;&amp;rsquo; [] {} 布尔值默认为True的数据有：一般除了上面的都是True 布尔值的变量名一般推荐使用is开头 # 代码实例 is_boo1f = False is_boolt = True 小知识： 在企业中一般说的数据库数据伪删除使用的就是类似这种判断逻辑。
+# 代码实例 # 一般企业提供的账号注销功能就是使用布尔值判断逻辑 # 比如下列表格中 is_delete 字段0代表着账户存在，字段1代表账户被删除，其实只是修改李程序取值的逻辑，并未删除实际数据 id	username	password phone is_delete 1 jason	123	110 1 2	kevin	321	120	0 # 一般这种方式大多应用于数据库中 元组（tuple） 定义： 小括号括起来 内部存放多个数据值 数据值与数据值之间逗号隔 开 数据值可以是任何数据类型 被称为不可变列表，是因为元组内存放的地址不能修改 # 代码实例 # 列表与元组的对比 # 列表使用[]进行定义 l1 = [11, 22, 33] # 定义一个列表并赋值给l1 l1[0] = 123 # 使用重复赋值将123替换到l1列表的0号索引 print(l1[0]) # 这里发现最终打印的123，而不是11，所以列表值是可变的 123 ​ 列表修改数据图表参考如下</description>
+    </item>
+    
     <item>
       <title>周末总结</title>
       <link>https://jinkes-li.github.io/python/%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93/</link>
