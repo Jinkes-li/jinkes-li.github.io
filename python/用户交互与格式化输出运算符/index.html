@@ -384,16 +384,16 @@ raw_input方法和python中的input一致，会将所有输入统一转换为字
 </span></span></code></pre></div></li>
 <li>
 <p>交叉赋值</p>
-<pre tabindex="0"><code class="language-ptyhon" data-lang="ptyhon">n = 100
-m = 999
-# 方式一，使用之间变量
-a = n
-n = m
-m = a
-print(n, m)
-n, m = m, n
-print(n, m)
-</code></pre></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>m <span style="color:#f92672">=</span> <span style="color:#ae81ff">999</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 方式一，使用之间变量</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> n
+</span></span><span style="display:flex;"><span>n <span style="color:#f92672">=</span> m
+</span></span><span style="display:flex;"><span>m <span style="color:#f92672">=</span> a
+</span></span><span style="display:flex;"><span>print(n, m)
+</span></span><span style="display:flex;"><span>n, m <span style="color:#f92672">=</span> m, n
+</span></span><span style="display:flex;"><span>print(n, m)
+</span></span></code></pre></div></li>
 <li>
 <p>解压赋值
 解压赋值在使用的时候，正常情况下需要保证左边的变量名和右边的数据值保持数量一致
@@ -473,14 +473,14 @@ print(n, m)
 <li>is 判断内存地址是否相同</li>
 <li>== 判断数据值是否相同</li>
 </ul>
-<pre tabindex="0"><code class="language-ptyhon" data-lang="ptyhon"># 代码实例
-l1 = [11, 22, 33, 44, 55, 66, 77, 88]
-l2 = [11, 22, 33, 44, 55, 66, 77, 88]
-print(l1 == l2)  # 使用==判断数据值是否相同，相同结果为True
-print(l1 is l2)  # 使用is判断内存地址是否相同，不同结果为False
-print(id(l1))  # 使用id()查看l1的内存地址4381014848
-print(id(l2))  # 使用id()查看l2的内存地址4381017280
-</code></pre></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 代码实例</span>
+</span></span><span style="display:flex;"><span>l1 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">33</span>, <span style="color:#ae81ff">44</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">66</span>, <span style="color:#ae81ff">77</span>, <span style="color:#ae81ff">88</span>]
+</span></span><span style="display:flex;"><span>l2 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">33</span>, <span style="color:#ae81ff">44</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">66</span>, <span style="color:#ae81ff">77</span>, <span style="color:#ae81ff">88</span>]
+</span></span><span style="display:flex;"><span>print(l1 <span style="color:#f92672">==</span> l2)  <span style="color:#75715e"># 使用==判断数据值是否相同，相同结果为True</span>
+</span></span><span style="display:flex;"><span>print(l1 <span style="color:#f92672">is</span> l2)  <span style="color:#75715e"># 使用is判断内存地址是否相同，不同结果为False</span>
+</span></span><span style="display:flex;"><span>print(id(l1))  <span style="color:#75715e"># 使用id()查看l1的内存地址4381014848</span>
+</span></span><span style="display:flex;"><span>print(id(l2))  <span style="color:#75715e"># 使用id()查看l2的内存地址4381017280</span>
+</span></span></code></pre></div></li>
 </ul>
 <p>联系题</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 1.获取用户输入并打印成下列格式</span>
