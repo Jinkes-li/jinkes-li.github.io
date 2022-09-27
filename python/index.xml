@@ -6,7 +6,22 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 26 Sep 2022 21:25:44 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Sep 2022 22:10:23 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>垃圾回收以及流程控制</title>
+      <link>https://jinkes-li.github.io/python/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%BB%A5%E5%8F%8A%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/</link>
+      <pubDate>Tue, 27 Sep 2022 22:10:23 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%BB%A5%E5%8F%8A%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/</guid>
+      <description>Python垃圾回收以及流程控制 垃圾回收 流程控制理论 流程控制之分支结构 流程控制之循环结构 垃圾回收机制 在不分语言中，内存空间的申请和释放都需要程序员自己写代码才可以完成，但是Python这里不需要，有自身的垃圾回收机制自动管理
+引用计数 引用计数，每一个变量值都有对应的计数值，每增加一个变量的引用，计数值则会加一，每减少一个引用计数值则会减一， 当引用值等于0时，就会触发垃圾回收机制 引用计数-原理图 标记清除 标记清除主要针对循环引用的问题 # 代码实例 l1 = [11, 22] # 引用计数1 l2 = [33, 44] # 引用计数1 # 循环引用 l1.append(l2) # l1 = [11, 22, [33, 44]] # 引用值为2 l2.append(l1) # l2 = [33, 44, [11, 22]] # 引用值为2 del l1 # 断开变量名l1与列表的绑定关系，引用值变更为1 del l2 # 断开变量名l2与列表的绑定关系，引用值变更为1 # 当内存占用到达临界值的时候，程序会自动停止，然后扫描程序中所有的数据，并给只产生循环引用的数据打上标记，之后一次性清除 标记清除-原理图
+分代回收 用的越久的对象，被回收的可能性越小 请直接看原理图 分代原理图 流程控制理论 在编程的世界中下列三者会出现混合使用
+Python代码中建议使用空格表示代码的从属关系，建议使用4个空格
+从属关系：缩进的代码（子代码）是否执行取决于上层代码，并不是所有的代码都有子代码
+如果多行子代码同属于一个父代码，那么这些子代码需要保持相同的缩进
+当一行代码需要编写子代码时，必须以冒号结尾</description>
+    </item>
+    
     <item>
       <title>用户交互与格式化输出运算符</title>
       <link>https://jinkes-li.github.io/python/%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E4%B8%8E%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
