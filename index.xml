@@ -6,7 +6,18 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 27 Sep 2022 22:10:23 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Sep 2022 18:58:47 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>For循环和数据类型方法</title>
+      <link>https://jinkes-li.github.io/python/for%E5%BE%AA%E7%8E%AF%E5%92%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Wed, 28 Sep 2022 18:58:47 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/for%E5%BE%AA%E7%8E%AF%E5%92%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%96%B9%E6%B3%95/</guid>
+      <description>while 循环补充说明 流程控制之for循环 while循环之死循环
+真正的死循环一旦执行，cpu功耗会急剧上升 # 死循环 while True: i = 99 ** 99 print(i) while嵌套及全局标志位
+注意： 一个break只能结束它所在的那一乘循环 注意：有几个while的嵌套，如果想一次性结束就应该写几个break 注意：如果不想反复的写break，可以使用全局标志位，就是在循环开始之初，定义一个变量为True，如果需要跳出while循环把这个变量赋值为False即可 is_flag = True # 这里定义一个全局标志位 while is_flag: # while的条件是如果is_flag = True就运行False就不运行 username = input(&amp;#39;username&amp;gt;&amp;gt;&amp;gt;:&amp;#39;) password = input(&amp;#39;password&amp;gt;&amp;gt;&amp;gt;:&amp;#39;) if username == &amp;#39;jason&amp;#39; and password == &amp;#39;123&amp;#39;: while is_flag: # 判断is_flag cmd = input(&amp;#39;请输入您的指令&amp;gt;&amp;gt;&amp;gt;:&amp;#39;) if cmd == &amp;#39;q&amp;#39;: # 这里判断我们输入的命令是什么，如果为q 直接将is_flag 从新赋值为False is_flag = False print(&amp;#39;正在执行您的指令:%s&amp;#39; % cmd) else: print(&amp;#39;用户名或密码错误&amp;#39;) 流程控制之for循环</description>
+    </item>
+    
     <item>
       <title>垃圾回收以及流程控制</title>
       <link>https://jinkes-li.github.io/python/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%BB%A5%E5%8F%8A%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/</link>

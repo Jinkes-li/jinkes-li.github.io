@@ -268,14 +268,12 @@ Python代码中建议使用空格表示代码的从属关系，建议使用4个�
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">5.按照上述规律依次执行 直到条件不成立才会结束循环体代码的执行
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">关键字
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">break  # 强行结束循环体
-</span></span></span></code></pre></div></li>
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">while循环体代码一旦执行到break会直接结束循环
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">continue  # 直接跳到条件判断处
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">while循环体代码一旦执行到continue会结束本次循环 开始下一次循环
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+</span></span></code></pre></div></li>
 </ul>
-<pre><code>while循环体代码一旦执行到break会直接结束循环
- continue  # 直接跳到条件判断处
-while循环体代码一旦执行到continue会结束本次循环 开始下一次循环
- '''
- ```
-</code></pre>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 代码实例</span>
 </span></span><span style="display:flex;"><span>     <span style="color:#75715e"># 打印1-10</span>
 </span></span><span style="display:flex;"><span>     num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
@@ -298,6 +296,144 @@ while循环体代码一旦执行到continue会结束本次循环 开始下一次
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">continue</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
 </span></span><span style="display:flex;"><span>        print(num)
+</span></span></code></pre></div><ul>
+<li>
+<h3 id="while-循环补充说明">while 循环补充说明</h3>
+</li>
+<li>
+<h3 id="流程控制之for循环">流程控制之for循环</h3>
+</li>
+<li>
+<p>while循环之死循环</p>
+<ul>
+<li>真正的死循环一旦执行，cpu功耗会急剧上升</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 死循环</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>  i <span style="color:#f92672">=</span> <span style="color:#ae81ff">99</span> <span style="color:#f92672">**</span> <span style="color:#ae81ff">99</span>
+</span></span><span style="display:flex;"><span>  print(i)
+</span></span></code></pre></div></li>
+<li>
+<p>while嵌套及全局标志位</p>
+<ul>
+<li>注意： 一个break只能结束它所在的那一乘循环</li>
+<li>注意：有几个while的嵌套，如果想一次性结束就应该写几个break</li>
+<li>注意：如果不想反复的写break，可以使用全局标志位，就是在循环开始之初，定义一个变量为True，如果需要跳出while循环把这个变量赋值为False即可</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span> 	is_flag <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>  <span style="color:#75715e"># 这里定义一个全局标志位</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">while</span> is_flag:  <span style="color:#75715e"># while的条件是如果is_flag = True就运行False就不运行</span>
+</span></span><span style="display:flex;"><span>      username <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;username&gt;&gt;&gt;:&#39;</span>)
+</span></span><span style="display:flex;"><span>      password <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;password&gt;&gt;&gt;:&#39;</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> username <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;jason&#39;</span> <span style="color:#f92672">and</span> password <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;123&#39;</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">while</span> is_flag:  <span style="color:#75715e"># 判断is_flag</span>
+</span></span><span style="display:flex;"><span>              cmd <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;请输入您的指令&gt;&gt;&gt;:&#39;</span>)
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">if</span> cmd <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;q&#39;</span>:  <span style="color:#75715e"># 这里判断我们输入的命令是什么，如果为q 直接将is_flag 从新赋值为False</span>
+</span></span><span style="display:flex;"><span>                  is_flag <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>              print(<span style="color:#e6db74">&#39;正在执行您的指令:</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> cmd)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>          print(<span style="color:#e6db74">&#39;用户名或密码错误&#39;</span>)
+</span></span></code></pre></div></li>
+<li>
+<p>流程控制之for循环</p>
+<ul>
+<li>for循环和while循环一样，都可以做到同样的事情，但是for循环的写法会比while的写法简单</li>
+<li>命名： 一般如果没有特定含义的数据可以使用，i，j，k，v，item 命名</li>
+<li>特点：擅长遍历取值，不需要结束条件，自动结束</li>
+<li>应用场景： 遍历对象的数据值</li>
+<li>语法：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> 循环变量 <span style="color:#f92672">in</span> 被循环的对象:
+</span></span><span style="display:flex;"><span>    print(循环变量)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>python
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 代码实例</span>
+</span></span><span style="display:flex;"><span>name <span style="color:#f92672">=</span> [ <span style="color:#e6db74">&#39;jinke&#39;</span>, <span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#e6db74">&#39;kimi&#39;</span> ]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> name:
+</span></span><span style="display:flex;"><span>    print(i)
+</span></span><span style="display:flex;"><span>    jinke
+</span></span><span style="display:flex;"><span>    wesley
+</span></span><span style="display:flex;"><span>    kimi
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如果使用while写则为下列这样</span>
+</span></span><span style="display:flex;"><span>name <span style="color:#f92672">=</span> [ <span style="color:#e6db74">&#39;jinke&#39;</span>, <span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#e6db74">&#39;kimi&#39;</span> ]
+</span></span><span style="display:flex;"><span>count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> count <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>:
+</span></span><span style="display:flex;"><span>    print(name[count])
+</span></span><span style="display:flex;"><span>    count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div></li>
+</ul>
+<blockquote>
+<p>在使用for遍历数据时需要注意，每种不同的数据类型，取值的样式都是不一样的，下列为代码实例</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># for 循环主要遍历的数据类型常见的有(字符串，列表，元组，字典，集合，整型)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># for循环之字符串循环</span>
+</span></span><span style="display:flex;"><span>info <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello world&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> info:
+</span></span><span style="display:flex;"><span>  print(i)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">输出结果
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">H  # 这里看到这里是按照数据类型的最小单位打印的，字符串就是单个字符
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">e
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">l
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">l
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">o
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   # 这里是空格，也算是字符串的单个字符
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">w
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">o
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">r
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">l
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">d
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 这里需要比较注意的是字典，和取值的方式是一样的，只答应key</span>
+</span></span><span style="display:flex;"><span>user_id <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;username&#39;</span>: <span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#e6db74">&#39;password&#39;</span>: <span style="color:#ae81ff">123</span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> user_id:
+</span></span><span style="display:flex;"><span>  print(i)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># 输出结果
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">username
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">password
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>
+<h3 id="基本数据类型方法">基本数据类型方法</h3>
+</li>
+</ul>
+<blockquote>
+<p>之前说了很多的数据类型，那针对这些数据方法就会有很多关于数据操作的方法</p>
+</blockquote>
+<ul>
+<li>range()方法</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 定义： range方法可以理解为帮我们生产一个内部包含多个数字的数据</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 默认起始位置为0 终止位置为100，python默认左开右闭</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">101</span>):
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># [0..100]</span>
+</span></span><span style="display:flex;"><span>print(i)  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 第一个是起始位置，第二个是终止位置</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>):
+</span></span><span style="display:flex;"><span>print(i)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 第三个个数为等差值，也叫做步长，默认不写为1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>print(i)
+</span></span></code></pre></div><h4 id="python2-和python3-的差别">Python2 和Python3 的差别</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">在python2中
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	range()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		直接产生一个列表 内部含有多个数值
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	xrange()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		其实就是python3里面的range
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">在python3中
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	range()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		类似于一个工厂 不会占用太多的内存空间 要就生产
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
 </span></span></code></pre></div><p>练习题</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1.根据用户输入内容打印其权限
