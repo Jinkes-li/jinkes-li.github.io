@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Python数据类型内置方法理论 | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/python/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%86%85%E7%BD%AE%E6%96%B9%E6%B3%95%E7%90%86%E8%AE%BA/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="Python数据类型内置方法理论" />
+<meta property="og:description" content="Python数据类型内置方法和理论 引言： Python自身对数字的敏感度比较低（精确度低） 如果是用在数据分析和金融量化方向，可以使用第三方包模块numpy
+本文内容
+数据类型内置方法理论 进制数转换 整型相关操作 浮点型相关操作 字符串相关操作 列表相关操作 数据类型内置方法理论 前面文章所提到的每一种数据类型本身都包含有一系列的操作方法，内置方法，是自身带的功能 Python中的数据类型调用内置方法的统一句式为: &ldquo;.&quot;:句点符 &lsquo;wesley&rsquo;.字符串的内置方法 str. 字符串内置方法 数据类型的内置方法比较的多，其中有一些经常使用的以及部分不经常使用的，需要在工作中使用，并且熟悉 进制数转化 开头前两位代表的是转换后表示的进制数 0b代表的是二进制 0o代表的是八进制 0x代表的是十六进制 # 代码实例 # 十进制转换其他进制 # 十转二 print(bin(100)) 0b1100100 # 十转八 print(oct(100)) 0o144 # 十转十六 print(hex(100)) 0x64 # 如果需要八进制转换成其他进制直接反打就可以了 # 二转十 print(int(0b1100100), 2) 100 2 # 八转十 print(int(0o144), 8) 100 8 # 十六转十 print(int(0x64), 16) 100 16 整型的相关操作 类型转换（可以将其他类型转换为整型） int(其他数据类型)，原始数据为浮点型可以直接转换，如果是字符串必须满足内部是纯数字才可以 # 代码实例 # str转int，注意字符串是不可变类型，这里需要重新赋值 a = &#39;1111&#39; a = int(a) print(type(a)) &lt;class &#39;int&#39;&gt; # float转int, 注意在float转int的时候int方法会将小数点后面的数据全部切除，而不是四舍五入，并且如果字符串中存在多个小数点，int无法识别并转换 a = 11." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/python/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%86%85%E7%BD%AE%E6%96%B9%E6%B3%95%E7%90%86%E8%AE%BA/" /><meta property="article:section" content="python" />
+<meta property="article:published_time" content="2022-09-29T20:51:22+08:00" />
+<meta property="article:modified_time" content="2022-09-29T20:51:22+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python数据类型内置方法理论"/>
+<meta name="twitter:description" content="Python数据类型内置方法和理论 引言： Python自身对数字的敏感度比较低（精确度低） 如果是用在数据分析和金融量化方向，可以使用第三方包模块numpy
+本文内容
+数据类型内置方法理论 进制数转换 整型相关操作 浮点型相关操作 字符串相关操作 列表相关操作 数据类型内置方法理论 前面文章所提到的每一种数据类型本身都包含有一系列的操作方法，内置方法，是自身带的功能 Python中的数据类型调用内置方法的统一句式为: &ldquo;.&quot;:句点符 &lsquo;wesley&rsquo;.字符串的内置方法 str. 字符串内置方法 数据类型的内置方法比较的多，其中有一些经常使用的以及部分不经常使用的，需要在工作中使用，并且熟悉 进制数转化 开头前两位代表的是转换后表示的进制数 0b代表的是二进制 0o代表的是八进制 0x代表的是十六进制 # 代码实例 # 十进制转换其他进制 # 十转二 print(bin(100)) 0b1100100 # 十转八 print(oct(100)) 0o144 # 十转十六 print(hex(100)) 0x64 # 如果需要八进制转换成其他进制直接反打就可以了 # 二转十 print(int(0b1100100), 2) 100 2 # 八转十 print(int(0o144), 8) 100 8 # 十六转十 print(int(0x64), 16) 100 16 整型的相关操作 类型转换（可以将其他类型转换为整型） int(其他数据类型)，原始数据为浮点型可以直接转换，如果是字符串必须满足内部是纯数字才可以 # 代码实例 # str转int，注意字符串是不可变类型，这里需要重新赋值 a = &#39;1111&#39; a = int(a) print(type(a)) &lt;class &#39;int&#39;&gt; # float转int, 注意在float转int的时候int方法会将小数点后面的数据全部切除，而不是四舍五入，并且如果字符串中存在多个小数点，int无法识别并转换 a = 11."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h3 id="python数据类型内置方法和理论">Python数据类型内置方法和理论</h3>
+<h3 id="引言">引言：</h3>
+<blockquote>
+<p>Python自身对数字的敏感度比较低（精确度低）
+如果是用在数据分析和金融量化方向，可以使用第三方包模块numpy</p>
+</blockquote>
+<p>本文内容</p>
+<ul>
+<li>数据类型内置方法理论</li>
+<li>进制数转换</li>
+<li>整型相关操作</li>
+<li>浮点型相关操作</li>
+<li>字符串相关操作</li>
+<li>列表相关操作</li>
+</ul>
+<h3 id="数据类型内置方法理论">数据类型内置方法理论</h3>
+<blockquote>
+<ol>
+<li>前面文章所提到的每一种数据类型本身都包含有一系列的操作方法，内置方法，是自身带的功能</li>
+<li>Python中的数据类型调用内置方法的统一句式为:
+&ldquo;.&quot;:句点符  &lsquo;wesley&rsquo;.字符串的内置方法</li>
+<li>str. 字符串内置方法</li>
+<li>数据类型的内置方法比较的多，其中有一些经常使用的以及部分不经常使用的，需要在工作中使用，并且熟悉</li>
+</ol>
+</blockquote>
+<h3 id="进制数转化">进制数转化</h3>
+<ol>
+<li>开头前两位代表的是转换后表示的进制数</li>
+<li>0b代表的是二进制</li>
+<li>0o代表的是八进制</li>
+<li>0x代表的是十六进制</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 代码实例</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 十进制转换其他进制</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 十转二</span>
+</span></span><span style="display:flex;"><span>print(bin(<span style="color:#ae81ff">100</span>))
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0b1100100</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 十转八</span>
+</span></span><span style="display:flex;"><span>print(oct(<span style="color:#ae81ff">100</span>))
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0o144</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 十转十六</span>
+</span></span><span style="display:flex;"><span>print(hex(<span style="color:#ae81ff">100</span>))
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0x64</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如果需要八进制转换成其他进制直接反打就可以了</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 二转十</span>
+</span></span><span style="display:flex;"><span>print(int(<span style="color:#ae81ff">0b1100100</span>), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">100</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 八转十</span>
+</span></span><span style="display:flex;"><span>print(int(<span style="color:#ae81ff">0o144</span>), <span style="color:#ae81ff">8</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">100</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 十六转十</span>
+</span></span><span style="display:flex;"><span>print(int(<span style="color:#ae81ff">0x64</span>), <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">100</span> <span style="color:#ae81ff">16</span>
+</span></span></code></pre></div><h3 id="整型的相关操作">整型的相关操作</h3>
+<ol>
+<li>类型转换（可以将其他类型转换为整型）
+int(其他数据类型)，原始数据为浮点型可以直接转换，如果是字符串必须满足内部是纯数字才可以</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 代码实例</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># str转int，注意字符串是不可变类型，这里需要重新赋值</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;1111&#39;</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> int(a)
+</span></span><span style="display:flex;"><span>print(type(a))
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">int</span><span style="color:#e6db74">&#39;&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># float转int, 注意在float转int的时候int方法会将小数点后面的数据全部切除，而不是四舍五入，并且如果字符串中存在多个小数点，int无法识别并转换</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#ae81ff">11.99</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> int(a)
+</span></span><span style="display:flex;"><span>print(type(a), a)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">int</span><span style="color:#e6db74">&#39;&gt; 11</span>
+</span></span></code></pre></div><h3 id="浮点型内置方法和操作">浮点型内置方法和操作</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 1. 类型转换</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如果被转换的数据我字符串，需要满足数据必须为纯数字，或者只能有一个字符串</span>
+</span></span><span style="display:flex;"><span>float(其他的数据类型)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># str带小数点转float</span>
+</span></span><span style="display:flex;"><span>str_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;11.11&#39;</span>
+</span></span><span style="display:flex;"><span>str_1 <span style="color:#f92672">=</span> float(str_1)
+</span></span><span style="display:flex;"><span>print(type(str_1), str_1)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">float</span><span style="color:#e6db74">&#39;&gt; 11.11</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># str纯数字转float</span>
+</span></span><span style="display:flex;"><span>str_2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;1111&#39;</span>
+</span></span><span style="display:flex;"><span>str_2 <span style="color:#f92672">=</span> float(str_2)
+</span></span><span style="display:flex;"><span>print(type(str_2), str_2)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">float</span><span style="color:#e6db74">&#39;&gt; 1111.0</span>
+</span></span></code></pre></div><h3 id="字符串内置方法与操作重点">字符串内置方法与操作（重点）</h3>
+<ol>
+<li>str可以将其他所有类型的数据转为str，只需要使用引号将数据值包裹起来即可</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 重点***** ：必须掌握</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> 索引取值<span style="color:#960050;background-color:#1e0010">（</span>通过索引取值<span style="color:#960050;background-color:#1e0010">，</span>起始位置0开始<span style="color:#960050;background-color:#1e0010">，</span>超出索引范围即报错<span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 索引取值左开右闭，当取值最后一位索引等于输入值时不打印，比如需要取0-5的索引值，一般取值时会写索引6，这样就取到了0-5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> 索引取值
+</span></span><span style="display:flex;"><span>str_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello world&#39;</span>  <span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span>print(str_1[<span style="color:#ae81ff">0</span>])  <span style="color:#75715e"># 取第一个值</span>
+</span></span><span style="display:flex;"><span>H
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(str_1[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])  <span style="color:#75715e"># 取最后一个值</span>
+</span></span><span style="display:flex;"><span>d
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> 切片操作
+</span></span><span style="display:flex;"><span>print(str_1[<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">5</span>])  <span style="color:#75715e"># 取索引1-4的值</span>
+</span></span><span style="display:flex;"><span>ello
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(str_1[<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])  <span style="color:#75715e"># 如果需要重右边开始取值，切片是按照从左往右开始取，这里需要写-5：-1</span>
+</span></span><span style="display:flex;"><span>worl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 上面的写法还需要我们去计算后面的尾数索引是多少，可以修改切片的方向</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> 修改切片的方向<span style="color:#960050;background-color:#1e0010">（</span>间隔<span style="color:#960050;background-color:#1e0010">，</span>步长<span style="color:#960050;background-color:#1e0010">，</span>默认值为一<span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span>print(str_1[<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">1</span>])  <span style="color:#75715e"># 取索引1到索引4的数据，第三位就是默认间隔</span>
+</span></span><span style="display:flex;"><span>ello
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(str_1[<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">2</span>])  <span style="color:#75715e"># 取索引1到索引4的数据，间隔设置为二，只能取1和4</span>
+</span></span><span style="display:flex;"><span>el
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(str_1[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])  <span style="color:#75715e"># 改变取值方向，如果第三位直接默认为1，会取不到任何数据，这里设置为-1，就改变了原本从左向右取值，顺序也是重右向左排序</span>
+</span></span><span style="display:flex;"><span>dlro
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> 切片中比较特殊的写法
+</span></span><span style="display:flex;"><span>print(str_1[:])  <span style="color:#75715e"># : 什么都不写，表示全部都要</span>
+</span></span><span style="display:flex;"><span>Hello world
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(str_1[<span style="color:#ae81ff">2</span>:])  <span style="color:#75715e"># 2: 后面不写，表示从索引二开始后面都要</span>
+</span></span><span style="display:flex;"><span>llo world
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(str_1[:<span style="color:#ae81ff">5</span>])  <span style="color:#75715e"># :5 前面什么都不写表示，从前面都要，到索引5结束</span>
+</span></span><span style="display:flex;"><span>Hello
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(str_1[::<span style="color:#ae81ff">2</span>])  <span style="color:#75715e"># ::2 这里写了步长为2，表示每间隔2取值，如果不写步长就相当于全部都要</span>
+</span></span><span style="display:flex;"><span>Hlowrd
+</span></span></code></pre></div><h3 id="str方法">Str方法</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> len()用于统计字符串中的长度
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>str_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello world&#39;</span>  <span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(len(str_1))  <span style="color:#75715e">#  长度为11，一共11个字符，空格也是字符</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> <span style="color:#f92672">.</span>strip()用于移除字符串首行和尾行的指定字符<span style="color:#960050;background-color:#1e0010">，</span>默认为空格
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 用户登录场景：</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">这里需要将用户输入的空格排除掉
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>username <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wesley&#39;</span>
+</span></span><span style="display:flex;"><span>in_name <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;请输入用户名：&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> in_name<span style="color:#f92672">.</span>strip() <span style="color:#f92672">==</span> username:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;登录成功&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.1</span> lstrip()  <span style="color:#75715e"># 去除字符左边的空格或指定为其他字符</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.2</span> rstrip()  <span style="color:#75715e"># 去除字符右边的空格或指定为其他字符</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> split()切割字符串中指定的字符<span style="color:#960050;background-color:#1e0010">，</span>原始数据中需要有特定的字符<span style="color:#960050;background-color:#1e0010">，</span>注意split处理完成的数据将会以列表的形式打印
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#原始数据</span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wesleu|123|read&#39;</span>  
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;|&#39;</span>))  <span style="color:#75715e"># 使用split()方法对字符进行切割,切割的符号为管道符</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#39;wesleu&#39;</span>, <span style="color:#e6db74">&#39;123&#39;</span>, <span style="color:#e6db74">&#39;read&#39;</span>]  <span style="color:#75715e"># 数据完成后需要重新赋值，原因是字符串是不可变类型</span>
+</span></span><span style="display:flex;"><span>a, b, c, <span style="color:#f92672">=</span> res<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;|&#39;</span>)  <span style="color:#75715e"># 从新解压赋值</span>
+</span></span><span style="display:flex;"><span>print(a, b, c)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.1</span>  <span style="color:#75715e"># split默认从左边开始切，可使用maxsplit= 指定需要切的次数 </span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;|&#39;</span>, maxsplit<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#39;wesleu&#39;</span>, <span style="color:#e6db74">&#39;123|read&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.2</span>  <span style="color:#75715e"># rsplit 从右边开始向左边切，同样可以使用maxsplit= 参数控制向左切的次数</span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>rsplit(<span style="color:#e6db74">&#39;|&#39;</span>, maxsplit<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#39;wesleu|123&#39;</span>, <span style="color:#e6db74">&#39;read&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> format字符串格式化输出
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.1</span> 应用一<span style="color:#960050;background-color:#1e0010">：</span> 等阶于占位符
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;my name is </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> my age is </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span>print(res)
+</span></span><span style="display:flex;"><span>my name <span style="color:#f92672">is</span> wesley my age <span style="color:#f92672">is</span> <span style="color:#ae81ff">123</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.2</span> 应用二<span style="color:#960050;background-color:#1e0010">：</span>索引取值并支持反复使用
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;my name is </span><span style="color:#e6db74">{0}</span><span style="color:#e6db74"> my age is </span><span style="color:#e6db74">{0}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{1}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span>print(res)
+</span></span><span style="display:flex;"><span>my name <span style="color:#f92672">is</span> wesley my age <span style="color:#f92672">is</span> wesley <span style="color:#ae81ff">123</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.3</span> 应用三<span style="color:#960050;background-color:#1e0010">：</span>占位符见名知意
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;my name is </span><span style="color:#e6db74">{name}</span><span style="color:#e6db74"> my age is </span><span style="color:#e6db74">{age}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{name}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;wesley&#39;</span>, age<span style="color:#f92672">=</span><span style="color:#ae81ff">23</span>)
+</span></span><span style="display:flex;"><span>print(res)
+</span></span><span style="display:flex;"><span>my name <span style="color:#f92672">is</span> wesley my age <span style="color:#f92672">is</span> <span style="color:#ae81ff">23</span> wesley
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.4</span> 应用四<span style="color:#960050;background-color:#1e0010">：</span>推荐使用<span style="color:#960050;background-color:#1e0010">（</span><span style="color:#f92672">*****</span><span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">这种方式是根据用户输入来定义变量，并定义字符串模版开头使用f&#39;字符串&#39;来调用功能，字符串里面使用</span><span style="color:#e6db74">{变量名}</span><span style="color:#e6db74">来进行替换
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>name <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;name &gt;&gt;:&#39;</span>)
+</span></span><span style="display:flex;"><span>age <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;age &gt;&gt;:&#39;</span>)
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;my name is </span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74"> my age is </span><span style="color:#e6db74">{</span>age<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>print(res)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>name <span style="color:#f92672">&gt;&gt;</span>:wesley
+</span></span><span style="display:flex;"><span>age <span style="color:#f92672">&gt;&gt;</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>my name <span style="color:#f92672">is</span> wesley my age <span style="color:#f92672">is</span> <span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.</span> 字符串需要了解的方法<span style="color:#960050;background-color:#1e0010">（</span><span style="color:#f92672">****</span><span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.1</span> 大小写相关
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hElLO WorlD 666&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.1.1</span> upper()  <span style="color:#75715e"># 将小写全部转换成大写</span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>upper())
+</span></span><span style="display:flex;"><span>HELLO WORLD <span style="color:#ae81ff">666</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.1.2</span> lower()  <span style="color:#75715e"># 将大写全部转换成小写</span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>lower())
+</span></span><span style="display:flex;"><span>hello world <span style="color:#ae81ff">666</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">应用场景：
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">图片验证码:生成没有大小写统一的验证码 展示给用户看
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">获取用户输入的验证码 将用户输入的验证码和当初产生的验证码统一转大写或者小写再比对
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>code <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;AabCcDa&#39;</span>  <span style="color:#75715e"># 初始验证码</span>
+</span></span><span style="display:flex;"><span>confirm_code <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;请输入验证码：&#39;</span>)<span style="color:#f92672">.</span>strip()  <span style="color:#75715e"># 用户输入的</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> confirm_code<span style="color:#f92672">.</span>upper() <span style="color:#f92672">==</span> code<span style="color:#f92672">.</span>upper():  <span style="color:#75715e"># 判断时全部转为大写</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;验证码输入正确&#39;</span>, confirm_code)
+</span></span><span style="display:flex;"><span>请输入验证码<span style="color:#960050;background-color:#1e0010">：</span>  aabccda  <span style="color:#75715e"># 用户手输入的验证码</span>
+</span></span><span style="display:flex;"><span>验证码输入正确 aabccda  <span style="color:#75715e"># confirm_code，变量还是小写是应为字符串是不可变类型，需要重新赋值</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.2</span> 判断字符串是否全部大写或者小写
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hello world&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.2.1</span> isupper() 判断字符串是否为纯大写<span style="color:#960050;background-color:#1e0010">，</span>返回值: <span style="color:#66d9ef">True</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>isupper())
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.2.2</span> islower() 判断字符串是否为纯小写<span style="color:#960050;background-color:#1e0010">，</span>返回值: <span style="color:#66d9ef">True</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>islower())
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.3</span> isdigit() 判断字符串中是否为纯数值<span style="color:#960050;background-color:#1e0010">，</span>返回值: <span style="color:#66d9ef">True</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>rse <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>print(rse<span style="color:#f92672">.</span>isdigit())  <span style="color:#75715e"># 没有数字不成立</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>rse <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;111&#39;</span>
+</span></span><span style="display:flex;"><span>print(rse<span style="color:#f92672">.</span>isdigit())  <span style="color:#75715e"># 全部都是数字成立</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6.</span> replace()替换字符串中指定的内容
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;my name is wesley wesley wesley wesley wesley&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6.1</span> 使用replace()全部替换
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#e6db74">&#39;tonySB&#39;</span>, ))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6.2</span> 使用replace()替换第一个
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#e6db74">&#39;tonySB&#39;</span>, <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>my name <span style="color:#f92672">is</span> tonySB wesley wesley wesley wesley
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7.</span> 字符串的拼接
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7.1</span> 使用运算的方式
+</span></span><span style="display:flex;"><span>s1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello&#39;</span>
+</span></span><span style="display:flex;"><span>s2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;World&#39;</span>
+</span></span><span style="display:flex;"><span>print(s1 <span style="color:#f92672">+</span> s2)
+</span></span><span style="display:flex;"><span>print(s1 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;$$$&#39;</span> <span style="color:#f92672">+</span> s2)
+</span></span><span style="display:flex;"><span>print(s1 <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7.2</span> 使用join()方法拼接
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;$&#39;</span><span style="color:#f92672">.</span>join([<span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#e6db74">&#39;123&#39;</span>, <span style="color:#e6db74">&#39;read&#39;</span>, <span style="color:#e6db74">&#39;JDB&#39;</span>]))
+</span></span><span style="display:flex;"><span>wesley<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#ae81ff">123</span><span style="color:#960050;background-color:#1e0010">$</span>read<span style="color:#960050;background-color:#1e0010">$</span>JDB
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8.2</span> count() 统计指定字符出现的次数
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello world&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>count(<span style="color:#e6db74">&#39;l&#39;</span>))  <span style="color:#75715e"># 统计l出现了几次</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9.</span> 判断字符串的开头或者结尾
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello world&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9.1</span> startswith()  <span style="color:#75715e"># 判断开头</span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;Hello &#39;</span>))  <span style="color:#75715e"># 结果为bool值，单个字母或者多个字母都可以</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9.2</span> endswith()  <span style="color:#75715e"># 判断结尾  # 结果为bool值</span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;d&#39;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10.</span> 冷门方法
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;helLO wORld hELlo worLD&#39;</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10.1</span> title()  <span style="color:#75715e"># 首字母全部大写</span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>title())
+</span></span><span style="display:flex;"><span>Hello World Hello World
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10.2</span> capitalize()  <span style="color:#75715e"># 仅首字母大写</span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>capitalize())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10.3</span> swapcase()  <span style="color:#75715e"># 小写变大写，大写变小写</span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>swapcase())
+</span></span><span style="display:flex;"><span>HELlo WorLD HelLO WORld
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10.4</span> index()  <span style="color:#75715e"># 查询字符是否存在，不区分大小写</span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>index(<span style="color:#e6db74">&#39;O&#39;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># index() 的缺点是找不到就回报错</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10.5</span> find()  <span style="color:#75715e"># 查询字符是否存在</span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;O&#39;</span>))  <span style="color:#75715e"># 查询字符是否存在，不区分大小写</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;c&#39;</span>))  <span style="color:#75715e"># 查询不到返回值为-1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>print(res<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;LO&#39;</span>)) <span style="color:#75715e"># en...待补充</span>
+</span></span></code></pre></div><h3 id="列表内置方法及操作">列表内置方法及操作</h3>
+<blockquote>
+<p>list(其他数据类型)
+能够被for遍历的数据都可以转成列表</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> list()  <span style="color:#75715e"># 转换其他类型的数据</span>
+</span></span><span style="display:flex;"><span>print(list(<span style="color:#e6db74">&#39;hello&#39;</span>))  <span style="color:#75715e"># str</span>
+</span></span><span style="display:flex;"><span>print(list({<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;wesley&#39;</span>}))  <span style="color:#75715e"># dcit</span>
+</span></span><span style="display:flex;"><span>print(list((<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, )))  <span style="color:#75715e"># toulp</span>
+</span></span><span style="display:flex;"><span>print(list({<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, }))  <span style="color:#75715e"># set</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> 需要掌握的方法<span style="color:#960050;background-color:#1e0010">（</span><span style="color:#f92672">*****</span><span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">11</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">111</span>, <span style="color:#ae81ff">222</span>, <span style="color:#ae81ff">333</span>, <span style="color:#ae81ff">444</span>, <span style="color:#ae81ff">555</span>, <span style="color:#ae81ff">666</span>, <span style="color:#ae81ff">777</span>, <span style="color:#ae81ff">888</span>]
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.1</span> 索引取值(正负数)<span style="color:#960050;background-color:#1e0010">，</span>这里和字符串方法一致
+</span></span><span style="display:flex;"><span>print(l1[<span style="color:#ae81ff">0</span>])  <span style="color:#75715e"># 取第一个</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">111</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(l1[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])  <span style="color:#75715e"># 取最后一个</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">888</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.2</span> 切片操作<span style="color:#960050;background-color:#1e0010">，</span>这里和字符串方法一致
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">11</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">111</span>, <span style="color:#ae81ff">222</span>, <span style="color:#ae81ff">333</span>, <span style="color:#ae81ff">444</span>, <span style="color:#ae81ff">555</span>, <span style="color:#ae81ff">666</span>, <span style="color:#ae81ff">777</span>, <span style="color:#ae81ff">888</span>]
+</span></span><span style="display:flex;"><span>print(l1[:])  <span style="color:#75715e"># 取所有</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">111</span>, <span style="color:#ae81ff">222</span>, <span style="color:#ae81ff">333</span>, <span style="color:#ae81ff">444</span>, <span style="color:#ae81ff">555</span>, <span style="color:#ae81ff">666</span>, <span style="color:#ae81ff">777</span>, <span style="color:#ae81ff">888</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(l1[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">5</span>])  <span style="color:#75715e"># 取索引0-5</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">111</span>, <span style="color:#ae81ff">222</span>, <span style="color:#ae81ff">333</span>, <span style="color:#ae81ff">444</span>, <span style="color:#ae81ff">555</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(l1[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>])  <span style="color:#75715e"># 从右边开始取值，并且间隔为2</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">888</span>, <span style="color:#ae81ff">666</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.3</span> 统计列表中数据的个数
+</span></span><span style="display:flex;"><span>print(len(l1))  <span style="color:#75715e"># 注意 这里是列表里的元素，不是单个字符串</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.4</span> 数据值修改 <span style="color:#960050;background-color:#1e0010">，</span>列表是可变的数据类型
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">11</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">111</span>, <span style="color:#ae81ff">222</span>, <span style="color:#ae81ff">333</span>, <span style="color:#ae81ff">444</span>, <span style="color:#ae81ff">555</span>, <span style="color:#ae81ff">666</span>, <span style="color:#ae81ff">777</span>, <span style="color:#ae81ff">888</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(id(l1))
+</span></span><span style="display:flex;"><span>l1[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">123</span>
+</span></span><span style="display:flex;"><span>print(l1)
+</span></span><span style="display:flex;"><span>print(id(l1))
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4346559360</span>  <span style="color:#75715e"># 内存ID</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">123</span>, <span style="color:#ae81ff">222</span>, <span style="color:#ae81ff">333</span>, <span style="color:#ae81ff">444</span>, <span style="color:#ae81ff">555</span>, <span style="color:#ae81ff">666</span>, <span style="color:#ae81ff">777</span>, <span style="color:#ae81ff">888</span>]
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4346559360</span>  <span style="color:#75715e"># 内存ID</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.5</span> 列表添加数据值 append()
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.5.1</span> 尾部添加数据值
+</span></span><span style="display:flex;"><span>l1<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">1010</span>)
+</span></span><span style="display:flex;"><span>print(l1)
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">111</span>, <span style="color:#ae81ff">222</span>, <span style="color:#ae81ff">333</span>, <span style="color:#ae81ff">444</span>, <span style="color:#ae81ff">555</span>, <span style="color:#ae81ff">666</span>, <span style="color:#ae81ff">777</span>, <span style="color:#ae81ff">888</span>, <span style="color:#ae81ff">1010</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.5.2</span> 任意位置插入数据值
+</span></span><span style="display:flex;"><span>l1<span style="color:#f92672">.</span>insert(<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;test&#39;</span>)  <span style="color:#75715e"># 从起始位置插入一个test</span>
+</span></span><span style="display:flex;"><span>print(l1)
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#39;test&#39;</span>, <span style="color:#ae81ff">111</span>, <span style="color:#ae81ff">222</span>, <span style="color:#ae81ff">333</span>, <span style="color:#ae81ff">444</span>, <span style="color:#ae81ff">555</span>, <span style="color:#ae81ff">666</span>, <span style="color:#ae81ff">777</span>, <span style="color:#ae81ff">888</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.6</span> 扩展列表和合并列表
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span>l1 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">33</span>]
+</span></span><span style="display:flex;"><span>l2 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">44</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">66</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.6.1</span> 运算大法
+</span></span><span style="display:flex;"><span>print(l1 <span style="color:#f92672">+</span> l2)
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">33</span>, <span style="color:#ae81ff">44</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">66</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.6.2</span> extend()  <span style="color:#75715e"># 将l2的值与l1合并</span>
+</span></span><span style="display:flex;"><span>l1<span style="color:#f92672">.</span>extend(l2)
+</span></span><span style="display:flex;"><span>print(l1)
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">33</span>, <span style="color:#ae81ff">44</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">66</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.6.3</span>  for循环<span style="color:#f92672">+</span>append大法
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> l2:
+</span></span><span style="display:flex;"><span>    l1<span style="color:#f92672">.</span>append(i)
+</span></span><span style="display:flex;"><span>print(l1)
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">33</span>, <span style="color:#ae81ff">44</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">66</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.7</span> 删除列表数据
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span>l2 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">44</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">66</span>]
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.7.1</span> <span style="color:#66d9ef">del</span> 关键字删除
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">del</span> l2[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>print(l2)
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">66</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.7.2</span> remove()  <span style="color:#75715e"># 这里直接填写需要删除的数据值</span>
+</span></span><span style="display:flex;"><span>l2<span style="color:#f92672">.</span>remove(<span style="color:#ae81ff">55</span>)  <span style="color:#75715e"># 删除数据值55</span>
+</span></span><span style="display:flex;"><span>print(l2)
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">44</span>, <span style="color:#ae81ff">66</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.7.3</span> pop()  <span style="color:#75715e"># 这里填写索引值 </span>
+</span></span><span style="display:flex;"><span>l2<span style="color:#f92672">.</span>pop(<span style="color:#ae81ff">2</span>)  <span style="color:#75715e"># 这里删除66 索引为2</span>
+</span></span><span style="display:flex;"><span>print(l2)
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">44</span>, <span style="color:#ae81ff">55</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>l2<span style="color:#f92672">.</span>pop()  <span style="color:#75715e"># pop() 默认弹出尾部的数据值</span>
+</span></span><span style="display:flex;"><span>print(l2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.8</span>  排序
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span>ss <span style="color:#f92672">=</span> [<span style="color:#ae81ff">54</span>, <span style="color:#ae81ff">99</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">76</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">43</span>, <span style="color:#ae81ff">76</span>, <span style="color:#ae81ff">88</span>, <span style="color:#ae81ff">99</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">33</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.8.1</span> sort()  <span style="color:#75715e"># 默认为升序</span>
+</span></span><span style="display:flex;"><span>ss<span style="color:#f92672">.</span>sort()
+</span></span><span style="display:flex;"><span>print(ss)
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">33</span>, <span style="color:#ae81ff">43</span>, <span style="color:#ae81ff">54</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">76</span>, <span style="color:#ae81ff">76</span>, <span style="color:#ae81ff">88</span>, <span style="color:#ae81ff">99</span>, <span style="color:#ae81ff">99</span>, <span style="color:#ae81ff">100</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.8.2</span> sort(reverse<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>) <span style="color:#75715e"># 通过reverse=True 改为降序</span>
+</span></span><span style="display:flex;"><span>ss<span style="color:#f92672">.</span>sort(reverse<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>print(ss)
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">99</span>, <span style="color:#ae81ff">99</span>, <span style="color:#ae81ff">88</span>, <span style="color:#ae81ff">76</span>, <span style="color:#ae81ff">76</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">54</span>, <span style="color:#ae81ff">43</span>, <span style="color:#ae81ff">33</span>, <span style="color:#ae81ff">12</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.9</span> 统计列表中某个数据值出现的次数
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原始数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">11</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">111</span>, <span style="color:#ae81ff">222</span>, <span style="color:#ae81ff">333</span>, <span style="color:#ae81ff">444</span>, <span style="color:#ae81ff">555</span>, <span style="color:#ae81ff">666</span>, <span style="color:#ae81ff">777</span>, <span style="color:#ae81ff">888</span>]
+</span></span><span style="display:flex;"><span>print(l1<span style="color:#f92672">.</span>count(<span style="color:#ae81ff">111</span>))
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.9.1</span> 颠倒列表顺序
+</span></span><span style="display:flex;"><span>l1<span style="color:#f92672">.</span>reverse()  <span style="color:#75715e"># 这里和sort的指定值一样，只是这里直接调用为空</span>
+</span></span><span style="display:flex;"><span>print(l1)
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">888</span>, <span style="color:#ae81ff">777</span>, <span style="color:#ae81ff">666</span>, <span style="color:#ae81ff">555</span>, <span style="color:#ae81ff">444</span>, <span style="color:#ae81ff">333</span>, <span style="color:#ae81ff">222</span>, <span style="color:#ae81ff">111</span>]
+</span></span></code></pre></div><h3 id="可变类型与不可变类型">可变类型与不可变类型</h3>
+<blockquote>
+<ol>
+<li>不可变类型：字符串，值改变 内存地址肯定变</li>
+<li>可变类型：列表，值改变 内存地址不变</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> 不可变类型<span style="color:#960050;background-color:#1e0010">，</span>值改变 内存地址肯定变
+</span></span><span style="display:flex;"><span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&amp;&amp;&amp;wesley&amp;&amp;&amp;&#39;</span>
+</span></span><span style="display:flex;"><span>print(name<span style="color:#f92672">.</span>strip(<span style="color:#e6db74">&#39;&amp;&#39;</span>))
+</span></span><span style="display:flex;"><span>print(name)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">上列的代码可以看出，当我们使用方法后并没有对变量的本身做出修改，如果需要修改则需要从新赋值，修改代码添加重新赋值
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&amp;&amp;&amp;wesley&amp;&amp;&amp;&#39;</span>
+</span></span><span style="display:flex;"><span>print(name)
+</span></span><span style="display:flex;"><span>print(id(name))
+</span></span><span style="display:flex;"><span>name <span style="color:#f92672">=</span> (name<span style="color:#f92672">.</span>strip(<span style="color:#e6db74">&#39;&amp;&#39;</span>))
+</span></span><span style="display:flex;"><span>print(name)
+</span></span><span style="display:flex;"><span>print(id(name))
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&amp;&amp;&amp;</span>wesley<span style="color:#f92672">&amp;&amp;&amp;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4305721904</span>
+</span></span><span style="display:flex;"><span>wesley
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4305694064</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">这里可以看出，只有重新赋值后才能修改，但是实际上是内存中新申请了空间存放了新的数据，旧数据被放弃
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> 可变类型<span style="color:#960050;background-color:#1e0010">，</span>值改变 内存地址不变
+</span></span><span style="display:flex;"><span>l1 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">33</span>]
+</span></span><span style="display:flex;"><span>print(id(l1))
+</span></span><span style="display:flex;"><span>l1<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">44</span>)
+</span></span><span style="display:flex;"><span>print(id(l1))
+</span></span><span style="display:flex;"><span>print(l1)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4376705920</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4376705920</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">33</span>, <span style="color:#ae81ff">44</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">这里的代码就可以看出，即使对l1 做出了添加新的值，但是内存中的ID值依旧没有改变，这就是可变类型和不可变类型的区别
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
