@@ -6,7 +6,16 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Sep 2022 20:51:22 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Sep 2022 17:35:33 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据类型和字符编码</title>
+      <link>https://jinkes-li.github.io/python/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/</link>
+      <pubDate>Fri, 30 Sep 2022 17:35:33 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/</guid>
+      <description>python 数据类型操作 今日内容 字典相关操作 元组相关操作 集合相关操作 字符编码(理论) 字典操作 1. 类型转换，字典的转换一般不使用关键字，而是自己手动转 dict() 2. 字典需要掌握的操作 # 原始数据 user_dict = {&amp;#39;username&amp;#39;: &amp;#39;jason&amp;#39;, &amp;#39;password&amp;#39;: 123, &amp;#39;hobby&amp;#39;: [&amp;#39;read&amp;#39;, &amp;#39;music&amp;#39;, &amp;#39;run&amp;#39;] } 2.1 按key取值（不推荐使用，如果这个key不存在会报错） print(user_dict[&amp;#39;username&amp;#39;]) # username jason jason 2.2 使用内置方法get取值（推荐使用） 2.2.1 使用get获取已经存在的key值 print(user_dict.get(&amp;#39;username&amp;#39;)) jason 2.2.2 使用get获取不存在的值 print(user_dict.get(&amp;#39;age&amp;#39;)) None 2.2.3 使用get获取不存在的值，并通过第二个参数设定默认返回值 print(user_dict.get(&amp;#39;age&amp;#39;, &amp;#39;False&amp;#39;)) False 3.1 字典修改数据值，和列表的重新赋值类似 print(id(user_dict)) user_dict[&amp;#39;username&amp;#39;] = &amp;#39;wesley&amp;#39; print(id(user_dict), user_dict) 4337316352 # 从内存ID上看，字典是一个可变参数 4337316352 {&amp;#39;username&amp;#39;: &amp;#39;wesley&amp;#39;, &amp;#39;password&amp;#39;: 123, &amp;#39;hobby&amp;#39;: [&amp;#39;read&amp;#39;, &amp;#39;music&amp;#39;, &amp;#39;run&amp;#39;]} 3.2 如果修改的key并不存在，则会新建 user_dict[&amp;#39;age&amp;#39;] = 18 print(user_dict) {&amp;#39;username&amp;#39;: &amp;#39;jason&amp;#39;, &amp;#39;password&amp;#39;: 123, &amp;#39;hobby&amp;#39;: [&amp;#39;read&amp;#39;, &amp;#39;music&amp;#39;, &amp;#39;run&amp;#39;], &amp;#39;age&amp;#39;: 18} 3.</description>
+    </item>
+    
     <item>
       <title>Python数据类型内置方法理论</title>
       <link>https://jinkes-li.github.io/python/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%86%85%E7%BD%AE%E6%96%B9%E6%B3%95%E7%90%86%E8%AE%BA/</link>
