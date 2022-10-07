@@ -6,7 +6,28 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Sep 2022 17:35:33 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 Oct 2022 20:14:40 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第二周总结</title>
+      <link>https://jinkes-li.github.io/python/%E7%AC%AC%E4%BA%8C%E5%91%A8%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Fri, 07 Oct 2022 20:14:40 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E7%AC%AC%E4%BA%8C%E5%91%A8%E6%80%BB%E7%BB%93/</guid>
+      <description>引言 本文对Python知识的的基础阶段整理归纳
+基本数据类型 用户交互与格式化输出运算符 赋值方式 垃圾回收以及流程控制 For循环和数据类型方法 数据类型内置方法理论 数据类型和字符编码 基本数据类型 Python中不同的数据需要有不同的数据类型来表示，用于更好的读取和修改
+1.1 布尔值（bool） 布尔值只有两个状态，True和Fales ，当数据为真时结果为True，数据为假时结果为Fales
+注意： Python中有一些数据默认值就为False，比如 0 ，None， &amp;lsquo;&amp;rsquo;, {}, [], 这些数据类型如果 没有数据默认为False，除了这些其他基本都为True 一般我们也可以使用变量来定义布尔值，比较建议的名称为is开头。
+1.2 字符串 （str） 字符串就是使用单引号或者双引号包含起来的字符就是字符串，字符串中都是文本数据，无法用于计算
+1.3 整型 （int） 整型： 整型就是整数，如 0， 1 ，2 等，可用用于运算和条件判断
+1.4 浮点型 （foalt） 浮点型： 浮点型就是小数，比如 3.14等
+1.5 列表 （list） 列表: 列表是使用中括号包含起来的数据，并以逗号分隔，可以存放多种数据类型，列表是有序的，可以通过索引来取值
+1.6 字典 （dict） 字典： 使用花括号括起来的数据，里面同样可以存放多种类型的数据，同时需要注意的是字典是以键值对来存放数据的，并且字典无序，只能通过键来取值
+1.7 元组 （tople） 元组： 使用小括号包含起来的数据，数据可以是多种数据类型，元组索引对应的数据值不可以修改，但是如果这个数据值为列表或者字典等，其中列表或者字典的值是可以修改的，元组这里同样有索引的概念
+1.8 集合 （set） 集合： 集合与字典一样同样使用花括号来定义，与之不同的是，字典存放数据需要以键值对的方式存放，集合中的数据使用逗号分隔，集合内存放的数据只能是不可变类型，并且在使用集合时，一般只应用于去重和关系运算
+用户交互与格式化输出运算符 2.1 用户交互 用户交互就是让与计算机的交流通讯，让计算机理解我们需要做什么
+# 关键字 1.</description>
+    </item>
+    
     <item>
       <title>数据类型和字符编码</title>
       <link>https://jinkes-li.github.io/python/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/</link>
