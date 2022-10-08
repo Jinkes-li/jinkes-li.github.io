@@ -6,7 +6,18 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Oct 2022 20:14:40 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Oct 2022 01:29:28 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>文件操作方法</title>
+      <link>https://jinkes-li.github.io/python/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Sun, 09 Oct 2022 01:29:28 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95/</guid>
+      <description>引言:
+平时操作文件都是在计算机中直接新建或编辑文件，这种就类似操作系统直接给我们创建了一个快捷方式，可以直接对硬盘进行操作，今天这里介绍如何使用python代码来对一个文件进行操作
+文件操作简介 定义： 文件就是操作系统提供的直接操作硬盘的快捷方式 文件的操作流程 创建或打开文件 编辑文件 保存文件 关闭文件 # Python代码操作文件的语法 # 方式一：（不推荐使用，需要写close来关闭打开的文件） l1 = open(&amp;#39;a.txt&amp;#39;, &amp;#39;r&amp;#39;, encoding=&amp;#39;utf8&amp;#39;) print(l1.read()) l1.close() # 方式二： （推荐使用，with会自动帮助我们关闭文件） with open(&amp;#39;a.txt&amp;#39;, &amp;#39;r&amp;#39;, encoding=&amp;#39;utf8&amp;#39;) as f: print(f.read()) &amp;#34;&amp;#34;&amp;#34; 注意： 如果对文件进行操作时使用到了反斜杠，如 &amp;#39;C：/admin/a.txt&amp;#39;，这里则需要使用&amp;#39;r&amp;#39;将反斜杠的特殊含义转义掉，仅仅作文一个源字符使用 &amp;#34;&amp;#34;&amp;#34; 文件的读写模式 r &amp;ndash; read 只读模式： 只能读不能写 w &amp;ndash; write 只写模式： 只能写不能读，需要注意如果不对光标进行操作。w操作会将原本文件中存在的数据全部覆盖 a &amp;ndash; append 只追加面膜是 ：只能在文件最后追加 read r 模式 read r 模式 # 如果文件不存在会直接报错 with open(r&amp;#39;a.txt&amp;#39;, &amp;#39;r&amp;#39;, encoding=&amp;#39;utf8&amp;#39;) as f: print(f.read()) write w 模式</description>
+    </item>
+    
     <item>
       <title>第二周总结</title>
       <link>https://jinkes-li.github.io/python/%E7%AC%AC%E4%BA%8C%E5%91%A8%E6%80%BB%E7%BB%93/</link>

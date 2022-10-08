@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 文件操作方法 | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/python/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="文件操作方法" />
+<meta property="og:description" content="引言:
+平时操作文件都是在计算机中直接新建或编辑文件，这种就类似操作系统直接给我们创建了一个快捷方式，可以直接对硬盘进行操作，今天这里介绍如何使用python代码来对一个文件进行操作
+文件操作简介 定义： 文件就是操作系统提供的直接操作硬盘的快捷方式 文件的操作流程 创建或打开文件 编辑文件 保存文件 关闭文件 # Python代码操作文件的语法 # 方式一：（不推荐使用，需要写close来关闭打开的文件） l1 = open(&#39;a.txt&#39;, &#39;r&#39;, encoding=&#39;utf8&#39;) print(l1.read()) l1.close() # 方式二： （推荐使用，with会自动帮助我们关闭文件） with open(&#39;a.txt&#39;, &#39;r&#39;, encoding=&#39;utf8&#39;) as f: print(f.read()) &#34;&#34;&#34; 注意： 如果对文件进行操作时使用到了反斜杠，如 &#39;C：/admin/a.txt&#39;，这里则需要使用&#39;r&#39;将反斜杠的特殊含义转义掉，仅仅作文一个源字符使用 &#34;&#34;&#34; 文件的读写模式 r &ndash; read 只读模式： 只能读不能写 w &ndash; write 只写模式： 只能写不能读，需要注意如果不对光标进行操作。w操作会将原本文件中存在的数据全部覆盖 a &ndash; append 只追加面膜是 ：只能在文件最后追加 read r 模式 read r 模式 # 如果文件不存在会直接报错 with open(r&#39;a.txt&#39;, &#39;r&#39;, encoding=&#39;utf8&#39;) as f: print(f.read()) write w 模式" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/python/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95/" /><meta property="article:section" content="python" />
+<meta property="article:published_time" content="2022-10-09T01:29:28+08:00" />
+<meta property="article:modified_time" content="2022-10-09T01:29:28+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="文件操作方法"/>
+<meta name="twitter:description" content="引言:
+平时操作文件都是在计算机中直接新建或编辑文件，这种就类似操作系统直接给我们创建了一个快捷方式，可以直接对硬盘进行操作，今天这里介绍如何使用python代码来对一个文件进行操作
+文件操作简介 定义： 文件就是操作系统提供的直接操作硬盘的快捷方式 文件的操作流程 创建或打开文件 编辑文件 保存文件 关闭文件 # Python代码操作文件的语法 # 方式一：（不推荐使用，需要写close来关闭打开的文件） l1 = open(&#39;a.txt&#39;, &#39;r&#39;, encoding=&#39;utf8&#39;) print(l1.read()) l1.close() # 方式二： （推荐使用，with会自动帮助我们关闭文件） with open(&#39;a.txt&#39;, &#39;r&#39;, encoding=&#39;utf8&#39;) as f: print(f.read()) &#34;&#34;&#34; 注意： 如果对文件进行操作时使用到了反斜杠，如 &#39;C：/admin/a.txt&#39;，这里则需要使用&#39;r&#39;将反斜杠的特殊含义转义掉，仅仅作文一个源字符使用 &#34;&#34;&#34; 文件的读写模式 r &ndash; read 只读模式： 只能读不能写 w &ndash; write 只写模式： 只能写不能读，需要注意如果不对光标进行操作。w操作会将原本文件中存在的数据全部覆盖 a &ndash; append 只追加面膜是 ：只能在文件最后追加 read r 模式 read r 模式 # 如果文件不存在会直接报错 with open(r&#39;a.txt&#39;, &#39;r&#39;, encoding=&#39;utf8&#39;) as f: print(f.read()) write w 模式"/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <p>引言:</p>
+<blockquote>
+<p>平时操作文件都是在计算机中直接新建或编辑文件，这种就类似操作系统直接给我们创建了一个快捷方式，可以直接对硬盘进行操作，今天这里介绍如何使用python代码来对一个文件进行操作</p>
+</blockquote>
+<ul>
+<li>文件操作简介
+定义： 文件就是操作系统提供的直接操作硬盘的快捷方式
+文件的操作流程</li>
+</ul>
+<ol>
+<li>创建或打开文件</li>
+<li>编辑文件</li>
+<li>保存文件</li>
+<li>关闭文件</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Python代码操作文件的语法</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 方式一：（不推荐使用，需要写close来关闭打开的文件）</span>
+</span></span><span style="display:flex;"><span>l1 <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;a.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>)
+</span></span><span style="display:flex;"><span>print(l1<span style="color:#f92672">.</span>read())
+</span></span><span style="display:flex;"><span>l1<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 方式二： （推荐使用，with会自动帮助我们关闭文件）</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;a.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    print(f<span style="color:#f92672">.</span>read())
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">注意：
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	如果对文件进行操作时使用到了反斜杠，如 &#39;C：/admin/a.txt&#39;，这里则需要使用&#39;r&#39;将反斜杠的特殊含义转义掉，仅仅作文一个源字符使用
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>文件的读写模式
+<ul>
+<li>r &ndash; read 只读模式： 只能读不能写</li>
+<li>w &ndash; write 只写模式： 只能写不能读，需要注意如果不对光标进行操作。w操作会将原本文件中存在的数据全部覆盖</li>
+<li>a &ndash; append 只追加面膜是 ：只能在文件最后追加</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>read r 模式</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>read r 模式
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如果文件不存在会直接报错</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;a.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    print(f<span style="color:#f92672">.</span>read())
+</span></span></code></pre></div><p>write w 模式</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 如果文件不存在，则自动创建文件，如果文件存在，则先清空文件中的内容</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;a.txt&#39;</span>, <span style="color:#e6db74">&#39;w&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;1</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;2&#39;</span>)
+</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;3&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">文件结果为：
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">23
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">解析：
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		如果写文件时不添加</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">换行符，数据将不会换行，直接在一行显示
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><p>append a 模式</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 在文件末尾追加</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;a.txt&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;1&#39;</span>)
+</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;2&#39;</span>)
+</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;3&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">结果：
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">23123
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">解析：
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		在上一份w模式的文件基础上，替换模式为a，可以看到在文件的最后追加了123
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>文件的操作模式
+t 模式和b 模式，默认不写使用的是t模式</li>
+</ul>
+<p>t模式
+rt  默认t可以省略
+wt  默认t可以省略
+at  默认t可以省略
+只能操作文本数据，必须带上encodeing参数，读写的最小单位是文本的最小单位</p>
+<p>b模式
+rb  b不可以省略
+wb  b不可以省略
+ab  b不可以省略
+能操作任何数据，不需要加入encodeing参数，读写的最小参数是字节</p>
+<ul>
+<li>文件的内置方法</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 文件的内置方法</span>
+</span></span><span style="display:flex;"><span>read()  <span style="color:#75715e"># 一次性读取所有内容，如果文本数据很大不建议使用会造成内存溢出</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>readline()  <span style="color:#75715e"># 结果出来时是一个列表，里面的元素对应的是文件中每一行的内容</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>readable()  <span style="color:#75715e"># 判断当前文件是否可读，结果为bool值</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>write()  <span style="color:#75715e"># 写入文件内容字符串或者是bytes类型</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>writelines()  <span style="color:#75715e"># 可以将列表中的多个元素写入文件</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>writable()  <span style="color:#75715e"># 判断文件是否可写，结果为bool值</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>flush  <span style="color:#75715e"># 保存的意思，如果文件内容非常重要，可以在操作完文件后使用flush立马将内存中的数据刷新到硬盘中</span>
+</span></span></code></pre></div><p>联系题</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">编写简易版本的拷贝工具
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">自己输入想要拷贝的数据路径
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">自己输入拷贝到哪个地方的目标路径
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">任何类型数据皆可拷贝
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">ps: 个别电脑C盘文件由于权限问题可能无法拷贝
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">换其他盘尝试即可
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>from_path <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;请输入源文件路径地址：&#39;</span>)<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span>destination_path <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;请输入目标路径: &#39;</span>)<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># # 将需要copy的文件转换为二进制</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">fr</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>from_path<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;rb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    f <span style="color:#f92672">=</span> (f<span style="color:#f92672">.</span>read())
+</span></span><span style="display:flex;"><span>    print(f)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">fr</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>destination_path<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> x:
+</span></span><span style="display:flex;"><span>    x<span style="color:#f92672">.</span>write(f)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">利用文件充当数据库编写用户登录、注册功能
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">文件名称: userinfo.txt
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">基础要求:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">用户注册功能 &gt;&gt; &gt;: 文件内添加用户数据(用户名、密码等)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">用户登录功能 &gt;&gt; &gt;: 读取文件内用户数据做校验
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">ps: 上述功能只需要实现一次就算过关(单用户)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">文件内始终就一个用户信息
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">用户注册，获取信息
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">userinfo = input(&#39;请注册用户名： &#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">passinfo = input(&#39;请设置密码： &#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># 将用户信息保存到文件userinfo.txt
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">with open(r&#39;userinfo.txt&#39;, &#39;w&#39;, encoding=&#39;utf8&#39;) as f:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    f.write(f&#39;</span><span style="color:#e6db74">{userinfo}</span><span style="color:#e6db74">|</span><span style="color:#e6db74">{passinfo}</span><span style="color:#e6db74">&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># 登录功能，获取用户信息并和文件中的信息比对
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">user = input(&#39;请输入用户名： &#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">password = input(&#39;请输入密码： &#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">with open(r&#39;userinfo.txt&#39;, &#39;r&#39;, encoding=&#39;utf8&#39;) as x:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    userdate = (x.read().split(&#39;|&#39;))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">if user == userdate[0] and password == userdate[1]:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    print(&#39;登录成功&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">else:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    print(&#39;登录失败&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># 拔高要求:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># 用户可以连续注册
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># 用户可以多账号切换登录(多用户)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># 文件内有多个用户信息
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># ps: 思考多用户数据情况下如何组织文件内数据结构较为简单
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># 提示: 本质其实就是昨天作业的第二道题
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># 只不过数据库由数据类型变成文件
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">is_False = True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">while is_False:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    print(&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    欢迎来到青州监狱
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    功能序号：
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1 注册用户
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2 登录用户
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    q 退出注册用户或登录用户
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Q 直接退出程序
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    # 判断用户选择的功能
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    fun_id = input(&#39;请输入需要使用的功能：&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    if fun_id == &#39;q&#39;:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        break
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    if fun_id == &#39;1&#39;:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        while is_False:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            userinfo = input(&#39;请注册用户名(q)： &#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            if userinfo == &#39;q&#39;:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                break
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            passinfo = input(&#39;请设置密码(q)： &#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            if passinfo == &#39;q&#39;:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                break
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            with open(r&#39;userinfo.txt&#39;, &#39;a&#39;, encoding=&#39;utf8&#39;) as f:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                f.write(f&#39;</span><span style="color:#e6db74">{userinfo}</span><span style="color:#e6db74">|</span><span style="color:#e6db74">{passinfo}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    elif fun_id == &#39;2&#39;:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        while is_False:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            login_user = input(&#39;请输入登录的用户名([q]:退出[w]:切换用户)： &#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            if login_user == &#39;q&#39;:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                break
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            login_pass = input(&#39;请输入密码([q]:退出[w]:切换用户)： &#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            if login_pass == &#39;q&#39;:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                break
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            elif login_pass == &#39;w&#39;:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                continue
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            with open(r&#39;userinfo.txt&#39;, &#39;r&#39;, encoding=&#39;utf8&#39;) as f1:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                for i in f1:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    i = i.strip(&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;).strip().split(&#39;|&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    u, p = i
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    print(u, p)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    if login_user == u and login_pass == p:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                        print(f&#39;欢迎</span><span style="color:#e6db74">{login_user}</span><span style="color:#e6db74">登录成功&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                        break
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                else:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    print(&#39;用户名与密码错误请重新输入： &#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    continue
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    else:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        print(&#39;输入的指令有误请重新输入&#39;)
+</span></span></span></code></pre></div>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
