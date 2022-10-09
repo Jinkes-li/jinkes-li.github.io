@@ -6,7 +6,18 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Oct 2022 01:29:28 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Oct 2022 16:19:35 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python函数(上)</title>
+      <link>https://jinkes-li.github.io/python/python%E5%87%BD%E6%95%B0%E4%B8%8A/</link>
+      <pubDate>Sun, 09 Oct 2022 16:19:35 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/python%E5%87%BD%E6%95%B0%E4%B8%8A/</guid>
+      <description>函数 引言：
+函数就相当于提前定义的工具，在使用时可以直接调用工具使用 函数比较类似于循环的代码，都是重复调用一个功能性问题，主要区别如下
+循环是相同的代码在相同的位置反复执行 函数是相同的代码在不同的位置反复调用 函数的语法结构 函数的定义与调用 函数的分类 函数的返回值 函数的参数 函数的语法结构 def def_name(): # 关键字，函数名，是否带参数 &amp;#34;&amp;#34;&amp;#34; 打印123，这里主要是对函数功能的描述 &amp;#34;&amp;#34;&amp;#34; print(123) #函数代码体 return 456 # 返回值 1. def 关键字 def关键字就是用来定义函数的 2. 函数名 函数名就相当于我们使用的变量名需要见名知意 3. () 参数 函数参数主要是用于接受外部数据传入内部给括号里面的参数使用 1. 形参： 在函数定义阶段，函数的括号中写入的参数叫做形参 2. 实参： 在函数调用阶段，被调用的函数中写入的数据被称为实参 4. 函数注释 函数注释是用于描述这个函数的功能 5. 函数代码体 函数代码体是实现一个功能的具体代码 6. return 返回值 调用函数后返回给用户的返回值，可有可无需要看具体使用 函数的定义与调用 # 函数的定义 def print_def(): &amp;#34;&amp;#34;&amp;#34; 这是一个打印123的功能 &amp;#34;&amp;#34;&amp;#34; print(123) # 函数的调用，函数的调用直接使用函数名加括号调用 print_def() &amp;#34;&amp;#34;&amp;#34; 注意： 1. 函数在定义阶段python只会检查语法，并不会执行 2. 函数需要先定义再调用 &amp;#34;&amp;#34;&amp;#34; 函数的分类 # 函数的三分类 1.</description>
+    </item>
+    
     <item>
       <title>文件操作方法</title>
       <link>https://jinkes-li.github.io/python/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95/</link>

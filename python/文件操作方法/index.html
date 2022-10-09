@@ -194,7 +194,26 @@ ab  b不可以省略
 </span></span><span style="display:flex;"><span>writable()  <span style="color:#75715e"># 判断文件是否可写，结果为bool值</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>flush  <span style="color:#75715e"># 保存的意思，如果文件内容非常重要，可以在操作完文件后使用flush立马将内存中的数据刷新到硬盘中</span>
-</span></span></code></pre></div><p>联系题</p>
+</span></span></code></pre></div><ul>
+<li>文件内光标移动实例</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 文件内光标移动实例</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> 写文件
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;a.txt&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span> ) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;好家伙1</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> 监控文件
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;a.txt&#39;</span>, <span style="color:#e6db74">&#39;rb&#39;</span>,) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>seek(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        line <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>readline()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> len(line) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            print(line<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf8&#39;</span>), end<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>)
+</span></span></code></pre></div><p>练习题</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1.
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">编写简易版本的拷贝工具
