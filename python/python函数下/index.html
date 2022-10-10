@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Python函数(下) | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/python/python%E5%87%BD%E6%95%B0%E4%B8%8B/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="Python函数(下)" />
+<meta property="og:description" content="python函数（下） 本文将链接上一章的python函数的参数继续讲下去
+函数的参数
+名称空间与作用域
+global与nonlocal
+函数名的多种用法
+函数的参数
+函数参数的概念
+形式参数 函数定义阶段括号内填写的参数 实际参数 函数调用阶段括号内填写的参数 1. 位置参数 位置形参 在定义函数时，在括号内从左到右依次填写的变量名 # 如何子代码只有一行或者很简短可以直接在冒号后面编写不用换行 def function(a, b, c):pass pass 位置实参 在函数调用时，在括号内依次从左往右填写的参数值 function(1, 2, 3) 位置参数的注意事项 # 定义一个函数并且写上ab两个位置形参 def func1(a, b): pass(a, b) 1. func1(1, 2) # 按照位置从左往右依次传值 2. func1(1) # 少了一个传入的值，报错 3. func1(1, 2, 3) # 多了一个值，还是报错 4. func1(b=1, a=2) # 关键字参数，将1传给b，2传给a 5. func1(b=1, 2) # 关键字参数一定要跟在位置参数后面否则会报错 6 func1(2, b=1) # 这里关键字参数在位置参数后面就可以正常传入 7. func1(1, a=2, b=3) # 同一个形参在调用的时候不能传入多个值 name = &#39;wesley&#39; pwd = 123 8." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/python/python%E5%87%BD%E6%95%B0%E4%B8%8B/" /><meta property="article:section" content="python" />
+<meta property="article:published_time" content="2022-10-10T19:49:24+08:00" />
+<meta property="article:modified_time" content="2022-10-10T19:49:24+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python函数(下)"/>
+<meta name="twitter:description" content="python函数（下） 本文将链接上一章的python函数的参数继续讲下去
+函数的参数
+名称空间与作用域
+global与nonlocal
+函数名的多种用法
+函数的参数
+函数参数的概念
+形式参数 函数定义阶段括号内填写的参数 实际参数 函数调用阶段括号内填写的参数 1. 位置参数 位置形参 在定义函数时，在括号内从左到右依次填写的变量名 # 如何子代码只有一行或者很简短可以直接在冒号后面编写不用换行 def function(a, b, c):pass pass 位置实参 在函数调用时，在括号内依次从左往右填写的参数值 function(1, 2, 3) 位置参数的注意事项 # 定义一个函数并且写上ab两个位置形参 def func1(a, b): pass(a, b) 1. func1(1, 2) # 按照位置从左往右依次传值 2. func1(1) # 少了一个传入的值，报错 3. func1(1, 2, 3) # 多了一个值，还是报错 4. func1(b=1, a=2) # 关键字参数，将1传给b，2传给a 5. func1(b=1, 2) # 关键字参数一定要跟在位置参数后面否则会报错 6 func1(2, b=1) # 这里关键字参数在位置参数后面就可以正常传入 7. func1(1, a=2, b=3) # 同一个形参在调用的时候不能传入多个值 name = &#39;wesley&#39; pwd = 123 8."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h3 id="python函数下">python函数（下）</h3>
+<blockquote>
+<p>本文将链接上一章的python函数的参数继续讲下去</p>
+</blockquote>
+<ul>
+<li>
+<p>函数的参数</p>
+</li>
+<li>
+<p>名称空间与作用域</p>
+</li>
+<li>
+<p>global与nonlocal</p>
+</li>
+<li>
+<p>函数名的多种用法</p>
+</li>
+<li>
+<p>函数的参数</p>
+</li>
+</ul>
+<blockquote>
+<p>函数参数的概念</p>
+<ol>
+<li>形式参数
+函数定义阶段括号内填写的参数</li>
+<li>实际参数
+函数调用阶段括号内填写的参数</li>
+</ol>
+</blockquote>
+<h3 id="1-位置参数">1. 位置参数</h3>
+<ol>
+<li>位置形参
+在定义函数时，在括号内从左到右依次填写的变量名</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 如何子代码只有一行或者很简短可以直接在冒号后面编写不用换行</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">function</span>(a, b, c):<span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">pass</span>
+</span></span></code></pre></div><ol start="2">
+<li>位置实参
+在函数调用时，在括号内依次从左往右填写的参数值</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>function(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>)
+</span></span></code></pre></div><h3 id="位置参数的注意事项">位置参数的注意事项</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义一个函数并且写上ab两个位置形参</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func1</span>(a, b):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">pass</span>(a, b)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> func1(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)  <span style="color:#75715e"># 按照位置从左往右依次传值</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> func1(<span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># 少了一个传入的值，报错</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> func1(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>)  <span style="color:#75715e"># 多了一个值，还是报错</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> func1(b<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, a<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)  <span style="color:#75715e"># 关键字参数，将1传给b，2传给a</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.</span> func1(b<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)  <span style="color:#75715e"># 关键字参数一定要跟在位置参数后面否则会报错</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span> func1(<span style="color:#ae81ff">2</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># 这里关键字参数在位置参数后面就可以正常传入</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7.</span> func1(<span style="color:#ae81ff">1</span>, a<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)  <span style="color:#75715e"># 同一个形参在调用的时候不能传入多个值</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wesley&#39;</span>
+</span></span><span style="display:flex;"><span>pwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">123</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8.</span> func1(name, pwd)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9.</span> func1(a<span style="color:#f92672">=</span>name, b<span style="color:#f92672">=</span>pwd)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 实参没有固定的定义，可以传入数据值，也可以传入绑定了数据值的变量名</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">越短越简单的越靠前
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">越长越复杂的越靠后
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">但是遇到了下列的情况除外
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	同一个形参在调用的时候不能多次赋值
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>默认参数</li>
+</ul>
+<blockquote>
+<p>默认参数其实就是提前定义好的关键字形参，别名叫做默认参数，用户可以传值也可以不用传</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">默认参数的定义也是遵循越短越简单越靠前
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">register</span>(name, age, gender<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;male&#39;</span>):
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		-------user info--------
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		name:</span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		 age:</span><span style="color:#e6db74">{</span>age<span style="color:#e6db74">}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	  gender:</span><span style="color:#e6db74">{</span>gender<span style="color:#e6db74">}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		&#34;&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>register(<span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#ae81ff">18</span>,)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 结果</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">-------</span>user info<span style="color:#f92672">--------</span>
+</span></span><span style="display:flex;"><span>	name:wesley
+</span></span><span style="display:flex;"><span>	age:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>	gender:male
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">------------------------</span>
+</span></span><span style="display:flex;"><span>register(<span style="color:#e6db74">&#39;andy&#39;</span>, <span style="color:#ae81ff">18</span>, <span style="color:#e6db74">&#39;female&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 结果</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">-------</span>user info<span style="color:#f92672">--------</span>
+</span></span><span style="display:flex;"><span>	name:andy
+</span></span><span style="display:flex;"><span>	age:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>	gender:female
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">------------------------</span>
+</span></span><span style="display:flex;"><span>register(<span style="color:#e6db74">&#39;dev&#39;</span>, <span style="color:#ae81ff">20</span>, gender<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;female&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 结果</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">-------</span>user info<span style="color:#f92672">--------</span>
+</span></span><span style="display:flex;"><span>	name:dev
+</span></span><span style="display:flex;"><span>	age:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>	gender:female
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">------------------------</span>
+</span></span></code></pre></div><ul>
+<li>可变长形参</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 定义一个函数，并写入可变长形参</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func1</span>(<span style="color:#f92672">*</span>a)<span style="color:#960050;background-color:#1e0010">：</span>
+</span></span><span style="display:flex;"><span>	print(a)
+</span></span><span style="display:flex;"><span>func1()  <span style="color:#75715e"># ()</span>
+</span></span><span style="display:flex;"><span>func1(<span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># (1,)</span>
+</span></span><span style="display:flex;"><span>func1(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>)  <span style="color:#75715e"># (1, 2)</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">*号在形参中的作用是用于接收多余的位置参数，组织为元组赋值给*号后面的变量名
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func2</span>(b, <span style="color:#f92672">*</span>a):
+</span></span><span style="display:flex;"><span>    print(a, b)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># func2()  # 函数至少需要一个参数给到b</span>
+</span></span><span style="display:flex;"><span>func2(<span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># () 1</span>
+</span></span><span style="display:flex;"><span>func2(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>)  <span style="color:#75715e"># (2, 3, 4) 1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义一个函数 并写入**a可边长形参</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func3</span>(<span style="color:#f92672">**</span>k):
+</span></span><span style="display:flex;"><span>	print(k)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 不传值默认就是空字典</span>
+</span></span><span style="display:flex;"><span>func3()  <span style="color:#75715e"># {}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 接受位置参数，并以字典的形式打印</span>
+</span></span><span style="display:flex;"><span>func3(a<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># {&#39;a&#39;: 1}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 接受位置参数，并以字典的形式打印</span>
+</span></span><span style="display:flex;"><span>func3(a<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)  <span style="color:#75715e"># {&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">如果函数中可变参数的前面出现了位置参数，就需要先给位置参数对应的数据值
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">**号在参数
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">用于接收多余的关键字参数，组织成字典的形式返回
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义一个例子</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义一个函数并需要传䘝位置参数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func5</span>(n, <span style="color:#f92672">*</span>a, <span style="color:#f92672">**</span>k):
+</span></span><span style="display:flex;"><span>    print(a, k)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>func5()  <span style="color:#75715e"># 函数至少需要一个参数给到n</span>
+</span></span><span style="display:flex;"><span>func5(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>)  <span style="color:#75715e"># (2, 3) {}</span>
+</span></span><span style="display:flex;"><span>func5(<span style="color:#ae81ff">111</span>,a<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)  <span style="color:#75715e"># () {&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}</span>
+</span></span><span style="display:flex;"><span>func5(n<span style="color:#f92672">=</span><span style="color:#ae81ff">111</span>,a<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)  <span style="color:#75715e"># () {&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}</span>
+</span></span><span style="display:flex;"><span>func5(a<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, n<span style="color:#f92672">=</span><span style="color:#ae81ff">111</span>)  <span style="color:#75715e"># () {&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}</span>
+</span></span><span style="display:flex;"><span>func5(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, a<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)  <span style="color:#75715e"># (2, 3) {&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 在学习python中使用* 和**的使用率很高，在这里，python的默认函数中就有这种函数，比较建议的命名方式是python提供的</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>args  <span style="color:#75715e"># 用于接收多余的位置参数</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">**</span>kwargs  <span style="color:#75715e"># 用于接收关键字参数，不能够并以字典的形式返回</span>
+</span></span></code></pre></div><ul>
+<li>可变长实参</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">-</span> <span style="color:#f92672">*</span> 可变长实参
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>(a, b, c):
+</span></span><span style="display:flex;"><span>    print(a, b, c)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 通过列表传值</span>
+</span></span><span style="display:flex;"><span>l1 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>index(<span style="color:#f92672">*</span>l1)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 通过字符串传值</span>
+</span></span><span style="display:flex;"><span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;tom&#39;</span>
+</span></span><span style="display:flex;"><span>index(<span style="color:#f92672">*</span>name)
+</span></span><span style="display:flex;"><span>t o m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 通过元组传值</span>
+</span></span><span style="display:flex;"><span>t1 <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>index(<span style="color:#f92672">*</span>t1)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 通过字典传值</span>
+</span></span><span style="display:flex;"><span>d1 <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;name&#39;</span>:<span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#e6db74">&#39;age&#39;</span>:<span style="color:#ae81ff">18</span>, <span style="color:#e6db74">&#39;salary&#39;</span>:<span style="color:#ae81ff">10000</span>}
+</span></span><span style="display:flex;"><span>index(<span style="color:#f92672">*</span>d1)
+</span></span><span style="display:flex;"><span>name age salary
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 注意如果是字典，只会传入键，这一点和for循环类似,这里也可以通过取值的方式将数据类型中的值取出再通过可变长实参赋予函数的形参</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> <span style="color:#f92672">**</span> 可变长实参
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">userinfo</span>(name, age):
+</span></span><span style="display:flex;"><span>    print(name, age)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用字典传值</span>
+</span></span><span style="display:flex;"><span>d1 <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;name&#39;</span>:<span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#e6db74">&#39;age&#39;</span>:<span style="color:#ae81ff">18</span>}
+</span></span><span style="display:flex;"><span>userinfo(<span style="color:#f92672">**</span>d1)
+</span></span><span style="display:flex;"><span>wesley <span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># *传入的是键，注意这里传入的是字典的值，除了使用字典以外这里还可以使用关键字参数传值</span>
+</span></span></code></pre></div><ul>
+<li>命名关键字参数</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#39;&#39;&#39;形参必须按照关键字参数传值&gt;&gt;&gt;:命名关键字参数&#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>(name, <span style="color:#f92672">*</span>args, gender<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;male&#39;</span>, <span style="color:#f92672">**</span>kwargs):
+</span></span><span style="display:flex;"><span>    print(name, args, gender, kwargs)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># index(&#39;wesley&#39;,1,2,3,4,a=1,b=2)</span>
+</span></span><span style="display:flex;"><span>index(<span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#e6db74">&#39;female&#39;</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><ul>
+<li>名称空间</li>
+</ul>
+<blockquote>
+<p>名称空间就是存放变量名和函数名和数据值的绑定关系的地方，被称为名称空间</p>
+</blockquote>
+<ul>
+<li>
+<p>内置名称空间
+内置名称空间是python解释器在启动时产生的，里面存放着我们使用的内置函数名称
+eg： len print input
+生命周期：
+内置名称空间在python解释器开启时产生，关闭的时候销毁
+作用域：
+内置名称空间在解释器级别全局有效</p>
+</li>
+<li>
+<p>全局名称空间
+全局名称空间是在我们run一个python文件中产生的，里面存放着定义的变量名类名
+函数名和他们的绑定关系
+生命周期：
+文件运行时产生，运行结束后销毁
+作用域：
+文件级别全局有效</p>
+</li>
+<li>
+<p>局部名称空间
+局部名称空间是我们在调用函数时，由函数体产生的变量名和绑定关系，局部命名空间将会在函数体代码运行结束后销毁
+生命周期:
+在函数体代码执行时产生，结束后销毁</p>
+<p>作用域:
+代码体内有效</p>
+</li>
+<li>
+<p>名称空间优先级
+1.当我们在局部名称空间中的时候
+局部名称空间 &raquo;&gt; 全局名称空间 &raquo;&gt; 内置名称空间
+2.当我们在全局名称空间中的时候
+全局名称空间 &raquo;&gt; 内置名称空间
+ps:其实名字的查找顺序是可以打破的</p>
+</li>
+</ul>
+<h3 id="接下来通过下列的代码来画出优先级">接下来通过下列的代码来画出优先级</h3>
+<p>下列这个图片是从内向外寻找的一个过程，具体优先级是什么需要看当前的位置</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mylen</span>():
+</span></span><span style="display:flex;"><span>	print(len)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mylen()
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>built<span style="color:#f92672">-</span><span style="color:#f92672">in</span> function len<span style="color:#f92672">&gt;</span>
+</span></span></code></pre></div><p><img src="https://github.com/Jinkes-li/jinkes-li.github.io/blob/master/images/image-20221010191652628.png?raw=true" alt=""></p>
+<p>练习题</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span>判断下列money的值是多少并说明理由 思考如何修改而不是新增绑定关系
+</span></span><span style="display:flex;"><span>	money <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():
+</span></span><span style="display:flex;"><span>        money <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span>	
+</span></span><span style="display:flex;"><span> 	print(money)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1.函数并没有被调用，也就没有产生局部命名空间，所以函数中的money的值并不存在
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2.在python文件中使用print 会直接先找全局命名空间的money，这里直接就找到了，值为100
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>	money <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span> 	<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func1</span>():
+</span></span><span style="display:flex;"><span>        money <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func2</span>():
+</span></span><span style="display:flex;"><span>            money <span style="color:#f92672">=</span> <span style="color:#ae81ff">888</span>
+</span></span><span style="display:flex;"><span>        func2()
+</span></span><span style="display:flex;"><span>   print(money)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1.和上一题一样，并没有调用函数，所以这里还是找全局，依旧是100，如果调用了func1函数，那向下看又调用了func2函数，func2的money = 888会被加载，局部命名空间产生，此时函数中的money就有了值，但是print和全局的money同级别所以还是100,除非在func2中加一个print，然后将文件级别的print换成func1(),这个时候才会到局部找到888
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>

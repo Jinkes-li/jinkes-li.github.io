@@ -6,7 +6,23 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Oct 2022 16:19:35 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Oct 2022 19:49:24 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python函数(下)</title>
+      <link>https://jinkes-li.github.io/python/python%E5%87%BD%E6%95%B0%E4%B8%8B/</link>
+      <pubDate>Mon, 10 Oct 2022 19:49:24 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/python%E5%87%BD%E6%95%B0%E4%B8%8B/</guid>
+      <description>python函数（下） 本文将链接上一章的python函数的参数继续讲下去
+函数的参数
+名称空间与作用域
+global与nonlocal
+函数名的多种用法
+函数的参数
+函数参数的概念
+形式参数 函数定义阶段括号内填写的参数 实际参数 函数调用阶段括号内填写的参数 1. 位置参数 位置形参 在定义函数时，在括号内从左到右依次填写的变量名 # 如何子代码只有一行或者很简短可以直接在冒号后面编写不用换行 def function(a, b, c):pass pass 位置实参 在函数调用时，在括号内依次从左往右填写的参数值 function(1, 2, 3) 位置参数的注意事项 # 定义一个函数并且写上ab两个位置形参 def func1(a, b): pass(a, b) 1. func1(1, 2) # 按照位置从左往右依次传值 2. func1(1) # 少了一个传入的值，报错 3. func1(1, 2, 3) # 多了一个值，还是报错 4. func1(b=1, a=2) # 关键字参数，将1传给b，2传给a 5. func1(b=1, 2) # 关键字参数一定要跟在位置参数后面否则会报错 6 func1(2, b=1) # 这里关键字参数在位置参数后面就可以正常传入 7. func1(1, a=2, b=3) # 同一个形参在调用的时候不能传入多个值 name = &amp;#39;wesley&amp;#39; pwd = 123 8.</description>
+    </item>
+    
     <item>
       <title>Python函数(上)</title>
       <link>https://jinkes-li.github.io/python/python%E5%87%BD%E6%95%B0%E4%B8%8A/</link>
