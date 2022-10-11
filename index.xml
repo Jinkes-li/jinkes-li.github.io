@@ -6,7 +6,24 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Oct 2022 19:49:24 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 Oct 2022 22:49:12 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pythons新手村Boss装饰器</title>
+      <link>https://jinkes-li.github.io/python/pythons%E6%96%B0%E6%89%8B%E6%9D%91boss%E8%A3%85%E9%A5%B0%E5%99%A8/</link>
+      <pubDate>Tue, 11 Oct 2022 22:49:12 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/pythons%E6%96%B0%E6%89%8B%E6%9D%91boss%E8%A3%85%E9%A5%B0%E5%99%A8/</guid>
+      <description>python新手村Boss装饰器 装饰器简介
+无产装饰器
+有参装饰器
+装饰器模版
+装饰器语法糖及修复技术
+多层装饰器
+装饰器简介
+概念： 在不改变被装饰器源代码和调用方式的情况下给被装饰的对象添加新的功能 装饰器的本质： 装饰器并不是一个新的技术，而是由函数参数，名称空间，函数名多种用法，闭包函数所组成到一起的结果 口诀： 对修改封闭，对扩展开放 储备知识 这里需要先需要提前使用一个time包来实现一下时间戳功能，代码如下
+时间相关操作(time) import time # time 获取时间戳 print(time.time()) # 时间戳(距离1970-01-01 00:00:00所经历的秒数) time.sleep(3) # 程序暂停3秒再运行 print(&amp;#39;这里是代码体&amp;#39;) print(time.time()) # 代码运行结束的时间戳 1665485696.789707 这里是代码体 1665485699.794832 2. 小程序，获取当前代码运行的时长 import time count = 0 start_time = time.time() while count &amp;lt; 10000000: print(&amp;#39;运行中...&amp;#39;) count += 1 end_time = time.time() print(f&amp;#39;当前程序运行需要的时长为{end_time - start_time}&amp;#39;) 当前程序运行需要的时长为16.997233867645264 # 这里是time的用法 装饰器的推导流程（重要） *1*. 第一部分 import time def index(): time.</description>
+    </item>
+    
     <item>
       <title>Python函数(下)</title>
       <link>https://jinkes-li.github.io/python/python%E5%87%BD%E6%95%B0%E4%B8%8B/</link>

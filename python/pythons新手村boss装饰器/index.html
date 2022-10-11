@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Pythons新手村Boss装饰器 | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/python/pythons%E6%96%B0%E6%89%8B%E6%9D%91boss%E8%A3%85%E9%A5%B0%E5%99%A8/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="Pythons新手村Boss装饰器" />
+<meta property="og:description" content="python新手村Boss装饰器 装饰器简介
+无产装饰器
+有参装饰器
+装饰器模版
+装饰器语法糖及修复技术
+多层装饰器
+装饰器简介
+概念： 在不改变被装饰器源代码和调用方式的情况下给被装饰的对象添加新的功能 装饰器的本质： 装饰器并不是一个新的技术，而是由函数参数，名称空间，函数名多种用法，闭包函数所组成到一起的结果 口诀： 对修改封闭，对扩展开放 储备知识 这里需要先需要提前使用一个time包来实现一下时间戳功能，代码如下
+时间相关操作(time) import time # time 获取时间戳 print(time.time()) # 时间戳(距离1970-01-01 00:00:00所经历的秒数) time.sleep(3) # 程序暂停3秒再运行 print(&#39;这里是代码体&#39;) print(time.time()) # 代码运行结束的时间戳 1665485696.789707 这里是代码体 1665485699.794832 2. 小程序，获取当前代码运行的时长 import time count = 0 start_time = time.time() while count &lt; 10000000: print(&#39;运行中...&#39;) count &#43;= 1 end_time = time.time() print(f&#39;当前程序运行需要的时长为{end_time - start_time}&#39;) 当前程序运行需要的时长为16.997233867645264 # 这里是time的用法 装饰器的推导流程（重要） *1*. 第一部分 import time def index(): time." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/python/pythons%E6%96%B0%E6%89%8B%E6%9D%91boss%E8%A3%85%E9%A5%B0%E5%99%A8/" /><meta property="article:section" content="python" />
+<meta property="article:published_time" content="2022-10-11T22:49:12+08:00" />
+<meta property="article:modified_time" content="2022-10-11T22:49:12+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pythons新手村Boss装饰器"/>
+<meta name="twitter:description" content="python新手村Boss装饰器 装饰器简介
+无产装饰器
+有参装饰器
+装饰器模版
+装饰器语法糖及修复技术
+多层装饰器
+装饰器简介
+概念： 在不改变被装饰器源代码和调用方式的情况下给被装饰的对象添加新的功能 装饰器的本质： 装饰器并不是一个新的技术，而是由函数参数，名称空间，函数名多种用法，闭包函数所组成到一起的结果 口诀： 对修改封闭，对扩展开放 储备知识 这里需要先需要提前使用一个time包来实现一下时间戳功能，代码如下
+时间相关操作(time) import time # time 获取时间戳 print(time.time()) # 时间戳(距离1970-01-01 00:00:00所经历的秒数) time.sleep(3) # 程序暂停3秒再运行 print(&#39;这里是代码体&#39;) print(time.time()) # 代码运行结束的时间戳 1665485696.789707 这里是代码体 1665485699.794832 2. 小程序，获取当前代码运行的时长 import time count = 0 start_time = time.time() while count &lt; 10000000: print(&#39;运行中...&#39;) count &#43;= 1 end_time = time.time() print(f&#39;当前程序运行需要的时长为{end_time - start_time}&#39;) 当前程序运行需要的时长为16.997233867645264 # 这里是time的用法 装饰器的推导流程（重要） *1*. 第一部分 import time def index(): time."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h3 id="python新手村boss装饰器">python新手村Boss装饰器</h3>
+<ul>
+<li>
+<p>装饰器简介</p>
+</li>
+<li>
+<p>无产装饰器</p>
+</li>
+<li>
+<p>有参装饰器</p>
+</li>
+<li>
+<p>装饰器模版</p>
+</li>
+<li>
+<p>装饰器语法糖及修复技术</p>
+</li>
+<li>
+<p>多层装饰器</p>
+</li>
+<li>
+<p>装饰器简介</p>
+</li>
+</ul>
+<blockquote>
+<ol>
+<li>概念：
+在不改变被装饰器源代码和调用方式的情况下给被装饰的对象添加新的功能</li>
+<li>装饰器的本质：
+装饰器并不是一个新的技术，而是由函数参数，名称空间，函数名多种用法，闭包函数所组成到一起的结果</li>
+<li>口诀：
+对修改封闭，对扩展开放</li>
+</ol>
+</blockquote>
+<ul>
+<li>储备知识</li>
+</ul>
+<blockquote>
+<p>这里需要先需要提前使用一个time包来实现一下时间戳功能，代码如下</p>
+</blockquote>
+<ul>
+<li>时间相关操作(time)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> time  <span style="color:#75715e"># time 获取时间戳</span>
+</span></span><span style="display:flex;"><span>print(time<span style="color:#f92672">.</span>time())  <span style="color:#75715e"># 时间戳(距离1970-01-01 00:00:00所经历的秒数)</span>
+</span></span><span style="display:flex;"><span>time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">3</span>)  <span style="color:#75715e"># 程序暂停3秒再运行</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;这里是代码体&#39;</span>)
+</span></span><span style="display:flex;"><span>print(time<span style="color:#f92672">.</span>time())  <span style="color:#75715e"># 代码运行结束的时间戳</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1665485696.789707</span>
+</span></span><span style="display:flex;"><span>这里是代码体
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1665485699.794832</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> 小程序<span style="color:#960050;background-color:#1e0010">，</span>获取当前代码运行的时长
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>start_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> count <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10000000</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;运行中...&#39;</span>)
+</span></span><span style="display:flex;"><span>    count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>end_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;当前程序运行需要的时长为</span><span style="color:#e6db74">{</span>end_time <span style="color:#f92672">-</span> start_time<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>当前程序运行需要的时长为16<span style="color:#ae81ff">.997233867645264</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 这里是time的用法</span>
+</span></span></code></pre></div><ul>
+<li>装饰器的推导流程（重要）</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">*</span><span style="color:#ae81ff">1</span><span style="color:#f92672">*.</span> 第一部分
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;from index&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">home</span>():
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;from home&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  直接在调用index函数的前后添加代码</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#start_time = time.time()</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#index()</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#end_time = time.time()</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#print(&#39;函数index的执行时间为： &#39;, end_time - start_time)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*.</span> index调用的部分不较多<span style="color:#960050;background-color:#1e0010">，</span>代码不可能反复拷贝<span style="color:#f92672">&gt;&gt;&gt;</span>相同的代码需要在不同的位置反复执行函数
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#def get_time():</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    start_time = time.time()</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    index()</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    end_time = time.time()</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    print(&#39;函数index的执行时间为&gt;&gt;&gt;: &#39;, end_time -  start_time)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#get_time()</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> index
+</span></span><span style="display:flex;"><span>函数index的执行时间为<span style="color:#f92672">&gt;&gt;&gt;</span>:  <span style="color:#ae81ff">3.0051331520080566</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span><span style="color:#ae81ff">3</span><span style="color:#f92672">*.</span> 函数体代码写死了<span style="color:#960050;background-color:#1e0010">，</span>只能统计index的执行时间<span style="color:#960050;background-color:#1e0010">，</span>如何才能做到统计更多的函数运行时间<span style="color:#960050;background-color:#1e0010">，</span>直接传参变换统计的函数
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_time</span>(xxx):
+</span></span><span style="display:flex;"><span>    start_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>    xxx()
+</span></span><span style="display:flex;"><span>    end_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;当前函数的执行时间为&gt;&gt;&gt;&#39;</span>, end_time <span style="color:#f92672">-</span> start_time )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>get_time(index)
+</span></span><span style="display:flex;"><span>get_time(home)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> index
+</span></span><span style="display:flex;"><span>当前函数的执行时间为<span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#ae81ff">3.004418134689331</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> home
+</span></span><span style="display:flex;"><span>当前函数的执行时间为<span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#ae81ff">1.0000019073486328</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span><span style="color:#ae81ff">4</span><span style="color:#f92672">*.</span> 虽然实现了一定的兼容性<span style="color:#960050;background-color:#1e0010">，</span>但是并不符合装饰器的特征<span style="color:#960050;background-color:#1e0010">，</span>第一种传参不写只能考虑闭包
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">outer</span>(xxx):
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">5.</span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_time</span>():
+</span></span><span style="display:flex;"><span>        start_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">6.</span>  xxx()
+</span></span><span style="display:flex;"><span>        end_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;函数的执行时间为：&#39;</span>, end_time <span style="color:#f92672">-</span> start_time)
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">3.</span>  <span style="color:#66d9ef">return</span> get_time
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> res <span style="color:#f92672">=</span> outer(index)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> res()
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8.</span> res1 <span style="color:#f92672">=</span> outer(home)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9.</span> res1()
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> index
+</span></span><span style="display:flex;"><span>函数的执行时间为<span style="color:#960050;background-color:#1e0010">：</span> <span style="color:#ae81ff">3.0043351650238037</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> home
+</span></span><span style="display:flex;"><span>函数的执行时间为<span style="color:#960050;background-color:#1e0010">：</span> <span style="color:#ae81ff">1.0040619373321533</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">推导解析:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1. 定义函数outer函数并需要1个形参
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2. 先调用outer函数将index函数名以位参的形式传入
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3. 将闭函数名get_time赋值为2号代码的res
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">4. res()调用就是get_time()执行
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">5. 执行get_time代码，先获取当前时间戳
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">6. 当前xxx值是1号代码传入的index，index执行结束后获取当前时间戳
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">7. 此时index的运行时长就获取到了
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">8. 8号和9号的代码同样重复1~6的过程
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span><span style="color:#ae81ff">5</span><span style="color:#f92672">*.</span>调用方式还是不对 如何变形<span style="color:#f92672">&gt;</span> 变量名赋值绑定<span style="color:#960050;background-color:#1e0010">（</span><span style="color:#f92672">******</span><span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">outer</span>(xxx):
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">4.</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_time</span>():
+</span></span><span style="display:flex;"><span>           start_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">5.</span> xxx()
+</span></span><span style="display:flex;"><span>           end_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">6.</span> print(<span style="color:#e6db74">&#39;函数执行的时长为： &#39;</span>, end_time <span style="color:#f92672">-</span> start_time)
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">2.1</span><span style="color:#66d9ef">return</span> get_time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> index <span style="color:#f92672">=</span> outer(index)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> index()
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8.</span> home <span style="color:#f92672">=</span> outer(home)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9.</span> home()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> index
+</span></span><span style="display:flex;"><span>函数执行的时长为<span style="color:#960050;background-color:#1e0010">：</span>  <span style="color:#ae81ff">3.005247116088867</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> home
+</span></span><span style="display:flex;"><span>函数执行的时长为<span style="color:#960050;background-color:#1e0010">：</span>  <span style="color:#ae81ff">1.0051252841949463</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">推导解析:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1. 先定义一个具有形参的outer函数
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2. 掉用outer函数并将index的函数名传入，
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2.1 并返回闭包的函数名，赋值给index，注意此时index的绑定关系是get_time函数名
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3. 调用index()函数，相当于调用get_time函数
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">4. 运行get_time函数，获取当前时间戳
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">5. xxx调用outer传入的index原函数名，执行index函数，并获取结束时间戳
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">6. 打印index函数运行时间
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">7. 以上推导结束，并实现了无参装饰器
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">8. 代码8和代码9 推导流程如1~6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">**</span><span style="color:#ae81ff">6.</span><span style="color:#f92672">**</span> 上述装饰器只能装饰无参函数<span style="color:#960050;background-color:#1e0010">，</span>兼容性太差
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(a):
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.1</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;from func&#39;</span>, a)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func1</span>(a, b):
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.2</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;from func1&#39;</span>, a, b)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func2</span>():
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">outer</span>(xxx):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_time</span>(a, b):
+</span></span><span style="display:flex;"><span>        start_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>        xxx(a, b)
+</span></span><span style="display:flex;"><span>        end_tima <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;函数的执行时间为： &#39;</span>, end_tima <span style="color:#f92672">-</span> start_time)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> get_time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>func1 <span style="color:#f92672">=</span> outer(func1)
+</span></span><span style="display:flex;"><span>func1(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># func = outer(func)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># func(1)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># func2 = outer(func2)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># func2()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">推导解析:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">和第五推导过程一致，但是我们这里会发现，这里的装饰器在执行过程中把参数的数量写死了，接下来第7步通过可变长参数修改此问题
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">**</span><span style="color:#ae81ff">7.</span><span style="color:#f92672">**</span> 被装饰的函数不知道有没有参数以及有几个参数 如何兼容
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(a):   
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.1</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;from func&#39;</span>, a)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func1</span>(a, b):  
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.2</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;from func1&#39;</span>, a, b)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">outer</span>(xxx):  
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">7.</span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_time</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs): 
+</span></span><span style="display:flex;"><span>          start_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">8.</span>  xxx(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+</span></span><span style="display:flex;"><span>          end_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>          print(<span style="color:#e6db74">&#39;函数的执行时间为： &#39;</span>, end_time <span style="color:#f92672">-</span> start_time)
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">5.</span>   <span style="color:#66d9ef">return</span> get_time
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> func <span style="color:#f92672">=</span> outer(func)  
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6.</span> func(<span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9.</span> func1 <span style="color:#f92672">=</span> outer(func1)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10.</span>func1(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">推导解析
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1. 定义func
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2. 定义func1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3. 定义outer
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">4. 调用outer并将func函数名传入xxx
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">5. outer返回值为get_time函数名，赋值给第4步的func
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">6. 执行func传入123 ，相当于执行get_time并传入123
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">7. 执行get_time 参数为args（123），获取当前执行时间
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">8. xxx为第4步func函数的名字，这一步带着123执行func函数，执行完成后获取结束时间并打印
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">9. 9. 10. 推导流程如1~8
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">10. 到此完成了一个无视参数的装饰器
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">**</span><span style="color:#ae81ff">8.</span><span style="color:#f92672">**</span> 如果被装饰的函数有返回值
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(a):
+</span></span><span style="display:flex;"><span>       time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.1</span>)
+</span></span><span style="display:flex;"><span>       print(<span style="color:#e6db74">&#39;from func&#39;</span>, a)
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;func&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func1</span>(a, b):
+</span></span><span style="display:flex;"><span>       time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.2</span>)
+</span></span><span style="display:flex;"><span>       print(<span style="color:#e6db74">&#39;from func1&#39;</span>, a, b)
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;func1&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">outer</span>(xxx):
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">6.</span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_time</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+</span></span><span style="display:flex;"><span>           start_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>           res <span style="color:#f92672">=</span> xxx(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+</span></span><span style="display:flex;"><span>           end_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>           print(<span style="color:#e6db74">&#39;函数的执行时间为： &#39;</span>, end_time <span style="color:#f92672">-</span> start_time)
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">return</span> res
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> get_time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> func <span style="color:#f92672">=</span> outer(func)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.</span> res <span style="color:#f92672">=</span> func(<span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7.</span> print(res)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>func1 <span style="color:#f92672">=</span> outer(func1)
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> func1(<span style="color:#ae81ff">123</span>, <span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span>print(res)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> func <span style="color:#ae81ff">123</span>
+</span></span><span style="display:flex;"><span>函数的执行时间为<span style="color:#960050;background-color:#1e0010">：</span>  <span style="color:#ae81ff">0.10509371757507324</span>
+</span></span><span style="display:flex;"><span>func
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> func1 <span style="color:#ae81ff">123</span> <span style="color:#ae81ff">123</span>
+</span></span><span style="display:flex;"><span>函数的执行时间为<span style="color:#960050;background-color:#1e0010">：</span>  <span style="color:#ae81ff">0.20029377937316895</span>
+</span></span><span style="display:flex;"><span>func1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">推导解析：
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1. 定义func
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2. 定义func1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3. 定义outer
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">4. 执行outer 并将func函数名传入xxx，返回值get_time给变量func
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">5. 执行func并传值123，相当于get_time传值123
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">6. 执行get_time ,获取当前时间，xxx参数调用outer传入的func函数名，执行函数，需要参数获取args参数值为123，执行完毕后返回值赋予res，获取运行完成好的时间并打印
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">7. 找到函数体内的res，当前返回值为&#39;func&#39;字符串
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>装饰器模版</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 务必掌握 </span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">outer</span>(func):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inner</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 执行被装饰对象之前可以做的额外操作</span>
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 执行被装饰对象之后可以做的额外操作</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> inner
+</span></span></code></pre></div><ul>
+<li>语法糖</li>
+</ul>
+<blockquote>
+<p>语法糖需要注意:</p>
+<ol>
+<li>装饰器需要卸载被装饰函数上面</li>
+<li>@装饰器名字就相当于原本写的func = outer(func)</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">outer</span>(xxx):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_time</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+</span></span><span style="display:flex;"><span>        start_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> xxx(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+</span></span><span style="display:flex;"><span>        end_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;函数的执行时间为： &#39;</span>, end_time <span style="color:#f92672">-</span> start_time)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> get_time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@outer</span>  <span style="color:#75715e"># 代替了原本需要写的func = outer(func)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(a):
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.1</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;from func&#39;</span>, a)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;func&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>func(<span style="color:#ae81ff">11</span>)
+</span></span></code></pre></div>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
