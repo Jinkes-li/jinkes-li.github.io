@@ -437,6 +437,58 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;func&#39;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>func(<span style="color:#ae81ff">11</span>)
+</span></span></code></pre></div><p>联系题</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   基本要求</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    	 执行每个函数的时候必须先校验身份 eg: jason 123</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>userwesley <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wesley&#39;</span>
+</span></span><span style="display:flex;"><span>password <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;123&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1. 注册功能
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2. 登录功能
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    3. 转账
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    4. 退出
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">outer</span>(func_name):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inner</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+</span></span><span style="display:flex;"><span>            user <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;请输入登录账户：&#39;</span>)
+</span></span><span style="display:flex;"><span>            pwd <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;请输入密码： &#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> user <span style="color:#f92672">==</span> userwesley <span style="color:#f92672">and</span> pwd <span style="color:#f92672">==</span> password:
+</span></span><span style="display:flex;"><span>                res <span style="color:#f92672">=</span> func_name(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#39;当前无权限&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> res
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> inner
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@outer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">register</span>():
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;注册用户&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@outer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">login</span>():
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;用户登录&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@outer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">transfer</span>():
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;转账&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@outer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">withdraw</span>():
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;退出&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    dict1 <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;1&#39;</span>: register,
+</span></span><span style="display:flex;"><span>             <span style="color:#e6db74">&#39;2&#39;</span>: login,
+</span></span><span style="display:flex;"><span>             <span style="color:#e6db74">&#39;3&#39;</span>: transfer,
+</span></span><span style="display:flex;"><span>             <span style="color:#e6db74">&#39;4&#39;</span>: withdraw
+</span></span><span style="display:flex;"><span>             }
+</span></span><span style="display:flex;"><span>    info <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;请输入需要使用的功能： &#39;</span>)
+</span></span><span style="display:flex;"><span>    print(info)
+</span></span><span style="display:flex;"><span>    dict1<span style="color:#f92672">.</span>get(info)()
 </span></span></code></pre></div>
   
   </div>
