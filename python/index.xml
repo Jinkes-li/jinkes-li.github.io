@@ -6,7 +6,18 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 11 Oct 2022 22:49:12 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 13 Oct 2022 21:09:37 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>常见算法及表达式</title>
+      <link>https://jinkes-li.github.io/python/%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E5%8F%8A%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+      <pubDate>Thu, 13 Oct 2022 21:09:37 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E5%8F%8A%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+      <description>常见算法及表达式 算法之二分法 三元表达式 各种生成式 匿名函数 重要的内置函数 常见的内置函数 算法简介之二分法 算法简单理解就是解决某些特定场景的特定方法 常见的算法有，二分法，冒泡，排序，红黑树，B+Tree 算法的应用场景：
+淘宝搜索产品后会一直推荐同产品给用户，这是淘宝的推荐算法 抖音，用户在使用抖音时，算法会将每个视频分类，具有相同喜欢视频类型的人群分类，从而实现对视频和人群进行不同的流量推送 二分法 二分法使用，待查找的数据集必须有序 二分法的缺陷，如果结果数据再初始位置，或者末尾位置，效率很低 基础原理： 对需要处理的数据进行中间值一分为二，对比需要查找的结果值，与前后两位值对比，如果结果值闭前者小，则对前面的数据再次进行二分处理依次类推，若结果值比前者大，则用二分的方式对后续的数据进行处理。
+python实现二分法 # 需要在以下数据中找到987 l1 = [12, 21, 32, 43, 56, 76, 87, 98, 123, 321, 453, 565, 678, 754, 812, 987, 1001, 1232] def look(l1, res_num): median = len(l1) // 2 # 判断，列表中的索引的值是否大于传入的值 if res_num &amp;gt; l1[median]: # 如果大于，将原列表中的后面的值取出赋值为new_list new_list = l1[median:] # 返回函数重新调用 return look(new_list, res_num) elif res_num &amp;lt; l1[median]: new_list = l1[:median] return look(new_list, res_num) else: print(&amp;#39;找到了&amp;#39;) look(l1, 21) 三元表达式 主要作用为简化代码</description>
+    </item>
+    
     <item>
       <title>Pythons新手村Boss装饰器</title>
       <link>https://jinkes-li.github.io/python/pythons%E6%96%B0%E6%89%8B%E6%9D%91boss%E8%A3%85%E9%A5%B0%E5%99%A8/</link>
