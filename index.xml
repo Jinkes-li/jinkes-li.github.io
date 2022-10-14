@@ -6,7 +6,17 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 13 Oct 2022 21:09:37 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 Oct 2022 21:36:14 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>内置函数及for循环原理</title>
+      <link>https://jinkes-li.github.io/python/%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%E5%8F%8Afor%E5%BE%AA%E7%8E%AF%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Fri, 14 Oct 2022 21:36:14 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%E5%8F%8Afor%E5%BE%AA%E7%8E%AF%E5%8E%9F%E7%90%86/</guid>
+      <description>python中常见内置函数 python常见内置函数 可迭代对象 迭代器对象 for 循环的本质 python中的内置函数 python中的内置函数非常的多，这里主要介绍常用的一部分
+序号 内置函数名 功能 1 abs() 求绝对值 2 all() ， any() 判断容器类型中所有的数据值对应的布尔值是否为Ture 3 bin()，oct(), hex, 进制转换 4 int() 进制转换，其他进制转十进制 5 bytes() 类型转换 6 Callable() call在IT专业名词中翻译成调用 7 chr(),ord() 依据ASCII码表实现字符与字符的转换 8 dir() 获取对象内部可以通过句点符获取的数据 9 divmod() 获取除法之后的整数和与数 10 enumerate() 枚举 11 eval(),exec() 能够识别字符串中python代码并执行 12 hash() 对数据进行hash加密，返回一串哈希值 13 help() 查看帮助信息 14 Isinstance(123,int) True 15 isinstance(123, str) False 16 pow() 幂指数 17 round() 四舍五入 可迭代对象 迭代就是更新换代，每次迭代都需要基于上一次的结果 比如说我们手机上的软件更新，其实这就是迭代的过程 # 代码实现 1.</description>
+    </item>
+    
     <item>
       <title>常见算法及表达式</title>
       <link>https://jinkes-li.github.io/python/%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E5%8F%8A%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
