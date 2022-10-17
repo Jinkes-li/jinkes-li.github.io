@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 异常与生成器 | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/python/%E5%BC%82%E5%B8%B8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="异常与生成器" />
+<meta property="og:description" content="异常处理和生成器对象 异常语法结构
+异常处理实战
+生成器对象
+生成器实现range方法
+生成器表达式
+生成器笔试题
+异常简介 异常的分类：
+语法错误 逻辑错误 异常结构 定位信息 错误类型 错误信息 异常常见错误类型 1. SyntexError 2. NameError 3. IndexError 4. KeyError 5. IndetationError 异常语法结构 try: 待监测的代码 except 错误类型 正对上述错误类型指定的方案 针对不同的错误类型指定不同的方案 try: 待监测的代码 except 错误类型1 as e: # e 就是报的错误类型 错误方案1 except 错误类型2 as e: 错误方案2 except 错误类型3 as e: 错误方案3 万能异常Exception/BaseException # 万能异常 try: 待监测代码 except Exception as e: 常见报错都都会执行此方案 # 结合else使用 try: 待监测代码 except Exception as e: 错误执行方案 else: # 在上面的代码正常执行没有执行异常方案时执行else print(&#39;哈哈哈，上面没有异常&#39;) # 结合finally try: 待监测代码 except Exception as e: 异常解决方案 else: print(&#39;上面正常执行没有错误我就执行&#39;) finally: print(&#39;上面的先上，无聊他们如何我都执行&#39;) 断言 断言：预测上面出现的错误类型，并确定错误异常类型" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/python/%E5%BC%82%E5%B8%B8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/" /><meta property="article:section" content="python" />
+<meta property="article:published_time" content="2022-10-17T18:23:39+08:00" />
+<meta property="article:modified_time" content="2022-10-17T18:23:39+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="异常与生成器"/>
+<meta name="twitter:description" content="异常处理和生成器对象 异常语法结构
+异常处理实战
+生成器对象
+生成器实现range方法
+生成器表达式
+生成器笔试题
+异常简介 异常的分类：
+语法错误 逻辑错误 异常结构 定位信息 错误类型 错误信息 异常常见错误类型 1. SyntexError 2. NameError 3. IndexError 4. KeyError 5. IndetationError 异常语法结构 try: 待监测的代码 except 错误类型 正对上述错误类型指定的方案 针对不同的错误类型指定不同的方案 try: 待监测的代码 except 错误类型1 as e: # e 就是报的错误类型 错误方案1 except 错误类型2 as e: 错误方案2 except 错误类型3 as e: 错误方案3 万能异常Exception/BaseException # 万能异常 try: 待监测代码 except Exception as e: 常见报错都都会执行此方案 # 结合else使用 try: 待监测代码 except Exception as e: 错误执行方案 else: # 在上面的代码正常执行没有执行异常方案时执行else print(&#39;哈哈哈，上面没有异常&#39;) # 结合finally try: 待监测代码 except Exception as e: 异常解决方案 else: print(&#39;上面正常执行没有错误我就执行&#39;) finally: print(&#39;上面的先上，无聊他们如何我都执行&#39;) 断言 断言：预测上面出现的错误类型，并确定错误异常类型"/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h3 id="异常处理和生成器对象">异常处理和生成器对象</h3>
+<ul>
+<li>
+<p>异常语法结构</p>
+</li>
+<li>
+<p>异常处理实战</p>
+</li>
+<li>
+<p>生成器对象</p>
+</li>
+<li>
+<p>生成器实现range方法</p>
+</li>
+<li>
+<p>生成器表达式</p>
+</li>
+<li>
+<p>生成器笔试题</p>
+</li>
+<li>
+<p>异常简介
+异常的分类：</p>
+</li>
+</ul>
+<ol>
+<li>语法错误</li>
+<li>逻辑错误
+异常结构</li>
+<li>定位信息</li>
+<li>错误类型</li>
+<li>错误信息</li>
+</ol>
+<ul>
+<li>异常常见错误类型</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> SyntexError
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> <span style="color:#a6e22e">NameError</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> <span style="color:#a6e22e">IndexError</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> <span style="color:#a6e22e">KeyError</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.</span> IndetationError
+</span></span></code></pre></div><ul>
+<li>异常语法结构</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>	待监测的代码
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">except</span> 错误类型
+</span></span><span style="display:flex;"><span>	正对上述错误类型指定的方案
+</span></span></code></pre></div><ol>
+<li>针对不同的错误类型指定不同的方案</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>	待监测的代码
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">except</span> 错误类型1 <span style="color:#66d9ef">as</span> e:  <span style="color:#75715e"># e 就是报的错误类型</span>
+</span></span><span style="display:flex;"><span>		错误方案1
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">except</span> 错误类型2 <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>		错误方案2
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">except</span> 错误类型3 <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>		错误方案3
+</span></span></code></pre></div><ol start="2">
+<li>万能异常Exception/BaseException</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 万能异常</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>	待监测代码
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>		常见报错都都会执行此方案
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 结合else使用</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>	待监测代码
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>		错误执行方案
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:  <span style="color:#75715e"># 在上面的代码正常执行没有执行异常方案时执行else</span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;哈哈哈，上面没有异常&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 结合finally</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>	待监测代码
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>		异常解决方案
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;上面正常执行没有错误我就执行&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">finally</span>:
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;上面的先上，无聊他们如何我都执行&#39;</span>)
+</span></span></code></pre></div><ol start="3">
+<li>断言</li>
+</ol>
+<blockquote>
+<p>断言：预测上面出现的错误类型，并确定错误异常类型</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wesley&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> isinstance(name, str)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;类型为字符串&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  如果类型判断错误就报错</span>
+</span></span></code></pre></div><ol start="4">
+<li>主动抛出异常</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;andy&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> name <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;andy&#39;</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74">&#39;又是你，老子不干了&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;哈哈哈不是andy，继续运行&#39;</span>)
+</span></span></code></pre></div><ul>
+<li>使用异常处理的注意事项</li>
+</ul>
+<blockquote>
+<ol>
+<li>异常处理能尽量少用就少用</li>
+<li>被try监测的代码能尽量少就尽量少</li>
+<li>当代码中可能会出现一些无法控制的情况报错才应该考虑使用</li>
+</ol>
+</blockquote>
+<ul>
+<li>使用异常 ，whlie循环，迭代器对象实现for循环</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 异常联系，使用while循环，异常，迭代器对象完成for循环功能</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>l1 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">33</span>, <span style="color:#ae81ff">44</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">66</span>, <span style="color:#ae81ff">77</span>, <span style="color:#ae81ff">88</span>, <span style="color:#ae81ff">99</span>]
+</span></span><span style="display:flex;"><span>new <span style="color:#f92672">=</span> l1<span style="color:#f92672">.</span>__iter__()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        print(new<span style="color:#f92672">.</span>__next__())
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">StopIteration</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
+</span></span></code></pre></div><ul>
+<li>生成器对象</li>
+</ul>
+<blockquote>
+<ol>
+<li>生成器的本质：具有__iter__和__next__的迭代器对象</li>
+<li>区别在于，迭代器是解释器提供的，生成器是程序员自己手写的</li>
+</ol>
+</blockquote>
+<ol>
+<li>解释器提供
+数据类型/文件对象&gt;迭代器对象</li>
+<li>程序员提供
+代码，关键字&gt;生成器对象</li>
+</ol>
+<ul>
+<li>生成器语法</li>
+</ul>
+<blockquote>
+<p>创建生成器就是在函数体代码中写上关键字yield</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 生成器对象</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">my_iter</span>()
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;这是一个生成器对象&#39;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">yield</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 函数体中如果有yield，第一次调用不会执行，会先生成一个生成器对象(迭代器对象)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> my_iter()
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 加上括号后调用__next__才会执行函数体代码，并停留yield</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>res<span style="color:#f92672">.</span>__next__()
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 每次执行后都回停留在yield，等待下一个yidld</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># yield也可以当做返回值使用</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">my_iter</span>():
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;我是第一&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;我是第二&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;我是第三&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> my_iter()
+</span></span><span style="display:flex;"><span>r1 <span style="color:#f92672">=</span> res<span style="color:#f92672">.</span>__next__()
+</span></span><span style="display:flex;"><span>print(r1)
+</span></span><span style="display:flex;"><span>r2 <span style="color:#f92672">=</span> res<span style="color:#f92672">.</span>__next__()
+</span></span><span style="display:flex;"><span>print(r2)
+</span></span><span style="display:flex;"><span>r3 <span style="color:#f92672">=</span> res<span style="color:#f92672">.</span>__next__()
+</span></span><span style="display:flex;"><span>print(r3)
+</span></span></code></pre></div><ul>
+<li>使用生成器写reang()函数</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 先写两个参数的</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">my_range</span>(start_num, end_num<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> end_num:
+</span></span><span style="display:flex;"><span>        end_num <span style="color:#f92672">=</span> start_num
+</span></span><span style="display:flex;"><span>        start_num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> start_num <span style="color:#f92672">&lt;</span> end_num:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield</span> start_num
+</span></span><span style="display:flex;"><span>        start_num <span style="color:#f92672">=</span> start_num <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> my_range(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>):
+</span></span><span style="display:flex;"><span>    print(i)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 三个参数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">my_range</span>(start_num, end_num<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, step<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> end_num:
+</span></span><span style="display:flex;"><span>        end_num <span style="color:#f92672">=</span> start_num
+</span></span><span style="display:flex;"><span>        start_num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> step <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> start_num <span style="color:#f92672">&lt;</span> end_num:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">yield</span> start_num
+</span></span><span style="display:flex;"><span>            start_num <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> step <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> start_num <span style="color:#f92672">&lt;</span> end_num:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">yield</span> start_num
+</span></span><span style="display:flex;"><span>            start_num <span style="color:#f92672">+=</span> step
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> my_range(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">10</span>):
+</span></span><span style="display:flex;"><span>    print(i)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 再来看看这个my_reang如何支持负数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">my_range</span>(start_num, end_num<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, step<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> end_num:
+</span></span><span style="display:flex;"><span>        end_num <span style="color:#f92672">=</span> start_num
+</span></span><span style="display:flex;"><span>        start_num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> step <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> start_num <span style="color:#f92672">&lt;</span> end_num:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">yield</span> start_num
+</span></span><span style="display:flex;"><span>            start_num <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> step <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> start_num <span style="color:#f92672">&lt;</span> end_num:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">yield</span> start_num
+</span></span><span style="display:flex;"><span>            start_num <span style="color:#f92672">+=</span> step
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> step <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        num <span style="color:#f92672">=</span> abs(step)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> start_num <span style="color:#f92672">&lt;</span> end_num:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">yield</span> end_num
+</span></span><span style="display:flex;"><span>            end_num <span style="color:#f92672">-=</span> num
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> my_range(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">100</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>):
+</span></span><span style="display:flex;"><span>    print(i)
+</span></span></code></pre></div><ul>
+<li>yield 冷门用法</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">eat</span>(name, food<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">准备用餐&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        food <span style="color:#f92672">=</span> <span style="color:#66d9ef">yield</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">正在吃</span><span style="color:#e6db74">{</span>food<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> eat(<span style="color:#e6db74">&#39;wesley&#39;</span>)
+</span></span><span style="display:flex;"><span>res<span style="color:#f92672">.</span>__next__()
+</span></span><span style="display:flex;"><span>res<span style="color:#f92672">.</span>send(<span style="color:#e6db74">&#39;汉堡&#39;</span>)
+</span></span><span style="display:flex;"><span>res<span style="color:#f92672">.</span>send(<span style="color:#e6db74">&#39;牛肉干&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  send的作用是将括号中的值传给yield的变量名再自动调用__next__</span>
+</span></span></code></pre></div><ul>
+<li>生成器表达式</li>
+</ul>
+<blockquote>
+<p>简化代码写法</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>l1 <span style="color:#f92672">=</span> (i <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>))
+</span></span><span style="display:flex;"><span>print(l1)  <span style="color:#75715e"># &lt;generator object &lt;genexpr&gt; at 0x100eff660&gt;</span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> l1<span style="color:#f92672">.</span>__iter__()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> res:
+</span></span><span style="display:flex;"><span>    print(i)
+</span></span></code></pre></div><ul>
+<li>面试题</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(n, i):  <span style="color:#75715e"># 普通函数 返回两个数的和  求和函数</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> n <span style="color:#f92672">+</span> i
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test</span>():  <span style="color:#75715e"># 生成器</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">4</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield</span> i
+</span></span><span style="display:flex;"><span>g <span style="color:#f92672">=</span> test()  <span style="color:#75715e"># 激活生成器</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> n <span style="color:#f92672">in</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>]:
+</span></span><span style="display:flex;"><span>    g <span style="color:#f92672">=</span> (add(n, i) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> g)
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    第一次for循环
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        g = (add(n, i) for i in g)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    第二次for循环
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        g = (add(10, i) for i in (add(10, i) for i in g))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>print(list(g))
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">21</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">23</span>]
+</span></span></code></pre></div>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>

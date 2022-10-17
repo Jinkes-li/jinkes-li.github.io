@@ -6,7 +6,23 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 16 Oct 2022 21:31:48 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 17 Oct 2022 18:23:39 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>异常与生成器</title>
+      <link>https://jinkes-li.github.io/python/%E5%BC%82%E5%B8%B8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/</link>
+      <pubDate>Mon, 17 Oct 2022 18:23:39 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E5%BC%82%E5%B8%B8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/</guid>
+      <description>异常处理和生成器对象 异常语法结构
+异常处理实战
+生成器对象
+生成器实现range方法
+生成器表达式
+生成器笔试题
+异常简介 异常的分类：
+语法错误 逻辑错误 异常结构 定位信息 错误类型 错误信息 异常常见错误类型 1. SyntexError 2. NameError 3. IndexError 4. KeyError 5. IndetationError 异常语法结构 try: 待监测的代码 except 错误类型 正对上述错误类型指定的方案 针对不同的错误类型指定不同的方案 try: 待监测的代码 except 错误类型1 as e: # e 就是报的错误类型 错误方案1 except 错误类型2 as e: 错误方案2 except 错误类型3 as e: 错误方案3 万能异常Exception/BaseException # 万能异常 try: 待监测代码 except Exception as e: 常见报错都都会执行此方案 # 结合else使用 try: 待监测代码 except Exception as e: 错误执行方案 else: # 在上面的代码正常执行没有执行异常方案时执行else print(&amp;#39;哈哈哈，上面没有异常&amp;#39;) # 结合finally try: 待监测代码 except Exception as e: 异常解决方案 else: print(&amp;#39;上面正常执行没有错误我就执行&amp;#39;) finally: print(&amp;#39;上面的先上，无聊他们如何我都执行&amp;#39;) 断言 断言：预测上面出现的错误类型，并确定错误异常类型</description>
+    </item>
+    
     <item>
       <title>第三周总结</title>
       <link>https://jinkes-li.github.io/python/%E7%AC%AC%E4%B8%89%E5%91%A8%E6%80%BB%E7%BB%93/</link>
@@ -139,7 +155,7 @@ global与nonlocal
       <guid>https://jinkes-li.github.io/python/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%86%85%E7%BD%AE%E6%96%B9%E6%B3%95%E7%90%86%E8%AE%BA/</guid>
       <description>Python数据类型内置方法和理论 引言： Python自身对数字的敏感度比较低（精确度低） 如果是用在数据分析和金融量化方向，可以使用第三方包模块numpy
 本文内容
-数据类型内置方法理论 进制数转换 整型相关操作 浮点型相关操作 字符串相关操作 列表相关操作 数据类型内置方法理论 前面文章所提到的每一种数据类型本身都包含有一系列的操作方法，内置方法，是自身带的功能 Python中的数据类型调用内置方法的统一句式为: &amp;ldquo;.&amp;quot;:句点符 &amp;lsquo;wesley&amp;rsquo;.字符串的内置方法 str. 字符串内置方法 数据类型的内置方法比较的多，其中有一些经常使用的以及部分不经常使用的，需要在工作中使用，并且熟悉 进制数转化 开头前两位代表的是转换后表示的进制数 0b代表的是二进制 0o代表的是八进制 0x代表的是十六进制 # 代码实例 # 十进制转换其他进制 # 十转二 print(bin(100)) 0b1100100 # 十转八 print(oct(100)) 0o144 # 十转十六 print(hex(100)) 0x64 # 如果需要八进制转换成其他进制直接反打就可以了 # 二转十 print(int(0b1100100), 2) 100 2 # 八转十 print(int(0o144), 8) 100 8 # 十六转十 print(int(0x64), 16) 100 16 整型的相关操作 类型转换（可以将其他类型转换为整型） int(其他数据类型)，原始数据为浮点型可以直接转换，如果是字符串必须满足内部是纯数字才可以 # 代码实例 # str转int，注意字符串是不可变类型，这里需要重新赋值 a = &amp;#39;1111&amp;#39; a = int(a) print(type(a)) &amp;lt;class &amp;#39;int&amp;#39;&amp;gt; # float转int, 注意在float转int的时候int方法会将小数点后面的数据全部切除，而不是四舍五入，并且如果字符串中存在多个小数点，int无法识别并转换 a = 11.</description>
+数据类型内置方法理论 进制数转换 整型相关操作 浮点型相关操作 字符串相关操作 列表相关操作 数据类型内置方法理论 前面文章所提到的每一种数据类型本身都包含有一系列的操作方法，内置方法，是自身带的功能 Python中的数据类型调用内置方法的统一句式为: &amp;ldquo;.&amp;quot;:句点符 &amp;lsquo;wesley&amp;rsquo;.字符串的内置方法 str. 字符串内置方法 数据类型的内置方法比较的多，其中有一些经常使用的以及部分不经常使用的，需要在工作中使用，并且熟悉 进制数转化 开头前两位代表的是转换后表示的进制数 0b代表的是二进制 0o代表的是八进制 0x代表的是十六进制 # 代码实例 # 十进制转换其他进制 # 十转二 print(bin(100)) 0b1100100 # 十转八 print(oct(100)) 0o144 # 十转十六 print(hex(100))i 0x64 # 如果需要八进制转换成其他进制直接反打就可以了 # 二转十 print(int(0b1100100), 2) 100 2 # 八转十 print(int(0o144), 8) 100 8 # 十六转十 print(int(0x64), 16) 100 16 整型的相关操作 类型转换（可以将其他类型转换为整型） int(其他数据类型)，原始数据为浮点型可以直接转换，如果是字符串必须满足内部是纯数字才可以 # 代码实例 # str转int，注意字符串是不可变类型，这里需要重新赋值 a = &amp;#39;1111&amp;#39; a = int(a) print(type(a)) &amp;lt;class &amp;#39;int&amp;#39;&amp;gt; # float转int, 注意在float转int的时候int方法会将小数点后面的数据全部切除，而不是四舍五入，并且如果字符串中存在多个小数点，int无法识别并转换 a = 11.</description>
     </item>
     
     <item>
