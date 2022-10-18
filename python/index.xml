@@ -6,7 +6,28 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 Oct 2022 18:23:39 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 Oct 2022 17:09:09 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>模块的概念与使用</title>
+      <link>https://jinkes-li.github.io/python/%E6%A8%A1%E5%9D%97%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Tue, 18 Oct 2022 17:09:09 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E6%A8%A1%E5%9D%97%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BD%BF%E7%94%A8/</guid>
+      <description>调包侠之Python模块 索引取值和迭代取值的差异
+模块简介
+导入模块的两种句式
+导入模块句式补充
+循环导入问题解决策略
+判断文件类型
+模块的查找顺序
+模块的绝对导入和相对导入
+包的概念
+索引取值和迭代取值的差异
+两者的使用主要是应用在不同的应用场景
+索引取值 索引取值可以在不同的位置反复的取值 不支持无序类型的取值 迭代取值 只能重前往后取值且无法后退 支持对无序数据取值 模块介绍 模块的本质就是内部具有一定功能的py文件 python的黑历史，在刚开始不火的时候被人戏称为调包侠，随着越来越多的程序员加入，先在看到python都要称一声调包侠 python模块的表现形式 python文件也可以称为模块文件 包含多个python文件的文件夹被称为包，（python2中的包文件具有__init__.py文件） 已经编译为共享库或DLL的c或者C++扩展 使用C编写并链接到python解释器的内置模块 模块分类 自定义模块 自定义模块就是程序员自己写的py文件 内置模块 python解释器自带的模块 第三方模块 由一些开发者大佬写的模块，我们可以直接使用pip安装并调用 导入模块的两种句式 注意： 这里一定要注意谁是被执行文件
+import modular_name from modular_name import parameter 1. import modular_name &amp;#34;&amp;#34;&amp;#34; 使用import导入模块的原理 案例： 现在run.py作为被执行文件需要导入同级目录下的register.py并调用其中的userinfo列表，代码如下： # run.py # 作为被执行文件 import register print(register.userinfo) # register.py # 作为模块 userinfo = [&amp;#39;wesley&amp;#39;, &amp;#39;otheruser&amp;#39;] def register(): &amp;#34;&amp;#34;&amp;#34;注册用户&amp;#34;&amp;#34;&amp;#34; pass 1. 被执行文件run运行，创建名称空间 2.</description>
+    </item>
+    
     <item>
       <title>异常与生成器</title>
       <link>https://jinkes-li.github.io/python/%E5%BC%82%E5%B8%B8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/</link>

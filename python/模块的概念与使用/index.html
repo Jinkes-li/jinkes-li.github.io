@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 模块的概念与使用 | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/python/%E6%A8%A1%E5%9D%97%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BD%BF%E7%94%A8/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="模块的概念与使用" />
+<meta property="og:description" content="调包侠之Python模块 索引取值和迭代取值的差异
+模块简介
+导入模块的两种句式
+导入模块句式补充
+循环导入问题解决策略
+判断文件类型
+模块的查找顺序
+模块的绝对导入和相对导入
+包的概念
+索引取值和迭代取值的差异
+两者的使用主要是应用在不同的应用场景
+索引取值 索引取值可以在不同的位置反复的取值 不支持无序类型的取值 迭代取值 只能重前往后取值且无法后退 支持对无序数据取值 模块介绍 模块的本质就是内部具有一定功能的py文件 python的黑历史，在刚开始不火的时候被人戏称为调包侠，随着越来越多的程序员加入，先在看到python都要称一声调包侠 python模块的表现形式 python文件也可以称为模块文件 包含多个python文件的文件夹被称为包，（python2中的包文件具有__init__.py文件） 已经编译为共享库或DLL的c或者C&#43;&#43;扩展 使用C编写并链接到python解释器的内置模块 模块分类 自定义模块 自定义模块就是程序员自己写的py文件 内置模块 python解释器自带的模块 第三方模块 由一些开发者大佬写的模块，我们可以直接使用pip安装并调用 导入模块的两种句式 注意： 这里一定要注意谁是被执行文件
+import modular_name from modular_name import parameter 1. import modular_name &#34;&#34;&#34; 使用import导入模块的原理 案例： 现在run.py作为被执行文件需要导入同级目录下的register.py并调用其中的userinfo列表，代码如下： # run.py # 作为被执行文件 import register print(register.userinfo) # register.py # 作为模块 userinfo = [&#39;wesley&#39;, &#39;otheruser&#39;] def register(): &#34;&#34;&#34;注册用户&#34;&#34;&#34; pass 1. 被执行文件run运行，创建名称空间 2." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/python/%E6%A8%A1%E5%9D%97%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BD%BF%E7%94%A8/" /><meta property="article:section" content="python" />
+<meta property="article:published_time" content="2022-10-18T17:09:09+08:00" />
+<meta property="article:modified_time" content="2022-10-18T17:09:09+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="模块的概念与使用"/>
+<meta name="twitter:description" content="调包侠之Python模块 索引取值和迭代取值的差异
+模块简介
+导入模块的两种句式
+导入模块句式补充
+循环导入问题解决策略
+判断文件类型
+模块的查找顺序
+模块的绝对导入和相对导入
+包的概念
+索引取值和迭代取值的差异
+两者的使用主要是应用在不同的应用场景
+索引取值 索引取值可以在不同的位置反复的取值 不支持无序类型的取值 迭代取值 只能重前往后取值且无法后退 支持对无序数据取值 模块介绍 模块的本质就是内部具有一定功能的py文件 python的黑历史，在刚开始不火的时候被人戏称为调包侠，随着越来越多的程序员加入，先在看到python都要称一声调包侠 python模块的表现形式 python文件也可以称为模块文件 包含多个python文件的文件夹被称为包，（python2中的包文件具有__init__.py文件） 已经编译为共享库或DLL的c或者C&#43;&#43;扩展 使用C编写并链接到python解释器的内置模块 模块分类 自定义模块 自定义模块就是程序员自己写的py文件 内置模块 python解释器自带的模块 第三方模块 由一些开发者大佬写的模块，我们可以直接使用pip安装并调用 导入模块的两种句式 注意： 这里一定要注意谁是被执行文件
+import modular_name from modular_name import parameter 1. import modular_name &#34;&#34;&#34; 使用import导入模块的原理 案例： 现在run.py作为被执行文件需要导入同级目录下的register.py并调用其中的userinfo列表，代码如下： # run.py # 作为被执行文件 import register print(register.userinfo) # register.py # 作为模块 userinfo = [&#39;wesley&#39;, &#39;otheruser&#39;] def register(): &#34;&#34;&#34;注册用户&#34;&#34;&#34; pass 1. 被执行文件run运行，创建名称空间 2."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h3 id="调包侠之python模块">调包侠之Python模块</h3>
+<ul>
+<li>
+<p>索引取值和迭代取值的差异</p>
+</li>
+<li>
+<p>模块简介</p>
+</li>
+<li>
+<p>导入模块的两种句式</p>
+</li>
+<li>
+<p>导入模块句式补充</p>
+</li>
+<li>
+<p>循环导入问题解决策略</p>
+</li>
+<li>
+<p>判断文件类型</p>
+</li>
+<li>
+<p>模块的查找顺序</p>
+</li>
+<li>
+<p>模块的绝对导入和相对导入</p>
+</li>
+<li>
+<p>包的概念</p>
+</li>
+<li>
+<p>索引取值和迭代取值的差异</p>
+</li>
+</ul>
+<blockquote>
+<p>两者的使用主要是应用在不同的应用场景</p>
+</blockquote>
+<ul>
+<li>索引取值</li>
+</ul>
+<blockquote>
+<ol>
+<li>索引取值可以在不同的位置反复的取值</li>
+<li>不支持无序类型的取值</li>
+</ol>
+</blockquote>
+<ul>
+<li>迭代取值</li>
+</ul>
+<blockquote>
+<ol>
+<li>只能重前往后取值且无法后退</li>
+<li>支持对无序数据取值</li>
+</ol>
+</blockquote>
+<ul>
+<li>模块介绍</li>
+</ul>
+<blockquote>
+<ol>
+<li>模块的本质就是内部具有一定功能的py文件</li>
+<li>python的黑历史，在刚开始不火的时候被人戏称为调包侠，随着越来越多的程序员加入，先在看到python都要称一声调包侠</li>
+</ol>
+</blockquote>
+<ul>
+<li>python模块的表现形式</li>
+</ul>
+<ol>
+<li>python文件也可以称为模块文件</li>
+<li>包含多个python文件的文件夹被称为包，（python2中的包文件具有__init__.py文件）</li>
+<li>已经编译为共享库或DLL的c或者C++扩展</li>
+<li>使用C编写并链接到python解释器的内置模块</li>
+</ol>
+<ul>
+<li>模块分类</li>
+</ul>
+<ol>
+<li>自定义模块
+自定义模块就是程序员自己写的py文件</li>
+<li>内置模块
+python解释器自带的模块</li>
+<li>第三方模块
+由一些开发者大佬写的模块，我们可以直接使用pip安装并调用</li>
+</ol>
+<ul>
+<li>导入模块的两种句式</li>
+</ul>
+<blockquote>
+<p>注意： 这里一定要注意谁是被执行文件</p>
+</blockquote>
+<ol>
+<li>import modular_name</li>
+<li>from modular_name import parameter</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> <span style="color:#f92672">import</span> modular_name
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">使用import导入模块的原理
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">案例： 现在run.py作为被执行文件需要导入同级目录下的register.py并调用其中的userinfo列表，代码如下：
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># run.py  # 作为被执行文件
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">import register
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">print(register.userinfo)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># register.py  # 作为模块
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">userinfo = [&#39;wesley&#39;, &#39;otheruser&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">def register():
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	&#34;&#34;&#34;</span>注册用户<span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		pass
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1. 被执行文件run运行，创建名称空间
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2. 执行import register 加载模块文件，并创建模块文件的名称空间
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3. 执行文件执行print(register.userinfo),对应模块文件的userinfo
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">4. 执行print(register.userinfo)可以调用到模块中用户的数据
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> <span style="color:#f92672">from</span> modular_name <span style="color:#f92672">import</span> parameter
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 这里还是以上面的代码为例:</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1. 执行文件run执行创建名称空间，并执行from register import userinfo  # 这个parameter这里和是用import不同的是可以写模块中的变量，如果不知道变量名叫什么可以写※号，※号代表加载所有的变量名
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2. 执行from register import userinfo 后会创建模块的名称空间，并创建所有的变量名，与上面不同的是，由于我们值from了一个userinfo所以被执行文件这里只会讲userinfo的变量名与模块中的变量名绑定，其他的变量名无法调用
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>import parameter 和 from modular_name import parameter的优缺点</li>
+</ul>
+<ol>
+<li>import parameter
+优点：在调用模块时使用句点符调用模块中的变量或者函数，名称不会混乱
+缺点：在调用时每次都需要使用句点符。。。。</li>
+<li>from modular_name import parameter 的优缺点
+优点：在调用模块时不需要使用句点符，调用方便
+缺点：由于不使用句点符调用模块中的功能，可能会名称冲突</li>
+</ol>
+<ul>
+<li>别名</li>
+</ul>
+<blockquote>
+<p>如果在导入模块时名称太长可以使用 as name来命名别名</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> time <span style="color:#66d9ef">as</span> ti
+</span></span><span style="display:flex;"><span><span style="color:#f92672">or</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> register <span style="color:#f92672">import</span> userinfo <span style="color:#66d9ef">as</span> ui, userauth <span style="color:#66d9ef">as</span> ua
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 起别名可以使用逗号分隔</span>
+</span></span></code></pre></div><ul>
+<li>多模块导入</li>
+<li>多模块导入的两种方式</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> 多行导入
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> 单行导入
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time<span style="color:#f92672">,</span> os<span style="color:#f92672">,</span> sys
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 推荐多行使用，若模块的功能类似推荐在一行导入</span>
+</span></span></code></pre></div><ul>
+<li>循环导入</li>
+</ul>
+<blockquote>
+<p>产生这个问题主要是执行文件导入模块时，模块也导入了执行文件作为包，会报错参数无法被找到，解决办法就是在模块执行时先提供执行文件需要的功能</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 执行文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> register
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;my is run file&#39;</span>)
+</span></span><span style="display:flex;"><span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;666&#39;</span>
+</span></span><span style="display:flex;"><span>print(register<span style="color:#f92672">.</span>userinfo)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 模块文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> run
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;my is register file&#39;</span>)
+</span></span><span style="display:flex;"><span>userinfo <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#e6db74">&#39;other&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">register</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>print(run<span style="color:#f92672">.</span>name)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-------------------------</span>Error<span style="color:#f92672">------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">AttributeError</span>: partially initialized module <span style="color:#e6db74">&#39;run&#39;</span> has no attribute <span style="color:#e6db74">&#39;name&#39;</span> (most likely due to a circular import)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># 解决方案
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">如果出现这种问题，将模块中的定义变量放在文件的头部，准确来说需要再调用前定义执行文件需要的功能，反之亦是如此
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>判断文件类型</li>
+</ul>
+<blockquote>
+<p>可以使用 __name__来判断当前的文件类型
+<strong>name</strong> : 1. 返回mian着为执行文件本身，若返回为包名则为调用的包</p>
+</blockquote>
+<p>这个功能主要用于模块开发者，如果非测试阶段由其他人调包使用可以通过__name__来判断一些测试指令是否执行，代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(my <span style="color:#f92672">is</span> modular)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>():
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;main&#39;</span>
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#39;测试指令&#39;</span>)
+</span></span></code></pre></div><ul>
+<li><strong>all</strong></li>
+</ul>
+<blockquote>
+<p>主要用于如果我们使用from导入模块的时候选择用通配符※匹配所有功能可以使用___all__ [&rsquo;name&rsquo;, &lsquo;age&rsquo;] 这样的格式限制用户不能调用的功能</p>
+</blockquote>
+<ul>
+<li>
+<p>模块的查找顺序</p>
+</li>
+<li>
+<p>内存
+在程序运行后，就算把自定义模块删除也是可以继续使用模块的功能的，因为自定义模块已经被加载到内存中</p>
+</li>
+<li>
+<p>内置
+如果自定义和内置模块的名称冲突，会调用自定义模块</p>
+</li>
+<li>
+<p>sys.path 系统环境变量
+以执行文件为准，如果前面两个找不到会到系统变量中寻找，一般pycharm会生成python项目的系统变量，而在cmd窗口中只会向环境变量中寻找</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 可以使用sys内置模块将自定义模块的路径加入pycharm未提供的系统变量</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查询</span>
+</span></span><span style="display:flex;"><span>print(sys<span style="color:#f92672">.</span>path)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加</span>
+</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>append(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;D:\pythonProject03\day17\mymd&#39;</span>)
+</span></span></code></pre></div><ul>
+<li>模块的相对导入和绝对导入</li>
+</ul>
+<blockquote>
+<p>这里使用的其实就是相对路径和绝对路径的概念
+. 代表当前目录  .. 代表上一级目录</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 代码演示</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如果自定义模块在执行文件的同级目录下,使用相对路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> . <span style="color:#f92672">import</span> register
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如果自定义模块在系统中的某个位置,使用绝对路径</span>
+</span></span><span style="display:flex;"><span>frmo home<span style="color:#f92672">.</span>python<span style="color:#f92672">.</span>xxx <span style="color:#f92672">import</span> register
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> 需要注意<span style="color:#960050;background-color:#1e0010">，</span>如果模块和模块之间不是同一个位置需要使用绝对路径重新定义路径
+</span></span></code></pre></div><ul>
+<li>包的概念</li>
+</ul>
+<blockquote>
+<ol>
+<li>包就是很多py文件的集合</li>
+<li>在python2中包中必须有着__init__.py的入口文件，python3中无此要求</li>
+</ol>
+</blockquote>
+
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
