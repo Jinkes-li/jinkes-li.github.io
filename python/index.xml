@@ -6,7 +6,24 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Oct 2022 17:09:09 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Oct 2022 17:27:15 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>编程思想和包的使用</title>
+      <link>https://jinkes-li.github.io/python/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%E5%92%8C%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Wed, 19 Oct 2022 17:27:15 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%E5%92%8C%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>编程思想和包的使用 包的具体使用
+编程思想转变
+目录开发规范
+常用内置模块
+collections 时间模块 随机数模块 包的具体使用
+虽然python3中不强制要求包里必须要有__init__.py这个文件，但是在写代码时最好将这个文件创建出来，放在代码兼容问题的出现
+程序员写包时 ，一般会写很多模块文件，然后将模块在__init__.py文件中引用，这样我们在使用的时候就可以通过导入这个包然后调用包里的模块文件 编程思想 编程思想就是指我们在运到一个编程问题时的想法和思路，比如如果规划程序的架构方便后期更改，如何做到高聚合低耦合的代码架构，不具备编程思想的人只能写一些简单逻辑的代码，当这个程序员具备了编程思想后，很多问题都会迎刃而解 如何学习编程思想，就是多写多练，参考优秀代码，思想碰撞，参考其他人看待问题的逻辑，完善自身
+软件开发目录 在我们开始实现一个复杂性系统时，首先考虑的并不是使用什么技术去实现，而是分析需求，分类需求并设计合理的项目目录结构
+# 通用性软件开发目录 wesley@------*****------ ⮀ ~/Desktop ⮀ tree myproject myproject # 项目目录 ├── README # 项目说明文件 ├── bin # 执行文价夹 │ └── start.py ├── conf # 配置文件 │ └── settings.py ├── core # 源码，主要的功能代码 │ └── src.py ├── db # 数据库相关操作代码 │ ├── db_handler.py │ └── userinfo.txt ├── interface # api文件夹 │ ├── accpunt.py │ ├── goods.</description>
+    </item>
+    
     <item>
       <title>模块的概念与使用</title>
       <link>https://jinkes-li.github.io/python/%E6%A8%A1%E5%9D%97%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BD%BF%E7%94%A8/</link>
