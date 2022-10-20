@@ -6,7 +6,19 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Oct 2022 17:27:15 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Oct 2022 17:12:26 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python模块上</title>
+      <link>https://jinkes-li.github.io/python/python%E6%A8%A1%E5%9D%97%E4%B8%8A/</link>
+      <pubDate>Thu, 20 Oct 2022 17:12:26 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/python%E6%A8%A1%E5%9D%97%E4%B8%8A/</guid>
+      <description>python模块 os和sys模块
+json模块
+os和sys模块
+os模块主要是针对目前执行文件对操作系统的操作 sys模块主要是正对python解释器操作 os模块的用法 1. 创建目录 os.mkdir(r&amp;#39;d1&amp;#39;) # 当前目录下创建d1，不可以创建多级目录 os.makedirs(r&amp;#39;a1/b1/c1/d1&amp;#39;) # 当前目录下创建多级目录，也可以创建单级目录 2. 删除目录 os.rmdir(r&amp;#39;d1&amp;#39;) # 可以删除单级目录，如果有文件不可以删除，并且不可以删除多级目录 os.removedirs(r&amp;#39;a1/b1/c1/d1&amp;#39;) # 可以删除多成目录，只能删除空目录 3. 列举文件路径下内容名称 print(os.listdir(r&amp;#39;modular&amp;#39;)) # 列出当前目录下的所有文件 4. 删除重命名文件 os.rename(r&amp;#39;test&amp;#39;, &amp;#39;test.py&amp;#39;) # 重命名test文件 os.remove(r&amp;#39;test.py&amp;#39;) # 删除test.py 文件 5. 获取/切换当前工作目录 print(os.getcwd()) # 获取当前工作目录 os.chdir(&amp;#39;..&amp;#39;) # 切换工作目录 6. 动态获取项目根目录 print(os.path.abspath(__file__)) # 获取执行文件的绝对路径 print(os.path.dirname(__file__)) # 获取执行文件所在目录路径 7. 判断路径是否存在(文件/目录) print(os.path.exists(r&amp;#39;osandsys.py&amp;#39;)) # 判断文件是否存在 print(os.path.exists(r&amp;#39;/Users/wesley/PycharmProjects/python-1&amp;#39;)) # 判断路径是否存在 print(os.path.isfile(&amp;#39;osandsys.py&amp;#39;)) # 判断路径是否文件 True print(os.path.isfile(&amp;#39;/Users/wesley/PycharmProjects/python-1&amp;#39;)) # 判断路径是否文件 False print(os.</description>
+    </item>
+    
     <item>
       <title>编程思想和包的使用</title>
       <link>https://jinkes-li.github.io/python/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%E5%92%8C%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
