@@ -221,6 +221,73 @@ os模块主要是针对目前执行文件对操作系统的操作 sys模块主�
 </span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;wesley&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span>: <span style="color:#ae81ff">18</span>}
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">str</span><span style="color:#e6db74">&#39;&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">dict</span><span style="color:#e6db74">&#39;&gt;</span>
+</span></span></code></pre></div><ul>
+<li>联系题</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1.编写一个统计指定文件类型的脚本工具</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  输入指定类型的文件后缀</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#      eg:.txt</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#  并给出一个具体路径 之后统计该类型文件在该文件下的个数</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   ps:简单实现即可 无需优化</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os<span style="color:#f92672">,</span> json
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">file_type_find</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 输入需要查询的路径</span>
+</span></span><span style="display:flex;"><span>        user_path <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;请输入需要查询的文件路径： &#39;</span>)<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 判断路径是否存在</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(user_path):
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;路径不存在，请从新输入： &#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 输入查看的文件类型</span>
+</span></span><span style="display:flex;"><span>        look <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;请输入需要查看的文件类型： &#39;</span>)<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 查看用户输入的路径文件</span>
+</span></span><span style="display:flex;"><span>        look_file_type <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>listdir(<span style="color:#e6db74">rf</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>user_path<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>        count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 过滤文件结尾</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> look_file_type:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> i<span style="color:#f92672">.</span>endswith(look):
+</span></span><span style="display:flex;"><span>                count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>                print(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(user_path, i))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;此类型文件为</span><span style="color:#e6db74">{</span>count<span style="color:#e6db74">}</span><span style="color:#e6db74">个&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>file_type_find()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> 编程小练习
+</span></span><span style="display:flex;"><span> 有一个目录文件下面有一堆文本文件
+</span></span><span style="display:flex;"><span>     eg:
+</span></span><span style="display:flex;"><span>      db目录
+</span></span><span style="display:flex;"><span>            J老师视频合集
+</span></span><span style="display:flex;"><span>            R老师视频合集
+</span></span><span style="display:flex;"><span>            C老师视频合集
+</span></span><span style="display:flex;"><span>            B老师视频合集
+</span></span><span style="display:flex;"><span> 文件内容自定义即可 要求循环打印出db目录下所有的文件名称让用户选择
+</span></span><span style="display:flex;"><span>  用户选择哪个文件就自动打开该文件并展示内容
+</span></span><span style="display:flex;"><span>  涉及到文件路径全部使用代码自动生成 不准直接拷贝当前计算机固定路径
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os<span style="color:#f92672">,</span> json<span style="color:#f92672">,</span> sys
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 进入db文件夹</span>
+</span></span><span style="display:flex;"><span>find_dirdb <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>listdir()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;db&#39;</span> <span style="color:#f92672">in</span> find_dirdb:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 切换目录</span>
+</span></span><span style="display:flex;"><span>    os<span style="color:#f92672">.</span>chdir(<span style="color:#e6db74">&#39;db&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 获取目录下的文件</span>
+</span></span><span style="display:flex;"><span>    file_list <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>listdir()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 获取路径</span>
+</span></span><span style="display:flex;"><span>    db_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>getcwd()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        print(file_list)
+</span></span><span style="display:flex;"><span>        choice <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;请选择需要查看的文件(请输入文件完整的名字)：&#39;</span>)
+</span></span><span style="display:flex;"><span>        abs_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(db_path, choice)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">rf</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>abs_path<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>            print(f<span style="color:#f92672">.</span>read())
 </span></span></code></pre></div>
   
   </div>
