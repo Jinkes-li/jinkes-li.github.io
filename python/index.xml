@@ -6,7 +6,24 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Oct 2022 17:12:26 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Oct 2022 19:02:45 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第四周总结</title>
+      <link>https://jinkes-li.github.io/python/%E7%AC%AC%E5%9B%9B%E5%91%A8%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sun, 23 Oct 2022 19:02:45 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E7%AC%AC%E5%9B%9B%E5%91%A8%E6%80%BB%E7%BB%93/</guid>
+      <description>第四周总结
+异常处理和生成器对象
+模块的概念和使用
+编程思想和包的使用
+常用的python模块
+异常处理
+在写程序的过程中可能会报出很多异常，而异常报出之后程序就会停止运行，当时有部分异常是对于用户来说是非致命的，所以这里就需要对一些可能出现的异常进行预测解决方案
+常见的异常类型 1. SyntexError # 语法错误 2. indexError # 索引错误 3. nameError # 名字错误 4. keyError # 键错误 5. IndetationError # 缩进错误 异常的语法结构 首先来看一下异常的语法结构
+# 单异常解决 try: 待监测的代码 except &amp;#39;接收的异常类型&amp;#39; as e: 解决异常的方案 # 多异常解决，多异常解决和单异常是一样的，只是多放了几个异常类型 try: 待监测的代码 except &amp;#39;第一种异常类型&amp;#39; as e: &amp;#39;解决方案&amp;#39; except &amp;#39;第二种异常类型&amp;#39; as e: &amp;#39;解决方案&amp;#39; # 万能异常，万能异常可以用于接收任何的异常，常用的万能异常接收有Exception和BaseException，这两个可以接收所有的异常 try: 待检测的代码 except Exception e: &amp;#39;解决方案&amp;#39; # try 异常还可以配合else使用，在执行中没有异常else才被执行， try: 待监测的代码 except &amp;#39;异常类型&amp;#39; as e: 解决方案 else: print(&amp;#39;上面全部没有异常我才会执行&amp;#39;) # finally 在使用了finally，无论上面的是否执行finally都会执行 try: 待监测的代码 except &amp;#39;异常类型&amp;#39; as e: 解决方案 else: print(解决方案) finally: print(&amp;#39;上面都执行完了，现在我再执行&amp;#39;) 异常的处理实战 # 异常一，这是由于未调用到变量名导致的 name1 = &amp;#39;wesley&amp;#39; name = &amp;#39;wesley1&amp;#39; try: if name == naeme1: print(&amp;#39;123&amp;#39;) except NameError as e: print(&amp;#39;未定义变量名&amp;#39;) 异常之断言 # 断言是用于预测上面被监测代码的类型，如果断言错误也会报出异常 # 使用 name = &amp;#39;wesley&amp;#39; assert isinstance(name, str) print(&amp;#39;类型为字符串&amp;#39;) # 需要注意，如果name的类型不是字符串，这个时候就会报错 主动抛出异常 try: name = &amp;#39;andy&amp;#39; if name == &amp;#39;andy&amp;#39;: raise Exception(&amp;#39;Error&amp;#39;): else: print(&amp;#39;不是andy，继续run&amp;#39;) 使用异常的注意事项 在写代码的过程中，可以不使用异常就不使用异常 如果必须使用，尽量不要超过10行代码 当代码中有不可预期的异常时再使用 异常的应用 # 使用异常实现for循环 l1 = [11, 22, 33, 44, 55] try: new = l1.</description>
+    </item>
+    
     <item>
       <title>Python模块上</title>
       <link>https://jinkes-li.github.io/python/python%E6%A8%A1%E5%9D%97%E4%B8%8A/</link>

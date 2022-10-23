@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 第四周总结 | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/python/%E7%AC%AC%E5%9B%9B%E5%91%A8%E6%80%BB%E7%BB%93/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="第四周总结" />
+<meta property="og:description" content="第四周总结
+异常处理和生成器对象
+模块的概念和使用
+编程思想和包的使用
+常用的python模块
+异常处理
+在写程序的过程中可能会报出很多异常，而异常报出之后程序就会停止运行，当时有部分异常是对于用户来说是非致命的，所以这里就需要对一些可能出现的异常进行预测解决方案
+常见的异常类型 1. SyntexError # 语法错误 2. indexError # 索引错误 3. nameError # 名字错误 4. keyError # 键错误 5. IndetationError # 缩进错误 异常的语法结构 首先来看一下异常的语法结构
+# 单异常解决 try: 待监测的代码 except &#39;接收的异常类型&#39; as e: 解决异常的方案 # 多异常解决，多异常解决和单异常是一样的，只是多放了几个异常类型 try: 待监测的代码 except &#39;第一种异常类型&#39; as e: &#39;解决方案&#39; except &#39;第二种异常类型&#39; as e: &#39;解决方案&#39; # 万能异常，万能异常可以用于接收任何的异常，常用的万能异常接收有Exception和BaseException，这两个可以接收所有的异常 try: 待检测的代码 except Exception e: &#39;解决方案&#39; # try 异常还可以配合else使用，在执行中没有异常else才被执行， try: 待监测的代码 except &#39;异常类型&#39; as e: 解决方案 else: print(&#39;上面全部没有异常我才会执行&#39;) # finally 在使用了finally，无论上面的是否执行finally都会执行 try: 待监测的代码 except &#39;异常类型&#39; as e: 解决方案 else: print(解决方案) finally: print(&#39;上面都执行完了，现在我再执行&#39;) 异常的处理实战 # 异常一，这是由于未调用到变量名导致的 name1 = &#39;wesley&#39; name = &#39;wesley1&#39; try: if name == naeme1: print(&#39;123&#39;) except NameError as e: print(&#39;未定义变量名&#39;) 异常之断言 # 断言是用于预测上面被监测代码的类型，如果断言错误也会报出异常 # 使用 name = &#39;wesley&#39; assert isinstance(name, str) print(&#39;类型为字符串&#39;) # 需要注意，如果name的类型不是字符串，这个时候就会报错 主动抛出异常 try: name = &#39;andy&#39; if name == &#39;andy&#39;: raise Exception(&#39;Error&#39;): else: print(&#39;不是andy，继续run&#39;) 使用异常的注意事项 在写代码的过程中，可以不使用异常就不使用异常 如果必须使用，尽量不要超过10行代码 当代码中有不可预期的异常时再使用 异常的应用 # 使用异常实现for循环 l1 = [11, 22, 33, 44, 55] try: new = l1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/python/%E7%AC%AC%E5%9B%9B%E5%91%A8%E6%80%BB%E7%BB%93/" /><meta property="article:section" content="python" />
+<meta property="article:published_time" content="2022-10-23T19:02:45+08:00" />
+<meta property="article:modified_time" content="2022-10-23T19:02:45+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="第四周总结"/>
+<meta name="twitter:description" content="第四周总结
+异常处理和生成器对象
+模块的概念和使用
+编程思想和包的使用
+常用的python模块
+异常处理
+在写程序的过程中可能会报出很多异常，而异常报出之后程序就会停止运行，当时有部分异常是对于用户来说是非致命的，所以这里就需要对一些可能出现的异常进行预测解决方案
+常见的异常类型 1. SyntexError # 语法错误 2. indexError # 索引错误 3. nameError # 名字错误 4. keyError # 键错误 5. IndetationError # 缩进错误 异常的语法结构 首先来看一下异常的语法结构
+# 单异常解决 try: 待监测的代码 except &#39;接收的异常类型&#39; as e: 解决异常的方案 # 多异常解决，多异常解决和单异常是一样的，只是多放了几个异常类型 try: 待监测的代码 except &#39;第一种异常类型&#39; as e: &#39;解决方案&#39; except &#39;第二种异常类型&#39; as e: &#39;解决方案&#39; # 万能异常，万能异常可以用于接收任何的异常，常用的万能异常接收有Exception和BaseException，这两个可以接收所有的异常 try: 待检测的代码 except Exception e: &#39;解决方案&#39; # try 异常还可以配合else使用，在执行中没有异常else才被执行， try: 待监测的代码 except &#39;异常类型&#39; as e: 解决方案 else: print(&#39;上面全部没有异常我才会执行&#39;) # finally 在使用了finally，无论上面的是否执行finally都会执行 try: 待监测的代码 except &#39;异常类型&#39; as e: 解决方案 else: print(解决方案) finally: print(&#39;上面都执行完了，现在我再执行&#39;) 异常的处理实战 # 异常一，这是由于未调用到变量名导致的 name1 = &#39;wesley&#39; name = &#39;wesley1&#39; try: if name == naeme1: print(&#39;123&#39;) except NameError as e: print(&#39;未定义变量名&#39;) 异常之断言 # 断言是用于预测上面被监测代码的类型，如果断言错误也会报出异常 # 使用 name = &#39;wesley&#39; assert isinstance(name, str) print(&#39;类型为字符串&#39;) # 需要注意，如果name的类型不是字符串，这个时候就会报错 主动抛出异常 try: name = &#39;andy&#39; if name == &#39;andy&#39;: raise Exception(&#39;Error&#39;): else: print(&#39;不是andy，继续run&#39;) 使用异常的注意事项 在写代码的过程中，可以不使用异常就不使用异常 如果必须使用，尽量不要超过10行代码 当代码中有不可预期的异常时再使用 异常的应用 # 使用异常实现for循环 l1 = [11, 22, 33, 44, 55] try: new = l1."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <p>第四周总结</p>
+<ul>
+<li>
+<p>异常处理和生成器对象</p>
+</li>
+<li>
+<p>模块的概念和使用</p>
+</li>
+<li>
+<p>编程思想和包的使用</p>
+</li>
+<li>
+<p>常用的python模块</p>
+</li>
+<li>
+<p>异常处理</p>
+</li>
+</ul>
+<blockquote>
+<p>在写程序的过程中可能会报出很多异常，而异常报出之后程序就会停止运行，当时有部分异常是对于用户来说是非致命的，所以这里就需要对一些可能出现的异常进行预测解决方案</p>
+</blockquote>
+<ul>
+<li>常见的异常类型</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> SyntexError  <span style="color:#75715e"># 语法错误</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> indexError   <span style="color:#75715e"># 索引错误</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> nameError    <span style="color:#75715e"># 名字错误</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> keyError     <span style="color:#75715e"># 键错误</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.</span> IndetationError  <span style="color:#75715e"># 缩进错误</span>
+</span></span></code></pre></div><ul>
+<li>异常的语法结构</li>
+</ul>
+<blockquote>
+<p>首先来看一下异常的语法结构</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#  单异常解决</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>		待监测的代码
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#e6db74">&#39;接收的异常类型&#39;</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>		解决异常的方案
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   多异常解决，多异常解决和单异常是一样的，只是多放了几个异常类型</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>		待监测的代码
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#e6db74">&#39;第一种异常类型&#39;</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#39;解决方案&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#e6db74">&#39;第二种异常类型&#39;</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#39;解决方案&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   万能异常，万能异常可以用于接收任何的异常，常用的万能异常接收有Exception和BaseException，这两个可以接收所有的异常</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>		待检测的代码
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> e:
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#39;解决方案&#39;</span>
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   try 异常还可以配合else使用，在执行中没有异常else才被执行，</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>	待监测的代码
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#e6db74">&#39;异常类型&#39;</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>	解决方案
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#39;上面全部没有异常我才会执行&#39;</span>)
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># finally 在使用了finally，无论上面的是否执行finally都会执行</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>		待监测的代码
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#e6db74">&#39;异常类型&#39;</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>		解决方案
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>		print(解决方案)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">finally</span>:
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#39;上面都执行完了，现在我再执行&#39;</span>)
+</span></span></code></pre></div><ul>
+<li>异常的处理实战</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 异常一，这是由于未调用到变量名导致的</span>
+</span></span><span style="display:flex;"><span>name1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wesley&#39;</span>
+</span></span><span style="display:flex;"><span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wesley1&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> name <span style="color:#f92672">==</span> naeme1:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;123&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#a6e22e">NameError</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;未定义变量名&#39;</span>)
+</span></span></code></pre></div><ul>
+<li>异常之断言</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 断言是用于预测上面被监测代码的类型，如果断言错误也会报出异常</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用</span>
+</span></span><span style="display:flex;"><span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wesley&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> isinstance(name, str)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;类型为字符串&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 需要注意，如果name的类型不是字符串，这个时候就会报错</span>
+</span></span></code></pre></div><ul>
+<li>主动抛出异常</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>	name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;andy&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> name <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;andy&#39;</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74">&#39;Error&#39;</span>):
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;不是andy，继续run&#39;</span>)
+</span></span></code></pre></div><ul>
+<li>使用异常的注意事项</li>
+</ul>
+<ol>
+<li>在写代码的过程中，可以不使用异常就不使用异常</li>
+<li>如果必须使用，尽量不要超过10行代码</li>
+<li>当代码中有不可预期的异常时再使用</li>
+</ol>
+<ul>
+<li>异常的应用</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 使用异常实现for循环</span>
+</span></span><span style="display:flex;"><span>l1 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">33</span>, <span style="color:#ae81ff">44</span>, <span style="color:#ae81ff">55</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>    new <span style="color:#f92672">=</span> l1<span style="color:#f92672">.</span>__iter__()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        print(new<span style="color:#f92672">.</span>__next__())
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#a6e22e">StopIteration</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">break</span>
+</span></span></code></pre></div><ul>
+<li>生成器对象</li>
+</ul>
+<blockquote>
+<ol>
+<li>生成器对象本质是具有__iter__和__next__方法的迭代器对象</li>
+<li>两者的区别是，一个是内置的python解释器提供给我们而生成器是程序员自己写的，
+实质的区别：</li>
+<li>迭代器，python解释器提供 数据类型&gt;文件对象&gt;迭代器对象</li>
+<li>生成器，程序员提供，代码&gt;关键字&gt;生成器对象</li>
+</ol>
+</blockquote>
+<ul>
+<li>生成器语法</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 生成器语法就是在写函数时添加yield关键字</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func_name</span>()
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;这个是人为提供的生成器&#39;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">yield</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 这里需要注意，如果函数体中有yield关键字，我们在第一次调用的时候不会直接被调用出来，而是会生成一个生成器对象，相当于迭代器对象</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 演示代码如下</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>():
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;这是一个生成器对象&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> func()
+</span></span><span style="display:flex;"><span>res<span style="color:#f92672">.</span>__next__()
+</span></span><span style="display:flex;"><span>这是一个生成器对象
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 当第一次调用时，函数遇到yield就会变形为生成器对象，当第二次调用时，会调用这个生成器对象，被打印其中的内容，需要注意的是，每一次调用之后就会停留在第二个yield，并等待下一次调用</span>
+</span></span></code></pre></div><ul>
+<li>yield的冷门用法</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 在使用的过程中可以将yield赋予变量，并且给变量名使用send()插入数据</span>
+</span></span></code></pre></div><ul>
+<li>生成器表达式</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>l1 <span style="color:#f92672">=</span> (i <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>))
+</span></span><span style="display:flex;"><span>print(l1)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># l1 &lt;generator object &lt;genexpr&gt; at 0x10073b9e0&gt;</span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> l1<span style="color:#f92672">.</span>__iter__()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> res:
+</span></span><span style="display:flex;"><span>    print(i)
+</span></span></code></pre></div><ul>
+<li>模块的概念和使用</li>
+</ul>
+<blockquote>
+<p>补充：索引取值和迭代器取值的区别</p>
+<ol>
+<li>索引取值，索引取值可以反复取值，并且可以在不同的位置去，但是不支持无序类型的数据取值</li>
+<li>迭代取值，迭代取值只能从前向后取，并且只能取一次，支持无序类型的数据取值</li>
+</ol>
+</blockquote>
+<ul>
+<li>什么是模块</li>
+</ul>
+<blockquote>
+<p>模块就是具有功能的py文件，在写代码的过程中，可以在执行文件中，调用其他文件已经写好的功能，</p>
+</blockquote>
+<ul>
+<li>模块的分类</li>
+</ul>
+<blockquote>
+<ol>
+<li>自定义模块，由我们自己写的py文件，我们在调用时被称为，自定义模块</li>
+<li>内置模块，python中有很多内置切好用的模块，这些模块是官方自己开发</li>
+<li>第三方模块，第三方模块时由第三方的开发者大佬开发提供</li>
+</ol>
+</blockquote>
+<ul>
+<li>导入模块的两种句式</li>
+</ul>
+<blockquote>
+<ol>
+<li>import &hellip;</li>
+<li>from &hellip; import</li>
+</ol>
+</blockquote>
+<ul>
+<li>import和from import 的优点和缺点</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 在使用第一种句式时，需要使用import 模块的名称， 在使用者种句式时，需要说过句点符调用模块中的功能</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> parameter 优点; 在调用模块时使用句点符调用模块中的变量或者函数<span style="color:#960050;background-color:#1e0010">，</span>名称不会混乱<span style="color:#960050;background-color:#1e0010">，</span>缺点: 在调用时每次都需要使用句点符
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>form modular_name <span style="color:#f92672">import</span> parameter 的优缺点<span style="color:#960050;background-color:#1e0010">，</span>优点<span style="color:#960050;background-color:#1e0010">：</span>在调用模块时
+</span></span><span style="display:flex;"><span>不需要使用句点符<span style="color:#960050;background-color:#1e0010">，</span>调用方便<span style="color:#960050;background-color:#1e0010">，</span>缺点<span style="color:#960050;background-color:#1e0010">：</span>由于不使用句点符调用模块中的功能<span style="color:#960050;background-color:#1e0010">，</span>可能会导致名称冲突
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 在模块中如果导入的名字太长，不太好调用，可以使用as 从新定义一个别名</span>
+</span></span></code></pre></div><ul>
+<li>模块导入之循环导入问题</li>
+</ul>
+<blockquote>
+<p>循环导入就类似于python垃圾回收机制中的循环引用问题，主要问题在调用模块时这个变量或者说名字还没有被调用，
+如何解决这个问题，在开发过程中我们需要尽量避免循环导入的问题，在使用时，可以在导入时把导入模块的动作放在最上面执行，或者替换一下变量存储问题来避免</p>
+</blockquote>
+<ul>
+<li>
+<p>模块的执行顺序</p>
+</li>
+<li>
+<p>内存</p>
+</li>
+<li>
+<p>内置</p>
+</li>
+<li>
+<p>sys.path</p>
+</li>
+<li>
+<p>执行文件</p>
+</li>
+</ul>
+<p>在使用模块时，最主要的是如何确认自己的执行文件
+python中提供了__name__这个方法让我们来确认当前执行的文件是否为执行文件</p>
+<ol>
+<li>返回main 则为执行文件</li>
+<li>返回文件名则为模块文件</li>
+</ol>
+<ul>
+<li>包的概念</li>
+</ul>
+<ol>
+<li>包就是很多py文件的集合</li>
+<li>在python2中包中必须有着__init__.py的入口文件，python3中无此要求</li>
+</ol>
+<ul>
+<li>包的使用</li>
+</ul>
+<ol>
+<li>我们可以使用from的方式来导入一个包，这个包里有很多的模块文件，可以根据自己的选择来选则使用什么模块的功能</li>
+</ol>
+<ul>
+<li>编程思想</li>
+</ul>
+<blockquote>
+<p>编程思想就是指我们在运到一个编程问题时的想法和思路，比如如果规划程序的架构方便后期更改，如何做到高聚合低耦合的代码架构，不具备编程思想的人只能写一些简单逻辑的代码，当这个程序员具备了编程思想后，很多问题都会迎刃而解 如何学习编程思想，就是多写多练，参考优秀代码，思想碰撞，参考其他人看待问题的逻辑，完善自身</p>
+</blockquote>
+<ul>
+<li>软件目录开发规范</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 通用性软件开发目录</span>
+</span></span><span style="display:flex;"><span> wesley@------*****------ ⮀ ~/Desktop ⮀ tree myproject
+</span></span><span style="display:flex;"><span>myproject  <span style="color:#75715e"># 项目目录</span>
+</span></span><span style="display:flex;"><span>├── README  <span style="color:#75715e"># 项目说明文件</span>
+</span></span><span style="display:flex;"><span>├── bin  <span style="color:#75715e"># 执行文价夹</span>
+</span></span><span style="display:flex;"><span>│   └── start.py
+</span></span><span style="display:flex;"><span>├── conf  <span style="color:#75715e"># 配置文件</span>
+</span></span><span style="display:flex;"><span>│   └── settings.py
+</span></span><span style="display:flex;"><span>├── core  <span style="color:#75715e"># 源码，主要的功能代码</span>
+</span></span><span style="display:flex;"><span>│   └── src.py
+</span></span><span style="display:flex;"><span>├── db  <span style="color:#75715e"># 数据库相关操作代码</span>
+</span></span><span style="display:flex;"><span>│   ├── db_handler.py
+</span></span><span style="display:flex;"><span>│   └── userinfo.txt
+</span></span><span style="display:flex;"><span>├── interface  <span style="color:#75715e"># api文件夹</span>
+</span></span><span style="display:flex;"><span>│   ├── accpunt.py
+</span></span><span style="display:flex;"><span>│   ├── goods.py
+</span></span><span style="display:flex;"><span>│   └── user.py
+</span></span><span style="display:flex;"><span>├── lib  <span style="color:#75715e"># 公共功能</span>
+</span></span><span style="display:flex;"><span>├── log  <span style="color:#75715e"># 日志存放文件夹</span>
+</span></span><span style="display:flex;"><span>│   └── log.log
+</span></span><span style="display:flex;"><span>└── requirements.txt  <span style="color:#75715e"># 项目运行环境，项目需要安装的py包</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>常用的内置模块</p>
+</li>
+<li>
+<p>时间模块</p>
+</li>
+</ul>
+<blockquote>
+<p>时间的3种格式</p>
+<ol>
+<li>时间戳 ，当前距离1970年1月1号的秒数</li>
+<li>结构化时间  计算机容易识别的时间数据</li>
+<li>格式化时间  人类容易识别的时间数据</li>
+<li>时间的表示 %Y 年 %m 月 %d 日，%H 小时 %M 分钟 %S 秒   [%X]=%H%M%S</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">1.</span>  time
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 功能(主要的)</span>
+</span></span><span style="display:flex;"><span>print(time<span style="color:#f92672">.</span>time())  <span style="color:#75715e"># 获得当前系统的时间戳</span>
+</span></span><span style="display:flex;"><span>print(time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>))  <span style="color:#75715e"># 睡眠2s再执行</span>
+</span></span><span style="display:flex;"><span>print(time<span style="color:#f92672">.</span>localtime()) <span style="color:#75715e"># 获取结构化时间</span>
+</span></span><span style="display:flex;"><span>print(time<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#39;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:%M:%S&#39;</span>)) <span style="color:#75715e"># 结构化时间</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span>  datatime
+</span></span><span style="display:flex;"><span>print(datetime<span style="color:#f92672">.</span>now()) <span style="color:#75715e"># 获取当前时间</span>
+</span></span><span style="display:flex;"><span>print(datetime<span style="color:#f92672">.</span>today()) <span style="color:#75715e"># 获取当前时间</span>
+</span></span><span style="display:flex;"><span>print(date<span style="color:#f92672">.</span>today()) <span style="color:#75715e"># 获取当前时间，年月日</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> datetime(<span style="color:#ae81ff">1998</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">00</span>,<span style="color:#ae81ff">00</span>) <span style="color:#75715e"># 自定义时间</span>
+</span></span><span style="display:flex;"><span>print(a)
+</span></span></code></pre></div><ul>
+<li>
+<p>随机数模块</p>
+</li>
+<li>
+<p>ranmod</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(random<span style="color:#f92672">.</span>random()) <span style="color:#75715e"># 打印0~1之间的小数</span>
+</span></span><span style="display:flex;"><span>print(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>)) <span style="color:#75715e"># 打印指定数字之间的随机数</span>
+</span></span><span style="display:flex;"><span>print(random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">2</span>)) <span style="color:#75715e"># 随机输出1~100 之间的偶数</span>
+</span></span><span style="display:flex;"><span>print(random<span style="color:#f92672">.</span>choice([<span style="color:#e6db74">&#39;1&#39;</span>,<span style="color:#e6db74">&#39;2&#39;</span>,<span style="color:#e6db74">&#39;3&#39;</span>,<span style="color:#e6db74">&#39;4&#39;</span>])) <span style="color:#75715e"># 随机抽取一个随机值</span>
+</span></span><span style="display:flex;"><span>print(random<span style="color:#f92672">.</span>choices([<span style="color:#e6db74">&#39;1&#39;</span>,<span style="color:#e6db74">&#39;2&#39;</span>,<span style="color:#e6db74">&#39;3&#39;</span>,<span style="color:#e6db74">&#39;4&#39;</span>])) <span style="color:#75715e"># 随机抽取一个随机值，同时保留原格式</span>
+</span></span><span style="display:flex;"><span>print(random<span style="color:#f92672">.</span>sample([<span style="color:#e6db74">&#39;jason&#39;</span>, <span style="color:#e6db74">&#39;kevin&#39;</span>, <span style="color:#e6db74">&#39;tony&#39;</span>, <span style="color:#e6db74">&#39;oscar&#39;</span>, <span style="color:#e6db74">&#39;jerry&#39;</span>, <span style="color:#e6db74">&#39;tom&#39;</span>], <span style="color:#ae81ff">2</span>))  <span style="color:#75715e"># 随机抽取2个元素</span>
+</span></span><span style="display:flex;"><span>l1 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">10</span>, <span style="color:#e6db74">&#39;J&#39;</span>, <span style="color:#e6db74">&#39;Q&#39;</span>, <span style="color:#e6db74">&#39;K&#39;</span>, <span style="color:#e6db74">&#39;A&#39;</span>]
+</span></span><span style="display:flex;"><span>random<span style="color:#f92672">.</span>shuffle(l1)  <span style="color:#75715e"># 随机打乱数据集</span>
+</span></span><span style="display:flex;"><span>print(l1) <span style="color:#75715e"># 随机打乱数据集</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用ranmod写随机验证码</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ranmod_num</span>(n):
+</span></span><span style="display:flex;"><span>    code <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n):
+</span></span><span style="display:flex;"><span>        random_upnum <span style="color:#f92672">=</span> chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">65</span>, <span style="color:#ae81ff">90</span>))
+</span></span><span style="display:flex;"><span>        random_lownum <span style="color:#f92672">=</span> chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">97</span>, <span style="color:#ae81ff">122</span>))
+</span></span><span style="display:flex;"><span>        random_int <span style="color:#f92672">=</span> str(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>))
+</span></span><span style="display:flex;"><span>        temp <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>choice([random_int, random_lownum, random_upnum])
+</span></span><span style="display:flex;"><span>        code <span style="color:#f92672">+=</span> temp
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> code
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> ranmod_num(<span style="color:#ae81ff">11</span>)
+</span></span><span style="display:flex;"><span>print(res)
+</span></span></code></pre></div><ul>
+<li>python 模块</li>
+<li>os和sys模块</li>
+</ul>
+<blockquote>
+<p>os模块主要是执行文件对操作系统的操作
+sys模块主要是针对python解释器的操作</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># os模块</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> 创建目录 <span style="color:#75715e"># 当前目录下创建</span>
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>mkdir(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;dirname&#39;</span>) 
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> 创建目录 <span style="color:#75715e"># 多级目录的创建</span>
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>makedirs(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;/root/a/b&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> 删除目录 <span style="color:#75715e"># 删除当前目录下的目录</span>
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>rmdir(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;deldirname&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> 删除多级目录 <span style="color:#75715e"># 需要注意目录中不能有文件</span>
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>removedirs(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;/root/a/b&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.</span> 切换目录
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>chdir(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;/root/a/b&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6.</span> 获取当前目录
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>getcwd()
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7.</span> 列举文件内容
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>listdir()
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8.</span> 删除或重命名
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>remove(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;old&#39;</span>, <span style="color:#e6db74">&#39;new&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9.</span> 动态获取文件路径
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>abspath(__file__) <span style="color:#75715e"># 获取文件的跟路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10.</span> 动态获取文件目录
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>dirname(__file__) <span style="color:#75715e"># 获取文件的路径名</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">11.</span> 判断文件文件是否存在
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;filename&#39;</span>) <span style="color:#75715e"># 判断文件是否存在</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">12.</span> 判断路径是否存在
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;absdirname&#39;</span>) <span style="color:#75715e"># 判断路径是否存在</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">13.</span> 判断路径是否文件
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isfile(<span style="color:#e6db74">&#39;filename&#39;</span>)  <span style="color:#75715e"># 判断是否有这个文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">14.</span> 判断路径是否存在
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isdir(<span style="color:#e6db74">&#39;dirpathname&#39;</span>) <span style="color:#75715e"># 判断路径是否存在 </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">15.</span> 路径拼接
+</span></span><span style="display:flex;"><span>l1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/root/home&#39;</span>
+</span></span><span style="display:flex;"><span>l2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;run.py&#39;</span>
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>join(l1,l2)  <span style="color:#75715e"># 拼接为 /root/home/run.py</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">16.</span> 获取文件大小
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>getsize(<span style="color:#e6db74">&#39;run.py&#39;</span>)
+</span></span></code></pre></div><ul>
+<li>sys模块</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>path  <span style="color:#75715e"># 获取pycharm的系统变量</span>
+</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>getrecursionlimit <span style="color:#75715e"># 获取最大递归深度</span>
+</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>setrecursionlimit(<span style="color:#ae81ff">50000</span>) <span style="color:#75715e"># 修改最大递归深度</span>
+</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>version <span style="color:#75715e"># 获取python解释器的版本</span>
+</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>platform <span style="color:#75715e"># 获取当前系统架构</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># argv 主要用于命令行，在执行过程中可以让用户传入必须参数作为判断</span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> len(res) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">3</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;执行命令缺少了用户名或密码&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    username <span style="color:#f92672">=</span> res[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>    password <span style="color:#f92672">=</span> res[<span style="color:#ae81ff">2</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> username <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;jason&#39;</span> <span style="color:#f92672">and</span> password <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;123&#39;</span>:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;jason您好 文件正常执行&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;您不是jason无权执行该文件&#39;</span>)
+</span></span></code></pre></div><ul>
+<li>json模块</li>
+</ul>
+<blockquote>
+<p>序列化模块，指的是可以让其他编程语言识别</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">-</span> dumps loads 针对数据操作
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> dump load 针对文件操作
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dumps和loads可以将数据序列化和反序列化
+</span></span><span style="display:flex;"><span>dump和load是在序列化的同时可以写入文件或者直接取值为python中的字典
+</span></span></code></pre></div>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
