@@ -6,7 +6,23 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Oct 2022 16:42:45 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 26 Oct 2022 20:22:04 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第三方模块</title>
+      <link>https://jinkes-li.github.io/python/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Wed, 26 Oct 2022 20:22:04 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97/</guid>
+      <description>python第三方模块 第三方模块指的是别人写的模块，一般情况下功能都是非常强大的 如果使用第三方模块第一次必须使用pip指令下载后才可以调用
+第三方模块的下载方式
+下载时可能会出现的问题
+爬虫之requests模块
+自动化办公openpyxl模块
+第三方模块扩展(模块叠模块)
+第三方模块的下载方式
+1. pip工具， 每个版本的解释器都有pip工具，当电脑上存在多版本解释器时需要知道我们在使用哪一个，为了避免冲突，会在pip工具重新复制一份起别名 2. 在下载模块，使用命令下载 php3 install 模块名 3. 在下载模块时，默认仓库指向的是python的官网，如果下载太慢建议更改为国内 php3 install 模块名 -i 国内仓库地址 4. 在安装模块时，若不想使用最新的模块可以使用==来指定版本 php3 install 模块名==版本号 5. 在编写代码时，pycharm也提供了一些操作界面的安装方式，不太推荐使用，毕竟代码运行的平台大多数还是linux 安装时可能存在的问题 下载第三方模块可能会出现的问题 1.报错并有警告信息 WARNING: You are using pip version 20.2.1; 原因在于pip版本过低 只需要拷贝后面的命令执行更新操作即可 d:\python38\python.exe -m pip install --upgrade pip 更新完成后再次执行下载第三方模块的命令即可 2.报错并含有Timeout关键字 说明当前计算机网络不稳定 只需要换网或者重新执行几次即可 3.报错并没有关键字 面向百度搜索 pip下载XXX报错:拷贝错误信息 通常都是需要用户提前准备好一些环境才可以顺利下载 4.下载速度很慢 pip默认下载的仓库地址是国外的 python.org 我们可以切换下载的地址 pip install 模块名 -i 仓库地址 pip的仓库地址有很多 百度查询即可 清华大学 ：https://pypi.tuna.tsinghua.edu.cn/simple/ 阿里云：http://mirrors.</description>
+    </item>
+    
     <item>
       <title>正则表达式</title>
       <link>https://jinkes-li.github.io/python/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
