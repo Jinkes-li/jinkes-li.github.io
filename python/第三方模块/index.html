@@ -290,6 +290,72 @@
 </span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pandas<span style="color:#f92672">.</span>DataFrame(data_dict)
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 直接保存成excel文件</span>
 </span></span><span style="display:flex;"><span>df<span style="color:#f92672">.</span>to_excel(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;pd_comp_info.xlsx&#39;</span>)
+</span></span></code></pre></div><ul>
+<li>小练习</li>
+</ul>
+<blockquote>
+<p>爬取某平台的二手房屋数据</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># https://sh.lianjia.com/ershoufang/huangpu/pg3/ 链家数据规则</span>
+</span></span><span style="display:flex;"><span>lj <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://sh.lianjia.com/ershoufang/huangpu/pg&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests<span style="color:#f92672">,</span> re
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> openpyxl <span style="color:#f92672">import</span> Workbook
+</span></span><span style="display:flex;"><span>page <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;请输入需要查询的二手房页码: &#39;</span>)<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span>lj_page <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(lj <span style="color:#f92672">+</span> page)  <span style="color:#75715e"># https://sh.lianjia.com/ershoufang/huangpu/pg123</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 返回状态码</span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(lj_page)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 读取网页源码信息</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> res<span style="color:#f92672">.</span>text
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 获取二手房数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 房屋简介</span>
+</span></span><span style="display:flex;"><span>House_introduction <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;&lt;a class=&#34;&#34; href=&#34;.*?&#34; target=&#34;_blank&#34; data-log_index=&#34;.*?&#34;  data-el=&#34;ershoufang&#34; data-housecode=&#34;.*?&#34; data-is_focus=&#34;&#34; data-sl=&#34;&#34;&gt;(.*?)&lt;/a&gt;&#39;</span>,
+</span></span><span style="display:flex;"><span>data)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># print(House_introduction)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 房屋定位</span>
+</span></span><span style="display:flex;"><span>House_location <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;&lt;a href=&#34;.*?&#34; target=&#34;_blank&#34; data-log_index=&#34;.*?&#34; data-el=&#34;region&#34;&gt;(.*?) &lt;/a&gt;&#39;</span>,
+</span></span><span style="display:flex;"><span>    data)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 房屋具体位置</span>
+</span></span><span style="display:flex;"><span>House_Specific_address <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;&lt;div class=&#34;positionInfo&#34;&gt;&lt;span class=&#34;positionIcon&#34;&gt;&lt;/span&gt;&lt;a href=&#34;.*?&#34; target=&#34;_blank&#34; data-log_index=&#34;.*?&#34; data-el=&#34;region&#34;&gt;.*? &lt;/a&gt;   -  &lt;a href=&#34;.*?&#34; target=&#34;_blank&#34;&gt;(.*?)&lt;/a&gt; &lt;/div&gt;&#39;</span>,
+</span></span><span style="display:flex;"><span>    data)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 房屋具体信息</span>
+</span></span><span style="display:flex;"><span>House_info <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;&lt;div class=&#34;houseInfo&#34;&gt;&lt;span class=&#34;houseIcon&#34;&gt;&lt;/span&gt;(.*?)&lt;/div&gt;&#39;</span>,
+</span></span><span style="display:flex;"><span>    data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 房屋关注信息</span>
+</span></span><span style="display:flex;"><span>House_follow <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;&lt;div class=&#34;followInfo&#34;&gt;&lt;span class=&#34;starIcon&#34;&gt;&lt;/span&gt;(.*?)&lt;/div&gt;&#39;</span>,
+</span></span><span style="display:flex;"><span>    data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 总金额</span>
+</span></span><span style="display:flex;"><span>total_amount <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;&lt;div class=&#34;totalPrice totalPrice2&#34;&gt;&lt;i&gt; &lt;/i&gt;&lt;span class=&#34;&#34;&gt;(.*?)&lt;/span&gt;&lt;i&gt;万&lt;/i&gt;&lt;/div&gt;&#39;</span>,
+</span></span><span style="display:flex;"><span>data)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 平方金额</span>
+</span></span><span style="display:flex;"><span>square_amount <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;&lt;div class=&#34;unitPrice&#34; data-hid=&#34;.*?&#34; data-rid=&#34;.*?&#34; data-price=&#34;.*?&#34;&gt;&lt;span&gt;(.*?)&lt;/span&gt;&lt;/div&gt;&#39;</span>,
+</span></span><span style="display:flex;"><span>data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>all_house_data <span style="color:#f92672">=</span> zip(House_introduction, House_location, House_Specific_address, House_info, House_follow, total_amount, square_amount)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>House <span style="color:#f92672">=</span> Workbook()
+</span></span><span style="display:flex;"><span>page_name <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#39;House&#39;</span> <span style="color:#f92672">+</span> page)
+</span></span><span style="display:flex;"><span>page_ex <span style="color:#f92672">=</span> House<span style="color:#f92672">.</span>create_sheet(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;查询页数</span><span style="color:#e6db74">{</span>page_name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>page_ex<span style="color:#f92672">.</span>append([<span style="color:#e6db74">&#39;房屋简介&#39;</span>, <span style="color:#e6db74">&#39;位置&#39;</span>, <span style="color:#e6db74">&#39;小区&#39;</span>, <span style="color:#e6db74">&#39;详细信息&#39;</span>, <span style="color:#e6db74">&#39;用户动态&#39;</span>, <span style="color:#e6db74">&#39;总金额&#39;</span>, <span style="color:#e6db74">&#39;平方金额&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> all_house_data<span style="color:#f92672">.</span>__iter__():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># for a in i:</span>
+</span></span><span style="display:flex;"><span>    page_ex<span style="color:#f92672">.</span>append([i[<span style="color:#ae81ff">0</span>], i[<span style="color:#ae81ff">1</span>], i[<span style="color:#ae81ff">2</span>], i[<span style="color:#ae81ff">3</span>], i[<span style="color:#ae81ff">4</span>], i[<span style="color:#ae81ff">5</span>], i[<span style="color:#ae81ff">6</span>]])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>House<span style="color:#f92672">.</span>save(<span style="color:#e6db74">rf</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>page_name<span style="color:#e6db74">}</span><span style="color:#e6db74">.xlsx&#39;</span>)
 </span></span></code></pre></div>
   
   </div>
