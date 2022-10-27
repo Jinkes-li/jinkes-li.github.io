@@ -6,7 +6,26 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 26 Oct 2022 20:22:04 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 Oct 2022 21:54:09 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python模块(下)</title>
+      <link>https://jinkes-li.github.io/python/python%E6%A8%A1%E5%9D%97%E4%B8%8B/</link>
+      <pubDate>Thu, 27 Oct 2022 21:54:09 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/python%E6%A8%A1%E5%9D%97%E4%B8%8B/</guid>
+      <description>python模块 hashlib 加密模块
+subprocess模块
+logging 日志模块
+logging模块的实际应用
+hashlib加密模块
+什么是加密 将明文数据处理成密文数据，确保其他人无法直接得到原本的信息
+为什么加密 保证数据的安全性，防止软件或文件被篡改
+如何判断数据是否加密 加密后的数据一般都是各种字符的组合，无法是被直接看懂的
+密文的长短 密文越长表示使用的加密算法越复杂
+基本的加密算法 md5, bash64, hmac, sha系列
+# 加密算法的基本操作 import hashlib # 选择需要使用的加密算法，比如下面使用的是md5 md5 = hashlib.md5() # 使用update传入明文数据，可以分段传输也可以单次传输 md5.update(b&amp;#39;hello&amp;#39;) # 需要传入二进制数据 # 获得数据加密后的MD5值 res = md5.hexdigest() print(res) # 5d41402abc4b2a76b9719d911017c592 加密算法补充 1. 加密算法不变，内容不变，结果也相同 import hashlib md5 = hashlib.md5() md5.update(b&amp;#39;wesley&amp;#39;) res = md5.hexdigest() print(res) # 加密后的值 a09f91f8be77e65b371a64bf1d8305c9 # 刚刚提到了多次的分段传入也是没有问题的，下列代码演示 import hashlib md5 = hashlib.md5() md5.update(b&amp;#39;we&amp;#39;) md5.update(b&amp;#39;sl&amp;#39;) md5.update(b&amp;#39;ey&amp;#39;) res = md5.</description>
+    </item>
+    
     <item>
       <title>第三方模块</title>
       <link>https://jinkes-li.github.io/python/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97/</link>
