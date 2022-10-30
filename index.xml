@@ -6,7 +6,22 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Oct 2022 21:54:09 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 Oct 2022 18:57:24 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第五周总结</title>
+      <link>https://jinkes-li.github.io/python/%E7%AC%AC%E4%BA%94%E5%91%A8%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sun, 30 Oct 2022 18:57:24 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E7%AC%AC%E4%BA%94%E5%91%A8%E6%80%BB%E7%BB%93/</guid>
+      <description>第五周总结 正则表达式
+第三方模块
+python模块
+正则表达式
+正则表达式，又称规则表达式,（Regular Expression，在代码中常简写为regex、regexp或RE），是一种文本模式，包括普通字符（例如，a 到 z 之间的字母）和特殊字符（称为&amp;quot;元字符&amp;quot;），是计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列匹配某个句法规则的字符串，通常被用来检索、替换那些符合某个模式（规则）的文本
+正则表达式前夕 为什么需要使用正则表达式
+1. 这里以京东的注册时需要输入手机号为例 # 1. 获取用户输入 usercode = input(&amp;#39;请输入注册手机号： &amp;#39;) # 2. 分析，手机号为11位，判断位数是否相等11 if len(usercode) == 11: # 3. 判断用户输入的是否为纯数字 if usercode.isdigit(): # 4. 继续分析，手机号一般有很多开头，这里演示188开头 if usercode.startswith(&amp;#39;188&amp;#39;): print(&amp;#39;验证通过&amp;#39;) else: print(&amp;#39;请输入正确的手机号&amp;#39;) else: print(&amp;#39;请输入数字&amp;#39;) else: print(&amp;#39;请输入正确的手机号长度&amp;#39;) # 代码执行结果，只有188开头的手机号码才可以通过注册 请输入注册手机号： 18800000000 验证通过 2. 第一种方式太过于麻烦，接下来使用正则表达式来写 import re # python中使用正则的模块，稍后介绍 user_code = inpot(&amp;#39;请输入手机号&amp;#39;).strip() if re.match(&amp;#39;^188[0-9]{8}$&amp;#39;, user_code) print(&amp;#39;合法的手机号&amp;#39;) else: print(&amp;#39;非法的手机号&amp;#39;) # 代码执行结果 请输入手机号： 18000000000 合法的手机号 字符组 字符组内所有的数据默认都是或的关系 字符组默认匹配规则是一个一个匹配 [0123456789] 匹配0~9任意一个数 [0-9] 匹配0到9任意一个数(缩写) [a-z] 匹配26个小写英文字母 [A-Z] 匹配26个大写英文字母 [0-9a-zA-Z] 匹配数字或者小写字母或者大写字母 特殊符号 特殊符号默认匹配方式是挨个匹配</description>
+    </item>
+    
     <item>
       <title>Python模块(下)</title>
       <link>https://jinkes-li.github.io/python/python%E6%A8%A1%E5%9D%97%E4%B8%8B/</link>
