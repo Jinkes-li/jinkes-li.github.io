@@ -6,7 +6,21 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 30 Oct 2022 18:57:24 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 31 Oct 2022 22:41:42 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ATM购物车中文版</title>
+      <link>https://jinkes-li.github.io/python/atm%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%AD%E6%96%87%E7%89%88/</link>
+      <pubDate>Mon, 31 Oct 2022 22:41:42 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/atm%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%AD%E6%96%87%E7%89%88/</guid>
+      <description>APM+购物车 创建目录 创建项目文件ATM 依据软件开发目录 创建bin下的start.py文件 conf下的settings.py文件 core下的scr.py文件 interface下的user_interface文件 shop_interface文件bank_interface文件 lib下的common文件 db目录下的handler文件 readme requriments文件 log目录可以代码创建 在将与用户交互的第一层放入在scr中搭建整体对的框架出来
+注册功能 首先获取用户的输入对的用户名及密码 核对二次输入的密码是否正确 正确的话 根据用户名去db目录的handler文件创数据的增删改查 依据模块os 拼接文件目录路径 再依据用户名创建文件的路径 再判断该路径在与不在 在的话输出读取到的对象字典 没有则返回None(这一步得放在创建文件之后 文件没创肯定读取不到) 再去新建用户字典 依据handler建的save将用户字典从写入到文件中则用户注册成功
+登入功能 获取用户输入的用户名及密码 用用户名去判断是否能将用户字典读取出来 能读取则判断用户存在 可以从里拿出来密码比对是否正确 正确则登入成功 这时创建的一个全局变量 用来储存登入的用户是谁 因为后面的功能实现都要基于用户是否登入成功 而且是涉及多个功能要用 所以创建装饰器放在lib的common文件中 再依据登入成功去改变全局的字典存储用户名 装饰器再依据全局字典是否登入则判断后面的功能能否实现
+查看用户余额 依据全局字典存储了用户登入的用户名 再依据用户名传值给函数去到第二层中的接口层user_interface 将其封装成函数靠用户名 去打开用户的字典读取到用户的余额
+查看用户余额 依据全局字典存储了用户登入的用户名 再依据用户名传值给函数去到第二层中的接口层user_interface 将其封装成函数靠用户名 去打开用户的字典读取到用户的余额
+提现功能 获取用户需要提现的金额 把当前登录的用户名， 和需要提现的金额传给接口层 获取当前用户的信息 拿到用户的余额和提现额度 用户的余额和 （提现的金额+手续费）做对比 若余额小 则 返回 余额不足 若余额不小 则比较提现金额和 提现额度的大小 若提现额度大 则 余额 - 提现金额 保	存 手续费 为零 返回 提现成功 若提现金额大 则 余额 - 提现金额 - 手 续费 保存 返回 提现成功</description>
+    </item>
+    
     <item>
       <title>第五周总结</title>
       <link>https://jinkes-li.github.io/python/%E7%AC%AC%E4%BA%94%E5%91%A8%E6%80%BB%E7%BB%93/</link>

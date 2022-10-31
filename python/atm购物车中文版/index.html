@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> ATM购物车中文版 | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/python/atm%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%AD%E6%96%87%E7%89%88/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="ATM购物车中文版" />
+<meta property="og:description" content="APM&#43;购物车 创建目录 创建项目文件ATM 依据软件开发目录 创建bin下的start.py文件 conf下的settings.py文件 core下的scr.py文件 interface下的user_interface文件 shop_interface文件bank_interface文件 lib下的common文件 db目录下的handler文件 readme requriments文件 log目录可以代码创建 在将与用户交互的第一层放入在scr中搭建整体对的框架出来
+注册功能 首先获取用户的输入对的用户名及密码 核对二次输入的密码是否正确 正确的话 根据用户名去db目录的handler文件创数据的增删改查 依据模块os 拼接文件目录路径 再依据用户名创建文件的路径 再判断该路径在与不在 在的话输出读取到的对象字典 没有则返回None(这一步得放在创建文件之后 文件没创肯定读取不到) 再去新建用户字典 依据handler建的save将用户字典从写入到文件中则用户注册成功
+登入功能 获取用户输入的用户名及密码 用用户名去判断是否能将用户字典读取出来 能读取则判断用户存在 可以从里拿出来密码比对是否正确 正确则登入成功 这时创建的一个全局变量 用来储存登入的用户是谁 因为后面的功能实现都要基于用户是否登入成功 而且是涉及多个功能要用 所以创建装饰器放在lib的common文件中 再依据登入成功去改变全局的字典存储用户名 装饰器再依据全局字典是否登入则判断后面的功能能否实现
+查看用户余额 依据全局字典存储了用户登入的用户名 再依据用户名传值给函数去到第二层中的接口层user_interface 将其封装成函数靠用户名 去打开用户的字典读取到用户的余额
+查看用户余额 依据全局字典存储了用户登入的用户名 再依据用户名传值给函数去到第二层中的接口层user_interface 将其封装成函数靠用户名 去打开用户的字典读取到用户的余额
+提现功能 获取用户需要提现的金额 把当前登录的用户名， 和需要提现的金额传给接口层 获取当前用户的信息 拿到用户的余额和提现额度 用户的余额和 （提现的金额&#43;手续费）做对比 若余额小 则 返回 余额不足 若余额不小 则比较提现金额和 提现额度的大小 若提现额度大 则 余额 - 提现金额 保	存 手续费 为零 返回 提现成功 若提现金额大 则 余额 - 提现金额 - 手 续费 保存 返回 提现成功" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/python/atm%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%AD%E6%96%87%E7%89%88/" /><meta property="article:section" content="python" />
+<meta property="article:published_time" content="2022-10-31T22:41:42+08:00" />
+<meta property="article:modified_time" content="2022-10-31T22:41:42+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ATM购物车中文版"/>
+<meta name="twitter:description" content="APM&#43;购物车 创建目录 创建项目文件ATM 依据软件开发目录 创建bin下的start.py文件 conf下的settings.py文件 core下的scr.py文件 interface下的user_interface文件 shop_interface文件bank_interface文件 lib下的common文件 db目录下的handler文件 readme requriments文件 log目录可以代码创建 在将与用户交互的第一层放入在scr中搭建整体对的框架出来
+注册功能 首先获取用户的输入对的用户名及密码 核对二次输入的密码是否正确 正确的话 根据用户名去db目录的handler文件创数据的增删改查 依据模块os 拼接文件目录路径 再依据用户名创建文件的路径 再判断该路径在与不在 在的话输出读取到的对象字典 没有则返回None(这一步得放在创建文件之后 文件没创肯定读取不到) 再去新建用户字典 依据handler建的save将用户字典从写入到文件中则用户注册成功
+登入功能 获取用户输入的用户名及密码 用用户名去判断是否能将用户字典读取出来 能读取则判断用户存在 可以从里拿出来密码比对是否正确 正确则登入成功 这时创建的一个全局变量 用来储存登入的用户是谁 因为后面的功能实现都要基于用户是否登入成功 而且是涉及多个功能要用 所以创建装饰器放在lib的common文件中 再依据登入成功去改变全局的字典存储用户名 装饰器再依据全局字典是否登入则判断后面的功能能否实现
+查看用户余额 依据全局字典存储了用户登入的用户名 再依据用户名传值给函数去到第二层中的接口层user_interface 将其封装成函数靠用户名 去打开用户的字典读取到用户的余额
+查看用户余额 依据全局字典存储了用户登入的用户名 再依据用户名传值给函数去到第二层中的接口层user_interface 将其封装成函数靠用户名 去打开用户的字典读取到用户的余额
+提现功能 获取用户需要提现的金额 把当前登录的用户名， 和需要提现的金额传给接口层 获取当前用户的信息 拿到用户的余额和提现额度 用户的余额和 （提现的金额&#43;手续费）做对比 若余额小 则 返回 余额不足 若余额不小 则比较提现金额和 提现额度的大小 若提现额度大 则 余额 - 提现金额 保	存 手续费 为零 返回 提现成功 若提现金额大 则 余额 - 提现金额 - 手 续费 保存 返回 提现成功"/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h3 id="apm购物车">APM+购物车</h3>
+<p>创建目录
+创建项目文件ATM
+依据软件开发目录
+创建bin下的start.py文件
+conf下的settings.py文件
+core下的scr.py文件
+interface下的user_interface文件
+shop_interface文件bank_interface文件
+lib下的common文件
+db目录下的handler文件
+readme requriments文件
+log目录可以代码创建
+在将与用户交互的第一层放入在scr中搭建整体对的框架出来</p>
+<h3 id="注册功能">注册功能</h3>
+<p>首先获取用户的输入对的用户名及密码
+核对二次输入的密码是否正确 正确的话
+根据用户名去db目录的handler文件创数据的增删改查
+依据模块os 拼接文件目录路径
+再依据用户名创建文件的路径 再判断该路径在与不在
+在的话输出读取到的对象字典
+没有则返回None(这一步得放在创建文件之后 文件没创肯定读取不到)
+再去新建用户字典
+依据handler建的save将用户字典从写入到文件中则用户注册成功</p>
+<h3 id="登入功能">登入功能</h3>
+<p>获取用户输入的用户名及密码
+用用户名去判断是否能将用户字典读取出来
+能读取则判断用户存在 可以从里拿出来密码比对是否正确
+正确则登入成功 这时创建的一个全局变量
+用来储存登入的用户是谁 因为后面的功能实现都要基于用户是否登入成功 而且是涉及多个功能要用 所以创建装饰器放在lib的common文件中
+再依据登入成功去改变全局的字典存储用户名 装饰器再依据全局字典是否登入则判断后面的功能能否实现</p>
+<h3 id="查看用户余额">查看用户余额</h3>
+<p>依据全局字典存储了用户登入的用户名
+再依据用户名传值给函数去到第二层中的接口层user_interface
+将其封装成函数靠用户名
+去打开用户的字典读取到用户的余额</p>
+<h3 id="查看用户余额-1">查看用户余额</h3>
+<p>依据全局字典存储了用户登入的用户名
+再依据用户名传值给函数去到第二层中的接口层user_interface
+将其封装成函数靠用户名
+去打开用户的字典读取到用户的余额</p>
+<h3 id="提现功能">提现功能</h3>
+<p>获取用户需要提现的金额
+把当前登录的用户名， 和需要提现的金额传给接口层
+获取当前用户的信息
+拿到用户的余额和提现额度
+用户的余额和 （提现的金额+手续费）做对比
+若余额小 则 返回 余额不足
+若余额不小 则比较提现金额和 提现额度的大小
+若提现额度大 则 余额 - 提现金额 保	存 手续费 为零 返回 提现成功
+若提现金额大 则 余额 - 提现金额 - 手 续费 保存 返回 提现成功</p>
+<h3 id="充值功能">充值功能</h3>
+<p>获取用户的充值金额
+把当前登录的用户名和用户输入的充值金额 传给接口	层
+获取用户数数据
+把用户的余额 与 充值的金额 相加 然后保存 返回充值 成功</p>
+<h3 id="转账功能">转账功能</h3>
+<p>获取转账对象
+获取转账金额
+把当前登录的用户名 和 转账用户的名 和转账金额传	递给接口层
+判断转账对象是否存在
+若转账对象不存在则 返回 转账用户不存在
+若转账对象存在 则比较当前用户的余额 和 转账 金额的大小
+若转账金额大 则返回 发起转账的用户的余额	不足
+若转账金额小 则 把发起转账的用户的余额 - 转账金额 收帐用户的余额 + 转账金额 然后	把 两个用户的数据都在保存一下 返回转账	成功</p>
+<h3 id="查看流水">查看流水</h3>
+<p>把当前登录用户名传递给接口
+获取用户数据
+返回用户的流水列表
+可以直接打印这个列表 或 for 循环这个列表</p>
+<h3 id="添加购物车">添加购物车</h3>
+<p>准备 预备购物车
+获取商品列表
+选择商品
+输入数量
+拿商品去判断 预备购物车里有没有
+若预备购物车 有 则 只在预备购物车里改变此商	品的数量
+若预备购物车 没有 则 添加到预备购物车
+当用户结束购物后， 把当前用户名 和预备购物车传	给接口
+获取用户数据
+获取用户的购物车
+拿预备购物车里的商品与用户购物车里的商品作比较
+若用户购物里有 则只修改此商品的数量
+若用户购物车里没有 则 添加
+保存数据 返回 添加成功</p>
+<h3 id="查看购物车">查看购物车</h3>
+<p>获取当前登录用户的用户名
+把用户名传参给接口
+获取用户的数据
+获取用户的购物车
+判断用户购物车的数据是否为空
+若为空则返回 当前用户的购物车空空如也
+若不为空 则返回 用户的购物车</p>
+<h3 id="结算购物车">结算购物车</h3>
+<p>获取当前登录用户的用户名
+把用户名传参给接口层
+获取用户数据
+获取用的购物车
+计算购物车的所有金额
+比较 购物车的金额 与 用户的余额大小
+若购物车的金额 比 余额大 则 返回 抱歉余额不足
+若 购物车的金额 比 余额小 则 余额 - 购物车额 并清空用户的购物车 保存
+返回结算成功</p>
+
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
