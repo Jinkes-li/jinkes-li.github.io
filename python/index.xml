@@ -6,7 +6,16 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 31 Oct 2022 22:41:42 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Nov 2022 21:29:31 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>阶段复习一</title>
+      <link>https://jinkes-li.github.io/python/%E9%98%B6%E6%AE%B5%E5%A4%8D%E4%B9%A0%E4%B8%80/</link>
+      <pubDate>Tue, 01 Nov 2022 21:29:31 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E9%98%B6%E6%AE%B5%E5%A4%8D%E4%B9%A0%E4%B8%80/</guid>
+      <description>阶段复习一 1.计算机基础阶段 计算机五大组成部分 1. 运算器 2. 控制器 3. 存储器 4. 输入设备 5. 输出设备 计算机三大核心硬件 1. 磁盘 2. 内存 3. CPU 操作系统 操作系统就是人与计算机硬件交互的前两 文件路径 1. 相对路径 2. 绝对路径 2.变量与常量 变量名 赋值符号 数据值、变量名、函数名、函数调用、生成式 遇到赋值符号先看符号右侧再看左侧 3.python基本数据类型 int整型、float浮点型、str字符串、list列表、dict字典、tuple元组、set集合、bool布尔值 4.垃圾回收机制 引用计数、标记清除、分代回收 5.用户交互 input\print 格式化输出 6.流程控制 if elif else while else break continue for else break continue range() 7.数据类型常用内置方法 字符串:索引取值切片、len()、strip()、split()、upper()、isdigit() 列表:索引取值切片、len()、append()、insert()、extend()、pop() 字典:按键取值、len()、get()、d[k] = v、keys()、values()、items() 8.字符编码 编码与解码	ASCII GBK UTF UNICODE encode() decode() 9.文件处理 with open(文件路径,模式,encoding=&amp;#39;utf8&amp;#39;) as f:pass 函数 1.</description>
+    </item>
+    
     <item>
       <title>ATM购物车中文版</title>
       <link>https://jinkes-li.github.io/python/atm%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%AD%E6%96%87%E7%89%88/</link>
