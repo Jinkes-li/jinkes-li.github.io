@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Python面向对象(上) | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/python/python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8A/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="Python面向对象(上)" />
+<meta property="og:description" content="python之面对对象 面向对象前夕
+面向对象编程思想
+面向对象重要理论
+面向对象代码实操
+对象的独有数据
+对象的独有方法
+面对对象前夕
+接下来主要看一下如果不使用面对对象的方式如何定义一些对象和会出现的问题
+代码演示：人汪大战 在这一步可以推导出来，如果有很多的人和很多汪，我们则需要写很多次重复代码
+# 实现步骤1，先定义人和汪汪 person1 ={ &#39;name&#39;: &#39;wesley&#39;, &#39;age&#39;: 18, &#39;gender&#39;: &#39;male&#39;, &#39;p_type&#39;: &#39;猛男&#39;, &#39;attack_val&#39;: 8000, &#39;life_val&#39;: 999999 } person2 = { &#39;name&#39;: &#39;kevin&#39;, &#39;age&#39;: 28, &#39;gender&#39;: &#39;female&#39;, &#39;p_type&#39;: &#39;淑女&#39;, &#39;attack_val&#39;: 1, &#39;life_val&#39;: 100 } dog1 = { &#39;name&#39;: &#39;小黑&#39;, &#39;d_type&#39;: &#39;泰迪&#39;, &#39;attack_val&#39;: 100, &#39;life_val&#39;: 8000 } dog2 = { &#39;name&#39;: &#39;小白&#39;, &#39;d_type&#39;: &#39;恶霸&#39;, &#39;attack_val&#39;: 2, &#39;life_val&#39;: 80000 } 继续向下推导，将产生人和汪星人的字典封装为函数，并封装人和汪星人的攻击函数 1. 创建一个可以传入人数据的函数 def create_person(name, age, gender, p_type, attack_val, life_val): person_dict = { &#39;name&#39;: name, &#39;age&#39;: age, &#39;gender&#39;: gender, &#39;p_type&#39;: p_type, &#39;attack_val&#39;: attack_val, &#39;life_val&#39;: life_val } return person_dict 2." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/python/python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8A/" /><meta property="article:section" content="python" />
+<meta property="article:published_time" content="2022-11-02T20:27:48+08:00" />
+<meta property="article:modified_time" content="2022-11-02T20:27:48+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python面向对象(上)"/>
+<meta name="twitter:description" content="python之面对对象 面向对象前夕
+面向对象编程思想
+面向对象重要理论
+面向对象代码实操
+对象的独有数据
+对象的独有方法
+面对对象前夕
+接下来主要看一下如果不使用面对对象的方式如何定义一些对象和会出现的问题
+代码演示：人汪大战 在这一步可以推导出来，如果有很多的人和很多汪，我们则需要写很多次重复代码
+# 实现步骤1，先定义人和汪汪 person1 ={ &#39;name&#39;: &#39;wesley&#39;, &#39;age&#39;: 18, &#39;gender&#39;: &#39;male&#39;, &#39;p_type&#39;: &#39;猛男&#39;, &#39;attack_val&#39;: 8000, &#39;life_val&#39;: 999999 } person2 = { &#39;name&#39;: &#39;kevin&#39;, &#39;age&#39;: 28, &#39;gender&#39;: &#39;female&#39;, &#39;p_type&#39;: &#39;淑女&#39;, &#39;attack_val&#39;: 1, &#39;life_val&#39;: 100 } dog1 = { &#39;name&#39;: &#39;小黑&#39;, &#39;d_type&#39;: &#39;泰迪&#39;, &#39;attack_val&#39;: 100, &#39;life_val&#39;: 8000 } dog2 = { &#39;name&#39;: &#39;小白&#39;, &#39;d_type&#39;: &#39;恶霸&#39;, &#39;attack_val&#39;: 2, &#39;life_val&#39;: 80000 } 继续向下推导，将产生人和汪星人的字典封装为函数，并封装人和汪星人的攻击函数 1. 创建一个可以传入人数据的函数 def create_person(name, age, gender, p_type, attack_val, life_val): person_dict = { &#39;name&#39;: name, &#39;age&#39;: age, &#39;gender&#39;: gender, &#39;p_type&#39;: p_type, &#39;attack_val&#39;: attack_val, &#39;life_val&#39;: life_val } return person_dict 2."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h3 id="python之面对对象">python之面对对象</h3>
+<ul>
+<li>
+<p>面向对象前夕</p>
+</li>
+<li>
+<p>面向对象编程思想</p>
+</li>
+<li>
+<p>面向对象重要理论</p>
+</li>
+<li>
+<p>面向对象代码实操</p>
+</li>
+<li>
+<p>对象的独有数据</p>
+</li>
+<li>
+<p>对象的独有方法</p>
+</li>
+<li>
+<p>面对对象前夕</p>
+</li>
+</ul>
+<blockquote>
+<p>接下来主要看一下如果不使用面对对象的方式如何定义一些对象和会出现的问题</p>
+</blockquote>
+<ol>
+<li>代码演示：人汪大战</li>
+</ol>
+<blockquote>
+<p>在这一步可以推导出来，如果有很多的人和很多汪，我们则需要写很多次重复代码</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 实现步骤1，先定义人和汪汪</span>
+</span></span><span style="display:flex;"><span>person1 <span style="color:#f92672">=</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;wesley&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;age&#39;</span>: <span style="color:#ae81ff">18</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;gender&#39;</span>: <span style="color:#e6db74">&#39;male&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;p_type&#39;</span>: <span style="color:#e6db74">&#39;猛男&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;attack_val&#39;</span>: <span style="color:#ae81ff">8000</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;life_val&#39;</span>: <span style="color:#ae81ff">999999</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>person2 <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;kevin&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;age&#39;</span>: <span style="color:#ae81ff">28</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;gender&#39;</span>: <span style="color:#e6db74">&#39;female&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;p_type&#39;</span>: <span style="color:#e6db74">&#39;淑女&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;attack_val&#39;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;life_val&#39;</span>: <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>dog1 <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;小黑&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;d_type&#39;</span>: <span style="color:#e6db74">&#39;泰迪&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;attack_val&#39;</span>: <span style="color:#ae81ff">100</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;life_val&#39;</span>: <span style="color:#ae81ff">8000</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>dog2 <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;小白&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;d_type&#39;</span>: <span style="color:#e6db74">&#39;恶霸&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;attack_val&#39;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;life_val&#39;</span>: <span style="color:#ae81ff">80000</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol start="2">
+<li>继续向下推导，将产生人和汪星人的字典封装为函数，并封装人和汪星人的攻击函数</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> 创建一个可以传入人数据的函数
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_person</span>(name, age, gender, p_type, attack_val, life_val):
+</span></span><span style="display:flex;"><span>    person_dict <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;name&#39;</span>: name,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;age&#39;</span>: age,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;gender&#39;</span>: gender,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;p_type&#39;</span>: p_type,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;attack_val&#39;</span>: attack_val,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;life_val&#39;</span>: life_val
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> person_dict
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> 创建一个可以传入汪星人数据的函数
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_dog</span>(name, d_type, attack_val, life_val):
+</span></span><span style="display:flex;"><span>    dog_dict <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;name&#39;</span>: name,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;d_type&#39;</span>: d_type,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;attack_val&#39;</span>: attack_val,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;life_val&#39;</span>: life_val
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dog_dict
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> 创建具体的2个人
+</span></span><span style="display:flex;"><span>p1 <span style="color:#f92672">=</span> create_person(<span style="color:#e6db74">&#39;jason&#39;</span>, <span style="color:#ae81ff">18</span>, <span style="color:#e6db74">&#39;male&#39;</span>, <span style="color:#e6db74">&#39;猛男&#39;</span>, <span style="color:#ae81ff">8000</span>, <span style="color:#ae81ff">99999999</span>)
+</span></span><span style="display:flex;"><span>p2 <span style="color:#f92672">=</span> create_person(<span style="color:#e6db74">&#39;kevin&#39;</span>, <span style="color:#ae81ff">28</span>, <span style="color:#e6db74">&#39;female&#39;</span>, <span style="color:#e6db74">&#39;淑女&#39;</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">800</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> 创建具体的两个汪星人
+</span></span><span style="display:flex;"><span>d1 <span style="color:#f92672">=</span> create_dog(<span style="color:#e6db74">&#39;小黑&#39;</span>, <span style="color:#e6db74">&#39;恶霸&#39;</span>, <span style="color:#ae81ff">800</span>, <span style="color:#ae81ff">900000</span>)
+</span></span><span style="display:flex;"><span>d2 <span style="color:#f92672">=</span> create_dog(<span style="color:#e6db74">&#39;小白&#39;</span>, <span style="color:#e6db74">&#39;泰迪&#39;</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">800000</span>)
+</span></span><span style="display:flex;"><span>print(p1, p2)
+</span></span><span style="display:flex;"><span>print(d1, d2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义出人打狗的动作 狗咬人的动作（推导目标实现）</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">person_attack</span>(person_dict, dog_dict):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;人:</span><span style="color:#e6db74">{</span>person_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">准备揍狗:</span><span style="color:#e6db74">{</span>dog_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    dog_dict[<span style="color:#e6db74">&#39;life_val&#39;</span>] <span style="color:#f92672">-=</span> person_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;attack_val&#39;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;人揍了狗一拳 狗掉血:</span><span style="color:#e6db74">{</span>person_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;attack_val&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74"> 狗剩余血量:</span><span style="color:#e6db74">{</span>dog_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;life_val&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dog_attack</span>(dog_dict, person_dict):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;狗:</span><span style="color:#e6db74">{</span>dog_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">准备咬人:</span><span style="color:#e6db74">{</span>person_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    person_dict[<span style="color:#e6db74">&#39;life_val&#39;</span>] <span style="color:#f92672">-=</span> dog_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;attack_val&#39;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;狗咬了人一口 人掉血:</span><span style="color:#e6db74">{</span>dog_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;attack_val&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74"> 人剩余血量:</span><span style="color:#e6db74">{</span>person_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;life_val&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>person_attack(p1, d1)
+</span></span><span style="display:flex;"><span>dog_attack(d2, p2)
+</span></span><span style="display:flex;"><span>人:jason准备揍狗:小黑
+</span></span><span style="display:flex;"><span>人揍了狗一拳 狗掉血:<span style="color:#ae81ff">8000</span> 狗剩余血量:<span style="color:#ae81ff">892000</span>
+</span></span><span style="display:flex;"><span>狗:小白准备咬人:kevin
+</span></span><span style="display:flex;"><span>狗咬了人一口 人掉血:<span style="color:#ae81ff">100</span> 人剩余血量:<span style="color:#ae81ff">700</span>
+</span></span></code></pre></div><ol start="3">
+<li>经过上面的推导大概可以得知如果不使用面对对象进行一些特定场景的变成可能会变的特别麻烦，并且，如果在最后调用阶段将人和汪星人的位置掉换一下呢？</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 这里就会发现，在使用代码时会产生一些不可预判的后果</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;推导步骤3:人和狗的攻击混乱&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># person_attack(d1, p1)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># dog_attack(p1, d2)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>人:小黑准备揍狗:jason
+</span></span><span style="display:flex;"><span>人揍了狗一拳 狗掉血:<span style="color:#ae81ff">800</span> 狗剩余血量:<span style="color:#ae81ff">99999199</span>
+</span></span><span style="display:flex;"><span>狗:jason准备咬人:小白
+</span></span><span style="display:flex;"><span>狗咬了人一口 人掉血:<span style="color:#ae81ff">8000</span> 人剩余血量:<span style="color:#ae81ff">792000</span>
+</span></span></code></pre></div><ul>
+<li>数据与功能的绑定</li>
+</ul>
+<blockquote>
+<p>上面遗留的问题如何解决呢，这里还是python代码为例，使用功能和数据绑定的编程思想解决这个问题，达到我们想要人只能调用人的方法，汪星人只能调用汪星人的方法</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;推导步骤4:如何实现只有人只能调用的人的攻击动作  狗只能调用狗的攻击动作&gt;&gt;&gt;:数据与功能的绑定&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_person</span>(name, age, gender, p_type, attack_val, life_val):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 产生人的函数(功能)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">person_attack</span>(person_dict, dog_dict):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;人:</span><span style="color:#e6db74">{</span>person_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">准备揍狗:</span><span style="color:#e6db74">{</span>dog_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>        dog_dict[<span style="color:#e6db74">&#39;life_val&#39;</span>] <span style="color:#f92672">-=</span> person_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;attack_val&#39;</span>)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;人揍了狗一拳 狗掉血:</span><span style="color:#e6db74">{</span>person_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;attack_val&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74"> 狗剩余血量:</span><span style="color:#e6db74">{</span>dog_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;life_val&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 表示人的信息(数据)</span>
+</span></span><span style="display:flex;"><span>    person_dict <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;name&#39;</span>: name,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;age&#39;</span>: age,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;gender&#39;</span>: gender,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;p_type&#39;</span>: p_type,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;attack_val&#39;</span>: attack_val,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;life_val&#39;</span>: life_val,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;person_attack&#39;</span>: person_attack
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> person_dict
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_dog</span>(name, d_type, attack_val, life_val):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dog_attack</span>(dog_dict, person_dict):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;狗:</span><span style="color:#e6db74">{</span>dog_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">准备咬人:</span><span style="color:#e6db74">{</span>person_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>        person_dict[<span style="color:#e6db74">&#39;life_val&#39;</span>] <span style="color:#f92672">-=</span> dog_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;attack_val&#39;</span>)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;狗咬了人一口 人掉血:</span><span style="color:#e6db74">{</span>dog_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;attack_val&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74"> 人剩余血量:</span><span style="color:#e6db74">{</span>person_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;life_val&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    dog_dict <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;name&#39;</span>: name,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;d_type&#39;</span>: d_type,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;attack_val&#39;</span>: attack_val,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;life_val&#39;</span>: life_val,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;dog_attack&#39;</span>: dog_attack
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dog_dict
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>person1 <span style="color:#f92672">=</span> get_person(<span style="color:#e6db74">&#39;jason&#39;</span>, <span style="color:#ae81ff">18</span>, <span style="color:#e6db74">&#39;male&#39;</span>, <span style="color:#e6db74">&#39;猛男&#39;</span>, <span style="color:#ae81ff">8000</span>, <span style="color:#ae81ff">99999999</span>)
+</span></span><span style="display:flex;"><span>dog1 <span style="color:#f92672">=</span> get_dog(<span style="color:#e6db74">&#39;小黑&#39;</span>, <span style="color:#e6db74">&#39;恶霸&#39;</span>, <span style="color:#ae81ff">800</span>, <span style="color:#ae81ff">900000</span>)
+</span></span><span style="display:flex;"><span>person1<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;person_attack&#39;</span>)(person1, dog1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">面向对象核心思想:数据与功能的绑定
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1. 这里可以看出来主要使用函数嵌套的方式将人的属性和功能绑定到一起
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2. 汪星人同样使用函数嵌套的方式将数据和功能绑定到一起
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3. 这样就事项了人只能调用人的功能和数据，反之亦然，达到了数据与功能的绑定
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>编程思想</li>
+</ul>
+<blockquote>
+<p>编程思想主要有2类</p>
+<ol>
+<li>面向过程</li>
+<li>面向对象</li>
+</ol>
+</blockquote>
+<ol>
+<li>
+<p>面向过程
+面向过程的主要思想
+像工厂流水线生产产品一样，越往下越简单，也越完善，即流程解决问题
+优点：编写比较简单，流程清晰，一不都有严谨的思路
+缺点：后期扩展或迭代不易</p>
+</li>
+<li>
+<p>面向对象
+什么是对象，在python中，数据和功能共融一体的容器就是对象，比如所数据类型可以存放一些数据 ，并且还有自己的一些方法，那这就是对象
+面向对象的主要思想
+把自己想象成造物主，需要什么就创造类与对象，后续只需要调用这个类中的对象即可
+优点： 易扩展
+缺点： 对新手不太友好，比较抽象
+问题：</p>
+</li>
+<li>
+<p>多个具有相同属性和功能的对象被称为类</p>
+</li>
+<li>
+<p>同一个类中的对象都可以调用这个类中的公共功能和数据</p>
+</li>
+<li>
+<p>python中必须先定义类后才能定义对象</p>
+</li>
+<li>
+<p>创造出来的对象 对于程序员来说 后期无法控制，无法向面向过程那样预测</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>类与对象详解
+对象： 数据和功能的结合体
+类： 具有多个具有相同数据和功能的对象
+程序中如果想要产生对象 必须要先定义出类</p>
+</li>
+<li>
+<p>类与对象的创建</p>
+</li>
+</ul>
+<blockquote>
+<p>面对对象并不是一门新的技术，但是为了方便区分，python中使用了新的语法来使用面向对象</p>
+</blockquote>
+<ol>
+<li>类的语法结构</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">类名</span><span style="color:#960050;background-color:#1e0010">：</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">“”“</span>类功能说明注释<span style="color:#960050;background-color:#1e0010">”“”</span>
+</span></span><span style="display:flex;"><span>	对象公共数据
+</span></span><span style="display:flex;"><span>	对象公共功能
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">是定义类的关键字</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> 类名和变量名的定义并无太大区别<span style="color:#960050;background-color:#1e0010">，</span>但是为了方便区分<span style="color:#960050;background-color:#1e0010">，</span>首字母需要大写
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> 数据<span style="color:#960050;background-color:#1e0010">：</span> 就是变量名和数据的绑定
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> 功能<span style="color:#960050;background-color:#1e0010">：</span> 其实就是函数
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.</span> 类在定义阶段调用<span style="color:#960050;background-color:#1e0010">，</span>会执行类体代码<span style="color:#960050;background-color:#1e0010">，</span>但是里面的函数名和变量名属于局部名称空间的不会执行
+</span></span></code></pre></div><ul>
+<li>类与对象的实际应用</li>
+</ul>
+<blockquote>
+<p>在面向对象中 类和对象访问数据或者功能 可以统一采用句点符</p>
+</blockquote>
+<ol>
+<li>查看名称空间</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 查看当前类下空间里所有的名称</span>
+</span></span><span style="display:flex;"><span>print(Student<span style="color:#f92672">.</span>__dict__)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看定义的choice_course</span>
+</span></span><span style="display:flex;"><span>print(Student<span style="color:#f92672">.</span>choice_course)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看定义的choice_course的第二种方法</span>
+</span></span><span style="display:flex;"><span>print(Student<span style="color:#f92672">.</span>__dict__<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;choice_course&#39;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看定义的school_name</span>
+</span></span><span style="display:flex;"><span>print(Student<span style="color:#f92672">.</span>__dict__<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;school_name&#39;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查看定义的school_name 的第二种方法</span>
+</span></span><span style="display:flex;"><span>print(Student<span style="color:#f92672">.</span>school_name)
+</span></span></code></pre></div><ul>
+<li>对象的产生</li>
+</ul>
+<blockquote>
+<p>需要注意 每一次调用即产生新的对象，谁调用主人公就是谁
+下列的代码也可以看出来内存地址不相同</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 类的调用 ：返回值即是对象的产生</span>
+</span></span><span style="display:flex;"><span>ojb1 <span style="color:#f92672">=</span> Student()
+</span></span><span style="display:flex;"><span>ojb2 <span style="color:#f92672">=</span> Student()
+</span></span><span style="display:flex;"><span>ojb3 <span style="color:#f92672">=</span> Student()
+</span></span><span style="display:flex;"><span>print(ojb1, ojb2, ojb3)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>__main__<span style="color:#f92672">.</span>Student object at <span style="color:#ae81ff">0x102729fd0</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>__main__<span style="color:#f92672">.</span>Student object at <span style="color:#ae81ff">0x102729fa0</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>__main__<span style="color:#f92672">.</span>Student object at <span style="color:#ae81ff">0x102729f10</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 查询对象，新产生的对象什么都没有</span>
+</span></span><span style="display:flex;"><span>print(ojb1<span style="color:#f92672">.</span>__dict__<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;school_name&#39;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 调用公共数据</span>
+</span></span><span style="display:flex;"><span>print(ojb1<span style="color:#f92672">.</span>school_name)
+</span></span><span style="display:flex;"><span>北京大学
+</span></span><span style="display:flex;"><span>print(ojb2<span style="color:#f92672">.</span>school_name)
+</span></span><span style="display:flex;"><span>北京大学
+</span></span><span style="display:flex;"><span>print(ojb2<span style="color:#f92672">.</span>school_name)
+</span></span><span style="display:flex;"><span>北京大学
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如果想更改数据代码如下，需要注意，由于是公共数据，更改之后其他对象也会更改</span>
+</span></span><span style="display:flex;"><span>Student<span style="color:#f92672">.</span>school_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;家里蹲&#39;</span>
+</span></span><span style="display:flex;"><span>print(ojb1<span style="color:#f92672">.</span>school_name)
+</span></span><span style="display:flex;"><span>家里蹲
+</span></span></code></pre></div><ul>
+<li>对象独有数据</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 推导流程1 每个对象手动添加独有数据</span>
+</span></span><span style="display:flex;"><span>ojb1<span style="color:#f92672">.</span>__dict__[<span style="color:#e6db74">&#39;name&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wesley&#39;</span>
+</span></span><span style="display:flex;"><span>ojb1<span style="color:#f92672">.</span>__dict__[<span style="color:#e6db74">&#39;age&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>print(ojb2<span style="color:#f92672">.</span>__dict__)
+</span></span><span style="display:flex;"><span>print(ojb1<span style="color:#f92672">.</span>name)
+</span></span><span style="display:flex;"><span>print(ojb1<span style="color:#f92672">.</span>age)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 这里可以看到上面ojb1对象已经有了自己的属性，ojb2由于没有添加还是为空</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 推导流程2:将添加对象独有数据的代码封装成函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">init</span>(ojb, name, age):
+</span></span><span style="display:flex;"><span>    ojb<span style="color:#f92672">.</span>__dict__[<span style="color:#e6db74">&#39;name&#39;</span>] <span style="color:#f92672">=</span> name
+</span></span><span style="display:flex;"><span>    ojb<span style="color:#f92672">.</span>__dict__[<span style="color:#e6db74">&#39;age&#39;</span>] <span style="color:#f92672">=</span> age
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 产生2个新对象</span>
+</span></span><span style="display:flex;"><span>stu1 <span style="color:#f92672">=</span> Student()
+</span></span><span style="display:flex;"><span>stu2 <span style="color:#f92672">=</span> Student()
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 调用函数并将空对象赋值传入数据</span>
+</span></span><span style="display:flex;"><span>init(stu1, <span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#ae81ff">18</span>)
+</span></span><span style="display:flex;"><span>init(stu2, <span style="color:#e6db74">&#39;andy&#39;</span>, <span style="color:#ae81ff">28</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 打印对象</span>
+</span></span><span style="display:flex;"><span>print(stu1<span style="color:#f92672">.</span>__dict__)
+</span></span><span style="display:flex;"><span>print(stu2<span style="color:#f92672">.</span>__dict__)
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#e6db74">&#39;age&#39;</span>: <span style="color:#ae81ff">18</span>}
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;andy&#39;</span>, <span style="color:#e6db74">&#39;age&#39;</span>: <span style="color:#ae81ff">28</span>}
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">这里就实现了不同的对象不同的数据
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>如何给学生这个对象设置独有功能? 代码如下</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 定义公共数据</span>
+</span></span><span style="display:flex;"><span>    school_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;北京大学&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 专门给学生添加的独有的数据功能</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">init</span>(ojb, name, age):
+</span></span><span style="display:flex;"><span>        ojb<span style="color:#f92672">.</span>__dict__[<span style="color:#e6db74">&#39;name&#39;</span>] <span style="color:#f92672">=</span> name
+</span></span><span style="display:flex;"><span>        ojb<span style="color:#f92672">.</span>__dict__[<span style="color:#e6db74">&#39;age&#39;</span>] <span style="color:#f92672">=</span> age
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 定义公共功能</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">choice_course</span>(self):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;学生选课系统&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 产生新对象</span>
+</span></span><span style="display:flex;"><span>stu1 <span style="color:#f92672">=</span> Student()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 调用类中的独有功能并插入数据</span>
+</span></span><span style="display:flex;"><span>Student<span style="color:#f92672">.</span>init(stu1, <span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#ae81ff">18</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 产生第二个新对象</span>
+</span></span><span style="display:flex;"><span>stu2 <span style="color:#f92672">=</span> Student()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 调用类中的独有功能并插入数据</span>
+</span></span><span style="display:flex;"><span>Student<span style="color:#f92672">.</span>init(stu2, <span style="color:#e6db74">&#39;andy&#39;</span>, <span style="color:#ae81ff">28</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 打印</span>
+</span></span><span style="display:flex;"><span>print(stu1<span style="color:#f92672">.</span>__dict__)
+</span></span><span style="display:flex;"><span>print(stu2<span style="color:#f92672">.</span>__dict__)
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#e6db74">&#39;age&#39;</span>: <span style="color:#ae81ff">18</span>}
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;andy&#39;</span>, <span style="color:#e6db74">&#39;age&#39;</span>: <span style="color:#ae81ff">28</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">这一步我们将定义学生属性的函数放入到类中，实现了这个功能只能学生使用
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>init 方法变形为__init__方法</li>
+</ul>
+<blockquote>
+<p>__init__在定义对象时自动触发</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 定义公共数据</span>
+</span></span><span style="display:flex;"><span>    school_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;北京大学&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 专门给学生添加的独有的数据功能</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(ojb, name, age):
+</span></span><span style="display:flex;"><span>        ojb<span style="color:#f92672">.</span>__dict__[<span style="color:#e6db74">&#39;name&#39;</span>] <span style="color:#f92672">=</span> name
+</span></span><span style="display:flex;"><span>        ojb<span style="color:#f92672">.</span>__dict__[<span style="color:#e6db74">&#39;age&#39;</span>] <span style="color:#f92672">=</span> age
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 定义公共功能</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">choice_course</span>(self):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;学生选课系统&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 推导步骤4:init方法变形</span>
+</span></span><span style="display:flex;"><span>stu1 <span style="color:#f92672">=</span> Student(<span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#ae81ff">18</span>)
+</span></span><span style="display:flex;"><span>print(stu1<span style="color:#f92672">.</span>__dict__)
+</span></span><span style="display:flex;"><span>print(stu1<span style="color:#f92672">.</span>name)
+</span></span><span style="display:flex;"><span>print(stu1<span style="color:#f92672">.</span>school_name)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> 推导步骤5:变量名修改
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 定义公共数据</span>
+</span></span><span style="display:flex;"><span>    school_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;北京大学&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 专门给学生添加的独有的数据功能</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(ojb, name, age):
+</span></span><span style="display:flex;"><span>        ojb<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name  <span style="color:#75715e"># ojb.__dict__[&#39;name&#39;] = name</span>
+</span></span><span style="display:flex;"><span>        ojb<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age  <span style="color:#75715e"># ojb.__dict__[&#39;age&#39;] = age</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 定义公共功能</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">choice_course</span>(self):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;学生选课系统&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sut1 <span style="color:#f92672">=</span>Student(<span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#ae81ff">18</span>)
+</span></span><span style="display:flex;"><span>print(sut1<span style="color:#f92672">.</span>name)
+</span></span></code></pre></div><ul>
+<li>独享功能</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 定义公共数据</span>
+</span></span><span style="display:flex;"><span>    school_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;北京大学&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 专门给学生添加的独有的数据功能</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(ojb, name, age):
+</span></span><span style="display:flex;"><span>        ojb<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name  <span style="color:#75715e"># ojb.__dict__[&#39;name&#39;] = name</span>
+</span></span><span style="display:flex;"><span>        ojb<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age  <span style="color:#75715e"># ojb.__dict__[&#39;age&#39;] = age</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 定义公共功能</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">choice_course</span>(self):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;学生</span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">正在选课&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义独享功能，修改 类中的choice_course功能</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">该功能如果被定义在全局中，那就是谁的可以调用的
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">定义在类中，类对外是公开的，但是受到谁来调用谁就是主人功的影响，又提供了独享功能的概念
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">定义在类中的功能 默认就是绑定给对象使用的 谁来调谁就是主人公
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>stu1 <span style="color:#f92672">=</span> Student(<span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#ae81ff">18</span>)
+</span></span><span style="display:flex;"><span>stu2 <span style="color:#f92672">=</span> Student(<span style="color:#e6db74">&#39;andy&#39;</span>, <span style="color:#ae81ff">48</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 对象中的数据值修改，当数据值存在时则更改，不存在时则新建</span>
+</span></span><span style="display:flex;"><span>stu1<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wesley123123&#39;</span>
+</span></span><span style="display:flex;"><span>stu2<span style="color:#f92672">.</span>balance <span style="color:#f92672">=</span> <span style="color:#ae81ff">6666</span>
+</span></span><span style="display:flex;"><span>print(stu1<span style="color:#f92672">.</span>__dict__)
+</span></span><span style="display:flex;"><span>print(stu2<span style="color:#f92672">.</span>__dict__)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;wesley123123&#39;</span>, <span style="color:#e6db74">&#39;age&#39;</span>: <span style="color:#ae81ff">18</span>}
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;andy&#39;</span>, <span style="color:#e6db74">&#39;age&#39;</span>: <span style="color:#ae81ff">48</span>, <span style="color:#e6db74">&#39;balance&#39;</span>: <span style="color:#ae81ff">6666</span>}
+</span></span></code></pre></div>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>

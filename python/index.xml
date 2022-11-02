@@ -6,7 +6,25 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 01 Nov 2022 21:29:31 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Nov 2022 20:27:48 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python面向对象(上)</title>
+      <link>https://jinkes-li.github.io/python/python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8A/</link>
+      <pubDate>Wed, 02 Nov 2022 20:27:48 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8A/</guid>
+      <description>python之面对对象 面向对象前夕
+面向对象编程思想
+面向对象重要理论
+面向对象代码实操
+对象的独有数据
+对象的独有方法
+面对对象前夕
+接下来主要看一下如果不使用面对对象的方式如何定义一些对象和会出现的问题
+代码演示：人汪大战 在这一步可以推导出来，如果有很多的人和很多汪，我们则需要写很多次重复代码
+# 实现步骤1，先定义人和汪汪 person1 ={ &amp;#39;name&amp;#39;: &amp;#39;wesley&amp;#39;, &amp;#39;age&amp;#39;: 18, &amp;#39;gender&amp;#39;: &amp;#39;male&amp;#39;, &amp;#39;p_type&amp;#39;: &amp;#39;猛男&amp;#39;, &amp;#39;attack_val&amp;#39;: 8000, &amp;#39;life_val&amp;#39;: 999999 } person2 = { &amp;#39;name&amp;#39;: &amp;#39;kevin&amp;#39;, &amp;#39;age&amp;#39;: 28, &amp;#39;gender&amp;#39;: &amp;#39;female&amp;#39;, &amp;#39;p_type&amp;#39;: &amp;#39;淑女&amp;#39;, &amp;#39;attack_val&amp;#39;: 1, &amp;#39;life_val&amp;#39;: 100 } dog1 = { &amp;#39;name&amp;#39;: &amp;#39;小黑&amp;#39;, &amp;#39;d_type&amp;#39;: &amp;#39;泰迪&amp;#39;, &amp;#39;attack_val&amp;#39;: 100, &amp;#39;life_val&amp;#39;: 8000 } dog2 = { &amp;#39;name&amp;#39;: &amp;#39;小白&amp;#39;, &amp;#39;d_type&amp;#39;: &amp;#39;恶霸&amp;#39;, &amp;#39;attack_val&amp;#39;: 2, &amp;#39;life_val&amp;#39;: 80000 } 继续向下推导，将产生人和汪星人的字典封装为函数，并封装人和汪星人的攻击函数 1. 创建一个可以传入人数据的函数 def create_person(name, age, gender, p_type, attack_val, life_val): person_dict = { &amp;#39;name&amp;#39;: name, &amp;#39;age&amp;#39;: age, &amp;#39;gender&amp;#39;: gender, &amp;#39;p_type&amp;#39;: p_type, &amp;#39;attack_val&amp;#39;: attack_val, &amp;#39;life_val&amp;#39;: life_val } return person_dict 2.</description>
+    </item>
+    
     <item>
       <title>阶段复习一</title>
       <link>https://jinkes-li.github.io/python/%E9%98%B6%E6%AE%B5%E5%A4%8D%E4%B9%A0%E4%B8%80/</link>
