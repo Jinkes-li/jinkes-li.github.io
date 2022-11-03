@@ -6,7 +6,24 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Nov 2022 20:27:48 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Nov 2022 19:00:58 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python面对对象(中)</title>
+      <link>https://jinkes-li.github.io/python/python%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E4%B8%AD/</link>
+      <pubDate>Thu, 03 Nov 2022 19:00:58 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/python%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E4%B8%AD/</guid>
+      <description>python面向对象 动静态方法
+面对对象值继承理论
+继承基本操作
+对象查找名字的顺序
+继承本质
+基于继承的派生方法
+动静态方法
+方法也就是函数，什么叫动静态呢，就是指自己传参的就是动态，需要手动传参的就是静态，这些方法又是如何被定义的呢，主要方式有三种
+1. 动态方法 class Student: school_name = &amp;#39;摆烂大学&amp;#39; # 1. 类中直接定义函数，默认绑定给对象，类调用有几个参数传几个，对象调用的第一个参数就是对象自身 def func1(self): print(&amp;#39;看看谁最能摆烂，很棒&amp;#39;) obj = Student() # 1. 绑定给对象的方法 obj.func1() # 类调用 Student.func1(123) 结果： 看看谁最能摆烂，很棒 看看谁最能摆烂，很棒 &amp;#34;&amp;#34;&amp;#34; 1. 第一种在定义方法时 在类中直接定义，默认是绑定给对象的，也就是说使用对象调用时会将对象名当做第一个参数传入，所以这里第一步调用的时候不需要额外的参数 2. 而在我们使用类调用这个方法时，有几个参数就需要写几个，需要对应传入的参数并不会有什么特殊的作用仅仅是占位传参 &amp;#34;&amp;#34;&amp;#34; 2. 动态方法 class Student: school_name = &amp;#39;摆烂大学&amp;#39; # 2. 被@classmethod修饰的函数，默认绑定给类，类调用的第一个参数就是类自身，对象也可以调用并且会自动将产生该对象的类当做第一个参数传入 @classmethod def func2(cls): print(&amp;#39;猜猜我是干嘛滴&amp;#39;, cls) obj = Student() # 2. 绑定给类的方法 Student.func2() obj.func2() 猜猜我是干嘛滴 &amp;lt;class &amp;#39;__main__.Student&amp;#39;&amp;gt; 猜猜我是干嘛滴 &amp;lt;class &amp;#39;__main__.</description>
+    </item>
+    
     <item>
       <title>Python面向对象(上)</title>
       <link>https://jinkes-li.github.io/python/python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8A/</link>
