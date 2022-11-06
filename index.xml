@@ -6,7 +6,21 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Nov 2022 19:00:58 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Nov 2022 16:56:07 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第六周总结</title>
+      <link>https://jinkes-li.github.io/python/%E7%AC%AC%E5%85%AD%E5%91%A8%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sun, 06 Nov 2022 16:56:07 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E7%AC%AC%E5%85%AD%E5%91%A8%E6%80%BB%E7%BB%93/</guid>
+      <description>第六周总结 引言：
+本周内容主要在于面向对象编程的思想
+编程思想 面向对象重要理论 面向对象代码实操 对象的独有数据 对象的独有方法 动静态方法 面对对象继承 对象查找名字的顺序 继承的本质 基于继承的派生方法 编程思想 面向过程 面向过程指的是将一个问题进行流程化处理，在处理过程中问题将会越来越简单，最终得到结果 面向对象 面向对象需要把自己当做造物主，将问题拆分创造一个个对象具有解决问题的数据与功能 在面向对象编程中有三大特性
+封装 继承 多态 名词解释： 1. 类： 用来描述具有相同属性和方法的对象的集合，类定义了该集合中每个对象所有的属性和方法，并切对象就是类的实例 2. 对象： 通过类定义的数据结构实例
+面向对象重要理论 多个具有相同属性和功能的对象被称为类 同一个类中的对象都可以调用这个类中的公共功能和数据 在python语言中必须先定义类后才能定义对象 创造对象后 对象是无法控制和预测 面向对象代码实操 # 类的语法 class Class_name: &amp;#34;&amp;#34;&amp;#34; 类的描述 &amp;#34;&amp;#34;&amp;#34; # 类的公共数据 common_data = &amp;#39;123班级&amp;#39; # 类的公共功能 def common_func(self): pass # class 定义类的关键字，后面是类的名字，定义和变量名的区别是首字母大写用于区分 # 类的公共数据，这个类产生的所有对象都可以调用的相同数据，这个数据是共享的 # def common_func(self): 类的公共功能，具有一定功能的函数 在面向对象中，类和对象访问数据或者功能，可以通过句点符点出类中的数据和功能
+查看名称空间 # 定义一个类 class Student: school_name = &amp;#39;野鸡大学&amp;#39; def common_func(self): pass # 查看当前的名称空间 print(Student.</description>
+    </item>
+    
     <item>
       <title>Python面对对象(中)</title>
       <link>https://jinkes-li.github.io/python/python%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E4%B8%AD/</link>
