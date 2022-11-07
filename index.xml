@@ -6,7 +6,22 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 06 Nov 2022 16:56:07 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Nov 2022 20:02:49 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python面向对象(下)</title>
+      <link>https://jinkes-li.github.io/python/python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8B/</link>
+      <pubDate>Mon, 07 Nov 2022 20:02:49 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8B/</guid>
+      <description>python面向对象 派生方法实站演练
+面向对象三大特性之封装
+面向对象三大特性之多态
+面向对象之反射
+反射的实战案例
+派生方法实战演练
+# 需使用序列化的方式的在字典中得到时间 import json import datetime d = { &amp;#39;t1&amp;#39;: datetime.date.today(), &amp;#39;t2&amp;#39;: datetime.datetime.today(), &amp;#39;t3&amp;#39;: &amp;#39;wesley&amp;#39; } res = json.dumps(d) print(res) # 这里打印直接发现报错 1. 方法一 # 使用字符串的方式直接强制转换，在字典的值中使用字符串强制转换 d = { &amp;#39;t1&amp;#39;: str(datetime.date.today()), &amp;#39;t2&amp;#39;: str(datetime.datetime.today()), &amp;#39;t3&amp;#39;: &amp;#39;wesley&amp;#39; } # 得到以下输出 {&amp;#34;t1&amp;#34;: &amp;#34;2022-11-07&amp;#34;, &amp;#34;t2&amp;#34;: &amp;#34;2022-11-07 14:47:01.042696&amp;#34;, &amp;#34;t3&amp;#34;: &amp;#34;wesley&amp;#34;} # 第二种 派生的方法 # 1. 序列化报错，先看一下dumps源码 # 2. 找到了一个命名关键字参数，cls=None 继续向下寻找相关 &amp;#34;&amp;#34;&amp;#34; 3. 通过上述行为找到了关于cls的判断，看到默认传参JSONEncoder，所以这里继续向下寻找 if cls is None: cls = JSONEncoder return cls( 4.</description>
+    </item>
+    
     <item>
       <title>第六周总结</title>
       <link>https://jinkes-li.github.io/python/%E7%AC%AC%E5%85%AD%E5%91%A8%E6%80%BB%E7%BB%93/</link>
