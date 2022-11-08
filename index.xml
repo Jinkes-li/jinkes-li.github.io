@@ -6,7 +6,18 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Nov 2022 20:02:49 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 08 Nov 2022 22:42:11 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>面向对象(终章)</title>
+      <link>https://jinkes-li.github.io/python/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BB%88%E7%AB%A0/</link>
+      <pubDate>Tue, 08 Nov 2022 22:42:11 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BB%88%E7%AB%A0/</guid>
+      <description>面向对象(终章) 面向对象的魔法方法 基于魔法方法的面试题 元类简介 创建类的两种方式 元类定制类的产生行为 元类定制对象的产生行为 魔法方法之双下new方法 设计模式简介及单例模式 面向对象的魔法方法
+欢迎来到魔法学院 魔法方法：类中定义的双下方法都被称为魔法方法 魔法方法不需要人为调用，在特定的条件下会自动触发运行 eg: __init__创建空对象之后自动触发给对象添加独有的数据
+常用的魔法方法 1. __init__ 对象添加独有数据时自动触发 2. __str__ 对象执行打印操作的时候会自动触发 3. __call__ 对象加括号调用的时候会自动触发 4. __getattr__ 对象使用句点符.一个不存在的名字的时候会自动触发 5. __getattribute__ 对象点名字会触发，无论名字是否存在，有它则不会执行上面的getattr方法 6. __setattr__ 给对象添加或修改数据的时候制动触发 对象.名字 = 值 7. __enter__ 当对象被当做with上下文管理里操作的时候开始自动触发，并且该方法返回什么 as 后面的变量名就会接收到什么 8. __exit__ with 上下文管理语法运行完毕后 自动触发（子代码结束） 魔法方法的实际应用 1. 案例一 &amp;#34;&amp;#34;&amp;#34; 题目： 思考如何对下列代码补全炒作，使代码运行不会报错 &amp;#34;&amp;#34;&amp;#34; class Context: def do_something(self): pass def __enter__(self): return self def __exit__(self, exc_type, exc_val, exc_tb): pass with Context() as f: f.</description>
+    </item>
+    
     <item>
       <title>Python面向对象(下)</title>
       <link>https://jinkes-li.github.io/python/python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8B/</link>
