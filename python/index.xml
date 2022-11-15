@@ -6,7 +6,16 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Nov 2022 16:01:38 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Nov 2022 20:56:06 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>网络技术(上)</title>
+      <link>https://jinkes-li.github.io/python/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E4%B8%8A/</link>
+      <pubDate>Tue, 15 Nov 2022 20:56:06 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E4%B8%8A/</guid>
+      <description>开发架构和网络相关 软件开发架构 架构发展趋势 网络编程前夕 OSI七层协议 各种重点协议 1.C/S架构 Client:客户端 Server:服务端 &amp;#34;&amp;#34;&amp;#34; 我们使用计算机下载下来的一个个app本质是各大互联网公司的客户端软件 通过这些客户端软件我们就可以体验到各个互联网公司给我们提供的服务 eg: 下载淘宝客户端 打开 体验淘宝服务端提供的购物服务 下载抖音客户端 打开 体验抖音服务端提供的视频服务 ps:一般情况下客户端与服务端交互需要互联网 但是有些不需要(因为客户端和服务端都在一台计算机上) 客户端:即将要去消费的客人 服务端:给客人提供服务的店 作为服务端必备的多个条件 1.24小时不间断提供服务 2.固定的地址 3.能够服务多个客人(高并发) &amp;#34;&amp;#34;&amp;#34; 2.B/S架构 Browser:浏览器 Server:服务器/端 &amp;#34;&amp;#34;&amp;#34; 浏览器可以充当所有服务端的客户端 ps:B/S架构本质还是C/S架构 &amp;#34;&amp;#34;&amp;#34; &amp;#39;&amp;#39;&amp;#39; C/S架构 优势:不同公司的客户端由不同公司独立开发 可以高度定制化客户端功能 劣势:需要下载才能使用 B/S架构 优势:不用下载直接访问 劣势:无法高度定制化 并且需要遵守很多规则 &amp;#39;&amp;#39;&amp;#39; 架构总结 ATM:三层架构 选课系统:三层架构 本质也属于软件开发架构的范畴 软件设计的大方向&amp;gt;&amp;gt;&amp;gt;:统一接口 微信小程序 支付宝小程序 网络编程前戏 1.什么是网络编程 基于网络编写代码 能够实现数据的远程交互 2.学习网络编程的目的 能够开发cs架构的软件 3.网络编程的起源 &amp;#34;&amp;#34;&amp;#34; 最早起源于美国军事领域 想实现计算机之间数据的交互 最早的时候只能用硬盘拷贝 之后发明了网络编程 &amp;#34;&amp;#34;&amp;#34; 4.网络编程必备条件 数据的远程交互 1.早期的电话 电话线 2.早期的大屁股电脑	网线 3.</description>
+    </item>
+    
     <item>
       <title>程序设计及单例实现</title>
       <link>https://jinkes-li.github.io/python/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%8F%8A%E5%8D%95%E4%BE%8B%E5%AE%9E%E7%8E%B0/</link>
