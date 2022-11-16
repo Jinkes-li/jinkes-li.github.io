@@ -6,7 +6,24 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 Nov 2022 20:56:06 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Nov 2022 19:12:45 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>网络技术(下)</title>
+      <link>https://jinkes-li.github.io/python/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E4%B8%8B/</link>
+      <pubDate>Wed, 16 Nov 2022 19:12:45 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E4%B8%8B/</guid>
+      <description>网络编程 传输层之TCP与UDP 应用层 socket模块简介 socket模块基本使用 代码优化处理 socket黏包问题 黏包问题的解决问题 TCP/IP协议簇 由多个协议组成，其中以TCP于IP为代表，本文详细介绍TCP和UDP
+UDP协议 UDP协议定义了端口，同一个主机上的每个应用程序都需要指定唯一的端口号，并且规定网络中传输的数据包必须加上端口信息，当数据包到达主机以后，就可以根据端口号找到对应的应用程序了。UDP协议比较简单，实现容易，但它没有确认机制，数据包一旦发出，无法知道对方是否收到，因此可靠性较差，为了解决这个问题，提高网络可靠性，TCP协议就诞生了。 TCP协议 TCP即传输控制协议，是一种面向连接的、可靠的、基于字节流的通信协议。简单来说TCP就是有确认机制的UDP协议，每发出一个数据包都要求确认，如果有一个数据包丢失，就收不到确认，发送方就必须重发这个数据包。为了保证传输的可靠性，TCP协议在UDP基础之上建立了三次对话的确认机制，即在正式收发数据前，必须和对方建立可靠的连接。TCP数据包和UDP一样，都是由首部和数据两部分组成，唯一不同的是，TCP数据包没有长度限制，理论上可以无限长，但是为了保证网络的效率，通常TCP数据包的长度不会超过IP数据包的长度，以确保单个TCP数据包不必再分割。 TCP和UDP主要区别 简单来说一个TCP需要建立通道确认应答，UDP则直接发送 这里借鉴鸡哥博客中的原理图
+TCP重要原理图，三次握手四次挥手 应用层 应用层相当于是相当于程序员自己写的程序，本层具有相当多的协议 这里常需要使用的是httpshttp FTP
+socket模块 Socket 是应用层于TCP/IP协议簇通信的之间软件抽象层，是一组接口，在设计模式中，Socket其实就是一个门面模式 把复杂的TCP/IP协议簇隐藏在Socket接口后面，对于用户来说直接调用接口，已符合指定的协议
+套接字（socket）的发展史 套接字起源于 20 世纪 70 年代加利福尼亚大学伯克利分校版本的 Unix,即人们所说的 BSD Unix。 因此,有时人们也把套接字称为“伯克利套接字”或“BSD 套接字”。一开始,套接字被设计用在同 一台主机上多个应用程序之间的通讯。这也被称进程间通讯,或 IPC。套接字有两种（或者称为有两个种族）,分别是基于文件型的和基于网络型的。
+基于文件类型的套接字家族 套接字家族的名字：AF_UNIX unix一切皆文件，基于文件的套接字调用的就是底层的文件系统来取数据，两个套接字进程运行在同一机器，可以通过访问同一个文件系统间接完成通信
+基于网络类型的套接字家族 套接字家族的名字：AF_INET (还有AF_INET6被用于ipv6，还有一些其他的地址家族，不过，他们要么是只用于某个平台，要么就是已经被废弃，或者是很少被使用，或者是根本没有实现，所有地址家族中，AF_INET是使用最广泛的一个，python支持很多种地址家族，但是由于我们只关心网络编程，所以大部分时候我么只使用AF_INET)
+Socket-TCP在python中的应用 本质上来说python中的Socket是一个类，也是一个内置模块，需要导入使用
+1. Server import socket &amp;#34;&amp;#34;&amp;#34; 在写代码时建议查看源码写代码的思路 &amp;#34;&amp;#34;&amp;#34; # 1. 产生一个Socket对象并指定采用的通信版本和协议（TCP） server = socket.socket() # 括号内不写参数，默认使用TCP协议，查看源码得知family=AF_INET基于网络的套接字， type=SOCK_STREAM流式协议即TCP # 2. 绑定一个固定的地址，需要设定对外提供服务的端口和IP server.bind((&amp;#39;127.0.0.1&amp;#39;, 8080)) # 3. 设立半连接池 server.</description>
+    </item>
+    
     <item>
       <title>网络技术(上)</title>
       <link>https://jinkes-li.github.io/python/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E4%B8%8A/</link>
