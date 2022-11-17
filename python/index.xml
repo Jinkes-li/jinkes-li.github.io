@@ -6,7 +6,24 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Nov 2022 19:12:45 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 17 Nov 2022 21:36:13 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>并发编程(上)</title>
+      <link>https://jinkes-li.github.io/python/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B8%8A/</link>
+      <pubDate>Thu, 17 Nov 2022 21:36:13 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B8%8A/</guid>
+      <description>UDP基本代码使用
+并发编程理论之操作系统发展史
+多道技术
+进程理论及调度算法
+用户太与系统态
+UDP协议
+UDP（user datagram protocol，用户数据报协议）是无连接的，面向消息的，提供高效率服务。 不会使用块的合并优化算法，, 由于UDP支持的是一对多的模式，所以接收端的skbuff(套接字缓冲区）采用了链式结构来记录每一个到达的UDP包，在每个UDP包中就有了消息头（消息来源地址，端口等信息），这样，对于接收端来说，就容易进行区分处理了。 即面向消息的通信是有消息保护边界的。 对于空消息：tcp是基于数据流的，于是收发的消息不能为空，这就需要在客户端和服务端都添加空消息的处理机制，防止程序卡住，而udp是基于数据报的，即便是你输入的是空内容（直接回车），也可以被发送，udp协议会帮你封装上消息头发送过去。 不可靠不黏包的udp协议：udp的recvfrom是阻塞的，一个recvfrom(x)必须对唯一一个sendinto(y),收完了x个字节的数据就算完成,若是y;x数据就丢失，这意味着udp根本不会粘包，但是会丢数据，不可靠。
+进程 进程（Process）是计算机中的程序关于某数据集合上的一次运行活动，是系统进行资源分配和调度的基本单位，是操作系统结构的基础。在早期面向进程设计的计算机结构中，进程是程序的基本执行实体；在当代面向线程设计的计算机结构中，进程是线程的容器。程序是指令、数据及其组织形式的描述，进程是程序的实体。 狭义定义：进程是正在运行的程序的实例（an instance of a computer program that is being executed）。 广义定义：进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。 需要理解进程就需要先理解程序
+程序： 值得是存放在存储设备上的可执行文件 进程：被操作系统运行起来的程序的另一种形式，可以看做是程序的另一种状态 单道技术和多道技术 单道技术 所有的程序排队执行 过程中不能重合 多道技术 利用空闲时间提前准备其他数据 最大化提升CPU利用率 多道技术详细 1.切换 计算机的CPU在两种情况下会切换(不让你用 给别人用) 1.程序有IO操作 输入\输出操作 input、time.sleep、read、write 2.程序长时间占用CPU	我们得雨露均沾 让多个程序都能被CPU运行一下 2.保存状态 CPU每次切换走之前都需要保存当前操作的状态 下次切换回来基于上次的进度继续执行 进程理论 进程与程序的区别 程序:一堆死代码(还没有被运行起来) 进程:正在运行的程序(被运行起来了) 进程的调度算法(重要) 1.FCFS(先来先服务) 对短作业不友好 2.短作业优先调度 对长作业不友好 3.时间片轮转法+多级反馈队列(目前还在用) 将时间均分 然后根据进程时间长短再分多个等级 等级越靠下表示耗时越长 每次分到的时间越多 但是优先级越低 进程的并行与并发 并行 多个进程同时执行 必须要有多个CPU参与 单个CPU无法实现并行 并发 多个进程看上去像同时执行 单个CPU可以实现 多个CPU肯定也可以 判断下列两句话孰对孰错 我写的程序很牛逼，运行起来之后可以实现14个亿的并行量 并行量必须要有对等的CPU才可以实现 我写的程序很牛逼，运行起来之后可以实现14个亿的并发量 合情合理 完全可以实现	以后我们的项目一般都会追求高并发 ps:目前国内可以说是最牛逼的&amp;gt;&amp;gt;&amp;gt;:12306 进程的三状态 就绪态 所有的进程在被CPU执行之前都必须先进入就绪态等待 运行态 CPU正在执行 阻塞态 进程运行过程中出现了IO操作 阻塞态无法直接进入运行态 需要先进入就绪态 用户态和内核态的转换 用户态切换到内核态的3种方式 a.</description>
+    </item>
+    
     <item>
       <title>网络技术(下)</title>
       <link>https://jinkes-li.github.io/python/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E4%B8%8B/</link>

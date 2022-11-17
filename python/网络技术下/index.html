@@ -242,6 +242,133 @@ unix一切皆文件，基于文件的套接字调用的就是底层的文件系�
 </span></span><span style="display:flex;"><span>    client<span style="color:#f92672">.</span>send(msg)
 </span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
 </span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;来自服务器发送的消息&gt;&gt;&gt;:&#39;</span>, data<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;UTF-8&#39;</span>))
+</span></span></code></pre></div><ul>
+<li>
+<p>更新 2022-11-17</p>
+</li>
+<li>
+<p>黏包现象</p>
+</li>
+</ul>
+<blockquote>
+<p>在使用上述的网络编程的方式实现了网络的通讯的同时带来了新的问题
+黏包：简单来说就是服务端不清楚需要接受多少次的数据算作完整的数据包，黏包显现的出现，会将后面的数据包的内容切到前一个数据包的尾部</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>一<span style="color:#960050;background-color:#1e0010">、</span>黏包成因
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">、</span>tcp协议的拆包机制
+</span></span><span style="display:flex;"><span>当发送端缓冲区的长度大于网卡的MTU时<span style="color:#960050;background-color:#1e0010">，</span>tcp会将这次发送的数据拆成几个数据包发送出去<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span>MTU是Maximum Transmission Unit的缩写<span style="color:#960050;background-color:#1e0010">。</span>意思是网络上传送的最大数据包<span style="color:#960050;background-color:#1e0010">。</span>MTU的单位是字节<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span>大部分网络设备的MTU都是1500<span style="color:#960050;background-color:#1e0010">。</span>如果本机的MTU比网关的MTU大<span style="color:#960050;background-color:#1e0010">，</span>大的数据包就会被拆开来传送<span style="color:#960050;background-color:#1e0010">，</span>
+</span></span><span style="display:flex;"><span>这样会产生很多数据包碎片<span style="color:#960050;background-color:#1e0010">，</span>增加丢包率<span style="color:#960050;background-color:#1e0010">，</span>降低网络速度<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">、</span>tcp的合包机制
+</span></span><span style="display:flex;"><span>TCP<span style="color:#960050;background-color:#1e0010">（</span>transport control protocol<span style="color:#960050;background-color:#1e0010">，</span>传输控制协议<span style="color:#960050;background-color:#1e0010">）</span>是面向连接的<span style="color:#960050;background-color:#1e0010">，</span>面向流的<span style="color:#960050;background-color:#1e0010">，</span>提供高可靠性服务<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span>收发两端<span style="color:#960050;background-color:#1e0010">（</span>客户端和服务器端<span style="color:#960050;background-color:#1e0010">）</span>都要有一一成对的socket<span style="color:#960050;background-color:#1e0010">，</span>因此<span style="color:#960050;background-color:#1e0010">，</span>发送端为了将多个发往接收端的包<span style="color:#960050;background-color:#1e0010">，</span>更有效的发到对方<span style="color:#960050;background-color:#1e0010">，</span>
+</span></span><span style="display:flex;"><span>使用了优化方法<span style="color:#960050;background-color:#1e0010">（</span>Nagle算法<span style="color:#960050;background-color:#1e0010">），</span>将多次间隔较小且数据量小的数据<span style="color:#960050;background-color:#1e0010">，</span>合并成一个大的数据块<span style="color:#960050;background-color:#1e0010">，</span>然后进行封包<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span>但是这样<span style="color:#960050;background-color:#1e0010">，</span>接收端<span style="color:#960050;background-color:#1e0010">，</span>就难于分辨出来了<span style="color:#960050;background-color:#1e0010">，</span>必须提供科学的拆包机制<span style="color:#960050;background-color:#1e0010">。</span> 即面向流的通信是无消息保护边界的<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span>对于空消息<span style="color:#960050;background-color:#1e0010">：</span>tcp是基于数据流的<span style="color:#960050;background-color:#1e0010">，</span>于是收发的消息不能为空<span style="color:#960050;background-color:#1e0010">，</span>这就需要在客户端和服务端都添加空消息的处理机制<span style="color:#960050;background-color:#1e0010">，</span>防止程序卡住<span style="color:#960050;background-color:#1e0010">，</span>
+</span></span><span style="display:flex;"><span>而udp是基于数据报的<span style="color:#960050;background-color:#1e0010">，</span>即便是你输入的是空内容<span style="color:#960050;background-color:#1e0010">（</span>直接回车<span style="color:#960050;background-color:#1e0010">），</span>也可以被发送<span style="color:#960050;background-color:#1e0010">，</span>udp协议会帮你封装上消息头发送过去<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span>可靠黏包的tcp协议<span style="color:#960050;background-color:#1e0010">：</span>tcp的协议数据不会丢<span style="color:#960050;background-color:#1e0010">，</span>没有收完包<span style="color:#960050;background-color:#1e0010">，</span>下次接收<span style="color:#960050;background-color:#1e0010">，</span>会继续上次继续接收<span style="color:#960050;background-color:#1e0010">，</span>己端总是在收到ack时才会清除缓冲区内容<span style="color:#960050;background-color:#1e0010">。</span>数据是可靠的<span style="color:#960050;background-color:#1e0010">，</span>但是会粘包<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span><span style="color:#960050;background-color:#1e0010">、</span>说明
+</span></span><span style="display:flex;"><span>发送端可以是一K一K地发送数据<span style="color:#960050;background-color:#1e0010">，</span>而接收端的应用程序可以两K两K地提走数据<span style="color:#960050;background-color:#1e0010">，</span>当然也有可能一次提走3K或6K数据<span style="color:#960050;background-color:#1e0010">，</span>或者一次只提走几个字节的数据<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span>也就是说<span style="color:#960050;background-color:#1e0010">，</span>应用程序所看到的数据是一个整体<span style="color:#960050;background-color:#1e0010">，</span>或说是一个流<span style="color:#960050;background-color:#1e0010">（</span>stream<span style="color:#960050;background-color:#1e0010">），</span>一条消息有多少字节对应用程序是不可见的<span style="color:#960050;background-color:#1e0010">，</span>因此TCP协议是面向流的协议<span style="color:#960050;background-color:#1e0010">，</span>这也是容易出现粘包问题的原因<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span>而UDP是面向消息的协议<span style="color:#960050;background-color:#1e0010">，</span>每个UDP段都是一条消息<span style="color:#960050;background-color:#1e0010">，</span>应用程序必须以消息为单位提取数据<span style="color:#960050;background-color:#1e0010">，</span>不能一次提取任意字节的数据<span style="color:#960050;background-color:#1e0010">，</span>这一点和TCP是很不同的<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span>怎样定义消息呢<span style="color:#960050;background-color:#1e0010">？</span>可以认为对方一次性write<span style="color:#f92672">/</span>send的数据为一个消息<span style="color:#960050;background-color:#1e0010">，</span>需要明白的是当对方send一条信息的时候<span style="color:#960050;background-color:#1e0010">，</span>无论底层怎样分段分片<span style="color:#960050;background-color:#1e0010">，</span>TCP协议层会把构成整条消息的数据段排序完成后才呈现在内核缓冲区<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>也就是<span style="color:#960050;background-color:#1e0010">：</span>
+</span></span><span style="display:flex;"><span>用UDP协议发送时<span style="color:#960050;background-color:#1e0010">，</span>用sendto函数最大能发送数据的长度为<span style="color:#960050;background-color:#1e0010">：</span><span style="color:#ae81ff">65535</span><span style="color:#f92672">-</span> IP头(<span style="color:#ae81ff">20</span>) <span style="color:#960050;background-color:#1e0010">–</span> UDP头(<span style="color:#ae81ff">8</span>)<span style="color:#960050;background-color:#1e0010">＝</span><span style="color:#ae81ff">65507</span>字节<span style="color:#960050;background-color:#1e0010">。</span>用sendto函数发送数据时<span style="color:#960050;background-color:#1e0010">，</span>如果发送数据长度大于该值<span style="color:#960050;background-color:#1e0010">，</span>
+</span></span><span style="display:flex;"><span>则函数会返回错误<span style="color:#960050;background-color:#1e0010">。（</span>丢弃这个包<span style="color:#960050;background-color:#1e0010">，</span>不进行发送<span style="color:#960050;background-color:#1e0010">）</span> 
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>用TCP协议发送时<span style="color:#960050;background-color:#1e0010">，</span>由于TCP是数据流协议<span style="color:#960050;background-color:#1e0010">，</span>因此不存在包大小的限制<span style="color:#960050;background-color:#1e0010">（</span>暂不考虑缓冲区的大小<span style="color:#960050;background-color:#1e0010">），</span>这是指在用send函数时<span style="color:#960050;background-color:#1e0010">，</span>数据长度参数不受限制<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span>而实际上<span style="color:#960050;background-color:#1e0010">，</span>所指定的这段数据并不一定会一次性发送出去<span style="color:#960050;background-color:#1e0010">，</span>如果这段数据比较长<span style="color:#960050;background-color:#1e0010">，</span>会被分段发送<span style="color:#960050;background-color:#1e0010">，</span>如果比较短<span style="color:#960050;background-color:#1e0010">，</span>可能会等待和下一次数据一起发送<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>例如<span style="color:#960050;background-color:#1e0010">：</span>
+</span></span><span style="display:flex;"><span>基于tcp的套接字客户端往服务端上传文件<span style="color:#960050;background-color:#1e0010">，</span>发送时文件内容是按照一段一段的字节流发送的<span style="color:#960050;background-color:#1e0010">，</span>在接收方看了<span style="color:#960050;background-color:#1e0010">，</span>根本不知道该文件的字节流从何处开始<span style="color:#960050;background-color:#1e0010">，</span>在何处结束
+</span></span><span style="display:flex;"><span>此外<span style="color:#960050;background-color:#1e0010">，</span>发送方引起的粘包是由TCP协议本身造成的<span style="color:#960050;background-color:#1e0010">，</span>TCP为提高传输效率<span style="color:#960050;background-color:#1e0010">，</span>发送方往往要收集到足够多的数据后才发送一个TCP段<span style="color:#960050;background-color:#1e0010">。</span>若连续几次需要send的数据都很少<span style="color:#960050;background-color:#1e0010">，</span>
+</span></span><span style="display:flex;"><span>通常TCP会根据优化算法把这些数据合成一个TCP段后一次发送出去<span style="color:#960050;background-color:#1e0010">，</span>这样接收方就收到了粘包数据<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span></code></pre></div><ul>
+<li>如何避免黏包</li>
+</ul>
+<blockquote>
+<p>需要明确服务端需要接收多大的数据包，再次之前如何将数据的长度作为报文的元数据提前发送给服务端并解析</p>
+</blockquote>
+<ol>
+<li>解决方案</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>客户端
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> 制作真实数据的信息字典<span style="color:#960050;background-color:#1e0010">（</span>数据长度<span style="color:#960050;background-color:#1e0010">，</span>数据简介<span style="color:#960050;background-color:#1e0010">，</span> 数据名称<span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> 利用struct模块制作字典的报头
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> 发送固定长度的报头<span style="color:#960050;background-color:#1e0010">（</span>解析出来是字典的长度<span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> 发送字典数据
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.</span> 发送真实数据
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> socket
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> struct
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>client <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket()
+</span></span><span style="display:flex;"><span>client<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#ae81ff">8080</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 需要获取真实数据大小</span>
+</span></span><span style="display:flex;"><span>file_size <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>getsize(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;/Users/wesley/PycharmProjects/pythonProject5/间谍过家家第13集.mp4&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 制作真实数据的字典描述数据</span>
+</span></span><span style="display:flex;"><span>data_dict <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;file_name&#39;</span>: <span style="color:#e6db74">&#39;lala.mp4&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;file_size&#39;</span>: file_size,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;file_desc&#39;</span>: <span style="color:#e6db74">&#39;这是一个好看的视频&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;file_info&#39;</span>: <span style="color:#e6db74">&#39;请准备好瓜子花生矿泉水&#39;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 制作字典报头</span>
+</span></span><span style="display:flex;"><span>data_dict_bytes <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>dumps(data_dict)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf8&#39;</span>)
+</span></span><span style="display:flex;"><span>data_dict_len <span style="color:#f92672">=</span> struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#39;i&#39;</span>, len(data_dict_bytes))
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 发送字典报头</span>
+</span></span><span style="display:flex;"><span>client<span style="color:#f92672">.</span>send(data_dict_len)  <span style="color:#75715e"># 报头本身也是bytes类型，我们在看的使用用len长度是4</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 发送字典数据</span>
+</span></span><span style="display:flex;"><span>client<span style="color:#f92672">.</span>send(data_dict_bytes)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 最后发送真实数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;/Users/wesley/PycharmProjects/pythonProject5/间谍过家家第13集.mp4&#39;</span>, <span style="color:#e6db74">&#39;rb&#39;</span> ) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> f:
+</span></span><span style="display:flex;"><span>        client<span style="color:#f92672">.</span>send(line)
+</span></span><span style="display:flex;"><span>        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.0001</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 服务端</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> 接收固定长度的字典报头
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> 解析出字典长度并接收
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> 通过字典获取到真实数据的各项信息
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> 接收真实数据长度
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> socket
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> struct
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>server <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket()
+</span></span><span style="display:flex;"><span>server<span style="color:#f92672">.</span>bind((<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#ae81ff">8080</span>))
+</span></span><span style="display:flex;"><span>server<span style="color:#f92672">.</span>listen(<span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sock, addr <span style="color:#f92672">=</span> server<span style="color:#f92672">.</span>accept()
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 需要接送用于描述真实信息的字典报头</span>
+</span></span><span style="display:flex;"><span>data_dict_head <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 根据报头解析出字典数据的长度</span>
+</span></span><span style="display:flex;"><span>data_dict_len <span style="color:#f92672">=</span> struct<span style="color:#f92672">.</span>unpack(<span style="color:#e6db74">&#39;i&#39;</span>, data_dict_head)[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 接收字典数据</span>
+</span></span><span style="display:flex;"><span>data_dict_bytes <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>recv(data_dict_len)
+</span></span><span style="display:flex;"><span>data_dict <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(data_dict_bytes) <span style="color:#75715e"># 自动解码再反序列化</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 获取数据的各项信息，一般比较建议使用循环的方式来获取</span>
+</span></span><span style="display:flex;"><span>total_size <span style="color:#f92672">=</span> data_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;file_size&#39;</span>)
+</span></span><span style="display:flex;"><span>recv_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(data_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;file_name&#39;</span>), <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> recv_size <span style="color:#f92672">&lt;</span> total_size:
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
+</span></span><span style="display:flex;"><span>        f<span style="color:#f92672">.</span>write(data)
+</span></span><span style="display:flex;"><span>        recv_size <span style="color:#f92672">+=</span> len(data)
+</span></span><span style="display:flex;"><span>        print(recv_size)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">在使用上述代码对数据进行传输时，如果跨网络需要对时间进行一定的限制，客户端需要稍微限制一下发送间隔不然较为容易被操作系统认作为攻击
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
 </span></span></code></pre></div>
   
   </div>
