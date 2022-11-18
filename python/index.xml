@@ -6,7 +6,26 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 17 Nov 2022 21:36:13 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Nov 2022 23:35:48 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>并发编程(中)</title>
+      <link>https://jinkes-li.github.io/python/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B8%AD/</link>
+      <pubDate>Fri, 18 Nov 2022 23:35:48 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B8%AD/</guid>
+      <description>同步与异步 阻塞与非阻塞 创建进程的多种方式 进程join方法 进程间数据隔离 进程间通信之IPC机制 进程对象诸多方法 生产者消费者模型 互斥锁 引言：
+在了解接下里的概念需要先明白一些基本知识
+任务：操作系统可以同时运行多个任务。例如：一边上网，一边听音乐。这就是操作系统的多任务。操作系统会轮流让各个任务交替执行，但由于CPU的执行实在是太快了，给我们感觉就像所有任务都在同时进行一样。 进程：一个任务就是一个进程 线程：线程是进程的基本单位，一个任务最少有一个线程 同步与异步 同步和异步说的都是编程语言在执行代码时的一个状态，简而言之的描述就是用来表达人物的提交方式
+同步 当提交任务后会等待返回结果再向下执行，相当与如果没有返回代码会一直等待
+异步 当提交任务后不会等待返回的结果，代码则继续执行，如果有结果会通过反馈机制返回
+阻塞与非阻塞 阻塞和非阻塞说的就是当前程序的执行状态
+阻塞 程序运行中的三状态的阻塞态
+非阻塞 程序运行中的三状态的就绪态和运行态
+需要明白的是一般我们再说这几种状态时，会组合着说
+同步阻塞 同步非阻塞 异步阻塞 异步非阻塞（效率最高） 创建进程的方式 在使用桌面操作系统时，当我们使用鼠标双击一个应用程序，程序运行就相当于创建了一个进程 例如电脑上的qq可以开多个，这也就是相当于开了多进程 那么在python中如何开启多个进程，代码实例如下 小知识：win和linux/mac 操作系统创建经常方式的区别
+win中在创建进程时会以模块导入的方式将代码导入内存中执行，这样会导致重复执行所以在win中创建多经常需要添加main来判断是不是执行文件，否则会出现重复导入的问题 linux或者mac系统同在创建多进程时，会直接将创建进程上面的代码复制到内存当中，所以在linux中或者mac中不存在这个问题 关于创建子进程，UNIX和windows 1.相同的是：进程创建后，父进程和子进程有各自不同的地址空间（多道技术要求物理层面实现进程之间内存的隔离），任何一个进程的在其地址空间中的修改都不会影响到另外一个进程。 2.不同的是：在UNIX中，子进程的初始地址空间是父进程的一个副本，提示：子进程和父进程是可以有只读的共享内存区的。但是对于windows系统来说，从一开始父进程与子进程的地址空间就是不同的。 # 创建进程的方式 # 需要使用multiprocessing 这个包下的Process from multiprocessing import Process import time def task(): print(&amp;#39;task is running&amp;#39;, &amp;#39;wesley&amp;#39;) time.sleep(3) print(&amp;#39;task is over&amp;#39;, &amp;#39;wesley&amp;#39;) if __name__ == &amp;#39;__main__&amp;#39;: p1 = Process(target=task) # 使用Process生成进程对象 p1.</description>
+    </item>
+    
     <item>
       <title>并发编程(上)</title>
       <link>https://jinkes-li.github.io/python/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B8%8A/</link>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 并发编程(中) | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/python/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B8%AD/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="并发编程(中)" />
+<meta property="og:description" content="同步与异步 阻塞与非阻塞 创建进程的多种方式 进程join方法 进程间数据隔离 进程间通信之IPC机制 进程对象诸多方法 生产者消费者模型 互斥锁 引言：
+在了解接下里的概念需要先明白一些基本知识
+任务：操作系统可以同时运行多个任务。例如：一边上网，一边听音乐。这就是操作系统的多任务。操作系统会轮流让各个任务交替执行，但由于CPU的执行实在是太快了，给我们感觉就像所有任务都在同时进行一样。 进程：一个任务就是一个进程 线程：线程是进程的基本单位，一个任务最少有一个线程 同步与异步 同步和异步说的都是编程语言在执行代码时的一个状态，简而言之的描述就是用来表达人物的提交方式
+同步 当提交任务后会等待返回结果再向下执行，相当与如果没有返回代码会一直等待
+异步 当提交任务后不会等待返回的结果，代码则继续执行，如果有结果会通过反馈机制返回
+阻塞与非阻塞 阻塞和非阻塞说的就是当前程序的执行状态
+阻塞 程序运行中的三状态的阻塞态
+非阻塞 程序运行中的三状态的就绪态和运行态
+需要明白的是一般我们再说这几种状态时，会组合着说
+同步阻塞 同步非阻塞 异步阻塞 异步非阻塞（效率最高） 创建进程的方式 在使用桌面操作系统时，当我们使用鼠标双击一个应用程序，程序运行就相当于创建了一个进程 例如电脑上的qq可以开多个，这也就是相当于开了多进程 那么在python中如何开启多个进程，代码实例如下 小知识：win和linux/mac 操作系统创建经常方式的区别
+win中在创建进程时会以模块导入的方式将代码导入内存中执行，这样会导致重复执行所以在win中创建多经常需要添加main来判断是不是执行文件，否则会出现重复导入的问题 linux或者mac系统同在创建多进程时，会直接将创建进程上面的代码复制到内存当中，所以在linux中或者mac中不存在这个问题 关于创建子进程，UNIX和windows 1.相同的是：进程创建后，父进程和子进程有各自不同的地址空间（多道技术要求物理层面实现进程之间内存的隔离），任何一个进程的在其地址空间中的修改都不会影响到另外一个进程。 2.不同的是：在UNIX中，子进程的初始地址空间是父进程的一个副本，提示：子进程和父进程是可以有只读的共享内存区的。但是对于windows系统来说，从一开始父进程与子进程的地址空间就是不同的。 # 创建进程的方式 # 需要使用multiprocessing 这个包下的Process from multiprocessing import Process import time def task(): print(&#39;task is running&#39;, &#39;wesley&#39;) time.sleep(3) print(&#39;task is over&#39;, &#39;wesley&#39;) if __name__ == &#39;__main__&#39;: p1 = Process(target=task) # 使用Process生成进程对象 p1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/python/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B8%AD/" /><meta property="article:section" content="python" />
+<meta property="article:published_time" content="2022-11-18T23:35:48+08:00" />
+<meta property="article:modified_time" content="2022-11-18T23:35:48+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="并发编程(中)"/>
+<meta name="twitter:description" content="同步与异步 阻塞与非阻塞 创建进程的多种方式 进程join方法 进程间数据隔离 进程间通信之IPC机制 进程对象诸多方法 生产者消费者模型 互斥锁 引言：
+在了解接下里的概念需要先明白一些基本知识
+任务：操作系统可以同时运行多个任务。例如：一边上网，一边听音乐。这就是操作系统的多任务。操作系统会轮流让各个任务交替执行，但由于CPU的执行实在是太快了，给我们感觉就像所有任务都在同时进行一样。 进程：一个任务就是一个进程 线程：线程是进程的基本单位，一个任务最少有一个线程 同步与异步 同步和异步说的都是编程语言在执行代码时的一个状态，简而言之的描述就是用来表达人物的提交方式
+同步 当提交任务后会等待返回结果再向下执行，相当与如果没有返回代码会一直等待
+异步 当提交任务后不会等待返回的结果，代码则继续执行，如果有结果会通过反馈机制返回
+阻塞与非阻塞 阻塞和非阻塞说的就是当前程序的执行状态
+阻塞 程序运行中的三状态的阻塞态
+非阻塞 程序运行中的三状态的就绪态和运行态
+需要明白的是一般我们再说这几种状态时，会组合着说
+同步阻塞 同步非阻塞 异步阻塞 异步非阻塞（效率最高） 创建进程的方式 在使用桌面操作系统时，当我们使用鼠标双击一个应用程序，程序运行就相当于创建了一个进程 例如电脑上的qq可以开多个，这也就是相当于开了多进程 那么在python中如何开启多个进程，代码实例如下 小知识：win和linux/mac 操作系统创建经常方式的区别
+win中在创建进程时会以模块导入的方式将代码导入内存中执行，这样会导致重复执行所以在win中创建多经常需要添加main来判断是不是执行文件，否则会出现重复导入的问题 linux或者mac系统同在创建多进程时，会直接将创建进程上面的代码复制到内存当中，所以在linux中或者mac中不存在这个问题 关于创建子进程，UNIX和windows 1.相同的是：进程创建后，父进程和子进程有各自不同的地址空间（多道技术要求物理层面实现进程之间内存的隔离），任何一个进程的在其地址空间中的修改都不会影响到另外一个进程。 2.不同的是：在UNIX中，子进程的初始地址空间是父进程的一个副本，提示：子进程和父进程是可以有只读的共享内存区的。但是对于windows系统来说，从一开始父进程与子进程的地址空间就是不同的。 # 创建进程的方式 # 需要使用multiprocessing 这个包下的Process from multiprocessing import Process import time def task(): print(&#39;task is running&#39;, &#39;wesley&#39;) time.sleep(3) print(&#39;task is over&#39;, &#39;wesley&#39;) if __name__ == &#39;__main__&#39;: p1 = Process(target=task) # 使用Process生成进程对象 p1."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <ul>
+<li>同步与异步</li>
+<li>阻塞与非阻塞</li>
+<li>创建进程的多种方式</li>
+<li>进程join方法</li>
+<li>进程间数据隔离</li>
+<li>进程间通信之IPC机制</li>
+<li>进程对象诸多方法</li>
+<li>生产者消费者模型</li>
+<li>互斥锁</li>
+</ul>
+<p>引言：</p>
+<blockquote>
+<p>在了解接下里的概念需要先明白一些基本知识</p>
+<ol>
+<li>任务：操作系统可以同时运行多个任务。例如：一边上网，一边听音乐。这就是操作系统的多任务。操作系统会轮流让各个任务交替执行，但由于CPU的执行实在是太快了，给我们感觉就像所有任务都在同时进行一样。</li>
+<li>进程：一个任务就是一个进程</li>
+<li>线程：线程是进程的基本单位，一个任务最少有一个线程</li>
+</ol>
+</blockquote>
+<ul>
+<li>同步与异步</li>
+</ul>
+<blockquote>
+<p>同步和异步说的都是编程语言在执行代码时的一个状态，简而言之的描述就是用来表达人物的提交方式</p>
+</blockquote>
+<ol>
+<li>
+<p>同步
+当提交任务后会等待返回结果再向下执行，相当与如果没有返回代码会一直等待</p>
+</li>
+<li>
+<p>异步
+当提交任务后不会等待返回的结果，代码则继续执行，如果有结果会通过反馈机制返回</p>
+</li>
+</ol>
+<ul>
+<li>阻塞与非阻塞</li>
+</ul>
+<blockquote>
+<p>阻塞和非阻塞说的就是当前程序的执行状态</p>
+</blockquote>
+<ol>
+<li>
+<p>阻塞
+程序运行中的三状态的阻塞态</p>
+</li>
+<li>
+<p>非阻塞
+程序运行中的三状态的就绪态和运行态</p>
+</li>
+</ol>
+<p>需要明白的是一般我们再说这几种状态时，会组合着说</p>
+<ol>
+<li>同步阻塞</li>
+<li>同步非阻塞</li>
+<li>异步阻塞</li>
+<li>异步非阻塞（效率最高）</li>
+</ol>
+<ul>
+<li>创建进程的方式</li>
+</ul>
+<blockquote>
+<ol>
+<li>在使用桌面操作系统时，当我们使用鼠标双击一个应用程序，程序运行就相当于创建了一个进程</li>
+<li>例如电脑上的qq可以开多个，这也就是相当于开了多进程
+那么在python中如何开启多个进程，代码实例如下</li>
+</ol>
+</blockquote>
+<p>小知识：win和linux/mac 操作系统创建经常方式的区别</p>
+<ol>
+<li>win中在创建进程时会以模块导入的方式将代码导入内存中执行，这样会导致重复执行所以在win中创建多经常需要添加main来判断是不是执行文件，否则会出现重复导入的问题</li>
+<li>linux或者mac系统同在创建多进程时，会直接将创建进程上面的代码复制到内存当中，所以在linux中或者mac中不存在这个问题</li>
+</ol>
+<ul>
+<li>关于创建子进程，UNIX和windows
+　　1.相同的是：进程创建后，父进程和子进程有各自不同的地址空间（多道技术要求物理层面实现进程之间内存的隔离），任何一个进程的在其地址空间中的修改都不会影响到另外一个进程。
+　　2.不同的是：在UNIX中，子进程的初始地址空间是父进程的一个副本，提示：子进程和父进程是可以有只读的共享内存区的。但是对于windows系统来说，从一开始父进程与子进程的地址空间就是不同的。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 创建进程的方式</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 需要使用multiprocessing 这个包下的Process</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> multiprocessing <span style="color:#f92672">import</span> Process
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">task</span>():
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;task is running&#39;</span>, <span style="color:#e6db74">&#39;wesley&#39;</span>)
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;task is over&#39;</span>, <span style="color:#e6db74">&#39;wesley&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    p1 <span style="color:#f92672">=</span> Process(target<span style="color:#f92672">=</span>task)  <span style="color:#75715e"># 使用Process生成进程对象</span>
+</span></span><span style="display:flex;"><span>    p1<span style="color:#f92672">.</span>start()  <span style="color:#75715e"># 启动子进程，</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;主&#39;</span>) 
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">这里需要注意，在启动子进程时上面的函数就会被启动，并且是异步的方式执行
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>创建进程传值方式</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 创建进程并传值</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> multiprocessing <span style="color:#f92672">import</span> Process
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">task</span>(name):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;task is running&#39;</span>, name)
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;task is over&#39;</span>, name)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    p1 <span style="color:#f92672">=</span> Process(target<span style="color:#f92672">=</span>task, args<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;wesley&#39;</span>,))
+</span></span><span style="display:flex;"><span>    p1<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;主&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">第一种传值方式使用使用 args来定义变量的值，在函数中使用变量进行调用
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>创建进程并使用键值的方式传值</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 在创建进程时使用对Process的继承方法进行重写</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> multiprocessing <span style="color:#f92672">import</span> Process
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyProcess</span>(Process):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, name, age):
+</span></span><span style="display:flex;"><span>        super()<span style="color:#f92672">.</span>__init__()
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;run is running&#39;</span>, self<span style="color:#f92672">.</span>name, self<span style="color:#f92672">.</span>age)
+</span></span><span style="display:flex;"><span>        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;run is over&#39;</span>, self<span style="color:#f92672">.</span>name, self<span style="color:#f92672">.</span>age)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    obj <span style="color:#f92672">=</span> MyProcess(<span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span>    obj<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;主&#39;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">需要注意的是这种方法本质上来说是对类中定义的值的一个重新复复赋值的一个操作
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>进程间数据隔离</li>
+</ul>
+<blockquote>
+<p>严格意义上来说 一台物理机上的进程是相互隔离的其中的数据无法被调用(默认情况)</p>
+<ol>
+<li>在UNIX中该系统调用是：fork，fork会创建一个与父进程一模一样的副本，二者有相同的存储映像、同样的环境字符串和同样的打开文件（在shell解释器进程中，执行一个命令就会创建一个子进程）</li>
+<li>在windows中该系统调用是：CreateProcess，CreateProcess既处理进程的创建，也负责把正确的程序装入新进程。</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> multiprocessing <span style="color:#f92672">import</span> Process
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>money <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>  <span style="color:#75715e"># 全局变量</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">task</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">global</span> money
+</span></span><span style="display:flex;"><span>    money <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;子进程的task函数查看money&#39;</span>, money)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    p1 <span style="color:#f92672">=</span> Process(target<span style="color:#f92672">=</span>task)
+</span></span><span style="display:flex;"><span>    p1<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>    print(money)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>子进程的task函数查看money <span style="color:#ae81ff">666</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">由于进程默认数据是全部隔离的，所以这里子进程的数据是666，主进程的数据是1000
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>进程的join方法</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 进程的join方法</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> multiprocessing <span style="color:#f92672">import</span> Process
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">task</span>(name, n):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> is running&#39;</span> <span style="color:#f92672">%</span> name)
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(n)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> is over&#39;</span> <span style="color:#f92672">%</span> name)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    p1 <span style="color:#f92672">=</span> Process(target<span style="color:#f92672">=</span>task, args<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;wesley1&#39;</span>, <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>    p2 <span style="color:#f92672">=</span> Process(target<span style="color:#f92672">=</span>task, args<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;wesley2&#39;</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>    p3 <span style="color:#f92672">=</span> Process(target<span style="color:#f92672">=</span>task, args<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;wesley3&#39;</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;主进程代码等待子进程代码运行结束再执行&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    start_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>    p1<span style="color:#f92672">.</span>start()  <span style="color:#75715e"># 异步</span>
+</span></span><span style="display:flex;"><span>    p2<span style="color:#f92672">.</span>start()  <span style="color:#75715e"># 异步</span>
+</span></span><span style="display:flex;"><span>    p3<span style="color:#f92672">.</span>start()  <span style="color:#75715e"># 异步</span>
+</span></span><span style="display:flex;"><span>    p1<span style="color:#f92672">.</span>join()
+</span></span><span style="display:flex;"><span>    p2<span style="color:#f92672">.</span>join()
+</span></span><span style="display:flex;"><span>    p3<span style="color:#f92672">.</span>join()
+</span></span><span style="display:flex;"><span>    print(time<span style="color:#f92672">.</span>time() <span style="color:#f92672">-</span> start_time)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.057915687561035</span>  <span style="color:#75715e"># 最总运行时间是3s，这和我们预期的6s不符，为什么</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1. join 这个指令是等待上一个指令完成后向后执行
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2. 但是当我执行p1 p2 p3 .start() 时，程序是异步执行，并不会等待，这也就是说，也就是说，这3个代码是同时执行的，最终我耗时最长的为3秒，所以这里也就是3秒，这种就叫做并发
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>IPC进程间通讯-队列</li>
+</ul>
+<blockquote>
+<p>创建队列，Queue是多进程安全队列，可以实现多进程间的数据交互
+Queue([maxsize])
+创建共享的进程队列。
+参数 ：maxsize是队列中允许的最大项数。如果省略此参数，则无大小限制。
+底层队列使用管道和锁定实现。</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> multiprocessing <span style="color:#f92672">import</span> Queue
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用消息队列需要再multiprocessing中的Queue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>q <span style="color:#f92672">=</span> Queue(<span style="color:#ae81ff">3</span>)  <span style="color:#75715e"># 在括号内可以指定存放消息的数据量，如果不写 默认没有限制</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>q<span style="color:#f92672">.</span>put(<span style="color:#ae81ff">111</span>)  <span style="color:#75715e"># 向消息队列中存放数据</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>q<span style="color:#f92672">.</span>full()  <span style="color:#75715e"># 判断队列是否已满，返回bool值</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>q<span style="color:#f92672">.</span>empty()  <span style="color:#75715e"># 判断队列是否为空，返回bool值</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>q<span style="color:#f92672">.</span>get()  <span style="color:#75715e"># 从消息队列中取出数据</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>q<span style="color:#f92672">.</span>get_nowait() <span style="color:#75715e"># 同get()方法一样</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">full()  和  empty()  方法在多进程中不可以使用，可能出现极限存储数据情况，这时方法的返回将不再准确
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;关于mac使用Queue队列产生的默认启动fork方式不一致带来的问题
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">spawn: 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">使用此方式启动进程, 只会执行和target参数或者run()方法相关的代码. Windows平台只能使用此方法. 此方式启动进程的效率最低.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">fork: 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">使用此方式启动的进程, 基本等同于主进程(复刻主进程, 主进程拥有的资源, 子进程都有). 所以, 该方式创建的子进程会从创建位置起, 和主进程一样执行程序中的代码. 此启动方式适用于Unix和Linux.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">forserver: 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">使用此方式, 程序将会启动一个服务器进程. 即当程序每次请求启动新进程时, 父进程都会连接到该服务器进程, 请求有服务器进程来创建新进程. 通过这种方式启动的进程不需要从父进程继承资源. 此方式使用与Unix,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> multiprocessing <span style="color:#f92672">import</span> Queue, set_start_method, get_context
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">product</span>(q):
+</span></span><span style="display:flex;"><span>    q<span style="color:#f92672">.</span>put(<span style="color:#e6db74">&#39;子进程p添加的数据&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer</span>(q):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;子进程获取队列中的数据&#39;</span>, q<span style="color:#f92672">.</span>get())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># set_start_method(&#39;fork&#39;) # 有mac 使用fork带来的问题 解决方式一</span>
+</span></span><span style="display:flex;"><span>    q <span style="color:#f92672">=</span> Queue()
+</span></span><span style="display:flex;"><span>    ctx <span style="color:#f92672">=</span> get_context(<span style="color:#e6db74">&#39;fork&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 主进程往队列中添加数据</span>
+</span></span><span style="display:flex;"><span>    q<span style="color:#f92672">.</span>put(<span style="color:#e6db74">&#39;我是主进程添加的数据&#39;</span>)
+</span></span><span style="display:flex;"><span>    p1 <span style="color:#f92672">=</span> ctx<span style="color:#f92672">.</span>Process(target<span style="color:#f92672">=</span>consumer, args<span style="color:#f92672">=</span>(q,))
+</span></span><span style="display:flex;"><span>    p2 <span style="color:#f92672">=</span> ctx<span style="color:#f92672">.</span>Process(target<span style="color:#f92672">=</span>product, args<span style="color:#f92672">=</span>(q,))
+</span></span><span style="display:flex;"><span>    p1<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>    p2<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;主&#39;</span>)
+</span></span></code></pre></div><ul>
+<li>生产者和消费者模型
+生产者： 负责产生数据的服务
+消费者： 负责处理数据的服务
+以上两种概念在IT行业中多用于消息队列</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 进程对象的多种方法</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1. 如何查看进程号</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> multiprocessing <span style="color:#f92672">import</span> Process, current_process
+</span></span><span style="display:flex;"><span>print(current_process()<span style="color:#f92672">.</span>pid) <span style="color:#75715e"># 获取当前进程PID</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 获得当前进程的PID</span>
+</span></span><span style="display:flex;"><span>print(os<span style="color:#f92672">.</span>getpid())
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 获得当前进程的父PPID</span>
+</span></span><span style="display:flex;"><span>print(os<span style="color:#f92672">.</span>getppid())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">----------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># from multiprocessing import Process,current_process</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># import os</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># def task():</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     print(current_process())</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     print(current_process().pid)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     pass</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># if __name__ == &#39;__main__&#39;:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     p = Process(target=task, name=&#34;我是子进程呦&#34;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     # p = Process(target=task)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     p.start()</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     p.join()</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     print(p.pid, &#34;我我我&#34;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     print(os.getpid())</span>
+</span></span></code></pre></div><ul>
+<li>守护进程</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> multiprocessing <span style="color:#f92672">import</span> Process
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">task</span>(name):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;德邦总管：</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> name)
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;德邦总管: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> name)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    p1 <span style="color:#f92672">=</span> Process(target<span style="color:#f92672">=</span>task, args<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;大张红&#39;</span>,))
+</span></span><span style="display:flex;"><span>    p1<span style="color:#f92672">.</span>daemon <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    p1<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;恕瑞玛皇帝:小吴勇嗝屁了&#39;</span>)
+</span></span></code></pre></div><ul>
+<li>僵尸进程和孤儿进程</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>僵尸进程
+</span></span><span style="display:flex;"><span>	进程执行完毕后并不会立刻销毁所有的数据 会有一些信息短暂保留下来
+</span></span><span style="display:flex;"><span> 	比如进程号<span style="color:#960050;background-color:#1e0010">、</span>进程执行时间<span style="color:#960050;background-color:#1e0010">、</span>进程消耗功率等给父进程查看
+</span></span><span style="display:flex;"><span> 	ps:所有的进程都会变成僵尸进程
+</span></span><span style="display:flex;"><span>孤儿进程
+</span></span><span style="display:flex;"><span>	子进程正常运行 父进程意外死亡 操作系统针对孤儿进程会派遣福利院管理
+</span></span></code></pre></div>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
