@@ -439,6 +439,58 @@ Queue([maxsize])
 </span></span><span style="display:flex;"><span> 	ps:所有的进程都会变成僵尸进程
 </span></span><span style="display:flex;"><span>孤儿进程
 </span></span><span style="display:flex;"><span>	子进程正常运行 父进程意外死亡 操作系统针对孤儿进程会派遣福利院管理
+</span></span></code></pre></div><ul>
+<li>抢票程序通过互斥锁保证数据安全</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> multiprocessing <span style="color:#f92672">import</span> get_context, Lock
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 对票数查询</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">search</span>(name):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">rf</span><span style="color:#e6db74">&#39;/Users/wesley/PycharmProjects/pythonProject5/package.json&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>load(f)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">正在查票，当前余票为：</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (name, data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;ticket_num&#39;</span>)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 用户买票</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">buy</span>(name, lock):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 再次确认</span>
+</span></span><span style="display:flex;"><span>    lock<span style="color:#f92672">.</span>acquire()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;/Users/wesley/PycharmProjects/pythonProject5/package.json&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>load(f)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 模拟网络延时</span>
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 判断是否有票</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;ticket_num&#39;</span>) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        data[<span style="color:#e6db74">&#39;ticket_num&#39;</span>] <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;/Users/wesley/PycharmProjects/pythonProject5/package.json&#39;</span>, <span style="color:#e6db74">&#39;w&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>            json<span style="color:#f92672">.</span>dump(data, f)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> 买票成功&#39;</span> <span style="color:#f92672">%</span> name)
+</span></span><span style="display:flex;"><span>        lock<span style="color:#f92672">.</span>release()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> 很遗憾，没有抢到票&#39;</span> <span style="color:#f92672">%</span> name)
+</span></span><span style="display:flex;"><span>        lock<span style="color:#f92672">.</span>release()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(name, lock):
+</span></span><span style="display:flex;"><span>    search(name)
+</span></span><span style="display:flex;"><span>    buy(name, lock)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    lock <span style="color:#f92672">=</span> Lock()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">20</span>):
+</span></span><span style="display:flex;"><span>        c <span style="color:#f92672">=</span> get_context(<span style="color:#e6db74">&#39;fork&#39;</span>)
+</span></span><span style="display:flex;"><span>        p <span style="color:#f92672">=</span> c<span style="color:#f92672">.</span>Process(target<span style="color:#f92672">=</span>run, args<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;用户</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> i, lock))
+</span></span><span style="display:flex;"><span>        p<span style="color:#f92672">.</span>start()
 </span></span></code></pre></div>
   
   </div>
