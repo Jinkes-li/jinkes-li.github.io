@@ -6,7 +6,16 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Nov 2022 21:28:31 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Nov 2022 22:42:59 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>并发编程(下)</title>
+      <link>https://jinkes-li.github.io/python/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B8%8B/</link>
+      <pubDate>Mon, 21 Nov 2022 22:42:59 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B8%8B/</guid>
+      <description>多进程实现TCP服务端并发 # 导入socket import socket from multiprocessing import Process # 用于创建进程的模块 # 创建一个进程对象，由于需要实现并发，需要使用函数包起来供调用 def get_server(): # 创建一个进程对象 server = socket.socket() # 绑定服务端对外的地址和接口 server.bind((&amp;#39;127.0.0.1&amp;#39;, 8080)) # 设置半连接池 server.listen(5) # 返回创建的对象供调用 return server # 定义一个用于接收客户端连接的函数 def get_talk(sock): # 需要循环接收信息 while True: # 定义接收的信息以及需要处理的操作 data = sock.recv(1024) print(data.decode(&amp;#39;utf8&amp;#39;)) # 将接收到的信息转为大写 sock.send(data.upper()) # 判断是否为执行文件，主要作为兼容win if __name__ == &amp;#39;__main__&amp;#39;: # 获取服务端信息 server = get_server() # 循环开设进程 while True: # 用于接收客户端请求 sock, addr = server.accept() # 开设进程聊天 p = Process(target=get_talk, args=(sock,)) # 启动进程 p.</description>
+    </item>
+    
     <item>
       <title>第七周总结</title>
       <link>https://jinkes-li.github.io/python/%E7%AC%AC%E4%B8%83%E5%91%A8%E6%80%BB%E7%BB%93/</link>
