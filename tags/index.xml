@@ -5,6 +5,30 @@
     <link>https://jinkes-li.github.io/tags/</link>
     <description>Recent content in Tags on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://jinkes-li.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Sun, 25 Sep 2022 17:05:19 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>周末总结</title>
+      <link>https://jinkes-li.github.io/tags/%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sun, 25 Sep 2022 17:05:19 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/tags/%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93/</guid>
+      <description>周末总结 硬件总结 计算机基础知识 安装Pycharm 遇见Python Markdown文档编写 计算机基础硬件 CPU
+控制器
+调度计算机硬件之间的工作，相当于人类的大脑
+运算器
+在计算机中负责数学运算以及逻辑运算，同样相当于人类的大脑
+存储
+内存
+基于电工作，内存将磁盘中的数据加载到自身于CPU交互，数据仅次于 CPU，但是断电未持久化的数据将会丢失
+磁盘 将内存需要存储的数据，在磁盘中永久的存储下去
+输入设备 计算机中的键盘鼠标，扫描仪等，都属于输入设备，是将外界信息录入计算机的一种设备
+输出设备 将计算机中的数据输出的设备被称为输出设备，例如显示器，投影机等
+计算机基础知识 路径 路径就是计算机中用来定位资源的路径，C:\user\admin\a.txt 这就是一个文件的路径
+相对路径 相对路径就是具有参照物的路径，可以不用从根目录开始寻找 绝对路径 绝对路径就是需要从根路径开始寻找 环境变量 当系统需要寻找一个文件时会先寻找当前路径，如果当前路径寻找不到就	会寻找系统中的环境变量，环境变量相当于告诉计算机，如果这个文件找不	到就去环境变量的这个文件下寻找
+进制
+二进制 0 1 10 11 ，0和1 就是二进制用来表示高低电平，可以直接被计算机识别，二进制逢二进一 八进制 0 1 2 3 4 5 6 7 ，0到7就是八进制，逢八进一 十进制 0 1 2 3 4 5 6 7 8 9 ，0-9时十进制，逢十进一 十六进制 0 1 2 3 4 5 6 7 8 9 a b c d e f ，0 -f是十六进制，逢十六进一 单位换算</description>
+    </item>
+    
   </channel>
 </rss>

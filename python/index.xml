@@ -6,26 +6,7 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 22 Nov 2022 16:58:20 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>数据库简单介绍及使用</title>
-      <link>https://jinkes-li.github.io/python/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Tue, 22 Nov 2022 16:58:20 +0800</pubDate>
-      
-      <guid>https://jinkes-li.github.io/python/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</guid>
-      <description>数据库的本质 数据库的分类 MySQL简介 MySQL基本使用 SQL与NoSQL 数据库相关概念 常见基本SQL语句 ####什么是数据 数据（data）是事实或观察的结果，是客观事物的逻辑归纳，是用于表示客观事物的未经过加工的的原始素材 数据可以是连续的值，比如声音，图像，称为模拟数据。也可以是离散的，如符号、文字，称为数字数据 在计算机系统中，数据以二进制信息单元0,1的形式表示
-为什么不吧数据放入到word这些工具里？ 1.安全性 2.集群
-####什么是数据库管理系统 DBMS（database management system） 1.管理数据 2.存储数据
-####数据库的种类 1.关系型数据库（RDBMS）
-典型产品：MySQL，Oracle，MSSQL（SQLserver）t-sql
-表与表之间是由关联的（连表查询)
-####菲关系型数据库（Nosql） 不使用SQL语句 json（key:value） MongoDB、Redis、elasticsearch
-####关系型数据库与非关系型数据库功能对比 关系型和非关系型特点对比 关系型数据库（RDBMS）的特点：
-1.二维表 2.典型产品Oracle传统企业，MySQL互联网企业 3.数据存取是通过SQL（Structured Query Language结构化查询语言） 4.最大特点数据安全性方面强（ACID） 非关系型数据库（NoSQL：Not only SQL）的特点：
-1.不是否定关系型数据库，而是做关系型数据库的补充。 时代特点对比 web1.0时代 1.1 企业提供内容，用户浏览，所以关系型数据库够用，并发并不高，所以不需要nosql。 web2.0时代 2.1 核心是企业提供平台，用户参与提供内容，这个时代关系型数据库无法满足需求了。 2003NoSQL出现 3.1 memcache的诞生，关注的点是性能，但是针对安全性能关注比较低，随着安全性能需求不断提升，所以有了redis。 redis的特点 4.1 依然高性能高并发 4.2 数据持久化功能 4.3 支持多数据类型，主从复制和集群 4.4 管理不再使用SQL了 NoSQL的分类、特点、典型产品
-1.键值（KV）存储：memcached、redis 2.列存储（column-oriented）：HBASE（新浪、360）Cassandra（200台服务器集群） 3.文档数据库（document-oriented）：MongoDB（最接近关系型数据库的NoSQL） 4.图形存储（Graph）：Neo4j 大版本 经典版本号 7 7.3.4 8i（internet） 8.</description>
-    </item>
-    
+    <lastBuildDate>Mon, 21 Nov 2022 22:42:59 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>并发编程(下)</title>
       <link>https://jinkes-li.github.io/python/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B8%8B/</link>
@@ -567,29 +548,6 @@ Python基本的数据类型
 身份运算符
 1. Python基本数据类型 布尔值 （bool） 定义：用来判断事务的对错，是否可行，应用与流程控制中 布尔值只有两种状态 True 真的，可行的，对的 False 假的，不可行的，错的 Python中所有的数据都是自带布尔值的，自带布尔值的数据有下列两种 布尔值默认为False的数据有：0 None &amp;rsquo;&amp;rsquo; [] {} 布尔值默认为True的数据有：一般除了上面的都是True 布尔值的变量名一般推荐使用is开头 # 代码实例 is_boo1f = False is_boolt = True 小知识： 在企业中一般说的数据库数据伪删除使用的就是类似这种判断逻辑。
 # 代码实例 # 一般企业提供的账号注销功能就是使用布尔值判断逻辑 # 比如下列表格中 is_delete 字段0代表着账户存在，字段1代表账户被删除，其实只是修改李程序取值的逻辑，并未删除实际数据 id	username	password phone is_delete 1 jason	123	110 1 2	kevin	321	120	0 # 一般这种方式大多应用于数据库中 元组（tuple） 定义： 小括号括起来 内部存放多个数据值 数据值与数据值之间逗号隔 开 数据值可以是任何数据类型 被称为不可变列表，是因为元组内存放的地址不能修改 # 代码实例 # 列表与元组的对比 # 列表使用[]进行定义 l1 = [11, 22, 33] # 定义一个列表并赋值给l1 l1[0] = 123 # 使用重复赋值将123替换到l1列表的0号索引 print(l1[0]) # 这里发现最终打印的123，而不是11，所以列表值是可变的 123 ​ 列表修改数据图表参考如下</description>
-    </item>
-    
-    <item>
-      <title>周末总结</title>
-      <link>https://jinkes-li.github.io/python/%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93/</link>
-      <pubDate>Sun, 25 Sep 2022 17:05:19 +0800</pubDate>
-      
-      <guid>https://jinkes-li.github.io/python/%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93/</guid>
-      <description>周末总结 硬件总结 计算机基础知识 安装Pycharm 遇见Python Markdown文档编写 计算机基础硬件 CPU
-控制器
-调度计算机硬件之间的工作，相当于人类的大脑
-运算器
-在计算机中负责数学运算以及逻辑运算，同样相当于人类的大脑
-存储
-内存
-基于电工作，内存将磁盘中的数据加载到自身于CPU交互，数据仅次于 CPU，但是断电未持久化的数据将会丢失
-磁盘 将内存需要存储的数据，在磁盘中永久的存储下去
-输入设备 计算机中的键盘鼠标，扫描仪等，都属于输入设备，是将外界信息录入计算机的一种设备
-输出设备 将计算机中的数据输出的设备被称为输出设备，例如显示器，投影机等
-计算机基础知识 路径 路径就是计算机中用来定位资源的路径，C:\user\admin\a.txt 这就是一个文件的路径
-相对路径 相对路径就是具有参照物的路径，可以不用从根目录开始寻找 绝对路径 绝对路径就是需要从根路径开始寻找 环境变量 当系统需要寻找一个文件时会先寻找当前路径，如果当前路径寻找不到就	会寻找系统中的环境变量，环境变量相当于告诉计算机，如果这个文件找不	到就去环境变量的这个文件下寻找
-进制
-二进制 0 1 10 11 ，0和1 就是二进制用来表示高低电平，可以直接被计算机识别，二进制逢二进一 八进制 0 1 2 3 4 5 6 7 ，0到7就是八进制，逢八进一 十进制 0 1 2 3 4 5 6 7 8 9 ，0-9时十进制，逢十进一 十六进制 0 1 2 3 4 5 6 7 8 9 a b c d e f ，0 -f是十六进制，逢十六进一 单位换算</description>
     </item>
     
     <item>

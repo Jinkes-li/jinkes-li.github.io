@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Databases on self-salvation</title>
+    <link>https://jinkes-li.github.io/databases/</link>
+    <description>Recent content in Databases on self-salvation</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 22 Nov 2022 16:58:20 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/databases/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据库简单介绍及使用</title>
+      <link>https://jinkes-li.github.io/databases/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Tue, 22 Nov 2022 16:58:20 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/databases/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</guid>
+      <description>数据库的本质 数据库的分类 MySQL简介 MySQL基本使用 SQL与NoSQL 数据库相关概念 常见基本SQL语句 ####什么是数据 数据（data）是事实或观察的结果，是客观事物的逻辑归纳，是用于表示客观事物的未经过加工的的原始素材 数据可以是连续的值，比如声音，图像，称为模拟数据。也可以是离散的，如符号、文字，称为数字数据 在计算机系统中，数据以二进制信息单元0,1的形式表示
+为什么不吧数据放入到word这些工具里？ 1.安全性 2.集群
+####什么是数据库管理系统 DBMS（database management system） 1.管理数据 2.存储数据
+####数据库的种类 1.关系型数据库（RDBMS）
+典型产品：MySQL，Oracle，MSSQL（SQLserver）t-sql
+表与表之间是由关联的（连表查询)
+####菲关系型数据库（Nosql） 不使用SQL语句 json（key:value） MongoDB、Redis、elasticsearch
+####关系型数据库与非关系型数据库功能对比 关系型和非关系型特点对比 关系型数据库（RDBMS）的特点：
+1.二维表 2.典型产品Oracle传统企业，MySQL互联网企业 3.数据存取是通过SQL（Structured Query Language结构化查询语言） 4.最大特点数据安全性方面强（ACID） 非关系型数据库（NoSQL：Not only SQL）的特点：
+1.不是否定关系型数据库，而是做关系型数据库的补充。 时代特点对比 web1.0时代 1.1 企业提供内容，用户浏览，所以关系型数据库够用，并发并不高，所以不需要nosql。 web2.0时代 2.1 核心是企业提供平台，用户参与提供内容，这个时代关系型数据库无法满足需求了。 2003NoSQL出现 3.1 memcache的诞生，关注的点是性能，但是针对安全性能关注比较低，随着安全性能需求不断提升，所以有了redis。 redis的特点 4.1 依然高性能高并发 4.2 数据持久化功能 4.3 支持多数据类型，主从复制和集群 4.4 管理不再使用SQL了 NoSQL的分类、特点、典型产品
+1.键值（KV）存储：memcached、redis 2.列存储（column-oriented）：HBASE（新浪、360）Cassandra（200台服务器集群） 3.文档数据库（document-oriented）：MongoDB（最接近关系型数据库的NoSQL） 4.图形存储（Graph）：Neo4j 大版本 经典版本号 7 7.3.4 8i（internet） 8.</description>
+    </item>
+    
+  </channel>
+</rss>

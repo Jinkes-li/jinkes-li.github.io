@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 22 Nov 2022 16:58:20 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>数据库简单介绍及使用</title>
-      <link>https://jinkes-li.github.io/python/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</link>
+      <link>https://jinkes-li.github.io/databases/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Tue, 22 Nov 2022 16:58:20 +0800</pubDate>
       
-      <guid>https://jinkes-li.github.io/python/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://jinkes-li.github.io/databases/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</guid>
       <description>数据库的本质 数据库的分类 MySQL简介 MySQL基本使用 SQL与NoSQL 数据库相关概念 常见基本SQL语句 ####什么是数据 数据（data）是事实或观察的结果，是客观事物的逻辑归纳，是用于表示客观事物的未经过加工的的原始素材 数据可以是连续的值，比如声音，图像，称为模拟数据。也可以是离散的，如符号、文字，称为数字数据 在计算机系统中，数据以二进制信息单元0,1的形式表示
 为什么不吧数据放入到word这些工具里？ 1.安全性 2.集群
 ####什么是数据库管理系统 DBMS（database management system） 1.管理数据 2.存储数据
@@ -571,10 +571,10 @@ Python基本的数据类型
     
     <item>
       <title>周末总结</title>
-      <link>https://jinkes-li.github.io/python/%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93/</link>
+      <link>https://jinkes-li.github.io/tags/%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93/</link>
       <pubDate>Sun, 25 Sep 2022 17:05:19 +0800</pubDate>
       
-      <guid>https://jinkes-li.github.io/python/%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93/</guid>
+      <guid>https://jinkes-li.github.io/tags/%E5%91%A8%E6%9C%AB%E6%80%BB%E7%BB%93/</guid>
       <description>周末总结 硬件总结 计算机基础知识 安装Pycharm 遇见Python Markdown文档编写 计算机基础硬件 CPU
 控制器
 调度计算机硬件之间的工作，相当于人类的大脑
