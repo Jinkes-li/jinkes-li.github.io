@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 数据库简单介绍及使用 | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/python/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="数据库简单介绍及使用" />
+<meta property="og:description" content="数据库的本质 数据库的分类 MySQL简介 MySQL基本使用 SQL与NoSQL 数据库相关概念 常见基本SQL语句 ####什么是数据 数据（data）是事实或观察的结果，是客观事物的逻辑归纳，是用于表示客观事物的未经过加工的的原始素材 数据可以是连续的值，比如声音，图像，称为模拟数据。也可以是离散的，如符号、文字，称为数字数据 在计算机系统中，数据以二进制信息单元0,1的形式表示
+为什么不吧数据放入到word这些工具里？ 1.安全性 2.集群
+####什么是数据库管理系统 DBMS（database management system） 1.管理数据 2.存储数据
+####数据库的种类 1.关系型数据库（RDBMS）
+典型产品：MySQL，Oracle，MSSQL（SQLserver）t-sql
+表与表之间是由关联的（连表查询)
+####菲关系型数据库（Nosql） 不使用SQL语句 json（key:value） MongoDB、Redis、elasticsearch
+####关系型数据库与非关系型数据库功能对比 关系型和非关系型特点对比 关系型数据库（RDBMS）的特点：
+1.二维表 2.典型产品Oracle传统企业，MySQL互联网企业 3.数据存取是通过SQL（Structured Query Language结构化查询语言） 4.最大特点数据安全性方面强（ACID） 非关系型数据库（NoSQL：Not only SQL）的特点：
+1.不是否定关系型数据库，而是做关系型数据库的补充。 时代特点对比 web1.0时代 1.1 企业提供内容，用户浏览，所以关系型数据库够用，并发并不高，所以不需要nosql。 web2.0时代 2.1 核心是企业提供平台，用户参与提供内容，这个时代关系型数据库无法满足需求了。 2003NoSQL出现 3.1 memcache的诞生，关注的点是性能，但是针对安全性能关注比较低，随着安全性能需求不断提升，所以有了redis。 redis的特点 4.1 依然高性能高并发 4.2 数据持久化功能 4.3 支持多数据类型，主从复制和集群 4.4 管理不再使用SQL了 NoSQL的分类、特点、典型产品
+1.键值（KV）存储：memcached、redis 2.列存储（column-oriented）：HBASE（新浪、360）Cassandra（200台服务器集群） 3.文档数据库（document-oriented）：MongoDB（最接近关系型数据库的NoSQL） 4.图形存储（Graph）：Neo4j 大版本 经典版本号 7 7.3.4 8i（internet） 8." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/python/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/" /><meta property="article:section" content="python" />
+<meta property="article:published_time" content="2022-11-22T16:58:20+08:00" />
+<meta property="article:modified_time" content="2022-11-22T16:58:20+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="数据库简单介绍及使用"/>
+<meta name="twitter:description" content="数据库的本质 数据库的分类 MySQL简介 MySQL基本使用 SQL与NoSQL 数据库相关概念 常见基本SQL语句 ####什么是数据 数据（data）是事实或观察的结果，是客观事物的逻辑归纳，是用于表示客观事物的未经过加工的的原始素材 数据可以是连续的值，比如声音，图像，称为模拟数据。也可以是离散的，如符号、文字，称为数字数据 在计算机系统中，数据以二进制信息单元0,1的形式表示
+为什么不吧数据放入到word这些工具里？ 1.安全性 2.集群
+####什么是数据库管理系统 DBMS（database management system） 1.管理数据 2.存储数据
+####数据库的种类 1.关系型数据库（RDBMS）
+典型产品：MySQL，Oracle，MSSQL（SQLserver）t-sql
+表与表之间是由关联的（连表查询)
+####菲关系型数据库（Nosql） 不使用SQL语句 json（key:value） MongoDB、Redis、elasticsearch
+####关系型数据库与非关系型数据库功能对比 关系型和非关系型特点对比 关系型数据库（RDBMS）的特点：
+1.二维表 2.典型产品Oracle传统企业，MySQL互联网企业 3.数据存取是通过SQL（Structured Query Language结构化查询语言） 4.最大特点数据安全性方面强（ACID） 非关系型数据库（NoSQL：Not only SQL）的特点：
+1.不是否定关系型数据库，而是做关系型数据库的补充。 时代特点对比 web1.0时代 1.1 企业提供内容，用户浏览，所以关系型数据库够用，并发并不高，所以不需要nosql。 web2.0时代 2.1 核心是企业提供平台，用户参与提供内容，这个时代关系型数据库无法满足需求了。 2003NoSQL出现 3.1 memcache的诞生，关注的点是性能，但是针对安全性能关注比较低，随着安全性能需求不断提升，所以有了redis。 redis的特点 4.1 依然高性能高并发 4.2 数据持久化功能 4.3 支持多数据类型，主从复制和集群 4.4 管理不再使用SQL了 NoSQL的分类、特点、典型产品
+1.键值（KV）存储：memcached、redis 2.列存储（column-oriented）：HBASE（新浪、360）Cassandra（200台服务器集群） 3.文档数据库（document-oriented）：MongoDB（最接近关系型数据库的NoSQL） 4.图形存储（Graph）：Neo4j 大版本 经典版本号 7 7.3.4 8i（internet） 8."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <ul>
+<li>数据库的本质</li>
+<li>数据库的分类</li>
+<li>MySQL简介</li>
+<li>MySQL基本使用</li>
+<li>SQL与NoSQL</li>
+<li>数据库相关概念</li>
+<li>常见基本SQL语句</li>
+</ul>
+<p>####什么是数据
+数据（data）是事实或观察的结果，是客观事物的逻辑归纳，是用于表示客观事物的未经过加工的的原始素材
+数据可以是连续的值，比如声音，图像，称为模拟数据。也可以是离散的，如符号、文字，称为数字数据
+在计算机系统中，数据以二进制信息单元0,1的形式表示</p>
+<blockquote>
+<p>为什么不吧数据放入到word这些工具里？
+1.安全性
+2.集群</p>
+</blockquote>
+<p>####什么是数据库管理系统
+DBMS（database management system）
+1.管理数据
+2.存储数据</p>
+<p>####数据库的种类
+1.关系型数据库（RDBMS）</p>
+<p>典型产品：MySQL，Oracle，MSSQL（SQLserver）t-sql</p>
+<p><img src="https://www.showdoc.cc/server/api/common/visitfile/sign/032eb904274f080e91e6b49a390e8e9f?showdoc=.jpg" alt=""></p>
+<p>表与表之间是由关联的（连表查询)</p>
+<p>####菲关系型数据库（Nosql）
+<img src="https://www.showdoc.cc/server/api/common/visitfile/sign/d1ebce01b124fc6c42ecdc82227d4474?showdoc=.jpg" alt="">
+不使用SQL语句
+json（key:value）
+MongoDB、Redis、elasticsearch</p>
+<p>####关系型数据库与非关系型数据库功能对比
+<img src="https://www.showdoc.cc/server/api/common/visitfile/sign/86cca4c086cee4084ac458d36ab3331f?showdoc=.jpg" alt="">
+<strong>关系型和非关系型特点对比</strong>
+<em>关系型数据库（RDBMS）的特点：</em></p>
+<ul>
+<li>1.二维表</li>
+<li>2.典型产品Oracle传统企业，MySQL互联网企业</li>
+<li>3.数据存取是通过SQL（Structured Query Language结构化查询语言）</li>
+<li>4.最大特点数据安全性方面强（ACID）</li>
+</ul>
+<p><em>非关系型数据库（NoSQL：Not only SQL）的特点：</em></p>
+<ul>
+<li>1.不是否定关系型数据库，而是做关系型数据库的补充。</li>
+</ul>
+<h2 id="时代特点对比">时代特点对比</h2>
+<ul>
+<li>
+<ol>
+<li>web1.0时代</li>
+</ol>
+<ul>
+<li>1.1 企业提供内容，用户浏览，所以关系型数据库够用，并发并不高，所以不需要nosql。</li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li>web2.0时代</li>
+</ol>
+<ul>
+<li>2.1 核心是企业提供平台，用户参与提供内容，这个时代关系型数据库无法满足需求了。</li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li>2003NoSQL出现</li>
+</ol>
+<ul>
+<li>3.1 memcache的诞生，关注的点是性能，但是针对安全性能关注比较低，随着安全性能需求不断提升，所以有了redis。</li>
+</ul>
+</li>
+<li>
+<ol start="4">
+<li>redis的特点</li>
+</ol>
+<ul>
+<li>4.1 依然高性能高并发</li>
+<li>4.2 数据持久化功能</li>
+<li>4.3 支持多数据类型，主从复制和集群</li>
+<li>4.4 管理不再使用SQL了</li>
+</ul>
+</li>
+</ul>
+<p><strong>NoSQL的分类、特点、典型产品</strong></p>
+<ul>
+<li>1.键值（KV）存储：memcached、redis</li>
+<li>2.列存储（column-oriented）：HBASE（新浪、360）Cassandra（200台服务器集群）</li>
+<li>3.文档数据库（document-oriented）：MongoDB（最接近关系型数据库的NoSQL）</li>
+<li>4.图形存储（Graph）：Neo4j</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>大版本</th>
+<th>经典版本号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7</td>
+<td>7.3.4</td>
+</tr>
+<tr>
+<td>8i（internet）</td>
+<td>8.1.7</td>
+</tr>
+<tr>
+<td>9i</td>
+<td>9.2.0.8</td>
+</tr>
+<tr>
+<td>10g（grid）</td>
+<td>10.2.0.4</td>
+</tr>
+<tr>
+<td>11g</td>
+<td>11.2.0.3、11.2.0.4</td>
+</tr>
+<tr>
+<td>12c（cloud）</td>
+<td>None</td>
+</tr>
+<tr>
+<td>18c</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>数据库的基本使用</li>
+</ul>
+<ol>
+<li>直接使用mysqladmin工具对密码进行修改</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span>mysqladmin <span style="color:#f92672">-</span>uroot <span style="color:#f92672">-</span>p123 password <span style="color:#ae81ff">456</span>
+</span></span></code></pre></div><ol start="2">
+<li>直接修改存储用户的数据表</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">update</span> <span style="color:#66d9ef">user</span> <span style="color:#66d9ef">set</span> password<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;1456&#39;</span> <span style="color:#66d9ef">where</span> root;
+</span></span></code></pre></div><ol start="3">
+<li>5.6之前支持的修改密码的方式</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">set</span> password<span style="color:#f92672">=</span>password(<span style="color:#e6db74">&#39;132&#39;</span>)
+</span></span></code></pre></div><ol start="4">
+<li>忘记密码可以使用 &ndash;skip-grant-table 在配置文件中跳过认证</li>
+</ol>
+<ul>
+<li>关于库相关操作</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">查看所有库</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">show</span> databases;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">查看所有表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">show</span> tables;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">进入一个库</span>
+</span></span><span style="display:flex;"><span>use mysql; 
+</span></span></code></pre></div><ul>
+<li>基本数据库SQL</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">创建库</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">database</span> <span style="color:#960050;background-color:#1e0010">库名；</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">查看库</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">show</span> databases;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">show</span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">database</span> <span style="color:#960050;background-color:#1e0010">库名</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">编辑库</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">database</span> <span style="color:#960050;background-color:#1e0010">库名</span> charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">删除库</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">database</span> <span style="color:#960050;background-color:#1e0010">库名</span>;
+</span></span></code></pre></div><ul>
+<li>相关表操作</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">创建表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> <span style="color:#960050;background-color:#1e0010">表名</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">查看表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">show</span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> tablename;  <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">指定表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">describe</span> tablename;  <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">查看表结构</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">编辑表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span> tablename <span style="color:#66d9ef">rename</span> newtablename; <span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">从命名表</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">删除表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">table</span> tablename;  <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">删除表</span>
+</span></span></code></pre></div><ul>
+<li>基于记录操作</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">插入数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> tablename <span style="color:#66d9ef">values</span>(data1, data2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">查询数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> tablename;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">编辑数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">update</span> tablename <span style="color:#66d9ef">set</span> id<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;data1&#39;</span> <span style="color:#66d9ef">where</span> <span style="color:#e6db74">&#39;root&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">删除数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">from</span> tablename;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">from</span> tablename <span style="color:#66d9ef">where</span> id<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;
+</span></span></code></pre></div>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
