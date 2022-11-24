@@ -6,7 +6,25 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 23 Nov 2022 19:39:41 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Nov 2022 21:24:31 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据约束条件</title>
+      <link>https://jinkes-li.github.io/databases/%E6%95%B0%E6%8D%AE%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6/</link>
+      <pubDate>Thu, 24 Nov 2022 21:24:31 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/databases/%E6%95%B0%E6%8D%AE%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6/</guid>
+      <description>MySQL字段约束条件 无符号， 零填充
+非空
+默认值
+唯一值
+主键
+自增
+外键
+无符号，零填充
+无符号，忽略数据中的正负符号关键字unsigned 零填充，数据未到数据位的情况下使用零填充
+1. 验证零填充，查看数据345是否会被零填充 mysql&amp;gt; create table t1(id int unsigned, uid int(5) zerofill); Query OK, 0 rows affected (0.05 sec) mysql&amp;gt; insert into t1 values(123, 345); Query OK, 1 row affected (0.02 sec) mysql&amp;gt; select * from t1; +-----+-------+ | id | uid | +-----+-------+ | 123 | 00345 | +-----+-------+ 1 row in set (0.02 sec) mysql&amp;gt; 非空 not null MySQL数据库在不加约束条件的情况下字段的值是可以为空的</description>
+    </item>
+    
     <item>
       <title>SQL数据类型</title>
       <link>https://jinkes-li.github.io/databases/sql%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
