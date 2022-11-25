@@ -6,7 +6,19 @@
     <description>Recent content in Databases on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 Nov 2022 21:24:31 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/databases/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 25 Nov 2022 20:20:46 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/databases/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据库DQL查询</title>
+      <link>https://jinkes-li.github.io/databases/%E6%95%B0%E6%8D%AE%E5%BA%93dql%E6%9F%A5%E8%AF%A2/</link>
+      <pubDate>Fri, 25 Nov 2022 20:20:46 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/databases/%E6%95%B0%E6%8D%AE%E5%BA%93dql%E6%9F%A5%E8%AF%A2/</guid>
+      <description>MySQL数据库查询关键字 接下来会通过mysql的关键字来演示在数据库中如何对数据查询
+mysql中的内置方法可以使用 &amp;lsquo;help function&amp;rsquo;来查看使用方式
+常用的mysql 查询相关关键字 数据库查询（DQL）
+-- 语法 select 字段列表 from 表名列表 where 条件列表 group by 分组字段列表 having 过滤列表 distinct 去重列表 order by 排序字段列表 limit 分页 regexp 正则匹配关键字 &amp;#34;&amp;#34;&amp;#34; DQL执行顺序 FROM -&amp;gt; WHERE -&amp;gt; GROUP BY -&amp;gt; SELECT -&amp;gt; ORDER BY -&amp;gt; LIMIT &amp;#34;&amp;#34;&amp;#34; 多表查询的两种方式 子查询 连表查询 基础查询 查询多个字段 -- 查询多个字段 select field1, field2.... from tablename; or select * from tablename; -- 设置别名 select field1 as a1, field2 as a2,.</description>
+    </item>
+    
     <item>
       <title>数据约束条件</title>
       <link>https://jinkes-li.github.io/databases/%E6%95%B0%E6%8D%AE%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6/</link>
