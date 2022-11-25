@@ -538,7 +538,35 @@ mysql中的内置方法可以使用 &lsquo;help function&rsquo;来查看使用�
 </span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----+--------+--------+-----+--------+-----+--------------+
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">5</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 基于上述的操作就可以将多张表合并到一起然后一次性获取更多的数据
-</span></span></span></code></pre></div>
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 基于emp表格对数据做出筛选
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>. <span style="color:#960050;background-color:#1e0010">查询岗位名以及岗位包含的所有员工名字</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> post,group_concat(name) <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> post;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>. <span style="color:#960050;background-color:#1e0010">查询岗位名以及各岗位内包含的员工个数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> post <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;部门&#39;</span>,group_concat(name) <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;部门成员&#39;</span>,<span style="color:#66d9ef">count</span>(name) <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;部门人数&#39;</span> <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> post;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>. <span style="color:#960050;background-color:#1e0010">查询公司内男员工和女员工的个数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> gender <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;性别&#39;</span>,<span style="color:#66d9ef">count</span>(id) <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;人数&#39;</span> <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> gender;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>. <span style="color:#960050;background-color:#1e0010">查询岗位名以及各岗位的平均薪资</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> post,<span style="color:#66d9ef">avg</span>(salary) <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> post;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>. <span style="color:#960050;background-color:#1e0010">查询岗位名以及各岗位的最高薪资</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> post,<span style="color:#66d9ef">max</span>(salary) <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> post;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>. <span style="color:#960050;background-color:#1e0010">查询岗位名以及各岗位的最低薪资</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> post,<span style="color:#66d9ef">min</span>(salary) <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> post;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>. <span style="color:#960050;background-color:#1e0010">查询男员工与男员工的平均薪资，女员工与女员工的平均薪资</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> gender <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;性别&#39;</span>,<span style="color:#66d9ef">avg</span>(salary) <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;平均薪资&#39;</span> <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> gender;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>. <span style="color:#960050;background-color:#1e0010">统计各部门年龄在</span><span style="color:#ae81ff">30</span><span style="color:#960050;background-color:#1e0010">岁以上的员工平均工资</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> post <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;部门&#39;</span>,<span style="color:#66d9ef">avg</span>(salary) <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;平均薪资&#39;</span> <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">where</span> age <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">30</span> <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> post;
+</span></span></code></pre></div>
   
   </div>
 </article>
