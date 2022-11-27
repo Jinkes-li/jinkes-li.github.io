@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 第八周总结 | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/databases/%E7%AC%AC%E5%85%AB%E5%91%A8%E6%80%BB%E7%BB%93/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="第八周总结" />
+<meta property="og:description" content="进程相关 多进程实现TCP服务端并 # 如何使用多进程实现并发 1. 导入multiprocessing 下的Process模块 2. 创建进程对象并return对象，供其他函数调用 3. 定义一个用于接收客户端函数 4. 调用进程对象，并循环接搜客户端请求 5. 循环开设进程，使每个客户端请求进来都可以有进程处理 Server: import socket from multiprocessing import Process def get_server(): server = socket.socket() server.bind((&#39;127.0.0.1&#39;,8080)) server.listen(5) return server def get_talk(soke): while True: data = sock.recv(1024) print(data.decode(&#39;utf8&#39;)) sock.send(data.upper()) if __name__ == &#39;__main__&#39;: server = get_server() while True: sock, addr = server.accept() p = Process(targat=get_talk, args=(sock,)) p.start() 互斥锁概念 互斥锁主要是针对于线程，在计算机中线程数据太快，在并发状态下所有的线程都会操作数据，这样就会造成数据的错乱，所以出现了锁的概念，在一个进程抢到锁之后才可以对数据进行操作，其他线程只能等待，虽然这样降低了计算机处理数据的性能，但是保证了数据的安全性
+如何加锁 在编程的过程中如何对代码添加锁，这一点需要结合具体业务，这里以12306举例，这种先查询然后再对数据做操作的业务，在对数据读取时不加锁，只有在对数据做操作时添加锁，接下来对这个业务进行简单的模拟
+# 在Python代码中可以使用multiprocessing这个模块下的LOCK锁模块来实现数据加锁 # set_start_mothod 是更改python进程的启动模式，这里使用的是mac系统所以需要修改模式为fork from multiprocessing import Process, set_start_mothod, Lock import time import json import random # 用于模拟用户在购买票时的网络延迟 # 用户查看票 def search(name): with open(data." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/databases/%E7%AC%AC%E5%85%AB%E5%91%A8%E6%80%BB%E7%BB%93/" /><meta property="article:section" content="databases" />
+<meta property="article:published_time" content="2022-11-27T17:27:41+08:00" />
+<meta property="article:modified_time" content="2022-11-27T17:27:41+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="第八周总结"/>
+<meta name="twitter:description" content="进程相关 多进程实现TCP服务端并 # 如何使用多进程实现并发 1. 导入multiprocessing 下的Process模块 2. 创建进程对象并return对象，供其他函数调用 3. 定义一个用于接收客户端函数 4. 调用进程对象，并循环接搜客户端请求 5. 循环开设进程，使每个客户端请求进来都可以有进程处理 Server: import socket from multiprocessing import Process def get_server(): server = socket.socket() server.bind((&#39;127.0.0.1&#39;,8080)) server.listen(5) return server def get_talk(soke): while True: data = sock.recv(1024) print(data.decode(&#39;utf8&#39;)) sock.send(data.upper()) if __name__ == &#39;__main__&#39;: server = get_server() while True: sock, addr = server.accept() p = Process(targat=get_talk, args=(sock,)) p.start() 互斥锁概念 互斥锁主要是针对于线程，在计算机中线程数据太快，在并发状态下所有的线程都会操作数据，这样就会造成数据的错乱，所以出现了锁的概念，在一个进程抢到锁之后才可以对数据进行操作，其他线程只能等待，虽然这样降低了计算机处理数据的性能，但是保证了数据的安全性
+如何加锁 在编程的过程中如何对代码添加锁，这一点需要结合具体业务，这里以12306举例，这种先查询然后再对数据做操作的业务，在对数据读取时不加锁，只有在对数据做操作时添加锁，接下来对这个业务进行简单的模拟
+# 在Python代码中可以使用multiprocessing这个模块下的LOCK锁模块来实现数据加锁 # set_start_mothod 是更改python进程的启动模式，这里使用的是mac系统所以需要修改模式为fork from multiprocessing import Process, set_start_mothod, Lock import time import json import random # 用于模拟用户在购买票时的网络延迟 # 用户查看票 def search(name): with open(data."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/databases">databases</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <ul>
+<li>进程相关</li>
+<li>多进程实现TCP服务端并</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 如何使用多进程实现并发</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> 导入multiprocessing 下的Process模块
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> 创建进程对象并return对象<span style="color:#960050;background-color:#1e0010">，</span>供其他函数调用
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> 定义一个用于接收客户端函数
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> 调用进程对象<span style="color:#960050;background-color:#1e0010">，</span>并循环接搜客户端请求
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.</span> 循环开设进程<span style="color:#960050;background-color:#1e0010">，</span>使每个客户端请求进来都可以有进程处理
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Server:
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> socket
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> multiprocessing <span style="color:#f92672">import</span> Process
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_server</span>():
+</span></span><span style="display:flex;"><span>	server <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket()
+</span></span><span style="display:flex;"><span>	server<span style="color:#f92672">.</span>bind((<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>,<span style="color:#ae81ff">8080</span>))
+</span></span><span style="display:flex;"><span>	server<span style="color:#f92672">.</span>listen(<span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> server
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_talk</span>(soke):
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>			data <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
+</span></span><span style="display:flex;"><span>			print(data<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf8&#39;</span>))
+</span></span><span style="display:flex;"><span>			sock<span style="color:#f92672">.</span>send(data<span style="color:#f92672">.</span>upper())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>	server <span style="color:#f92672">=</span> get_server()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>		sock, addr <span style="color:#f92672">=</span> server<span style="color:#f92672">.</span>accept()
+</span></span><span style="display:flex;"><span>		p <span style="color:#f92672">=</span> Process(targat<span style="color:#f92672">=</span>get_talk, args<span style="color:#f92672">=</span>(sock,))
+</span></span><span style="display:flex;"><span>		p<span style="color:#f92672">.</span>start()
+</span></span></code></pre></div><ul>
+<li>
+<p>互斥锁概念
+互斥锁主要是针对于线程，在计算机中线程数据太快，在并发状态下所有的线程都会操作数据，这样就会造成数据的错乱，所以出现了锁的概念，在一个进程抢到锁之后才可以对数据进行操作，其他线程只能等待，虽然这样降低了计算机处理数据的性能，但是保证了数据的安全性</p>
+</li>
+<li>
+<p>如何加锁
+在编程的过程中如何对代码添加锁，这一点需要结合具体业务，这里以12306举例，这种先查询然后再对数据做操作的业务，在对数据读取时不加锁，只有在对数据做操作时添加锁，接下来对这个业务进行简单的模拟</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 在Python代码中可以使用multiprocessing这个模块下的LOCK锁模块来实现数据加锁</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># set_start_mothod 是更改python进程的启动模式，这里使用的是mac系统所以需要修改模式为fork</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> multiprocessing <span style="color:#f92672">import</span> Process, set_start_mothod, Lock
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random <span style="color:#75715e"># 用于模拟用户在购买票时的网络延迟</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 用户查看票</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">search</span>(name):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">with</span> open(data<span style="color:#f92672">.</span>json, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>		data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>load(f)
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">查看票 目前剩余：</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (name, data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;ticket_num&#39;</span>)))
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 用户购买票</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">buy</span>(name):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">with</span> open(data<span style="color:#f92672">.</span>json, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;urf8&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>		data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>load(f):
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># 模拟延时</span>
+</span></span><span style="display:flex;"><span>	time<span style="color:#f92672">.</span>sleep(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># 买票逻辑</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;ticket_num&#39;</span>) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">with</span> open(data<span style="color:#f92672">.</span>json, <span style="color:#e6db74">&#39;w&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>			data[<span style="color:#e6db74">&#39;ticket_num&#39;</span>] <span style="color:#f92672">-=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>			json<span style="color:#f92672">.</span>dump(data, f)
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> 买票成功&#39;</span> <span style="color:#f92672">%</span> name)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> 购买失败&#39;</span> <span style="color:#f92672">%</span> name)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建函数执行查票和买票逻</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(name, mutex):
+</span></span><span style="display:flex;"><span>	search(name)
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># 接下来需要运行购买车票的函数，所以这里需要进行加锁，保证一个线程执行</span>
+</span></span><span style="display:flex;"><span>	mutex<span style="color:#f92672">.</span>acquire() <span style="color:#75715e"># 添加锁</span>
+</span></span><span style="display:flex;"><span>	buy(name)
+</span></span><span style="display:flex;"><span>	mutex<span style="color:#f92672">.</span>release() <span style="color:#75715e"># 上面的购买函数运行完成后，释放锁</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>set_start_method(<span style="color:#e6db74">&#39;fork&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>	mutex <span style="color:#f92672">=</span> Lock()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+</span></span><span style="display:flex;"><span>		p <span style="color:#f92672">=</span> Process(target<span style="color:#f92672">=</span>run, args<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;用户</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">号&#39;</span> <span style="color:#f92672">%</span> i, mutex))
+</span></span><span style="display:flex;"><span>		p<span style="color:#f92672">.</span>start()
+</span></span></code></pre></div><ul>
+<li>死锁</li>
+</ul>
+<blockquote>
+<p>当一个线程需要抢一把锁并且本身还在锁内没有释放，这时候另一个线程无法将锁释放，（释放条件是另一个进程释放锁） 这是就会出现，死锁现象，相互等待</p>
+</blockquote>
+<p>死锁现象非常的有意思，比如说我们面试的时候面试官需要让我们解释死锁 面试官：请你解释一下什么是死锁 候选人：让我进公司就告诉你 面试官：那你先解释什么是死锁 候选人：那你先让我进公司我告诉你啊 以上依次往复，这就是死锁</p>
+<ul>
+<li>
+<p>线程理论
+线程是程序中最小的执行单位，每一个程序运行起来都会产生进程，而进程内至少存在一个线程，所以线程才是最小执行单位
+进程是资源单位，一般代表一块内存空间
+一个进程内可以存在多个线程，并且线程内的数据是共享的
+创建进程的消耗要远大于线程，因为创建进程时需要开辟新的内存空间，而对于线程来说资源是在当前进程的内存空间内共享的</p>
+</li>
+<li>
+<p>创建进程的多种方式</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 创建进程需要使用threading模块</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> threading <span style="color:#f92672">import</span> Thread
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">task</span>(name):
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74"> is runing&#39;</span>)
+</span></span><span style="display:flex;"><span>	time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.1</span>)
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74"> is over&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__name__&#39;</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>		t <span style="color:#f92672">=</span> Thread(target<span style="color:#f92672">=</span>task, args<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;用户</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span>i,))
+</span></span><span style="display:flex;"><span>		t<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>form threading <span style="color:#f92672">import</span> Thread
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyThread</span>(Thread):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#39;run is runing&#39;</span>)
+</span></span><span style="display:flex;"><span>		time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#39;run is over&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>obj <span style="color:#f92672">=</span> MyThread()
+</span></span><span style="display:flex;"><span>obj<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;主进程&#39;</span>)
+</span></span></code></pre></div><ul>
+<li>
+<p>线程的诸多特性</p>
+</li>
+<li>
+<p>守护线程
+同进程中一致，待验证</p>
+</li>
+<li>
+<p>GIL全局解释器锁
+在官方文档中对GIL的释义
+In CPython, the global interpreter lock, or GIL, is a mutex that prevents multiple native threads from executing Python bytecodes at once. This lock is necessary mainly because CPython’s memory management is not thread-safe. (However, since the GIL exists, other features have grown to depend on the guarantees that it enforces.</p>
+</li>
+</ul>
+<ol>
+<li>在CPython解释器中存在全局解释器锁，简称GIL</li>
+<li>GIL的本质也是互斥锁，用来阻止同一个进程内多个线程同时执行</li>
+<li>GIL的存在在因为CPython解释器中内存管理不是线程安全的（垃圾回收机制）</li>
+</ol>
+<ul>
+<li>线程的使用场景</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">场景一：
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		单个CPU
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		多个CPU
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">场景二：
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		IO密集型
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		计算密集型
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> 单个CPU
+</span></span><span style="display:flex;"><span>	IO密集型
+</span></span><span style="display:flex;"><span>		多进程<span style="color:#960050;background-color:#1e0010">：</span> 申请额外的空间<span style="color:#960050;background-color:#1e0010">，</span>消耗更多的资源
+</span></span><span style="display:flex;"><span>		多线程<span style="color:#960050;background-color:#1e0010">：</span> 消耗资源相对较少<span style="color:#960050;background-color:#1e0010">，</span>通过多道技术
+</span></span><span style="display:flex;"><span>		ps<span style="color:#960050;background-color:#1e0010">：</span>多线程更具有优势
+</span></span><span style="display:flex;"><span>	计算密集型
+</span></span><span style="display:flex;"><span>		多进程<span style="color:#960050;background-color:#1e0010">：</span> 申请额外的空间<span style="color:#960050;background-color:#1e0010">，</span>消耗更多的资源(总耗时<span style="color:#f92672">+</span>申请空间<span style="color:#f92672">+</span>cp代码<span style="color:#f92672">+</span>切换)
+</span></span><span style="display:flex;"><span>		多线程<span style="color:#960050;background-color:#1e0010">：</span> 消耗资源相对较少<span style="color:#960050;background-color:#1e0010">，</span>通过多道技术<span style="color:#960050;background-color:#1e0010">（</span>总耗时<span style="color:#f92672">+</span>切换<span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span>		ps: 多线程有优势
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> 多个CPU
+</span></span><span style="display:flex;"><span>	IO密集型
+</span></span><span style="display:flex;"><span>		多进程<span style="color:#960050;background-color:#1e0010">：</span>总耗时<span style="color:#960050;background-color:#1e0010">（</span>单个进程耗时<span style="color:#f92672">+</span>IO<span style="color:#f92672">+</span>申请空间<span style="color:#f92672">+</span>拷贝代码<span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span>		多线程<span style="color:#960050;background-color:#1e0010">：（</span>单个进程的耗时<span style="color:#f92672">+</span>IO<span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span>		ps<span style="color:#960050;background-color:#1e0010">：</span> 多线程有优势
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>	计算密集型
+</span></span><span style="display:flex;"><span>		多进程<span style="color:#960050;background-color:#1e0010">：</span>总耗时<span style="color:#960050;background-color:#1e0010">（</span>单个进程耗时<span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span>		多线程<span style="color:#960050;background-color:#1e0010">：</span>总耗时<span style="color:#960050;background-color:#1e0010">（</span>多进程的综合耗时<span style="color:#960050;background-color:#1e0010">）</span>
+</span></span></code></pre></div><ul>
+<li>信号量
+信号量是指在使用锁时，指定一次创建锁的数量
+信号量需要使用Semaphore同样在threading模块下</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> threading <span style="color:#f92672">import</span> Thread, Lock, Semaphore
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sp <span style="color:#f92672">=</span> Semaphore(<span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyThread</span>(Thread):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self):
+</span></span><span style="display:flex;"><span>		sp<span style="color:#f92672">.</span>acquire()
+</span></span><span style="display:flex;"><span>		print(self<span style="color:#f92672">.</span>name)
+</span></span><span style="display:flex;"><span>		time<span style="color:#f92672">.</span>sleep(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">20</span>)<span style="color:#960050;background-color:#1e0010">：</span>
+</span></span><span style="display:flex;"><span>	t <span style="color:#f92672">=</span> MyThread()
+</span></span><span style="display:flex;"><span>	t<span style="color:#f92672">.</span>start()
+</span></span></code></pre></div><ul>
+<li>event事件
+event事件，相当与线程间的依赖，A线程必须等待B线程执行到event.set() 的位置后 并且自己有event.wait()后才能继续向下执行，使用的是threading下的Event</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> threading <span style="color:#f92672">import</span> Thread, Event
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>event <span style="color:#f92672">=</span> Event()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">light</span>():
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;暂停&#39;</span>)
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;结束暂停&#39;</span>)
+</span></span><span style="display:flex;"><span>    event<span style="color:#f92672">.</span>set()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">car</span>(name):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> 暂停中&#39;</span> <span style="color:#f92672">%</span> name)
+</span></span><span style="display:flex;"><span>    event<span style="color:#f92672">.</span>wait()
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> gogogo&#39;</span> <span style="color:#f92672">%</span> name)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> Thread(target<span style="color:#f92672">=</span>light)
+</span></span><span style="display:flex;"><span>t<span style="color:#f92672">.</span>start()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">20</span>):
+</span></span><span style="display:flex;"><span>    t <span style="color:#f92672">=</span> Thread(target<span style="color:#f92672">=</span>car, args<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;GOPRO</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> i,))
+</span></span><span style="display:flex;"><span>    t<span style="color:#f92672">.</span>start()
+</span></span></code></pre></div><ul>
+<li>进程池与线程池
+为什么要有进程池和线程池，因为在创建进程和线程时硬件是由物理极限的，不可能一直无线的创建下去，所以产生了进程池和线程池的概念，降低了程序的执行效率，但是保证了计算机硬件的安全
+进程池：提前创建好固定数量的进程供后续程序的调用，超出则等待
+线程池：提前创建好固定数量的线程供后续程序的调用，超出则等待</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> concurrent.futures <span style="color:#f92672">import</span> ProcessPiilExecutor, ThreadPoolExecutor
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> threading <span style="color:#f92672">import</span> current_thread
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建固定数量的进程和线程池</span>
+</span></span><span style="display:flex;"><span>pool <span style="color:#f92672">=</span> ThreadPoolExecutor(<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>pool1 <span style="color:#f92672">=</span> ProcessPoolExecutor(<span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">task</span>(n):
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;task is running&#39;</span>)
+</span></span><span style="display:flex;"><span>	time<span style="color:#f92672">.</span>sleep(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;task is over&#39;</span>, n, current_thread()<span style="color:#f92672">.</span>name)
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;task is over&#39;</span>, os<span style="color:#f92672">.</span>getpid())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#39;from func&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">20</span>):
+</span></span><span style="display:flex;"><span>	res <span style="color:#f92672">=</span> pool1<span style="color:#f92672">.</span>submit(task,<span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span>	print(res<span style="color:#f92672">.</span>result())
+</span></span><span style="display:flex;"><span>	poo1<span style="color:#f92672">.</span>submit(task,<span style="color:#ae81ff">123</span>)<span style="color:#f92672">.</span>add_done_callback(func)
+</span></span></code></pre></div><ul>
+<li>
+<p>协程
+是程序员利用多道技术想出来的代码思想，用来欺骗CPU一直运行
+协程需要使用猴子模块，threading模块通过应用线程实现并发，multiprocessing使用进程实现并发，在python中还有一种实现并发的方式，就是用协程，以一种单线程单进程的方式实现并发</p>
+</li>
+<li>
+<p>携程如何实现并发</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> sockt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> gevent <span style="color:#f92672">import</span> monkey;monkey<span style="color:#f92672">.</span>patch_all()
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> gevent <span style="color:#f92672">import</span> spawn
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">communication</span>(sock):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>		data <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
+</span></span><span style="display:flex;"><span>		print(data<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf8&#39;</span>))
+</span></span><span style="display:flex;"><span>		sock<span style="color:#f92672">.</span>send(data<span style="color:#f92672">.</span>upper())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_server</span>():
+</span></span><span style="display:flex;"><span>	server <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket()
+</span></span><span style="display:flex;"><span>	server<span style="color:#f92672">.</span>bind((<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#ae81ff">8080</span>))
+</span></span><span style="display:flex;"><span>	server<span style="color:#f92672">.</span>listen(<span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>		sock, addr <span style="color:#f92672">=</span> server<span style="color:#f92672">.</span>accept()
+</span></span><span style="display:flex;"><span>		spawn(communication, sock)
+</span></span><span style="display:flex;"><span>s1 <span style="color:#f92672">=</span> spawn(get_server)
+</span></span><span style="display:flex;"><span>s1<span style="color:#f92672">.</span>join()
+</span></span></code></pre></div><ul>
+<li>
+<p>数据库相关</p>
+</li>
+<li>
+<p>MySQL的基本使用</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">对数据库密码做更改</span>
+</span></span><span style="display:flex;"><span>mysqladmin <span style="color:#f92672">-</span>root <span style="color:#f92672">-</span>p123 password <span style="color:#ae81ff">456</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">直接修改该存储用户的数据表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">update</span> <span style="color:#66d9ef">user</span> <span style="color:#66d9ef">set</span> password<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;1234&#39;</span> <span style="color:#66d9ef">where</span> <span style="color:#e6db74">&#39;root&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">创建库</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">database</span> <span style="color:#960050;background-color:#1e0010">库名</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">查看库</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">show</span> databases;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">show</span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">database</span> <span style="color:#960050;background-color:#1e0010">库名</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">编辑库</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">database</span> <span style="color:#960050;background-color:#1e0010">库名</span> charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">删除库</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">database</span> <span style="color:#960050;background-color:#1e0010">库名</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">记录表相关操作</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">创建表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> <span style="color:#960050;background-color:#1e0010">表名</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">查看表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">show</span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> tablesname;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">describe</span> tablename;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">编辑表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span> tablename <span style="color:#66d9ef">rename</span> newtablename;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">删除表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">table</span> tablename;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">基于记录操作</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">插入数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> tablename <span style="color:#66d9ef">values</span>(data1,data2);
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">查询数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> tablename;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">编辑数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">update</span> tablename <span style="color:#66d9ef">set</span> id<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;data1&#39;</span> <span style="color:#66d9ef">where</span> <span style="color:#e6db74">&#39;root&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">删除数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">from</span> tablename;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">from</span> tablename <span style="color:#66d9ef">where</span> id<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;
+</span></span></code></pre></div><ul>
+<li>
+<p>MySQL配置文件</p>
+</li>
+<li>
+<p>字符编码与配置文件
+show status 可以查看出当前mysql系统运行的实时状态，便于做出相应优化
+show variables 查看系统参数，系统默认设置或dba调整后的参数</p>
+</li>
+<li>
+<p>MySQL字符相关(5.7)</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vim /etc/my.conf
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>mysqld<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>charcter-set-server<span style="color:#f92672">=</span>utf8mb4
+</span></span><span style="display:flex;"><span>collation-server<span style="color:#f92672">=</span>utf8mb4_general_ci
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>client<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>default-character-set<span style="color:#f92672">=</span>utf8mb4
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>mysql<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>default-character-set<span style="color:#f92672">=</span>utf8mb4
+</span></span></code></pre></div><ul>
+<li>数据库存储引擎</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#75715e">-- 查看常用的存储引擎
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">show</span> engines;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 1. MyISAm
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">MySQL 5.5 之前使用的存储引擎
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">该引擎存储数据比较快，但是功能比较少，不支持数据库事务，安全性低
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 2. InnoDB
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">MySQL 5.5之后使用的存储引擎
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">该引擎支持事务，行级锁，外键等，安全性高，但是速度与MyISAM向对比弱
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- Memory
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">该引擎基于内存存储数据，仅仅用户临时表存储数据，当数据库从起之后数据全部消失
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- BlackHole
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">该引擎将数据写入黑洞，类似于linux下的/dev/null块设备
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span></code></pre></div><ul>
+<li>创建表的完整语法</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> tablename(
+</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">字段名，字段类型（数字）</span> <span style="color:#960050;background-color:#1e0010">约束条件</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">1. 字段名和字段类型是必须的
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">2. 数字和约束条件是非必须的
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span></code></pre></div><ul>
+<li>字段类型 整型</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>字节</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tinyint</td>
+<td>1bytes</td>
+<td>正负号（占1bit）</td>
+</tr>
+<tr>
+<td>smallint</td>
+<td>2bytes</td>
+<td>正负号（占1bit）</td>
+</tr>
+<tr>
+<td>int</td>
+<td>4bytes</td>
+<td>正负号（占1bit）</td>
+</tr>
+<tr>
+<td>bigint</td>
+<td>8bytes</td>
+<td>正负号（占1bit）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>严格模式
+在使用数据库存储数据时，如果存储的数据不符合规范，则数据库返回错误信息
+这是由于数据库默认严格模式带来的效果，sql_mode=strict_trans_tables</p>
+</li>
+<li>
+<p>字段类型 - 浮点型</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>参数</th>
+<th>精度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>float</td>
+<td>（20,10）</td>
+<td>小数后7位</td>
+</tr>
+<tr>
+<td>double</td>
+<td>（20,10）</td>
+<td>小数后14位</td>
+</tr>
+<tr>
+<td>decimal</td>
+<td>（20,10）</td>
+<td>小数后19位以上</td>
+</tr>
+</tbody>
+</table>
+<p>字段类型- 字符串类型</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>char</td>
+<td>定长 如果带有数字4 则代表最多存储4个字符，超出则报错,不够则使用空格填充</td>
+</tr>
+<tr>
+<td>varchar</td>
+<td>变长 如果带有数字4 则代表最多存储4个字符，超出则报错,不够则有几位存几位</td>
+</tr>
+</tbody>
+</table>
+<p>char和varchar的区别：char优势是整存整取速度快，劣势是浪费存储空间，varchar 优势：节省存储空间，劣势：存储的数据比较char慢</p>
+<ul>
+<li>
+<p>内置函数char_length()
+该函数默认可以获取熟读的长度</p>
+</li>
+<li>
+<p>字段类型 枚举 多选一：提供多个选项只能选择一个 关键字为enum</p>
+</li>
+<li>
+<p>字段类型 集合 多对一和多对多，提供多个选项可以选择一个或多个，关键字set</p>
+</li>
+<li>
+<p>字段类型- 日期</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>datetime 年月日时分秒
+</span></span><span style="display:flex;"><span>date 年月日
+</span></span><span style="display:flex;"><span>time 时分秒
+</span></span><span style="display:flex;"><span>year 年
+</span></span></code></pre></div><ul>
+<li>MySQL约束条件</li>
+<li>无符号
+无符号，忽略数据中的正负符号，关键字unsigned</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> t1(id int unsigned);
+</span></span></code></pre></div><ul>
+<li>零填充
+零填充，在数据写入未达到数据未时，使用零填充 关键字zerofill</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> t2(id int zerofill);
+</span></span></code></pre></div><ul>
+<li>非空
+非空 即数据值不能为空 , 关键字为NOT NULL</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> t3(id int <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span>);
+</span></span></code></pre></div><ul>
+<li>默认值
+默认值，当写入数据时若字段没有数据则给一个默认值 default</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> t4(name varchar <span style="color:#66d9ef">default</span> <span style="color:#e6db74">&#39;wesley&#39;</span>);
+</span></span></code></pre></div><ul>
+<li>唯一值
+即当列数据值 只能出现一次 关键字 unique</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> t5(id int <span style="color:#66d9ef">unique</span>);
+</span></span></code></pre></div><ul>
+<li>主键
+主键特性：非空且唯一 关键字 primary key</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> t6(id int <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span>);
+</span></span></code></pre></div><ul>
+<li>自增
+自动增加，配合主键使用 关键字 auto_increment</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> t7(id int <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span> auto_increment);
+</span></span></code></pre></div><ul>
+<li>外键
+关联其他表键，可以用外键创建表与表的关系</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> t8(
+</span></span><span style="display:flex;"><span>	id int <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span> auto_increment,
+</span></span><span style="display:flex;"><span>	uid int,
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">foreign</span> <span style="color:#66d9ef">key</span>(uid) <span style="color:#66d9ef">references</span> t9(id)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">foreign key 用于指定本表需要作为外键的字段
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">references 用于指定链接到其他表的关系字段
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span></code></pre></div><ul>
+<li>级联
+级联是将表与表的关系强制绑定，当对主表做操作时副表也会随着主表操作，与外键一起使用</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> t10(
+</span></span><span style="display:flex;"><span>	id int <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span> auto_increment,
+</span></span><span style="display:flex;"><span>	uid int,
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">foreign</span> <span style="color:#66d9ef">key</span>(uid) <span style="color:#66d9ef">references</span> t11(id)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">on</span> <span style="color:#66d9ef">update</span> <span style="color:#66d9ef">cascade</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">on</span> <span style="color:#66d9ef">delete</span> <span style="color:#66d9ef">cascade</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">级联操作：on update cascade
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">当对uid字段做更新操作时 t11表关联的id字段也会发生相同的变化
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">级联操作：on delete cascade
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">当对uid字段做删除操作时 t11表关联的id字段也会发生相同的变化
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span></code></pre></div><ul>
+<li>mysql 数据库查询关键字</li>
+</ul>
+<blockquote>
+<p>mysql中的内置方法可以通过help来查看</p>
+</blockquote>
+<p>数据库查询语言 DQL</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#75715e">-- 语法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#960050;background-color:#1e0010">字段列表</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#960050;background-color:#1e0010">表名列表</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#960050;background-color:#1e0010">条件列表</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#960050;background-color:#1e0010">分组字段列表</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">having</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#960050;background-color:#1e0010">过滤列表</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">distinct</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#960050;background-color:#1e0010">去重列表</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#960050;background-color:#1e0010">排序字段列表</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">limit</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#960050;background-color:#1e0010">分页</span>]
+</span></span><span style="display:flex;"><span>regexp
+</span></span><span style="display:flex;"><span>[<span style="color:#960050;background-color:#1e0010">正则匹配</span>]
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">DQL执行顺序
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">FROM -&gt; WHERE -&gt; GROUP BY -&gt; SELECT -&gt; ORDER BY -&gt; LIMIT
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span></code></pre></div><ol>
+<li>查询多个字段</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> field1, field2 <span style="color:#66d9ef">from</span> tablename;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">or</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> tablename;
+</span></span></code></pre></div><ol start="2">
+<li>给字段设置别名</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> field1 <span style="color:#66d9ef">as</span> a1 <span style="color:#66d9ef">from</span> tablename;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">or</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> field1 a1 <span style="color:#66d9ef">from</span> tablename;
+</span></span></code></pre></div><ul>
+<li>条件查询 where</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> t1 <span style="color:#66d9ef">where</span> id<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;1&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 如果查询多个确定条件可以使用in的方式
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> t1 <span style="color:#66d9ef">where</span> id <span style="color:#66d9ef">in</span> (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">7</span>)
+</span></span></code></pre></div><ul>
+<li>模糊查询 like</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#75715e">-- 使用like查询name字段中带有o的姓名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> t1 <span style="color:#66d9ef">where</span> name <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;%o%&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 也可以查询名字是固定长度的数据值,比如名字为4个字符
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> t1 <span style="color:#66d9ef">where</span> name <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;____&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">or</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> t1 <span style="color:#66d9ef">where</span> <span style="color:#66d9ef">char_length</span>(name) <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 注意如果需要匹配数据值为null的数据只能使用is不支持=
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> t1 <span style="color:#66d9ef">where</span> name <span style="color:#66d9ef">is</span> <span style="color:#66d9ef">null</span>;
+</span></span></code></pre></div><ul>
+<li>查询关键字 group by分组</li>
+</ul>
+<blockquote>
+<p>group by 分组指将前面处理的数据作为新的数据集配合函数或其他条件处理，分组后最小的处理单位是组，不再是组内的单个数据</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#75715e">-- 假设emp是公司表，post是部门信息 salary是薪资
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 接下来就使用group by 针对部门分组，分组之后就可以配合聚合函数操作
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> post <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> post;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> post <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;部门&#39;</span>, <span style="color:#66d9ef">max</span>(salary) <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;最高薪&#39;</span>, <span style="color:#66d9ef">min</span>(salary) <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;最低薪&#39;</span>, <span style="color:#66d9ef">avg</span>(salary) <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;平均薪&#39;</span>, <span style="color:#66d9ef">sum</span>(salary) <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;部门开销&#39;</span> <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> post; 
+</span></span></code></pre></div><ul>
+<li>查询关键字 having</li>
+</ul>
+<blockquote>
+<p>having 本质和where一致 都是作为数据的筛选，区别是where是第一次对数据过滤，having是针对处理完的数据集做处理</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#75715e">-- 统计各部门年龄在30岁以上的员工平均工资 并且保留大于10000的数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> post,<span style="color:#66d9ef">avg</span>(salary) <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">where</span> age <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">30</span> <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> post <span style="color:#66d9ef">having</span> <span style="color:#66d9ef">avg</span>(salary) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10000</span>;
+</span></span></code></pre></div><ul>
+<li>查询关键字去重 distinct</li>
+</ul>
+<blockquote>
+<p>需要注意如果查询多个字段，每条记录必须一致才能去重 ，关键字必须写在字段的前面</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span> id,age <span style="color:#66d9ef">from</span> emp;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 这里id和age字段中必须完全一致才能被去重
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">例如,符合要求
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">id 1  age 18
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">id 1  age 18
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">不符合要求
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">id 1  age 18
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">id 2  age 18
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span></code></pre></div><ul>
+<li>查询关键字 - order by 排序</li>
+</ul>
+<blockquote>
+<p>mysql 默认asc升序，desc降序</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#75715e">-- 单字段排序
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 升序
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> age <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> <span style="color:#66d9ef">asc</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 降序
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> age <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> <span style="color:#66d9ef">desc</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 多字段排序
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 先对age进行升序，再更具salary降序
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> age <span style="color:#66d9ef">asc</span>, salary <span style="color:#66d9ef">desc</span>;
+</span></span></code></pre></div><ul>
+<li>查询关键字- limit分页
+对数据做截取处理</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#75715e">-- 前5条数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">limit</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 第二条数据开始的后5条数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">limit</span> <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>;
+</span></span></code></pre></div><ul>
+<li>查询关键字 regexp 正则表达式</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#75715e">-- 模糊查询的第二种方式
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> emp <span style="color:#66d9ef">where</span> name regexp <span style="color:#e6db74">&#39;^j.*(n|y)&#39;</span>;
+</span></span></code></pre></div><ul>
+<li>多表联查</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> emp1, dep;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">在同时对两张表查询数据值称为：’笛卡尔积‘无脑对应没有意义，多表联查应该将
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">无关系的两张表通过语句指定逻辑关系
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> emp1, dep <span style="color:#66d9ef">where</span> emp1.dep_id<span style="color:#f92672">=</span>dep.id;
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> emp1, dep <span style="color:#66d9ef">where</span> emp1.dep_id<span style="color:#f92672">=</span>dep.id;
+</span></span></code></pre></div>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/databases">databases</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>

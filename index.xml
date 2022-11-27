@@ -6,7 +6,18 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 25 Nov 2022 20:20:46 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 27 Nov 2022 17:27:41 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第八周总结</title>
+      <link>https://jinkes-li.github.io/databases/%E7%AC%AC%E5%85%AB%E5%91%A8%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sun, 27 Nov 2022 17:27:41 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/databases/%E7%AC%AC%E5%85%AB%E5%91%A8%E6%80%BB%E7%BB%93/</guid>
+      <description>进程相关 多进程实现TCP服务端并 # 如何使用多进程实现并发 1. 导入multiprocessing 下的Process模块 2. 创建进程对象并return对象，供其他函数调用 3. 定义一个用于接收客户端函数 4. 调用进程对象，并循环接搜客户端请求 5. 循环开设进程，使每个客户端请求进来都可以有进程处理 Server: import socket from multiprocessing import Process def get_server(): server = socket.socket() server.bind((&amp;#39;127.0.0.1&amp;#39;,8080)) server.listen(5) return server def get_talk(soke): while True: data = sock.recv(1024) print(data.decode(&amp;#39;utf8&amp;#39;)) sock.send(data.upper()) if __name__ == &amp;#39;__main__&amp;#39;: server = get_server() while True: sock, addr = server.accept() p = Process(targat=get_talk, args=(sock,)) p.start() 互斥锁概念 互斥锁主要是针对于线程，在计算机中线程数据太快，在并发状态下所有的线程都会操作数据，这样就会造成数据的错乱，所以出现了锁的概念，在一个进程抢到锁之后才可以对数据进行操作，其他线程只能等待，虽然这样降低了计算机处理数据的性能，但是保证了数据的安全性
+如何加锁 在编程的过程中如何对代码添加锁，这一点需要结合具体业务，这里以12306举例，这种先查询然后再对数据做操作的业务，在对数据读取时不加锁，只有在对数据做操作时添加锁，接下来对这个业务进行简单的模拟
+# 在Python代码中可以使用multiprocessing这个模块下的LOCK锁模块来实现数据加锁 # set_start_mothod 是更改python进程的启动模式，这里使用的是mac系统所以需要修改模式为fork from multiprocessing import Process, set_start_mothod, Lock import time import json import random # 用于模拟用户在购买票时的网络延迟 # 用户查看票 def search(name): with open(data.</description>
+    </item>
+    
     <item>
       <title>数据库DQL查询</title>
       <link>https://jinkes-li.github.io/databases/%E6%95%B0%E6%8D%AE%E5%BA%93dql%E6%9F%A5%E8%AF%A2/</link>
