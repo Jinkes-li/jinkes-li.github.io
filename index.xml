@@ -6,7 +6,17 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Nov 2022 21:59:28 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Nov 2022 23:30:45 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据库终章</title>
+      <link>https://jinkes-li.github.io/databases/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%88%E7%AB%A0/</link>
+      <pubDate>Tue, 29 Nov 2022 23:30:45 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/databases/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%88%E7%AB%A0/</guid>
+      <description>MySQL终章 SQL注入问题 视图 触发器 存储过程 流程控制 内置函数 索引与慢查询优化 SQL注入 SQL(SQL injection)注入问题是早期利用SQL语言中的非法拼接和更改条件或操作数据,是发生在 Web 程序中数据库层的安全漏洞，是网站存在最多也是最简单的漏洞。 主要原因是程序对用户输入数据的合法性没有判断和处理，导致攻击者可以在 Web 应用程序中事先定义好的 SQL 语句中添加额外的 SQL 语句， 在管理员不知情的情况下实现非法操作，以此来实现欺骗数据库服务器执行非授权的任意查询，从而进一步获取到数据信息。
+在python中如何方法SQL注入问题？ &amp;#34;&amp;#34;&amp;#34; 数据库中提前准备账户密码表 mysql&amp;gt; select * from userinfo; +----+--------+-----+ | id | name | pwd | +----+--------+-----+ | 1 | wesley | 123 | +----+--------+-----+ &amp;#34;&amp;#34;&amp;#34; import pymysql conn = pymysql.connect( host=&amp;#39;121.4.86.62&amp;#39;, port=3306, user=&amp;#39;root&amp;#39;, password=&amp;#39;Videojet2029@&amp;#39;, database=&amp;#39;db7&amp;#39;, charset=&amp;#39;utf8mb4&amp;#39;, autocommit=True ) cursor = conn.cursor(cursor=pymysql.cursors.DictCursor) username = input(&amp;#39;name&amp;gt;&amp;gt;: &amp;#39;) password = input(&amp;#39;pass&amp;gt;&amp;gt;: &amp;#39;) # 构建sql语句 sql = &amp;#34; select * from userinfo where name=&amp;#39;%s&amp;#39; and pwd=&amp;#39;%s&amp;#39; &amp;#34; % (username, password) print(sql) cursor.</description>
+    </item>
+    
     <item>
       <title>数据库多表联查</title>
       <link>https://jinkes-li.github.io/databases/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%9A%E8%A1%A8%E8%81%94%E6%9F%A5/</link>

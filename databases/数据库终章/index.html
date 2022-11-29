@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 数据库终章 | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/databases/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%88%E7%AB%A0/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="数据库终章" />
+<meta property="og:description" content="MySQL终章 SQL注入问题 视图 触发器 存储过程 流程控制 内置函数 索引与慢查询优化 SQL注入 SQL(SQL injection)注入问题是早期利用SQL语言中的非法拼接和更改条件或操作数据,是发生在 Web 程序中数据库层的安全漏洞，是网站存在最多也是最简单的漏洞。 主要原因是程序对用户输入数据的合法性没有判断和处理，导致攻击者可以在 Web 应用程序中事先定义好的 SQL 语句中添加额外的 SQL 语句， 在管理员不知情的情况下实现非法操作，以此来实现欺骗数据库服务器执行非授权的任意查询，从而进一步获取到数据信息。
+在python中如何方法SQL注入问题？ &#34;&#34;&#34; 数据库中提前准备账户密码表 mysql&gt; select * from userinfo; &#43;----&#43;--------&#43;-----&#43; | id | name | pwd | &#43;----&#43;--------&#43;-----&#43; | 1 | wesley | 123 | &#43;----&#43;--------&#43;-----&#43; &#34;&#34;&#34; import pymysql conn = pymysql.connect( host=&#39;121.4.86.62&#39;, port=3306, user=&#39;root&#39;, password=&#39;Videojet2029@&#39;, database=&#39;db7&#39;, charset=&#39;utf8mb4&#39;, autocommit=True ) cursor = conn.cursor(cursor=pymysql.cursors.DictCursor) username = input(&#39;name&gt;&gt;: &#39;) password = input(&#39;pass&gt;&gt;: &#39;) # 构建sql语句 sql = &#34; select * from userinfo where name=&#39;%s&#39; and pwd=&#39;%s&#39; &#34; % (username, password) print(sql) cursor." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/databases/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%88%E7%AB%A0/" /><meta property="article:section" content="databases" />
+<meta property="article:published_time" content="2022-11-29T23:30:45+08:00" />
+<meta property="article:modified_time" content="2022-11-29T23:30:45+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="数据库终章"/>
+<meta name="twitter:description" content="MySQL终章 SQL注入问题 视图 触发器 存储过程 流程控制 内置函数 索引与慢查询优化 SQL注入 SQL(SQL injection)注入问题是早期利用SQL语言中的非法拼接和更改条件或操作数据,是发生在 Web 程序中数据库层的安全漏洞，是网站存在最多也是最简单的漏洞。 主要原因是程序对用户输入数据的合法性没有判断和处理，导致攻击者可以在 Web 应用程序中事先定义好的 SQL 语句中添加额外的 SQL 语句， 在管理员不知情的情况下实现非法操作，以此来实现欺骗数据库服务器执行非授权的任意查询，从而进一步获取到数据信息。
+在python中如何方法SQL注入问题？ &#34;&#34;&#34; 数据库中提前准备账户密码表 mysql&gt; select * from userinfo; &#43;----&#43;--------&#43;-----&#43; | id | name | pwd | &#43;----&#43;--------&#43;-----&#43; | 1 | wesley | 123 | &#43;----&#43;--------&#43;-----&#43; &#34;&#34;&#34; import pymysql conn = pymysql.connect( host=&#39;121.4.86.62&#39;, port=3306, user=&#39;root&#39;, password=&#39;Videojet2029@&#39;, database=&#39;db7&#39;, charset=&#39;utf8mb4&#39;, autocommit=True ) cursor = conn.cursor(cursor=pymysql.cursors.DictCursor) username = input(&#39;name&gt;&gt;: &#39;) password = input(&#39;pass&gt;&gt;: &#39;) # 构建sql语句 sql = &#34; select * from userinfo where name=&#39;%s&#39; and pwd=&#39;%s&#39; &#34; % (username, password) print(sql) cursor."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/databases">databases</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h3 id="mysql终章">MySQL终章</h3>
+<ul>
+<li>SQL注入问题</li>
+<li>视图</li>
+<li>触发器</li>
+<li>存储过程</li>
+<li>流程控制</li>
+<li>内置函数</li>
+<li>索引与慢查询优化</li>
+</ul>
+<h4 id="sql注入">SQL注入</h4>
+<blockquote>
+<p>SQL(SQL injection)注入问题是早期利用SQL语言中的非法拼接和更改条件或操作数据,是发生在 Web 程序中数据库层的安全漏洞，是网站存在最多也是最简单的漏洞。
+主要原因是程序对用户输入数据的合法性没有判断和处理，导致攻击者可以在 Web 应用程序中事先定义好的 SQL 语句中添加额外的 SQL 语句，
+在管理员不知情的情况下实现非法操作，以此来实现欺骗数据库服务器执行非授权的任意查询，从而进一步获取到数据信息。</p>
+</blockquote>
+<ul>
+<li>在python中如何方法SQL注入问题？</li>
+</ul>
+<pre tabindex="0"><code class="language-Pyhton" data-lang="Pyhton">&#34;&#34;&#34;
+数据库中提前准备账户密码表
+mysql&gt; select * from userinfo;
++----+--------+-----+
+| id | name   | pwd |
++----+--------+-----+
+|  1 | wesley | 123 |
++----+--------+-----+
+&#34;&#34;&#34;
+
+import pymysql
+
+conn = pymysql.connect(
+    host=&#39;121.4.86.62&#39;,
+    port=3306,
+    user=&#39;root&#39;,
+    password=&#39;Videojet2029@&#39;,
+    database=&#39;db7&#39;,
+    charset=&#39;utf8mb4&#39;,
+    autocommit=True
+)
+
+cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+
+username = input(&#39;name&gt;&gt;: &#39;)
+password = input(&#39;pass&gt;&gt;: &#39;)
+
+# 构建sql语句
+sql = &#34; select * from userinfo where name=&#39;%s&#39; and pwd=&#39;%s&#39; &#34; % (username, password)
+
+print(sql)
+cursor.execute(sql)
+
+res = cursor.fetchall()
+
+if res:
+    print(&#39;登录成功&#39;)
+    print(res)
+else:
+    print(&#39;用户名或密码错误&#39;)
+
+&#34;&#34;&#34;
+上述代码存在的问题
+sql = &#34; select * from userinfo where name=&#39;%s&#39; and pwd=&#39;%s&#39; &#34; % (username, password)
+如果这一行代码，在前端使用SQL注入将会被恶意拼接
+注入: wesley&#39; -- hahsdklflaksdfhk 
+恶意拼接: select * from userinfo where name=&#39;wesley&#39; -- hahsdklflaksdfhk&#39; and pwd=&#39;&#39; 
+所以针对这个问题，需要针对性的过滤一些特殊字符，在python中pymysql的execute()方法会默认将特殊字符过滤
+需要更改代码中的SQL拼接，更改为如下所示
+sql = &#34;select * from userinfo where name=%s and pwd=%s&#34;
+cursor.execute(sql, (username, password))
+
+SQL再次注入效果
+name&gt;&gt;: wesley&#39; -- hahshdfhash
+pass&gt;&gt;: 
+ select * from userinfo where name=%s and pwd=%s 
+此时已经无法恶意拼接了
+&#34;&#34;&#34;
+</code></pre><ul>
+<li>视图
+视图指的是将使用率高的结果表保存在下来供下次继续使用</li>
+</ul>
+<ol>
+<li>视图的表只能用来查询，不能做增删改操作，一般情况下视图是不变的</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">如何创建视图</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">view</span> teacher2course <span style="color:#66d9ef">as</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> teacher <span style="color:#66d9ef">inner</span> <span style="color:#66d9ef">join</span> course <span style="color:#66d9ef">on</span> teacher.tid <span style="color:#f92672">=</span> course.teacher_id
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>. <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">view</span>  <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">创建视图关键字</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>. teacher2course <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">视图名称</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>. <span style="color:#960050;background-color:#1e0010">其他查询的</span>SQL语句
+</span></span></code></pre></div><ul>
+<li>触发器
+触发器指，达到某个条件后自动触发执行，在mysql数据库中针对于表的增加，删除，更新能够自动触发
+主要有六种触发机制</li>
+</ul>
+<ol>
+<li>增加前
+在增加数据前触发触发器</li>
+<li>增加后
+在增加数据后触发触发器</li>
+<li>删除前
+在删除数据前触发触发器</li>
+<li>删除后
+在删除数据后触发触发器</li>
+<li>更新前
+在更新数据前触发触发器</li>
+<li>更新后
+在更新数据后触发触发器</li>
+</ol>
+<ul>
+<li>触发器的命名</li>
+</ul>
+<blockquote>
+<p>见名知意</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> tri_before_insert_t1  <span style="color:#75715e"># 触发器在插入t1数据前触发</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> tri_after_delete_t2   <span style="color:#75715e"># 触发器在删除t2数据之后触发</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> tri_after_update_t2   <span style="color:#75715e"># 触发器在更新t2数据后触发</span>
+</span></span></code></pre></div><p>注意： 由于触发器中可能需要使用;来区分行，这里就和mysql的结束符产生了冲突，所以需要临时使用 delimiter $$ 临时替换结束符，$$为替换的新结束符</p>
+<ul>
+<li>触发器的实际应用</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> cmd (
+</span></span><span style="display:flex;"><span>	id int <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span> auto_increment,
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">user</span> char(<span style="color:#ae81ff">32</span>),
+</span></span><span style="display:flex;"><span>	priv char(<span style="color:#ae81ff">10</span>),
+</span></span><span style="display:flex;"><span>	cmd char(<span style="color:#ae81ff">64</span>),
+</span></span><span style="display:flex;"><span>	sub_time datetime,  <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">提交时间</span>
+</span></span><span style="display:flex;"><span>	success enum (<span style="color:#e6db74">&#39;yes&#39;</span>, <span style="color:#e6db74">&#39;no&#39;</span>) <span style="color:#f92672">#</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">代表执行失败</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> errlog(
+</span></span><span style="display:flex;"><span>	id int <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span> auto_increment,
+</span></span><span style="display:flex;"><span>	err_cmd char(<span style="color:#ae81ff">64</span>),
+</span></span><span style="display:flex;"><span>	err_time datetime
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">----------上述语句先定义2张表备用----------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delimiter</span> <span style="color:#960050;background-color:#1e0010">$$</span>  <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">将</span>MySQL默认的结束符由;<span style="color:#960050;background-color:#1e0010">替换为$$</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">trigger</span> tri_after_insert_cmd <span style="color:#66d9ef">after</span> <span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">on</span> cmd <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">each</span> <span style="color:#66d9ef">row</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#66d9ef">NEW</span>.success <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;no&#39;</span> <span style="color:#66d9ef">then</span>  <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">新记录都会被</span>MySQL封装成NEW对象
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> errlog(err_cmd, err_time) <span style="color:#66d9ef">values</span>(<span style="color:#66d9ef">NEW</span>.cmd, <span style="color:#66d9ef">NEW</span>.sub_time);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">end</span> <span style="color:#66d9ef">if</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span> <span style="color:#960050;background-color:#1e0010">$$</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delimiter</span> ;  <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">结束之后需要再改回来</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">往表</span>CMD中插入记录<span style="color:#960050;background-color:#1e0010">，触发触发器，根据</span>IF的条件判断是否插入错误日志
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">测试数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> cmd (
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">user</span>,
+</span></span><span style="display:flex;"><span>	priv,
+</span></span><span style="display:flex;"><span>	cmd,
+</span></span><span style="display:flex;"><span>	sub_time,
+</span></span><span style="display:flex;"><span>	success
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">values</span>
+</span></span><span style="display:flex;"><span>	(<span style="color:#e6db74">&#39;wesley&#39;</span>, <span style="color:#e6db74">&#39;0755&#39;</span>, <span style="color:#e6db74">&#39;ll /etc&#39;</span>, NOW(), <span style="color:#e6db74">&#39;yes&#39;</span>),
+</span></span><span style="display:flex;"><span>	(<span style="color:#e6db74">&#39;wesley&#39;</span>,<span style="color:#e6db74">&#39;0755&#39;</span>,<span style="color:#e6db74">&#39;cat /etc/passwd&#39;</span>,NOW(), <span style="color:#e6db74">&#39;no&#39;</span>),
+</span></span><span style="display:flex;"><span>	(<span style="color:#e6db74">&#39;wesley&#39;</span>,<span style="color:#e6db74">&#39;0755&#39;</span>,<span style="color:#e6db74">&#39;ps aux&#39;</span>,NOW(),<span style="color:#e6db74">&#39;yes&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">查询</span>errlog表记录
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> errlog;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----+-----------------+---------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> id <span style="color:#f92672">|</span> err_cmd         <span style="color:#f92672">|</span> err_time            <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----+-----------------+---------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> cat <span style="color:#f92672">/</span>etc<span style="color:#f92672">/</span>passwd <span style="color:#f92672">|</span> <span style="color:#ae81ff">2022</span><span style="color:#f92672">-</span><span style="color:#ae81ff">11</span><span style="color:#f92672">-</span><span style="color:#ae81ff">29</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">37</span>:<span style="color:#ae81ff">13</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----+-----------------+---------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">查看所有的触发器</span>
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">show</span> triggers;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> <span style="color:#66d9ef">Trigger</span><span style="color:#f92672">|</span> Event  <span style="color:#f92672">|</span> <span style="color:#66d9ef">Table</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">Statement</span><span style="color:#f92672">|</span> Timing <span style="color:#f92672">|</span> Created<span style="color:#f92672">|</span> sql_mode<span style="color:#f92672">|</span> <span style="color:#66d9ef">Definer</span> <span style="color:#f92672">|</span> character_set_client <span style="color:#f92672">|</span> collation_connection <span style="color:#f92672">|</span> <span style="color:#66d9ef">Database</span> <span style="color:#66d9ef">Collation</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----------------------+--------+-------+-----------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> tri_after_insert_cmd <span style="color:#f92672">|</span> <span style="color:#66d9ef">INSERT</span> <span style="color:#f92672">|</span> cmd   <span style="color:#f92672">|</span> <span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#66d9ef">NEW</span>.success <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;no&#39;</span> <span style="color:#66d9ef">then</span>  <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">新记录都会被</span>MySQL封装成NEW对象
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> errlog(err_cmd, err_time) <span style="color:#66d9ef">values</span>(<span style="color:#66d9ef">NEW</span>.cmd, <span style="color:#66d9ef">NEW</span>.sub_time);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">end</span> <span style="color:#66d9ef">if</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">AFTER</span>  <span style="color:#f92672">|</span> <span style="color:#ae81ff">2022</span><span style="color:#f92672">-</span><span style="color:#ae81ff">11</span><span style="color:#f92672">-</span><span style="color:#ae81ff">29</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">30</span>:<span style="color:#ae81ff">48</span>.<span style="color:#ae81ff">10</span> <span style="color:#f92672">|</span> ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION <span style="color:#f92672">|</span> root<span style="color:#f92672">@%</span>  <span style="color:#f92672">|</span> utf8mb4              <span style="color:#f92672">|</span> utf8mb4_general_ci   <span style="color:#f92672">|</span> utf8mb4_general_ci <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----------------------+--------+-------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">删除触发器</span>
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">trigger</span> tri_after_insert_cmd;
+</span></span><span style="display:flex;"><span>Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span></code></pre></div><ul>
+<li>Mysql事务
+MySQL 事务主要用于处理操作量大，复杂度高的数据，比如需要删除一个人员的基本资料，也要删除该人员相关的信息，邮箱，文章等，这些数据库操作语句就构成了一个事物</li>
+</ul>
+<ol>
+<li>在MySQL中只有使用了InnoDB的数据库引擎的数据库或表才支持事务</li>
+<li>事务处理可以用来维护数据库的完整性，保证成批的SQL语句全部执行或不执行</li>
+<li>事务是用来管理 insert,update,delete 语句</li>
+</ol>
+<ul>
+<li>事务特性（ACID）</li>
+</ul>
+<ol>
+<li>
+<p>原子性（Atomicity  或称不可分割性）
+原子性：一个事物（transaction）中的所有操作，要么全部完成，要不全部不完成，不会结束再之间的某个环节，事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样</p>
+</li>
+<li>
+<p>一致性（Consistency）
+一致性：在事务开始和事务结束以后，数据库的完整性没有被破坏，这表示写入的资料必须完全符合所有的预设规则，包含资料的精准度，窜联性以及后续数据库可以自发性的完成预定工作</p>
+</li>
+<li>
+<p>隔离性（lsolation  又称独立性）
+隔离性：数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时有于交叉执行而导致的数据不一致，事务隔离分为不同的级别，每一种级别都规定了事务中所做的修改，set transaction isolation level 级别</p>
+<ol>
+<li>
+<p>读未提交(Read uncommitted)
+事务中的修改即使没有提交，对其他事物也都是可见的，事务可以出去未提交的实际，这一现象也被称为“脏读”</p>
+</li>
+<li>
+<p>读提交(read committd)
+多数数据库系统的默认隔离级别，一个事务从开始提交之前所作的任何修改对其他事务来说都是不可见的，这种级别也叫做“不可重复读”</p>
+</li>
+<li>
+<p>可重复读(repeatable read)
+可重复读是MYSQL默认隔离级别，可以解决脏读的问题，但是无法解决幻读，幻读指的是，当某个事物在读取某个范围内的记录时，另一个事务又在改范围内插入了新的记录，当之前的事务再次读取该范围内的记录会产生幻行，InnoDB和XtraDB通过多版本并发控制(MVCC)及间隙锁策略解决该问题</p>
+</li>
+<li>
+<p>串行化(Serializable)
+强制事务串行执行，很少使用该级别</p>
+</li>
+</ol>
+</li>
+<li>
+<p>持久性（Durability）
+持久性：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失</p>
+</li>
+</ol>
+<blockquote>
+<p>在MySQL默认设置下，事务都是自动提交的，即执行SQL语句后就会马上执行COMMIT操作，所以要显式的开启一个事务需要使用BEGIN或者START TRANSACTION 或者执行 SET AUTOCOMMIT = 0来禁止使用当前会话的自动提交</p>
+</blockquote>
+<ul>
+<li>MySQL 事务处理的两种方式</li>
+</ul>
+<ol>
+<li>用BEGIN，ROLLBACK，COMMIT实现
+<ul>
+<li>BEGIN 开始一个事务（	start transaction）</li>
+<li>ROLLBACK 事务回滚</li>
+<li>COMMIT 事务确认</li>
+</ul>
+</li>
+<li>直接使用SET 来改变MySQL的自动提交模式
+<ul>
+<li>SET AUTOCOMMIT=0 进制自动提交</li>
+<li>SET AUTOCOMMIT=1 开启自动提交</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>事务特性验证</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#75715e">-- 创建用户表，需求是wesley转给tank 100元 jason收取手续费10元
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">user</span>(
+</span></span><span style="display:flex;"><span>	id int <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span> auto_increment,
+</span></span><span style="display:flex;"><span>	name char(<span style="color:#ae81ff">32</span>),
+</span></span><span style="display:flex;"><span>	balance int
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 导入初始金额
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#66d9ef">user</span>(name, balance) <span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;wesley&#39;</span>,<span style="color:#ae81ff">1000</span>),(<span style="color:#e6db74">&#39;jason&#39;</span>,<span style="color:#ae81ff">1000</span>),(<span style="color:#e6db74">&#39;tank&#39;</span>,<span style="color:#ae81ff">1000</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 原表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">user</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----+--------+---------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> id <span style="color:#f92672">|</span> name   <span style="color:#f92672">|</span> balance <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----+--------+---------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> wesley <span style="color:#f92672">|</span>    <span style="color:#ae81ff">1000</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> jason  <span style="color:#f92672">|</span>    <span style="color:#ae81ff">1000</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span> tank   <span style="color:#f92672">|</span>    <span style="color:#ae81ff">1000</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----+--------+---------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 开启事务
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">start</span> <span style="color:#66d9ef">transaction</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1054</span> <span style="color:#f92672">-</span> <span style="color:#66d9ef">Unknown</span> <span style="color:#66d9ef">column</span> <span style="color:#e6db74">&#39;wesley&#39;</span> <span style="color:#66d9ef">in</span> <span style="color:#e6db74">&#39;where clause&#39;</span>
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">update</span> <span style="color:#66d9ef">user</span> <span style="color:#66d9ef">set</span> balance<span style="color:#f92672">=</span><span style="color:#ae81ff">900</span> <span style="color:#66d9ef">where</span> name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wesley&#39;</span>;
+</span></span><span style="display:flex;"><span>Query OK, <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Rows</span> matched: <span style="color:#ae81ff">1</span>  Changed: <span style="color:#ae81ff">1</span>  Warnings: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">update</span> <span style="color:#66d9ef">user</span> <span style="color:#66d9ef">set</span> balance<span style="color:#f92672">=</span><span style="color:#ae81ff">1010</span> <span style="color:#66d9ef">where</span> name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;jason&#39;</span>;
+</span></span><span style="display:flex;"><span>Query OK, <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Rows</span> matched: <span style="color:#ae81ff">1</span>  Changed: <span style="color:#ae81ff">1</span>  Warnings: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">update</span> <span style="color:#66d9ef">user</span> <span style="color:#66d9ef">set</span> balance<span style="color:#f92672">=</span><span style="color:#ae81ff">1090</span> <span style="color:#66d9ef">where</span> name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;tank&#39;</span>;
+</span></span><span style="display:flex;"><span>Query OK, <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Rows</span> matched: <span style="color:#ae81ff">1</span>  Changed: <span style="color:#ae81ff">1</span>  Warnings: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 修改之后的数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">user</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----+--------+---------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> id <span style="color:#f92672">|</span> name   <span style="color:#f92672">|</span> balance <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----+--------+---------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> wesley <span style="color:#f92672">|</span>     <span style="color:#ae81ff">900</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> jason  <span style="color:#f92672">|</span>    <span style="color:#ae81ff">1010</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span> tank   <span style="color:#f92672">|</span>    <span style="color:#ae81ff">1090</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----+--------+---------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 回滚事务后再查看
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">rollback</span>;
+</span></span><span style="display:flex;"><span>Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 在使用事务时，只要没有commit提交事务，数据都只是在内存中存在
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">commit</span>;
+</span></span><span style="display:flex;"><span>Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 回滚事务后，事务回滚到之前的状态
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">user</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----+--------+---------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> id <span style="color:#f92672">|</span> name   <span style="color:#f92672">|</span> balance <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----+--------+---------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> wesley <span style="color:#f92672">|</span>    <span style="color:#ae81ff">1000</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> jason  <span style="color:#f92672">|</span>    <span style="color:#ae81ff">1000</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span> tank   <span style="color:#f92672">|</span>    <span style="color:#ae81ff">1000</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">----+--------+---------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span></code></pre></div><ul>
+<li>MVCC</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>MVCC只能在read committed(提交读)<span style="color:#960050;background-color:#1e0010">、</span>repeatable read(可重复读)两种隔离级别下工作<span style="color:#960050;background-color:#1e0010">，</span>其他两个不兼容(read uncommitted:总是读取最新  serializable:所有的行都加锁)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>InnoDB的MVCC通过在每行记录后面保存两个隐藏的列来实现MVCC
+</span></span><span style="display:flex;"><span>	一个列保存了行的创建时间
+</span></span><span style="display:flex;"><span>  一个列保存了行的过期时间(或删除时间)  <span style="color:#75715e"># 本质是系统版本号</span>
+</span></span><span style="display:flex;"><span>每开始一个新的事务版本号都会自动递增<span style="color:#960050;background-color:#1e0010">，</span>事务开始时刻的系统版本号会作为事务的版本号用来和查询到的每行记录版本号进行比较
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>例如
+</span></span><span style="display:flex;"><span>刚插入第一条数据的时候<span style="color:#960050;background-color:#1e0010">，</span>我们默认事务id为1<span style="color:#960050;background-color:#1e0010">，</span>实际是这样存储的
+</span></span><span style="display:flex;"><span>    username		create_version		delete_version
+</span></span><span style="display:flex;"><span>    jason						<span style="color:#ae81ff">1</span>					
+</span></span><span style="display:flex;"><span>可以看到<span style="color:#960050;background-color:#1e0010">，</span>我们在content列插入了kobe这条数据<span style="color:#960050;background-color:#1e0010">，</span>在create_version这列存储了1<span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">1</span>是这次插入操作的事务id<span style="color:#960050;background-color:#1e0010">。</span>
+</span></span><span style="display:flex;"><span>然后我们将jason修改为jason01<span style="color:#960050;background-color:#1e0010">，</span>实际存储是这样的
+</span></span><span style="display:flex;"><span>    username		create_version		delete_version
+</span></span><span style="display:flex;"><span>    jason						<span style="color:#ae81ff">1</span>									<span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    jason01					<span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>可以看到<span style="color:#960050;background-color:#1e0010">，</span>update的时候<span style="color:#960050;background-color:#1e0010">，</span>会先将之前的数据delete_version标记为当前新的事务id<span style="color:#960050;background-color:#1e0010">，</span>也就是2<span style="color:#960050;background-color:#1e0010">，</span>然后将新数据写入<span style="color:#960050;background-color:#1e0010">，</span>将新数据的create_version标记为新的事务id
+</span></span><span style="display:flex;"><span>当我们删除数据的时候<span style="color:#960050;background-color:#1e0010">，</span>实际存储是这样的
+</span></span><span style="display:flex;"><span>		username		create_version		delete_version
+</span></span><span style="display:flex;"><span>    jason01					<span style="color:#ae81ff">2</span>									 <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">由此当我们查询一条记录的时候，只有满足以下两个条件的记录才会被显示出来：
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   1.当前事务id要大于或者等于当前行的create_version值，这表示在事务开始前这行数据已经存在了。
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   2.当前事务id要小于delete_version值，这表示在事务开始之后这行记录才被删除。
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>存储过程
+存储过程是事先经过编译并存储在数据库中的一段SQL 语句的集合，调用存储过程可以简化应用开发人员的很多工作，减少数据在数据库和应用服务器之间的传输，对于提高数据处理的效率是有好处的。 存储过程思想上很简单，就是数据库SQL 语言层面的代码封装与重用
+特点</li>
+</ul>
+<ol>
+<li>封装</li>
+<li>复用</li>
+<li>可以接收参数，也可以返回数据减少网络交互，效率提升</li>
+</ol>
+<p>=================COPY=START=================</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#75715e">-- 创建语法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">procedure</span> <span style="color:#960050;background-color:#1e0010">存储过程名称</span>( [ <span style="color:#960050;background-color:#1e0010">参数列表</span> ] )
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">BEGIN</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">SQL</span> <span style="color:#960050;background-color:#1e0010">语句</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">END</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- NOTE: 在命令行中，执行创建存储过程的SQL时，需要通过关键字delimiter 指定SQL语句的结束符。默认是 分号作为结束符。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- delimiter $ ，则 $ 符作为结束符。
+</span></span></span></code></pre></div><p>调用
+CALL 名称 ( [参数])</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">无参函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delimiter</span> <span style="color:#960050;background-color:#1e0010">$$</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">procedure</span> p1()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> cmd;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span> <span style="color:#960050;background-color:#1e0010">$$</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delimiter</span> ;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">调用</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">call</span> p1()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">有参函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delimiter</span> <span style="color:#960050;background-color:#1e0010">$$</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">procedure</span> p2(
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">in</span> m int,  <span style="color:#f92672">#</span> in表示这个参数必须只能是传入不能被返回出去
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">in</span> n int,  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">out</span> res int  <span style="color:#f92672">#</span> out表示这个参数可以被返回出去<span style="color:#960050;background-color:#1e0010">，还有一个</span>inout表示即可以传入也可以被返回出去
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">begin</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> cmd <span style="color:#66d9ef">where</span> id <span style="color:#f92672">&gt;</span> m <span style="color:#66d9ef">and</span> id <span style="color:#f92672">&lt;</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">set</span> res<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;  <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">用来标志存储过程是否执行</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span> <span style="color:#960050;background-color:#1e0010">$$</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delimiter</span> ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">针对</span>res需要先提前定义
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span>res<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>;  <span style="color:#960050;background-color:#1e0010">定义</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">@</span>res;  <span style="color:#960050;background-color:#1e0010">查看</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">call</span> p1(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span>,<span style="color:#f92672">@</span>res)  <span style="color:#960050;background-color:#1e0010">调用</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">@</span>res  <span style="color:#960050;background-color:#1e0010">查看</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">查看存储过程具体信息
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	show create procedure pro1;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">查看所有存储过程
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	show procedure status;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">删除存储过程
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	drop procedure pro1;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">大前提</span>:<span style="color:#960050;background-color:#1e0010">存储过程在哪个库下面创建的只能在对应的库下面才能使用！！！</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">、直接在</span>mysql中调用
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span>res<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>  <span style="color:#f92672">#</span> res的值是用来判断存储过程是否被执行成功的依据<span style="color:#960050;background-color:#1e0010">，所以需要先定义一个变量</span><span style="color:#f92672">@</span>res存储10
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">call</span> p1(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">10</span>);  <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">报错</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">call</span> p1(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">4</span>,<span style="color:#f92672">@</span>res);  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">查看结果</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#f92672">@</span>res;  <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">执行成功，</span><span style="color:#f92672">@</span>res变量值发生了变化
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">、在</span>python程序中调用
+</span></span><span style="display:flex;"><span>pymysql链接mysql
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">产生的游表</span><span style="color:#66d9ef">cursor</span>.callproc(<span style="color:#e6db74">&#39;p1&#39;</span>,(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">10</span>))  <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">内部原理：</span><span style="color:#f92672">@</span>_p1_0<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>,<span style="color:#f92672">@</span>_p1_1<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>,<span style="color:#f92672">@</span>_p1_2<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">cursor</span>.excute(<span style="color:#e6db74">&#39;select @_p1_2;&#39;</span>)
+</span></span></code></pre></div><ul>
+<li>函数</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>可以看成是python中的内置函数
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;ps:可以通过help 函数名    查看帮助信息!&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1.移除指定字符</span>
+</span></span><span style="display:flex;"><span>Trim<span style="color:#960050;background-color:#1e0010">、</span>LTrim<span style="color:#960050;background-color:#1e0010">、</span>RTrim
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2.大小写转换</span>
+</span></span><span style="display:flex;"><span>Lower<span style="color:#960050;background-color:#1e0010">、</span>Upper
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3.获取左右起始指定个数字符</span>
+</span></span><span style="display:flex;"><span>Left<span style="color:#960050;background-color:#1e0010">、</span>Right
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4.返回读音相似值(对英文效果)</span>
+</span></span><span style="display:flex;"><span>Soundex
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">eg:客户表中有一个顾客登记的用户名为J.Lee
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		但如果这是输入错误真名其实叫J.Lie,可以使用soundex匹配发音类似的
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		where Soundex(name)=Soundex(&#39;J.Lie&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 5.日期格式:date_format</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&#39;&#39;在MySQL中表示时间格式尽量采用2022-11-11形式&#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>CREATE TABLE blog (
+</span></span><span style="display:flex;"><span>    id INT PRIMARY KEY auto_increment,
+</span></span><span style="display:flex;"><span>    NAME CHAR (<span style="color:#ae81ff">32</span>),
+</span></span><span style="display:flex;"><span>    sub_time datetime
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>INSERT INTO blog (NAME, sub_time)
+</span></span><span style="display:flex;"><span>VALUES
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;第1篇&#39;</span>,<span style="color:#e6db74">&#39;2015-03-01 11:31:21&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;第2篇&#39;</span>,<span style="color:#e6db74">&#39;2015-03-11 16:31:21&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;第3篇&#39;</span>,<span style="color:#e6db74">&#39;2016-07-01 10:21:31&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;第4篇&#39;</span>,<span style="color:#e6db74">&#39;2016-07-22 09:23:21&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;第5篇&#39;</span>,<span style="color:#e6db74">&#39;2016-07-23 10:11:11&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;第6篇&#39;</span>,<span style="color:#e6db74">&#39;2016-07-25 11:21:31&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;第7篇&#39;</span>,<span style="color:#e6db74">&#39;2017-03-01 15:33:21&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;第8篇&#39;</span>,<span style="color:#e6db74">&#39;2017-03-01 17:32:21&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;第9篇&#39;</span>,<span style="color:#e6db74">&#39;2017-03-01 18:31:21&#39;</span>);
+</span></span><span style="display:flex;"><span>select date_format(sub_time,<span style="color:#e6db74">&#39;%Y-%m&#39;</span>),count(id) <span style="color:#f92672">from</span> blog group by date_format(sub_time,<span style="color:#e6db74">&#39;%Y-%m&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span>where Date(sub_time) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2015-03-01&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span>where Year(sub_time)<span style="color:#f92672">=</span><span style="color:#ae81ff">2016</span> AND Month(sub_time)<span style="color:#f92672">=</span><span style="color:#ae81ff">07</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 更多日期处理相关函数 </span>
+</span></span><span style="display:flex;"><span>	adddate	增加一个日期 
+</span></span><span style="display:flex;"><span>	addtime	增加一个时间
+</span></span><span style="display:flex;"><span>	datediff计算两个日期差值
+</span></span></code></pre></div><ul>
+<li>流程控制</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 分支结构</span>
+</span></span><span style="display:flex;"><span>declare i int default <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>IF i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> THEN
+</span></span><span style="display:flex;"><span>	SELECT <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>ELSEIF i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> THEN
+</span></span><span style="display:flex;"><span>	SELECT <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>ELSE
+</span></span><span style="display:flex;"><span>	SELECT <span style="color:#ae81ff">7</span>;
+</span></span><span style="display:flex;"><span>END IF;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 循环结构</span>
+</span></span><span style="display:flex;"><span>DECLARE num INT ;
+</span></span><span style="display:flex;"><span>SET num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> ;
+</span></span><span style="display:flex;"><span>WHILE num <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span> DO
+</span></span><span style="display:flex;"><span>	SELECT num ;
+</span></span><span style="display:flex;"><span>	SET num <span style="color:#f92672">=</span> num <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> ;
+</span></span><span style="display:flex;"><span>END WHILE ;
+</span></span></code></pre></div><ul>
+<li>索引相关概念</li>
+</ul>
+<ol>
+<li>索引相当于是书的目录，可以更快的找到找到自己想要的内容
+索引在Mysql中也叫做建，是存储引擎用于快速找到记录的一种数据结构</li>
+</ol>
+<ul>
+<li>primary key</li>
+<li>unique key</li>
+<li>index key
+primary key和unique key除了可以加快查询本身还自带限制条件而index key很单一就是用来加快数据查询</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#75715e">-- 通过代码看查询本质
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>id int <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span> auto_increment,
+</span></span><span style="display:flex;"><span>name varchar(<span style="color:#ae81ff">32</span>) <span style="color:#66d9ef">unique</span>,
+</span></span><span style="display:flex;"><span>province varchar(<span style="color:#ae81ff">32</span>)
+</span></span><span style="display:flex;"><span>age int
+</span></span><span style="display:flex;"><span>phone bigint
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 遍历查找
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> name <span style="color:#66d9ef">from</span> userinfo <span style="color:#66d9ef">where</span> phone<span style="color:#f92672">=</span><span style="color:#ae81ff">1888888</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 通过B+Tree查找
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> name <span style="color:#66d9ef">from</span> userinfo <span style="color:#66d9ef">where</span> id<span style="color:#f92672">=</span><span style="color:#ae81ff">9999</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">索引可以加快数据查询 但是会降低增删的速度
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">通常情况下我们频繁使用某些字段查询数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">为了提升查询的速度可以将该字段建立索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">聚集索引</span>(<span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">主键、主键索引</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">辅助索引</span>(<span style="color:#66d9ef">unique</span>,<span style="color:#66d9ef">index</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">除主键意外的都是辅助索引</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">覆盖索引</span>(<span style="color:#960050;background-color:#1e0010">需要查询的字段值与查找字段同一位置</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">select</span> name <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">user</span> <span style="color:#66d9ef">where</span> name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;jason&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">非覆盖索引</span>(<span style="color:#960050;background-color:#1e0010">需要查询的字段值与查找字段不在位置</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">select</span> age <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">user</span> <span style="color:#66d9ef">where</span> name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;jason&#39;</span>;
+</span></span></code></pre></div><ul>
+<li>索引数据结构</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>索引底层其实是树结构<span style="color:#f92672">&gt;&gt;&gt;</span>:树是计算机底层的数据结构
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>树有很多中类型
+</span></span><span style="display:flex;"><span>	二叉树<span style="color:#960050;background-color:#1e0010">、</span>b树<span style="color:#960050;background-color:#1e0010">、</span>b<span style="color:#f92672">+</span>树<span style="color:#960050;background-color:#1e0010">、</span>B<span style="color:#f92672">*</span>树<span style="color:#f92672">......</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>二叉树
+</span></span><span style="display:flex;"><span>	二叉树里面还可以细分成很多领域 我们简单的了解即可 
+</span></span><span style="display:flex;"><span>  	二叉意味着每个节点最大只能分两个子节点
+</span></span><span style="display:flex;"><span>B树
+</span></span><span style="display:flex;"><span>	所有的节点都可以存放完整的数据
+</span></span><span style="display:flex;"><span>B<span style="color:#f92672">+</span>\<span style="color:#f92672">*</span>树
+</span></span><span style="display:flex;"><span>	只有叶子节点才会存放真正的数据 其他节点只存放索引数据
+</span></span><span style="display:flex;"><span> 	B<span style="color:#f92672">+</span>叶子节点增加了指向其他叶子节点的指针
+</span></span><span style="display:flex;"><span>  	B<span style="color:#f92672">*</span>叶子节点和枝节点都有指向其他节点的指针
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>辅助索引在查询数据的时候最会还是需要借助于聚集索引
+</span></span><span style="display:flex;"><span>	辅助索引叶子节点存放的是数据的主键值
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>有时候就算采用索引字段查询数据 也可能不会走索引<span style="color:#960050;background-color:#1e0010">!!!</span>
+</span></span><span style="display:flex;"><span>	最好能记三个左右的特殊情况
+</span></span></code></pre></div><ul>
+<li>慢查询优化</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>explain <span style="color:#75715e"># 通过在sql语句前面加上改关键字，可以看到下列的执行级别，一般在range级别或之上的级别都是正常的sql，在写sql时候尽量避免index级别</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">）</span>index		尽量避免
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">）</span>range		
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span><span style="color:#960050;background-color:#1e0010">）</span>ref
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span><span style="color:#960050;background-color:#1e0010">）</span>eq_ref
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span><span style="color:#960050;background-color:#1e0010">）</span>const
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span><span style="color:#960050;background-color:#1e0010">）</span>system
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span><span style="color:#960050;background-color:#1e0010">）</span>null
+</span></span></code></pre></div><ul>
+<li>测试索引</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#f92672">#</span><span style="color:#ae81ff">1</span>. <span style="color:#960050;background-color:#1e0010">准备表</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> s1(
+</span></span><span style="display:flex;"><span>id int,
+</span></span><span style="display:flex;"><span>name varchar(<span style="color:#ae81ff">20</span>),
+</span></span><span style="display:flex;"><span>gender char(<span style="color:#ae81ff">6</span>),
+</span></span><span style="display:flex;"><span>email varchar(<span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span><span style="color:#ae81ff">2</span>. <span style="color:#960050;background-color:#1e0010">创建存储过程，实现批量插入记录</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delimiter</span> <span style="color:#960050;background-color:#1e0010">$$</span> <span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">声明存储过程的结束符号为$$</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">procedure</span> auto_insert1()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">BEGIN</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">declare</span> i int <span style="color:#66d9ef">default</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    while(i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">3000000</span>)<span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> s1 <span style="color:#66d9ef">values</span>(i,<span style="color:#e6db74">&#39;jason&#39;</span>,<span style="color:#e6db74">&#39;male&#39;</span>,concat(<span style="color:#e6db74">&#39;jason&#39;</span>,i,<span style="color:#e6db74">&#39;@oldboy&#39;</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">set</span> i<span style="color:#f92672">=</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span> while;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">END</span><span style="color:#960050;background-color:#1e0010">$$</span> <span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">$$结束</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delimiter</span> ; <span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">重新声明分号为结束符号</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span><span style="color:#ae81ff">3</span>. <span style="color:#960050;background-color:#1e0010">查看存储过程</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">show</span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">procedure</span> auto_insert1<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">G</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span><span style="color:#ae81ff">4</span>. <span style="color:#960050;background-color:#1e0010">调用存储过程</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">call</span> auto_insert1();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 开始验证
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">desc</span> s1;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">--------+-------------+------+-----+---------+-------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> Field  <span style="color:#f92672">|</span> <span style="color:#66d9ef">Type</span>        <span style="color:#f92672">|</span> <span style="color:#66d9ef">Null</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">Key</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">Default</span> <span style="color:#f92672">|</span> Extra <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">--------+-------------+------+-----+---------+-------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> id     <span style="color:#f92672">|</span> int(<span style="color:#ae81ff">11</span>)     <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> name   <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">20</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> gender <span style="color:#f92672">|</span> char(<span style="color:#ae81ff">6</span>)     <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> email  <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">50</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">--------+-------------+------+-----+---------+-------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(id)  <span style="color:#66d9ef">from</span> s1 <span style="color:#66d9ef">where</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">30000</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span>         <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">1</span>.<span style="color:#ae81ff">21</span> sec)
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(id)  <span style="color:#66d9ef">from</span> s1 <span style="color:#66d9ef">where</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span>         <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">1</span>.<span style="color:#ae81ff">27</span> sec)
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span> s1 <span style="color:#66d9ef">add</span> <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span>(id);
+</span></span><span style="display:flex;"><span>Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">28</span>.<span style="color:#ae81ff">49</span> sec)
+</span></span><span style="display:flex;"><span>Records: <span style="color:#ae81ff">0</span>  Duplicates: <span style="color:#ae81ff">0</span>  Warnings: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#66d9ef">from</span> s1 <span style="color:#66d9ef">where</span> id <span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span>         <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#66d9ef">from</span> s1 <span style="color:#66d9ef">where</span> name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;jason&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span>   <span style="color:#ae81ff">2999999</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">87</span> sec)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">范围问题
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">并不是加了索引，以后查询的时候按照这个字段速度就一定快</span>   
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#66d9ef">from</span> s1 <span style="color:#66d9ef">where</span> id <span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span>   <span style="color:#ae81ff">2999998</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">74</span> sec)
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#66d9ef">from</span> s1 <span style="color:#66d9ef">where</span> id <span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">and</span> id <span style="color:#f92672">&lt;</span><span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span>         <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#66d9ef">from</span> s1 <span style="color:#66d9ef">where</span> id <span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">and</span> id <span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10000</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span>      <span style="color:#ae81ff">9998</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#66d9ef">from</span> s1 <span style="color:#66d9ef">where</span> id <span style="color:#f92672">!=</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span>   <span style="color:#ae81ff">2999998</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">73</span> sec)
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">table</span> s1 <span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span>;
+</span></span><span style="display:flex;"><span>Query OK, <span style="color:#ae81ff">2999999</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">15</span>.<span style="color:#ae81ff">62</span> sec)
+</span></span><span style="display:flex;"><span>Records: <span style="color:#ae81ff">2999999</span>  Duplicates: <span style="color:#ae81ff">0</span>  Warnings: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">select</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#66d9ef">from</span> s1 <span style="color:#66d9ef">where</span> name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;jason&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">count</span>(id) <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">|</span>   <span style="color:#ae81ff">2999999</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span><span style="color:#75715e">-----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">1</span>.<span style="color:#ae81ff">52</span> sec)
+</span></span><span style="display:flex;"><span> 
+</span></span></code></pre></div>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/databases">databases</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
