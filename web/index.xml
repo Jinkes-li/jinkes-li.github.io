@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Webs on self-salvation</title>
+    <link>https://jinkes-li.github.io/web/</link>
+    <description>Recent content in Webs on self-salvation</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 30 Nov 2022 21:16:43 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/web/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>前端开端</title>
+      <link>https://jinkes-li.github.io/web/%E5%89%8D%E7%AB%AF%E5%BC%80%E7%AB%AF/</link>
+      <pubDate>Wed, 30 Nov 2022 21:16:43 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/web/%E5%89%8D%E7%AB%AF%E5%BC%80%E7%AB%AF/</guid>
+      <description>前端入门 前端与后端的概念
+服务端搭建及客户端访问
+超文本传输协议(HTTP)
+超文本标记语言(HTML)
+前端与后端 前端 任何与用户直接打交道的操作界面 都可以称之为前端&amp;raquo;&amp;gt;:接待员 后端 不直接与用户打交道 主要负责内部真正的业务逻辑的执行&amp;raquo;&amp;gt;:幕后操作者
+前端三剑客 HTML	网页的骨架 CSS	网页的样式 JavaScript	网页的动态
+蜡笔小新光着身子 主体 HTML 穿裙子 抹口红 样式	CSS 丢根钢管 舞起来 动作	JS http协议 HTTP协议的四大特性 1. 基于请求响 客户端发送请求，服务端回应响应 2. 基于TCP/IP作用域应用层之上的协议 该协议属于应用层 3. 无状态 服务端不会保存客户端的任何状态 4. 无/短连接 客户端与服务端不会长久保持链接 2.数据格式
+1.请求格式 请求首行(请求方式(有很多种) 协议版本) 请求头(一大堆K:V键值对) 换行 请求体(存放敏感信息 并不是所有的请求方式都有请求体) 2.响应格式 响应首行(状态码 协议版本) 响应头(一大堆K:V键值对) 换行 响应体(存放给浏览器展示的数据) 3.响应状态码 用数字来表达一些文字意义(类似于暗号) 1XX:服务端已经接收到了你的请求正在处理 客户端可以继续发送或者等待 2XX:200 OK 请求成功 服务端发送了对应的响应 3XX:302(临时) 304(永久) 重定向(想访问网页A但是自动调到了网页B) 4XX:403访问权限不够 404请求资源不存在 5XX:服务端内部错误 在公司中我们还会自定义更多的响应状态码 通常以10000起步 聚合数据 HTML简介 1.</description>
+    </item>
+    
+  </channel>
+</rss>
