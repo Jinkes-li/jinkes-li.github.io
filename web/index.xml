@@ -6,7 +6,16 @@
     <description>Recent content in Webs on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Nov 2022 21:16:43 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/web/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Dec 2022 21:28:05 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/web/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>前端之路</title>
+      <link>https://jinkes-li.github.io/web/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF/</link>
+      <pubDate>Thu, 01 Dec 2022 21:28:05 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/web/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF/</guid>
+      <description>前端之路 表单标签的补充说明 CSS层叠样式表 如何查找标签 如何添加样式 基于form表单发送数据 1. 用户获取用户数据的标签至少含有name属性 name属性相当于字典的键 用户输入的数据会被保存到标签的value属性中 value属性相当于字典的值 2. 如果不需要用户填写数据，只需要选择，可以自己设定值 &amp;lt;input type=&amp;#34;radio&amp;#34; name=&amp;#34;gender&amp;#34; value=&amp;#34;male&amp;#34;&amp;gt; ps: 没有name属性的标签 form表单会直接忽略不会发送 3. 针对input标签理论上配一个label标签绑定，但是也可以不写 &amp;lt;label for=&amp;#34;d1&amp;#34;&amp;gt;username: &amp;lt;input type=&amp;#34;text&amp;#34; id=&amp;#34;d1&amp;#34;&amp;gt; &amp;lt;/label&amp;gt; &amp;lt;label for=&amp;#34;d1&amp;#34;&amp;gt;username&amp;lt;/label&amp;gt; &amp;lt;input tyoe=&amp;#34;text&amp;#34; id=&amp;#34;d1&amp;#34;&amp;gt; 4.标签的属性如果和属性值相等，可以简写 &amp;lt;input type=&amp;#34;file&amp;#34; multiple=&amp;#34;multuple&amp;#34;&amp;gt; &amp;lt;input type=&amp;#34;file&amp;#34; multuple&amp;gt; 5. 针对选择类型的标签可以提前设置默认选项 &amp;lt;input type=&amp;#34;radio&amp;#34; name=&amp;#34;gender&amp;#34; checked=&amp;#34;checked&amp;#34;&amp;gt; &amp;lt;input type=&amp;#34;radio&amp;#34; name=&amp;#34;gender&amp;#34; checked&amp;gt; &amp;lt;input type=&amp;#34;checkbox&amp;#34; checked=&amp;#34;checked&amp;#34;&amp;gt; &amp;lt;input type=&amp;#34;checkbox&amp;#34; name=&amp;#34;gender&amp;#34; checked&amp;gt; &amp;lt;option value=&amp;#34;&amp;#34; selectd=&amp;#34;selected&amp;#34;&amp;gt;222&amp;lt;/option&amp;gt; &amp;lt;option value=&amp;#34;&amp;#34; selected&amp;gt;222&amp;lt;/option&amp;gt; 6. 下拉框于文件上传可以复选 &amp;lt;input type=&amp;#34;file&amp;#34; multiple&amp;gt; &amp;lt;sekect name=&amp;#34;&amp;#34; id=&amp;#34;&amp;#34; multiple&amp;gt; CSS层叠样式表 /*主要用来调节html标签的各种样式*/ 思考:页面都是由HTML构成的 并且页面上有很多相同的HTML标签 但是相同的HTML标签在不同的位置可能有不同的样式 我们如何区分标签 标签的两大重要属性：区分标签 1.</description>
+    </item>
+    
     <item>
       <title>前端开端</title>
       <link>https://jinkes-li.github.io/web/%E5%89%8D%E7%AB%AF%E5%BC%80%E7%AB%AF/</link>

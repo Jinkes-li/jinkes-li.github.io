@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 前端之路 | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/web/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="前端之路" />
+<meta property="og:description" content="前端之路 表单标签的补充说明 CSS层叠样式表 如何查找标签 如何添加样式 基于form表单发送数据 1. 用户获取用户数据的标签至少含有name属性 name属性相当于字典的键 用户输入的数据会被保存到标签的value属性中 value属性相当于字典的值 2. 如果不需要用户填写数据，只需要选择，可以自己设定值 &lt;input type=&#34;radio&#34; name=&#34;gender&#34; value=&#34;male&#34;&gt; ps: 没有name属性的标签 form表单会直接忽略不会发送 3. 针对input标签理论上配一个label标签绑定，但是也可以不写 &lt;label for=&#34;d1&#34;&gt;username: &lt;input type=&#34;text&#34; id=&#34;d1&#34;&gt; &lt;/label&gt; &lt;label for=&#34;d1&#34;&gt;username&lt;/label&gt; &lt;input tyoe=&#34;text&#34; id=&#34;d1&#34;&gt; 4.标签的属性如果和属性值相等，可以简写 &lt;input type=&#34;file&#34; multiple=&#34;multuple&#34;&gt; &lt;input type=&#34;file&#34; multuple&gt; 5. 针对选择类型的标签可以提前设置默认选项 &lt;input type=&#34;radio&#34; name=&#34;gender&#34; checked=&#34;checked&#34;&gt; &lt;input type=&#34;radio&#34; name=&#34;gender&#34; checked&gt; &lt;input type=&#34;checkbox&#34; checked=&#34;checked&#34;&gt; &lt;input type=&#34;checkbox&#34; name=&#34;gender&#34; checked&gt; &lt;option value=&#34;&#34; selectd=&#34;selected&#34;&gt;222&lt;/option&gt; &lt;option value=&#34;&#34; selected&gt;222&lt;/option&gt; 6. 下拉框于文件上传可以复选 &lt;input type=&#34;file&#34; multiple&gt; &lt;sekect name=&#34;&#34; id=&#34;&#34; multiple&gt; CSS层叠样式表 /*主要用来调节html标签的各种样式*/ 思考:页面都是由HTML构成的 并且页面上有很多相同的HTML标签 但是相同的HTML标签在不同的位置可能有不同的样式 我们如何区分标签 标签的两大重要属性：区分标签 1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/web/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF/" /><meta property="article:section" content="web" />
+<meta property="article:published_time" content="2022-12-01T21:28:05+08:00" />
+<meta property="article:modified_time" content="2022-12-01T21:28:05+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="前端之路"/>
+<meta name="twitter:description" content="前端之路 表单标签的补充说明 CSS层叠样式表 如何查找标签 如何添加样式 基于form表单发送数据 1. 用户获取用户数据的标签至少含有name属性 name属性相当于字典的键 用户输入的数据会被保存到标签的value属性中 value属性相当于字典的值 2. 如果不需要用户填写数据，只需要选择，可以自己设定值 &lt;input type=&#34;radio&#34; name=&#34;gender&#34; value=&#34;male&#34;&gt; ps: 没有name属性的标签 form表单会直接忽略不会发送 3. 针对input标签理论上配一个label标签绑定，但是也可以不写 &lt;label for=&#34;d1&#34;&gt;username: &lt;input type=&#34;text&#34; id=&#34;d1&#34;&gt; &lt;/label&gt; &lt;label for=&#34;d1&#34;&gt;username&lt;/label&gt; &lt;input tyoe=&#34;text&#34; id=&#34;d1&#34;&gt; 4.标签的属性如果和属性值相等，可以简写 &lt;input type=&#34;file&#34; multiple=&#34;multuple&#34;&gt; &lt;input type=&#34;file&#34; multuple&gt; 5. 针对选择类型的标签可以提前设置默认选项 &lt;input type=&#34;radio&#34; name=&#34;gender&#34; checked=&#34;checked&#34;&gt; &lt;input type=&#34;radio&#34; name=&#34;gender&#34; checked&gt; &lt;input type=&#34;checkbox&#34; checked=&#34;checked&#34;&gt; &lt;input type=&#34;checkbox&#34; name=&#34;gender&#34; checked&gt; &lt;option value=&#34;&#34; selectd=&#34;selected&#34;&gt;222&lt;/option&gt; &lt;option value=&#34;&#34; selected&gt;222&lt;/option&gt; 6. 下拉框于文件上传可以复选 &lt;input type=&#34;file&#34; multiple&gt; &lt;sekect name=&#34;&#34; id=&#34;&#34; multiple&gt; CSS层叠样式表 /*主要用来调节html标签的各种样式*/ 思考:页面都是由HTML构成的 并且页面上有很多相同的HTML标签 但是相同的HTML标签在不同的位置可能有不同的样式 我们如何区分标签 标签的两大重要属性：区分标签 1."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/databases">databases</a></li>
+      
+        <li><a href="/web">web</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h3 id="前端之路">前端之路</h3>
+<ul>
+<li>表单标签的补充说明</li>
+<li>CSS层叠样式表</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>如何查找标签
+</span></span><span style="display:flex;"><span>如何添加样式
+</span></span></code></pre></div><ul>
+<li>基于form表单发送数据</li>
+</ul>
+<pre tabindex="0"><code class="language-pyhton" data-lang="pyhton">1. 用户获取用户数据的标签至少含有name属性
+		name属性相当于字典的键
+	用户输入的数据会被保存到标签的value属性中
+		value属性相当于字典的值
+2. 如果不需要用户填写数据，只需要选择，可以自己设定值
+&lt;input type=&#34;radio&#34; name=&#34;gender&#34; value=&#34;male&#34;&gt;
+ps: 没有name属性的标签 form表单会直接忽略不会发送
+
+3. 针对input标签理论上配一个label标签绑定，但是也可以不写
+&lt;label for=&#34;d1&#34;&gt;username:
+	&lt;input type=&#34;text&#34; id=&#34;d1&#34;&gt;
+&lt;/label&gt;
+&lt;label for=&#34;d1&#34;&gt;username&lt;/label&gt;
+&lt;input tyoe=&#34;text&#34; id=&#34;d1&#34;&gt;
+
+4.标签的属性如果和属性值相等，可以简写
+&lt;input type=&#34;file&#34; multiple=&#34;multuple&#34;&gt;
+&lt;input type=&#34;file&#34; multuple&gt;
+
+5. 针对选择类型的标签可以提前设置默认选项
+&lt;input type=&#34;radio&#34; name=&#34;gender&#34; checked=&#34;checked&#34;&gt;
+&lt;input type=&#34;radio&#34; name=&#34;gender&#34; checked&gt;
+&lt;input type=&#34;checkbox&#34; checked=&#34;checked&#34;&gt;
+&lt;input type=&#34;checkbox&#34; name=&#34;gender&#34; checked&gt;
+&lt;option value=&#34;&#34; selectd=&#34;selected&#34;&gt;222&lt;/option&gt;
+&lt;option value=&#34;&#34; selected&gt;222&lt;/option&gt;
+
+6. 下拉框于文件上传可以复选
+&lt;input type=&#34;file&#34; multiple&gt;
+&lt;sekect name=&#34;&#34; id=&#34;&#34; multiple&gt;
+</code></pre><ul>
+<li>CSS层叠样式表</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-CSS" data-lang="CSS"><span style="display:flex;"><span><span style="color:#75715e">/*主要用来调节html标签的各种样式*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">思考</span>:<span style="color:#a6e22e">页面都是由HTML构成的</span> <span style="color:#f92672">并且页面上有很多相同的HTML标签</span> <span style="color:#f92672">但是相同的HTML标签在不同的位置可能有不同的样式</span> <span style="color:#f92672">我们如何区分标签</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">标签的两大重要属性</span><span style="color:#960050;background-color:#1e0010">：</span><span style="color:#f92672">区分标签</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">1</span><span style="color:#f92672">.</span> <span style="color:#f92672">class属性</span><span style="color:#960050;background-color:#1e0010">：</span><span style="color:#f92672">分门别类</span> <span style="color:#f92672">主要用于批量查找</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">2</span><span style="color:#f92672">.</span> <span style="color:#f92672">id属性</span><span style="color:#960050;background-color:#1e0010">：</span><span style="color:#f92672">精准查找</span> <span style="color:#f92672">主要用于点对点</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">1</span><span style="color:#f92672">.</span> <span style="color:#f92672">CSS语法结构</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">选择器</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#960050;background-color:#1e0010">样式名1：样式值1；</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#960050;background-color:#1e0010">样式名2：样式值2</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">2</span><span style="color:#f92672">.</span> <span style="color:#f92672">引入CSS的多种方式</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">1</span><span style="color:#f92672">.</span> <span style="color:#f92672">head内style标签内编写</span><span style="color:#960050;background-color:#1e0010">（</span><span style="color:#f92672">推荐学习时使用</span><span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">2</span><span style="color:#f92672">.</span> <span style="color:#f92672">head内link标签引用</span><span style="color:#f92672">(</span><span style="color:#f92672">标准方式</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">3</span><span style="color:#f92672">.</span> <span style="color:#f92672">标签内部通过style属性直接编写</span><span style="color:#f92672">(</span><span style="color:#f92672">不推荐</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><ul>
+<li>CSS选择器</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-CSS" data-lang="CSS"><span style="display:flex;"><span><span style="color:#f92672">CSS基本选择器</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">1</span><span style="color:#f92672">.</span> <span style="color:#f92672">标签选择器</span><span style="color:#f92672">(</span><span style="color:#f92672">直接按照标签名查找标签</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">div</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">red</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">2</span><span style="color:#f92672">.</span> <span style="color:#f92672">类选择器</span><span style="color:#f92672">(</span><span style="color:#f92672">按照标签的class值查找标签</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>		.<span style="color:#a6e22e">c1</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">green</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">3</span><span style="color:#f92672">.</span> <span style="color:#f92672">id选择器</span><span style="color:#f92672">(</span><span style="color:#f92672">根据标签的id之精准查找标签</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>		#d1 {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">yellow</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">4</span><span style="color:#f92672">.</span> <span style="color:#f92672">通用选择器</span><span style="color:#f92672">(</span><span style="color:#f92672">直接选择页面所有的标签</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">*</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">blue</span>;
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		}
+</span></span></code></pre></div><ul>
+<li>CSS 组合选择器</li>
+</ul>
+<blockquote>
+<p>标签嵌套</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-CSS" data-lang="CSS"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#f92672">p</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">ppp</span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">p</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#f92672">p</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">ppp</span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">p</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#f92672">div</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">div</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;</span><span style="color:#f92672">div</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">divdiv</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;</span><span style="color:#f92672">p</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">divdivp</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#f92672">&lt;</span><span style="color:#f92672">span</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">divdivpspan</span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">span</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;/</span><span style="color:#f92672">p</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;/</span><span style="color:#f92672">div</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">div</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#f92672">p</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">ppp</span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">p</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#f92672">span</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">spanspan</span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">span</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">针对标签的上下层级以及嵌套的另外的说法</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">父标签</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#f92672">后代标签</span> <span style="color:#f92672">子标签</span> <span style="color:#f92672">弟弟标签</span> <span style="color:#f92672">哥哥标签</span> <span style="color:#f92672">祖先标签</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">1</span><span style="color:#f92672">.</span> <span style="color:#f92672">后代选择器</span><span style="color:#960050;background-color:#1e0010">（</span><span style="color:#f92672">空格</span><span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">div</span> <span style="color:#f92672">span</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">red</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">2</span><span style="color:#f92672">.</span> <span style="color:#f92672">儿子选择器</span><span style="color:#960050;background-color:#1e0010">（</span><span style="color:#f92672">大于</span><span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">div</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">span</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">red</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">3</span><span style="color:#f92672">.</span> <span style="color:#f92672">毗邻选择器</span><span style="color:#f92672">(</span><span style="color:#f92672">加号</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">div</span><span style="color:#f92672">+</span><span style="color:#f92672">span</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">red</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">4</span><span style="color:#f92672">.</span> <span style="color:#f92672">弟弟选择器</span><span style="color:#f92672">(</span><span style="color:#f92672">小波浪号</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">div</span><span style="color:#f92672">~</span><span style="color:#f92672">span</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">red</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>分组与嵌套</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-CSS" data-lang="CSS"><span style="display:flex;"><span><span style="color:#f92672">div</span><span style="color:#f92672">,</span><span style="color:#f92672">p</span><span style="color:#f92672">,</span><span style="color:#f92672">span</span> { <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">多个选择器合并查找</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">yellow</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>#d<span style="color:#f92672">,</span> .<span style="color:#a6e22e">c1</span><span style="color:#f92672">,</span><span style="color:#f92672">span</span> {
+</span></span><span style="display:flex;"><span>	COLOR: <span style="color:#66d9ef">green</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">div</span>.<span style="color:#a6e22e">c1</span> { <span style="color:#960050;background-color:#1e0010">查找class含有c1的div</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">red</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">div</span>#d1 { <span style="color:#960050;background-color:#1e0010">查找id是d1的div</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">red</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">c1</span> <span style="color:#f92672">p</span>.<span style="color:#a6e22e">c2</span> { <span style="color:#960050;background-color:#1e0010">查找含有c1样式值里面含有c2样式值的p标签</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">antiquewhite</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol start="4">
+<li>属性选择器</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-CSS" data-lang="CSS"><span style="display:flex;"><span><span style="color:#f92672">[</span><span style="color:#f92672">username</span><span style="color:#f92672">]</span> { <span style="color:#960050;background-color:#1e0010">按照属性名查找</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">red</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span><span style="color:#f92672">username</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;wesley&#39;</span><span style="color:#f92672">]</span> { <span style="color:#960050;background-color:#1e0010">按照属性名等于属性值</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">yellow</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">div</span><span style="color:#f92672">[</span><span style="color:#f92672">username</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;wesley&#39;</span><span style="color:#f92672">]</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">darkcyan</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol start="5">
+<li>伪类选择器</li>
+</ol>
+<blockquote>
+<p>&ldquo;&ldquo;&ldquo;a标签补充说明 针对没有点击过的网址 默认是蓝色 点击过的则为紫色&rdquo;&rdquo;&rdquo;</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-CSS" data-lang="CSS"><span style="display:flex;"><span><span style="color:#f92672">a</span>:<span style="color:#a6e22e">hover</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">orange</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">input</span>:<span style="color:#a6e22e">focus</span> { <span style="color:#960050;background-color:#1e0010">input获取焦点(被点击)之后采用的样式</span>
+</span></span><span style="display:flex;"><span>		backgroud-color: <span style="color:#66d9ef">red</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol start="6">
+<li>元素选择器</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-CSS" data-lang="CSS"><span style="display:flex;"><span><span style="color:#f92672">p</span>:<span style="color:#a6e22e">first-letter</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">font-size</span>: <span style="color:#ae81ff">48</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">red</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">p</span>:<span style="color:#a6e22e">after</span> {  <span style="color:#960050;background-color:#1e0010">css添加文本无法正常选中</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">content</span>: <span style="color:#e6db74">&#39;呵呵呵&#39;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">red</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>选择器优先级</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-CSS" data-lang="CSS"><span style="display:flex;"><span><span style="color:#f92672">1</span><span style="color:#f92672">.</span> <span style="color:#f92672">选择器相同</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#f92672">导入方式不同</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">就近原则</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">2</span><span style="color:#f92672">.</span> <span style="color:#f92672">选择器不同</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#f92672">导入方式相同</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">内联样式</span> <span style="color:#f92672">&gt;</span> <span style="color:#f92672">id选择器</span> <span style="color:#f92672">&gt;</span> <span style="color:#f92672">类选择器</span> <span style="color:#f92672">&gt;</span> <span style="color:#f92672">标签选择器</span>
+</span></span></code></pre></div><ul>
+<li>CSS 样式调节</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-CSS" data-lang="CSS"><span style="display:flex;"><span><span style="color:#f92672">字体样式</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">font-size</span>:<span style="color:#a6e22e">14px</span> <span style="color:#f92672">24px</span> <span style="color:#f92672">28px</span> <span style="color:#f92672">36px</span>	<span style="color:#f92672">字体代码</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">font-weight</span><span style="color:#f92672">:</span> <span style="color:#f92672">lighter</span><span style="color:#f92672">;</span>     	  <span style="color:#f92672">字体粗细</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">color</span>:<span style="color:#a6e22e">三种模式</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/*color: red;*/</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/*color: #3d3d3d;*/</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">color</span><span style="color:#f92672">:</span> <span style="color:#f92672">rgb</span><span style="color:#f92672">(</span><span style="color:#f92672">186</span><span style="color:#f92672">,</span><span style="color:#f92672">11</span><span style="color:#f92672">,</span><span style="color:#f92672">98</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">rgba</span><span style="color:#f92672">()</span><span style="color:#f92672">最后一个参数还可以控制透明度</span> <span style="color:#f92672">0</span><span style="color:#f92672">~</span><span style="color:#f92672">1</span>
+</span></span><span style="display:flex;"><span>   	
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">text-align</span><span style="color:#f92672">:</span> <span style="color:#f92672">center</span>		<span style="color:#f92672">文本居中</span>
+</span></span><span style="display:flex;"><span>	 <span style="color:#f92672">text-decoration</span><span style="color:#f92672">:</span> <span style="color:#f92672">none</span><span style="color:#f92672">;</span>  <span style="color:#f92672">主要用于a标签取消下划线</span>
+</span></span><span style="display:flex;"><span>   	 <span style="color:#f92672">text-indent</span><span style="color:#f92672">:</span> <span style="color:#f92672">32px</span><span style="color:#f92672">;</span>		<span style="color:#f92672">首行缩进</span>
+</span></span><span style="display:flex;"><span>   	 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">背景属性</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">div</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">width</span>: <span style="color:#ae81ff">800</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">height</span>: <span style="color:#ae81ff">800</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/*background-color: red;*/</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/*background-image: url(&#34;https://img2.baidu.com/it/u=167083063,1652780278&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=369&amp;h=472&#34;);*/</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/*background-image: url(&#34;666.png&#34;);*/</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/*background-repeat: no-repeat;*/</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/*background-repeat: repeat-x;*/</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/*background-repeat: repeat-y;*/</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/*background-position: center center;*/</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">background</span>:  url(<span style="color:#e6db74">&#34;666.png&#34;</span>) <span style="color:#66d9ef">blue</span> <span style="color:#66d9ef">no-repeat</span> <span style="color:#66d9ef">center</span> <span style="color:#66d9ef">center</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">当多个属性名有相同的前缀</span> <span style="color:#f92672">那么可以简写一次性完成</span>
+</span></span></code></pre></div>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/databases">databases</a></li>
+         
+        <li><a href="/web">web</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
