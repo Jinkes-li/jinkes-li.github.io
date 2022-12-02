@@ -6,7 +6,23 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Dec 2022 21:28:05 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Dec 2022 20:50:49 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>前端之路之马上穷途末路</title>
+      <link>https://jinkes-li.github.io/web/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E4%B9%8B%E9%A9%AC%E4%B8%8A%E7%A9%B7%E9%80%94%E6%9C%AB%E8%B7%AF/</link>
+      <pubDate>Fri, 02 Dec 2022 20:50:49 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/web/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E4%B9%8B%E9%A9%AC%E4%B8%8A%E7%A9%B7%E9%80%94%E6%9C%AB%E8%B7%AF/</guid>
+      <description>前端之路二 边框
+盒子模型
+浮动
+定位
+补充说明
+简易博客页面搭建
+边框
+# 自定义边框的边 border-left/top/right/bottom-color: black; 边框的颜色 border-left/top/right/bottom-width: 5px; 边框的距离 border-left/top/right/botto-style: solid; 边框的呈现形式，实线，虚线 &amp;#34;&amp;#34;&amp;#34; dotted 点状虚线边框 dashed 矩形虚线边框 solid 实线边框 &amp;#34;&amp;#34;&amp;#34; # 统一调整每个边的边框 # 直接控制四个边框的形式 border: 10px solid yellowgreen; # 画圆 border-radius: 50: css修改文字熟悉&amp;ndash;display属性 &amp;#34;&amp;#34;&amp;#34; 只有块级标签可以设置长宽，行内标签是不可以设置的（行内标签是由行内的文本决定的） &amp;#34;&amp;#34;&amp;#34; display:inline; 让标签具备行内标签的特性--不能修改长宽 display:block; 让标签具备块级标签的特性--可以修改长宽 display:inline-block; 是元素同时具备行级标签和快级标签元素的特点 dispay:none; 隐藏标签，在页面上不保留位置，也不显示 visibility:hidde; 也是隐藏标签，但是页面上回显出来一个空地 盒子模型 &amp;#34;&amp;#34;&amp;#34; 盒子模型的组成部分-盒子 内部物品 contect(内容) 内部物品和盒子内部的距离 padding(内边距) 盒子的厚度 border/边框 盒子内部到盒子外部的距离margin(外边距) 两个标签之间的距离，有时候可以用margin也可以用padding &amp;#34;&amp;#34;&amp;#34; # 1. body标签默认自带8px的margin值，写页面的时候可以更具需求更改 margin-top: 0; 上 margin-rigth: 0; 右 margin-bottom: 0; 下 margin-left: 0; 左 简写 margin: 1px 2px 3px 4px(上右下左) margin: 1px (统一设定一个值) # 2.</description>
+    </item>
+    
     <item>
       <title>前端之路</title>
       <link>https://jinkes-li.github.io/web/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF/</link>
