@@ -114,65 +114,65 @@
 <ul>
 <li>在python中如何方法SQL注入问题？</li>
 </ul>
-<pre tabindex="0"><code class="language-Pyhton" data-lang="Pyhton">&#34;&#34;&#34;
-数据库中提前准备账户密码表
-mysql&gt; select * from userinfo;
-+----+--------+-----+
-| id | name   | pwd |
-+----+--------+-----+
-|  1 | wesley | 123 |
-+----+--------+-----+
-&#34;&#34;&#34;
-
-import pymysql
-
-conn = pymysql.connect(
-    host=&#39;121.4.86.62&#39;,
-    port=3306,
-    user=&#39;root&#39;,
-    password=&#39;Videojet2029@&#39;,
-    database=&#39;db7&#39;,
-    charset=&#39;utf8mb4&#39;,
-    autocommit=True
-)
-
-cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
-
-username = input(&#39;name&gt;&gt;: &#39;)
-password = input(&#39;pass&gt;&gt;: &#39;)
-
-# 构建sql语句
-sql = &#34; select * from userinfo where name=&#39;%s&#39; and pwd=&#39;%s&#39; &#34; % (username, password)
-
-print(sql)
-cursor.execute(sql)
-
-res = cursor.fetchall()
-
-if res:
-    print(&#39;登录成功&#39;)
-    print(res)
-else:
-    print(&#39;用户名或密码错误&#39;)
-
-&#34;&#34;&#34;
-上述代码存在的问题
-sql = &#34; select * from userinfo where name=&#39;%s&#39; and pwd=&#39;%s&#39; &#34; % (username, password)
-如果这一行代码，在前端使用SQL注入将会被恶意拼接
-注入: wesley&#39; -- hahsdklflaksdfhk 
-恶意拼接: select * from userinfo where name=&#39;wesley&#39; -- hahsdklflaksdfhk&#39; and pwd=&#39;&#39; 
-所以针对这个问题，需要针对性的过滤一些特殊字符，在python中pymysql的execute()方法会默认将特殊字符过滤
-需要更改代码中的SQL拼接，更改为如下所示
-sql = &#34;select * from userinfo where name=%s and pwd=%s&#34;
-cursor.execute(sql, (username, password))
-
-SQL再次注入效果
-name&gt;&gt;: wesley&#39; -- hahshdfhash
-pass&gt;&gt;: 
- select * from userinfo where name=%s and pwd=%s 
-此时已经无法恶意拼接了
-&#34;&#34;&#34;
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">数据库中提前准备账户密码表
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">mysql&gt; select * from userinfo;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">+----+--------+-----+
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">| id | name   | pwd |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">+----+--------+-----+
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">|  1 | wesley | 123 |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">+----+--------+-----+
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pymysql
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> pymysql<span style="color:#f92672">.</span>connect(
+</span></span><span style="display:flex;"><span>    host<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;121.4.86.62&#39;</span>,
+</span></span><span style="display:flex;"><span>    port<span style="color:#f92672">=</span><span style="color:#ae81ff">3306</span>,
+</span></span><span style="display:flex;"><span>    user<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;root&#39;</span>,
+</span></span><span style="display:flex;"><span>    password<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Videojet2029@&#39;</span>,
+</span></span><span style="display:flex;"><span>    database<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;db7&#39;</span>,
+</span></span><span style="display:flex;"><span>    charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8mb4&#39;</span>,
+</span></span><span style="display:flex;"><span>    autocommit<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cursor <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor(cursor<span style="color:#f92672">=</span>pymysql<span style="color:#f92672">.</span>cursors<span style="color:#f92672">.</span>DictCursor)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>username <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;name&gt;&gt;: &#39;</span>)
+</span></span><span style="display:flex;"><span>password <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;pass&gt;&gt;: &#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 构建sql语句</span>
+</span></span><span style="display:flex;"><span>sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34; select * from userinfo where name=&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39; and pwd=&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39; &#34;</span> <span style="color:#f92672">%</span> (username, password)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(sql)
+</span></span><span style="display:flex;"><span>cursor<span style="color:#f92672">.</span>execute(sql)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>fetchall()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> res:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;登录成功&#39;</span>)
+</span></span><span style="display:flex;"><span>    print(res)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;用户名或密码错误&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">上述代码存在的问题
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">sql = &#34; select * from userinfo where name=&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39; and pwd=&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39; &#34; % (username, password)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">如果这一行代码，在前端使用SQL注入将会被恶意拼接
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">注入: wesley&#39; -- hahsdklflaksdfhk 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">恶意拼接: select * from userinfo where name=&#39;wesley&#39; -- hahsdklflaksdfhk&#39; and pwd=&#39;&#39; 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">所以针对这个问题，需要针对性的过滤一些特殊字符，在python中pymysql的execute()方法会默认将特殊字符过滤
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">需要更改代码中的SQL拼接，更改为如下所示
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">sql = &#34;select * from userinfo where name=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> and pwd=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">cursor.execute(sql, (username, password))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">SQL再次注入效果
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">name&gt;&gt;: wesley&#39; -- hahshdfhash
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">pass&gt;&gt;: 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> select * from userinfo where name=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> and pwd=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">此时已经无法恶意拼接了
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
 <li>视图
 视图指的是将使用率高的结果表保存在下来供下次继续使用</li>
 </ul>
