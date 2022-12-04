@@ -6,7 +6,16 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 02 Dec 2022 20:50:49 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Dec 2022 21:21:52 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第九周总结</title>
+      <link>https://jinkes-li.github.io/web/%E7%AC%AC%E4%B9%9D%E5%91%A8%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sun, 04 Dec 2022 21:21:52 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/web/%E7%AC%AC%E4%B9%9D%E5%91%A8%E6%80%BB%E7%BB%93/</guid>
+      <description>第九周总结 Mysql 多表联查两种方式 -- 方式一 -- inner join 内连接 /* 使用内连接即使将两张表的结果值拼起来，如果条件对应不上则不显示该条记录 */ select * from emp inner join dep on emp.id = dep.id -- left join 左连接 /* 在使用时和内连接一样，不同的是以左表为基准，如果右表的条件没有匹配则显示NULL */ select * from emp left join dep on emp.id = dep.id -- rigth join 右连接 /* 以右表为基准，如果左表的条件位匹配则使用NULL填充 */ select * from emp rigth join dep on emp.id =dep.id -- union 全链接 /* 全连接就是使用左链接和右链接查询之后的数据合并到一起(查询的数据未匹配则使用NULL填充) */ select * from mep left join dep on mep.</description>
+    </item>
+    
     <item>
       <title>前端之路之马上穷途末路</title>
       <link>https://jinkes-li.github.io/web/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E4%B9%8B%E9%A9%AC%E4%B8%8A%E7%A9%B7%E9%80%94%E6%9C%AB%E8%B7%AF/</link>
