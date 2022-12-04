@@ -16,7 +16,7 @@
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
   <meta property="og:title" content="第九周总结" />
-<meta property="og:description" content="Mysql 多表联查两种方式 -- 方式一 -- inner join 内连接 /* 使用内连接即使将两张表的结果值拼起来，如果条件对应不上则不显示该条记录 */ select * from emp inner join dep on emp.id = dep.id -- left join 左连接 /* 在使用时和内连接一样，不同的是以左表为基准，如果右表的条件没有匹配则显示NULL */ select * from emp left join dep on emp.id = dep.id -- rigth join 右连接 /* 以右表为基准，如果左表的条件位匹配则使用NULL填充 */ select * from emp rigth join dep on emp.id =dep.id -- union 全链接 /* 全连接就是使用左链接和右链接查询之后的数据合并到一起(查询的数据未匹配则使用NULL填充) */ select * from mep left join dep on mep." />
+<meta property="og:description" content="第九周总结 Mysql 多表联查两种方式 -- 方式一 -- inner join 内连接 /* 使用内连接即使将两张表的结果值拼起来，如果条件对应不上则不显示该条记录 */ select * from emp inner join dep on emp.id = dep.id -- left join 左连接 /* 在使用时和内连接一样，不同的是以左表为基准，如果右表的条件没有匹配则显示NULL */ select * from emp left join dep on emp.id = dep.id -- rigth join 右连接 /* 以右表为基准，如果左表的条件位匹配则使用NULL填充 */ select * from emp rigth join dep on emp.id =dep.id -- union 全链接 /* 全连接就是使用左链接和右链接查询之后的数据合并到一起(查询的数据未匹配则使用NULL填充) */ select * from mep left join dep on mep." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://jinkes-li.github.io/web/%E7%AC%AC%E4%B9%9D%E5%91%A8%E6%80%BB%E7%BB%93/" /><meta property="article:section" content="web" />
 <meta property="article:published_time" content="2022-12-04T21:21:52+08:00" />
@@ -25,7 +25,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="第九周总结"/>
-<meta name="twitter:description" content="Mysql 多表联查两种方式 -- 方式一 -- inner join 内连接 /* 使用内连接即使将两张表的结果值拼起来，如果条件对应不上则不显示该条记录 */ select * from emp inner join dep on emp.id = dep.id -- left join 左连接 /* 在使用时和内连接一样，不同的是以左表为基准，如果右表的条件没有匹配则显示NULL */ select * from emp left join dep on emp.id = dep.id -- rigth join 右连接 /* 以右表为基准，如果左表的条件位匹配则使用NULL填充 */ select * from emp rigth join dep on emp.id =dep.id -- union 全链接 /* 全连接就是使用左链接和右链接查询之后的数据合并到一起(查询的数据未匹配则使用NULL填充) */ select * from mep left join dep on mep."/>
+<meta name="twitter:description" content="第九周总结 Mysql 多表联查两种方式 -- 方式一 -- inner join 内连接 /* 使用内连接即使将两张表的结果值拼起来，如果条件对应不上则不显示该条记录 */ select * from emp inner join dep on emp.id = dep.id -- left join 左连接 /* 在使用时和内连接一样，不同的是以左表为基准，如果右表的条件没有匹配则显示NULL */ select * from emp left join dep on emp.id = dep.id -- rigth join 右连接 /* 以右表为基准，如果左表的条件位匹配则使用NULL填充 */ select * from emp rigth join dep on emp.id =dep.id -- union 全链接 /* 全连接就是使用左链接和右链接查询之后的数据合并到一起(查询的数据未匹配则使用NULL填充) */ select * from mep left join dep on mep."/>
 
   
   
@@ -93,7 +93,8 @@
 
   <div class="content" itemprop="articleBody">
   
-    <ul>
+    <h3 id="第九周总结">第九周总结</h3>
+<ul>
 <li>Mysql 多表联查两种方式</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#75715e">-- 方式一
@@ -486,24 +487,14 @@
 </span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">body</span>&gt;
 </span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
 </span></span></code></pre></div><ol>
-<li>
-<!-- raw HTML omitted -->
-</li>
-<li>
-<!-- raw HTML omitted -->
-</li>
-<li>
-<!-- raw HTML omitted -->
-</li>
-<li>
-<!-- raw HTML omitted -->
-</li>
-<li>
-<!-- raw HTML omitted -->
-</li>
+<li>&lt;!DOCTYPE html&gt; 声明为HTML5文档</li>
+<li>&lt;html&gt;&lt;/html&gt; 是文档的开始标记和结束的标记，是HTML页面的根元素，在这个标签之间的是文档的头部head和主体body</li>
+<li>&lt;head&gt;&lt;/head&gt; 定义了HTML的开头部分，他们之间的内容不会再浏览器的文档窗口显示，包含文档的元数据（meta）</li>
+<li>&lt;title&gt;&lt;/title&gt; 定义了网页标题 在浏览器标题栏显示</li>
+<li>&lt;body&gt;&lt;/body&gt; 之间的文本是网页可见的主体内容</li>
 </ol>
 <p>注意事项：
-对于中文网页需要使用<!-- raw HTML omitted -->声明编码，否则会出现乱码，不分浏览器默认字符编码为GBK 则需要设置<!-- raw HTML omitted --></p>
+对于中文网页需要使用&lt;meta charset=&ldquo;utf-8&rdquo;&gt;声明编码，否则会出现乱码，不分浏览器默认字符编码为GBK 则需要设置&lt;meta charset=&ldquo;GBK&rdquo;&gt;</p>
 <ul>
 <li>HTML 标签的格式</li>
 </ul>
@@ -535,15 +526,15 @@
 </thead>
 <tbody>
 <tr>
-<td><!-- raw HTML omitted --><!-- raw HTML omitted --></td>
+<td>&lt;title&gt;&lt;/title&gt;</td>
 <td>定义网页标题</td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --><!-- raw HTML omitted --></td>
+<td>&lt;style&gt;&lt;/style&gt;</td>
 <td>定义内部样式表</td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --><!-- raw HTML omitted --></td>
+<td>&lt;script&gt;&lt;/script&gt;</td>
 <td>定义JS代码或者引入外部JS文件</td>
 </tr>
 <tr>
@@ -551,7 +542,7 @@
 <td>引入外部样式表文件或网站图标</td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --></td>
+<td>&lt;meta&gt;</td>
 <td>定义网页原信息</td>
 </tr>
 </tbody>
@@ -561,15 +552,9 @@
 <p>Meta标签
 Meta标签介绍：</p>
 <ul>
-<li>
-<!-- raw HTML omitted -->
-</li>
-<li>
-<!-- raw HTML omitted -->
-</li>
-<li>
-<!-- raw HTML omitted -->
-</li>
+<li>&lt;meta&gt;元素可提供有关页面的元信息（mata-information）,针对搜索引擎和更新频度的描述和关键词。</li>
+<li>&lt;meta&gt;标签位于文档的头部，不包含任何内容。</li>
+<li>&lt;meta&gt;提供的信息是用户不可见的。</li>
 </ul>
 </li>
 </ul>
@@ -603,35 +588,35 @@ Meta标签介绍：</p>
 </thead>
 <tbody>
 <tr>
-<td><!-- raw HTML omitted --><!-- raw HTML omitted --></td>
+<td>&lt;b&gt;&lt;/b&gt;</td>
 <td>加粗</td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --><!-- raw HTML omitted --></td>
+<td>&lt;i&gt;&lt;/i&gt;</td>
 <td>斜体</td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --><!-- raw HTML omitted --></td>
+<td>&lt;u&gt;&lt;/u&gt;</td>
 <td>下划线</td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --><!-- raw HTML omitted --></td>
+<td>&lt;s&gt;&lt;/s&gt;</td>
 <td>删除线</td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --><!-- raw HTML omitted --></td>
+<td>&lt;p&gt;&lt;/p&gt;</td>
 <td>段落标签</td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --><!-- raw HTML omitted -->  &amp; &lt;h1~h6&gt;&lt;/h1~h6&gt;</td>
+<td>&lt;h1&gt;&lt;/h1&gt;  &amp; &lt;h1~h6&gt;&lt;/h1~h6&gt;</td>
 <td>标题</td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --></td>
+<td>&lt;br&gt;</td>
 <td>换行</td>
 </tr>
 <tr>
-<td><!-- raw HTML omitted --></td>
+<td>&lt;hr&gt;</td>
 <td>水平线</td>
 </tr>
 </tbody>
@@ -853,7 +838,7 @@ URL地址由4部分组成
 <li>表单元素</li>
 </ul>
 <p>input
-<!-- raw HTML omitted --> 元素会根据不同的 type 属性，变化为多种形态。</p>
+&lt;input&gt; 元素会根据不同的 type 属性，变化为多种形态。</p>
 <table>
 <thead>
 <tr>
