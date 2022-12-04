@@ -16,7 +16,7 @@
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
   <meta property="og:title" content="第九周总结" />
-<meta property="og:description" content="第九周总结 Mysql 多表联查两种方式 -- 方式一 -- inner join 内连接 /* 使用内连接即使将两张表的结果值拼起来，如果条件对应不上则不显示该条记录 */ select * from emp inner join dep on emp.id = dep.id -- left join 左连接 /* 在使用时和内连接一样，不同的是以左表为基准，如果右表的条件没有匹配则显示NULL */ select * from emp left join dep on emp.id = dep.id -- rigth join 右连接 /* 以右表为基准，如果左表的条件位匹配则使用NULL填充 */ select * from emp rigth join dep on emp.id =dep.id -- union 全链接 /* 全连接就是使用左链接和右链接查询之后的数据合并到一起(查询的数据未匹配则使用NULL填充) */ select * from mep left join dep on mep." />
+<meta property="og:description" content="Mysql 多表联查两种方式 -- 方式一 -- inner join 内连接 /* 使用内连接即使将两张表的结果值拼起来，如果条件对应不上则不显示该条记录 */ select * from emp inner join dep on emp.id = dep.id -- left join 左连接 /* 在使用时和内连接一样，不同的是以左表为基准，如果右表的条件没有匹配则显示NULL */ select * from emp left join dep on emp.id = dep.id -- rigth join 右连接 /* 以右表为基准，如果左表的条件位匹配则使用NULL填充 */ select * from emp rigth join dep on emp.id =dep.id -- union 全链接 /* 全连接就是使用左链接和右链接查询之后的数据合并到一起(查询的数据未匹配则使用NULL填充) */ select * from mep left join dep on mep." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://jinkes-li.github.io/web/%E7%AC%AC%E4%B9%9D%E5%91%A8%E6%80%BB%E7%BB%93/" /><meta property="article:section" content="web" />
 <meta property="article:published_time" content="2022-12-04T21:21:52+08:00" />
@@ -25,7 +25,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="第九周总结"/>
-<meta name="twitter:description" content="第九周总结 Mysql 多表联查两种方式 -- 方式一 -- inner join 内连接 /* 使用内连接即使将两张表的结果值拼起来，如果条件对应不上则不显示该条记录 */ select * from emp inner join dep on emp.id = dep.id -- left join 左连接 /* 在使用时和内连接一样，不同的是以左表为基准，如果右表的条件没有匹配则显示NULL */ select * from emp left join dep on emp.id = dep.id -- rigth join 右连接 /* 以右表为基准，如果左表的条件位匹配则使用NULL填充 */ select * from emp rigth join dep on emp.id =dep.id -- union 全链接 /* 全连接就是使用左链接和右链接查询之后的数据合并到一起(查询的数据未匹配则使用NULL填充) */ select * from mep left join dep on mep."/>
+<meta name="twitter:description" content="Mysql 多表联查两种方式 -- 方式一 -- inner join 内连接 /* 使用内连接即使将两张表的结果值拼起来，如果条件对应不上则不显示该条记录 */ select * from emp inner join dep on emp.id = dep.id -- left join 左连接 /* 在使用时和内连接一样，不同的是以左表为基准，如果右表的条件没有匹配则显示NULL */ select * from emp left join dep on emp.id = dep.id -- rigth join 右连接 /* 以右表为基准，如果左表的条件位匹配则使用NULL填充 */ select * from emp rigth join dep on emp.id =dep.id -- union 全链接 /* 全连接就是使用左链接和右链接查询之后的数据合并到一起(查询的数据未匹配则使用NULL填充) */ select * from mep left join dep on mep."/>
 
   
   
@@ -93,8 +93,7 @@
 
   <div class="content" itemprop="articleBody">
   
-    <h3 id="第九周总结">第九周总结</h3>
-<ul>
+    <ul>
 <li>Mysql 多表联查两种方式</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#75715e">-- 方式一
@@ -872,47 +871,47 @@ URL地址由4部分组成
 <tr>
 <td>password</td>
 <td>密码输入框</td>
-<td><!-- raw HTML omitted --></td>
+<td>&lt;input type=&ldquo;password&rdquo;  /&gt;</td>
 </tr>
 <tr>
 <td>date</td>
 <td>日期输入框</td>
-<td><!-- raw HTML omitted --></td>
+<td>&lt;input type=&ldquo;date&rdquo; /&gt;</td>
 </tr>
 <tr>
 <td>checkbox</td>
 <td>复选框</td>
-<td><!-- raw HTML omitted --></td>
+<td>&lt;input type=&ldquo;checkbox&rdquo; checked=&ldquo;checked&rdquo;  /&gt;</td>
 </tr>
 <tr>
 <td>radio</td>
 <td>单选框</td>
-<td><!-- raw HTML omitted --></td>
+<td>&lt;input type=&ldquo;radio&rdquo;  /&gt;</td>
 </tr>
 <tr>
 <td>submit</td>
 <td>提交按钮</td>
-<td><!-- raw HTML omitted --></td>
+<td>&lt;input type=&ldquo;submit&rdquo; value=&ldquo;提交&rdquo; /&gt;</td>
 </tr>
 <tr>
 <td>reset</td>
 <td>重置按钮</td>
-<td><!-- raw HTML omitted --></td>
+<td>&lt;input type=&ldquo;reset&rdquo; value=&ldquo;重置&rdquo;  /&gt;</td>
 </tr>
 <tr>
 <td>button</td>
 <td>普通按钮</td>
-<td><!-- raw HTML omitted --></td>
+<td>&lt;input type=&ldquo;button&rdquo; value=&ldquo;普通按钮&rdquo;  /&gt;</td>
 </tr>
 <tr>
 <td>hidden</td>
 <td>隐藏输入框</td>
-<td><!-- raw HTML omitted --></td>
+<td>&lt;input type=&ldquo;hidden&rdquo;  /&gt;</td>
 </tr>
 <tr>
 <td>file</td>
 <td>文本选择框</td>
-<td><!-- raw HTML omitted --></td>
+<td>&lt;input type=&ldquo;file&rdquo;  /&gt;</td>
 </tr>
 </tbody>
 </table>

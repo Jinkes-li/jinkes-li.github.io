@@ -13,7 +13,7 @@
       <pubDate>Sun, 04 Dec 2022 21:21:52 +0800</pubDate>
       
       <guid>https://jinkes-li.github.io/web/%E7%AC%AC%E4%B9%9D%E5%91%A8%E6%80%BB%E7%BB%93/</guid>
-      <description>第九周总结 Mysql 多表联查两种方式 -- 方式一 -- inner join 内连接 /* 使用内连接即使将两张表的结果值拼起来，如果条件对应不上则不显示该条记录 */ select * from emp inner join dep on emp.id = dep.id -- left join 左连接 /* 在使用时和内连接一样，不同的是以左表为基准，如果右表的条件没有匹配则显示NULL */ select * from emp left join dep on emp.id = dep.id -- rigth join 右连接 /* 以右表为基准，如果左表的条件位匹配则使用NULL填充 */ select * from emp rigth join dep on emp.id =dep.id -- union 全链接 /* 全连接就是使用左链接和右链接查询之后的数据合并到一起(查询的数据未匹配则使用NULL填充) */ select * from mep left join dep on mep.</description>
+      <description>Mysql 多表联查两种方式 -- 方式一 -- inner join 内连接 /* 使用内连接即使将两张表的结果值拼起来，如果条件对应不上则不显示该条记录 */ select * from emp inner join dep on emp.id = dep.id -- left join 左连接 /* 在使用时和内连接一样，不同的是以左表为基准，如果右表的条件没有匹配则显示NULL */ select * from emp left join dep on emp.id = dep.id -- rigth join 右连接 /* 以右表为基准，如果左表的条件位匹配则使用NULL填充 */ select * from emp rigth join dep on emp.id =dep.id -- union 全链接 /* 全连接就是使用左链接和右链接查询之后的数据合并到一起(查询的数据未匹配则使用NULL填充) */ select * from mep left join dep on mep.</description>
     </item>
     
     <item>
