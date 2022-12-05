@@ -6,7 +6,20 @@
     <description>Recent content on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Dec 2022 21:21:52 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Dec 2022 19:55:03 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JavaScript开端</title>
+      <link>https://jinkes-li.github.io/web/javascript%E5%BC%80%E7%AB%AF/</link>
+      <pubDate>Mon, 05 Dec 2022 19:55:03 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/web/javascript%E5%BC%80%E7%AB%AF/</guid>
+      <description>前端之路之JS大法 JavaScript编程语言 ECMAScript和JavaScript的关系 1996年11月，JavaScript的创造者&amp;ndash;Netscape公司，决定将JavaScript提交给国际标准化组织ECMA，希望这门语言能够成为国际标准。次年，ECMA发布262号标准文件（ECMA-262）的第一版，规定了浏览器脚本语言的标准，并将这种语言称为ECMAScript，这个版本就是1.0版。 该标准一开始就是针对JavaScript语言制定的，但是没有称其为JavaScript，有两个方面的原因。一是商标，JavaScript本身已被Netscape注册为商标。而是想体现这门语言的制定者是ECMA，而不是Netscape，这样有利于保证这门语言的开发性和中立性。
+因此ECMAScript和JavaScript的关系是，前者是后者的规格，后者是前者的一种实现。
+主要功能
+嵌入动态文本于HTML页面。 对浏览器事件做出响应。 读写HTML元素。 在数据被提交到服务器之前验证数据。 检测访客的浏览器信息。 控制cookies，包括创建和修改等。 基于Node.js技术进行服务器端编程。 语言组成 ECMAScript，描述了该语言的语法和基本对象。 文档对象模型（DOM），描述处理网页内容的方法和接口。 浏览器对象模型（BOM），描述与浏览器进行交互的方法和接口。
+JavaScript基础 1. 注释语法 // 单行注释 /*多行注释*/ 2. 引入js的多种方式 1. head内script标签内编写 2. head内script标签src属性引入外部js资源 3. body内最底部通过script标签属性引入外部js资源 // 需要注意页面的加载是从上向下的，在操作js代码需要等待标签加载完成后才能正常执行 // JavaScript代码结尾可以写结束符也可以不写，结束符为;号 比变量与常量 /* 1. pycharm创建js文件或者html文件(适合较为复杂的js代码) 2. 浏览器提供编写的js代码环境 */ // 变量的声明，使用var和let关键字 1. 使用var定义变量，作用全局 var name = &amp;#39;welsey&amp;#39;; 2. 使用let定义变量，可以在局部定义变量不影响全局 let name = &amp;#39;likaixin&amp;#39;; 3. 使用const定义常量，不可更改 const pi = 3.14 基本数据类型 // 在js中使用typeof查看数据类型 1. 数值类型(Number) 在js中整型与浮点型不分家，都叫Number NaN也属于数值类型，释义：不是一个数字(Not A Number) 2.</description>
+    </item>
+    
     <item>
       <title>第九周总结</title>
       <link>https://jinkes-li.github.io/web/%E7%AC%AC%E4%B9%9D%E5%91%A8%E6%80%BB%E7%BB%93/</link>
