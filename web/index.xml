@@ -6,7 +6,18 @@
     <description>Recent content in Webs on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Dec 2022 19:55:03 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/web/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Dec 2022 21:56:15 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/web/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JavaScript与jQuery基础入门到放弃</title>
+      <link>https://jinkes-li.github.io/web/javascript%E4%B8%8Ejquery%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83/</link>
+      <pubDate>Tue, 06 Dec 2022 21:56:15 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/web/javascript%E4%B8%8Ejquery%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83/</guid>
+      <description>JavaScript与jQuery基础入门到放弃 引言： - BOM 操作 - DOM 操作 - jQuery 类库
+BOM 操作 BOM (Browser Object Model) 指浏览器对象模型，使 JavaScript有能力与浏览器交互
+window.open() // 打开浏览器空页面 window.open(&amp;#39;http://www.baidu.com&amp;#39;, &amp;#39;&amp;#39;,&amp;#39;width=800px, left=200px&amp;#39;)	// 打开指定网站的页面，并指定打开大小 window.close()	// 关闭当前浏览器窗口 navigator.userAgent	// 标识自己是一个浏览器 history.forward()	// 前进一页 history.back() // 后退一页 window.location.href	// 获取当前网页所在网页地址，可以加赋值符号和网址跳转 window.locaton.reload()	// 刷新当前页面 alert(&amp;#39;警告⚠️&amp;#39;)	//	警告框 confirm(&amp;#39;提示是否确认&amp;#39;) // 确认框 Prompt(&amp;#39;你想输入什么&amp;#39;)	// 提示框 // 计时器相关操作（重要） let t = setTimeout(showMsg, 3000) // 3000毫秒后执行函数 clearTimeout(t)	// 取消任务 s = setInterval(func, 3000) // 每隔3000毫秒执行一次 clearInterval(s) // 取消任务 DOM 操作 DOM (Document Object Model) 指文档对象模型，通过它可以访问HTML文档的所有元素 既然DOM操作时通过js代码来操作标签，所以需要先学习如何查找标签之后才能给标签绑定一些js代码(DOM 操作)</description>
+    </item>
+    
     <item>
       <title>JavaScript开端</title>
       <link>https://jinkes-li.github.io/web/javascript%E5%BC%80%E7%AB%AF/</link>
