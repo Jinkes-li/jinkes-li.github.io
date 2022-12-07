@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 前端学习之路崩溃 | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/web/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E5%B4%A9%E6%BA%83/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="前端学习之路崩溃" />
+<meta property="og:description" content="jQuery与Bootstrap页面框架入门到崩溃 jQuery查找标签 jQuery节点操作 jQuery事件绑定 Bootstrap页面框架 jQuery查找标签 1. 基本选择器 $(&#39;#d1&#39;) // id选择器 $(&#39;.c1&#39;)	// class选择器 $(&#39;div&#39;)	// 标签选择器 2. 组合选择器 $(&#39;#id, .className, TagName&#39;) $(&#39;div#d1&#39;) // 查找div标签，并且id等于d1 $(&#39;span.c1&#39;) // 查找含有c1样式类的span标签 $(&#39;div,span,p&#39;) // 查找div或者span或者p标签 $(&#39;#d1, .c1,span&#39;) // 查找id是d1的或者class含有c1的或者span标签 3. 层级选择器 $(&#39;div p&#39;) // 查找div里面所有的后代p标签 $(&#39;div &gt;p&#39;) // 查找div里面的儿子p标签 $(&#39;div &#43; p&#39;) // 查找div同级别下紧挨着的p标签 $(&#39;div~p&#39;)	// 查找div同级别下的所有p标签 4. 属性选择器 $(&#39;[username]&#39;) // 查找含有username属性名的标签 $(&#39;[username=&#34;wesley&#34;]&#39;) // 查找含有username属性名并且值等于wesley的标签 $(&#39;li:first&#39;) // 匹配该标签的第一个 $(&#39;li:last&#39;) // 匹配该标签的最后一个 $(&#39;li:eq(0)&#39;) // 匹配该标签索引对应的那个标签 $(&#39;li:even&#39;) // 匹配所有索引值为偶数的元素，从0开始计数 $(&#39;li:odd&#39;) // 匹配所有索引值为奇数的元素，从0开始计数 $(&#39;li:gt(3)&#39;) // 匹配所有索引值大于3的元素 $(&#39;li:lt(3)&#39;)	// 匹配所有索引值小于3的元素 $(&#39;li:not(元素选择器)&#39;) // 移除所有满足not条件的标签 $(&#39;li:has(元素选择器)&#39;) // 选取所有包含一个或多个标签在内的标签（指的是从后代标签中寻找） // 以上标签的优化写法 $(&#39;li:first&#39;) --&gt; $(&#39;li&#39;)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/web/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E5%B4%A9%E6%BA%83/" /><meta property="article:section" content="web" />
+<meta property="article:published_time" content="2022-12-07T19:45:28+08:00" />
+<meta property="article:modified_time" content="2022-12-07T19:45:28+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="前端学习之路崩溃"/>
+<meta name="twitter:description" content="jQuery与Bootstrap页面框架入门到崩溃 jQuery查找标签 jQuery节点操作 jQuery事件绑定 Bootstrap页面框架 jQuery查找标签 1. 基本选择器 $(&#39;#d1&#39;) // id选择器 $(&#39;.c1&#39;)	// class选择器 $(&#39;div&#39;)	// 标签选择器 2. 组合选择器 $(&#39;#id, .className, TagName&#39;) $(&#39;div#d1&#39;) // 查找div标签，并且id等于d1 $(&#39;span.c1&#39;) // 查找含有c1样式类的span标签 $(&#39;div,span,p&#39;) // 查找div或者span或者p标签 $(&#39;#d1, .c1,span&#39;) // 查找id是d1的或者class含有c1的或者span标签 3. 层级选择器 $(&#39;div p&#39;) // 查找div里面所有的后代p标签 $(&#39;div &gt;p&#39;) // 查找div里面的儿子p标签 $(&#39;div &#43; p&#39;) // 查找div同级别下紧挨着的p标签 $(&#39;div~p&#39;)	// 查找div同级别下的所有p标签 4. 属性选择器 $(&#39;[username]&#39;) // 查找含有username属性名的标签 $(&#39;[username=&#34;wesley&#34;]&#39;) // 查找含有username属性名并且值等于wesley的标签 $(&#39;li:first&#39;) // 匹配该标签的第一个 $(&#39;li:last&#39;) // 匹配该标签的最后一个 $(&#39;li:eq(0)&#39;) // 匹配该标签索引对应的那个标签 $(&#39;li:even&#39;) // 匹配所有索引值为偶数的元素，从0开始计数 $(&#39;li:odd&#39;) // 匹配所有索引值为奇数的元素，从0开始计数 $(&#39;li:gt(3)&#39;) // 匹配所有索引值大于3的元素 $(&#39;li:lt(3)&#39;)	// 匹配所有索引值小于3的元素 $(&#39;li:not(元素选择器)&#39;) // 移除所有满足not条件的标签 $(&#39;li:has(元素选择器)&#39;) // 选取所有包含一个或多个标签在内的标签（指的是从后代标签中寻找） // 以上标签的优化写法 $(&#39;li:first&#39;) --&gt; $(&#39;li&#39;)."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/databases">databases</a></li>
+      
+        <li><a href="/web">web</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h3 id="jquery与bootstrap页面框架入门到崩溃">jQuery与Bootstrap页面框架入门到崩溃</h3>
+<ul>
+<li>jQuery查找标签</li>
+<li>jQuery节点操作</li>
+<li>jQuery事件绑定</li>
+<li>Bootstrap页面框架</li>
+</ul>
+<h3 id="jquery查找标签">jQuery查找标签</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JavaScript" data-lang="JavaScript"><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> <span style="color:#a6e22e">基本选择器</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#d1&#39;</span>)  <span style="color:#75715e">// id选择器
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;.c1&#39;</span>)	<span style="color:#75715e">// class选择器
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div&#39;</span>)	<span style="color:#75715e">// 标签选择器
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> <span style="color:#a6e22e">组合选择器</span> <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#id, .className, TagName&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div#d1&#39;</span>)  <span style="color:#75715e">// 查找div标签，并且id等于d1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;span.c1&#39;</span>)  <span style="color:#75715e">// 查找含有c1样式类的span标签
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div,span,p&#39;</span>)  <span style="color:#75715e">// 查找div或者span或者p标签
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#d1, .c1,span&#39;</span>)  <span style="color:#75715e">// 查找id是d1的或者class含有c1的或者span标签
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> <span style="color:#a6e22e">层级选择器</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div p&#39;</span>)  <span style="color:#75715e">// 查找div里面所有的后代p标签
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div &gt;p&#39;</span>) <span style="color:#75715e">// 查找div里面的儿子p标签
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div + p&#39;</span>) <span style="color:#75715e">// 查找div同级别下紧挨着的p标签
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div~p&#39;</span>)	<span style="color:#75715e">// 查找div同级别下的所有p标签
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> <span style="color:#a6e22e">属性选择器</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;[username]&#39;</span>) <span style="color:#75715e">// 查找含有username属性名的标签
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;[username=&#34;wesley&#34;]&#39;</span>) <span style="color:#75715e">// 查找含有username属性名并且值等于wesley的标签 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;li:first&#39;</span>) <span style="color:#75715e">// 匹配该标签的第一个
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;li:last&#39;</span>)  <span style="color:#75715e">// 匹配该标签的最后一个
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;li:eq(0)&#39;</span>) <span style="color:#75715e">// 匹配该标签索引对应的那个标签
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;li:even&#39;</span>)  <span style="color:#75715e">// 匹配所有索引值为偶数的元素，从0开始计数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;li:odd&#39;</span>)   <span style="color:#75715e">// 匹配所有索引值为奇数的元素，从0开始计数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;li:gt(3)&#39;</span>) <span style="color:#75715e">// 匹配所有索引值大于3的元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;li:lt(3)&#39;</span>)	<span style="color:#75715e">// 匹配所有索引值小于3的元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;li:not(元素选择器)&#39;</span>)  <span style="color:#75715e">// 移除所有满足not条件的标签
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;li:has(元素选择器)&#39;</span>)  <span style="color:#75715e">// 选取所有包含一个或多个标签在内的标签（指的是从后代标签中寻找）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 以上标签的优化写法 $(&#39;li:first&#39;) --&gt; $(&#39;li&#39;).first()
+</span></span></span></code></pre></div><h3 id="表单筛选器">表单筛选器</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JavaScript" data-lang="JavaScript"><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;:text&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;:password&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;:file&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;:radio&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;:submit&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;:button&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;:checked&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;:selected&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 例子
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;:checkbox&#34;</span>)  <span style="color:#75715e">// 找到所有的checkbox
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 表单对象属性
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">:</span><span style="color:#a6e22e">enabled</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">:</span><span style="color:#a6e22e">disabled</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">:</span><span style="color:#a6e22e">checked</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">:</span><span style="color:#a6e22e">selected</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// input例子
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">form</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">input</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;email&#34;</span> <span style="color:#a6e22e">disabled</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;disabled&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">input</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/form&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;input:enabled&#39;</span>) <span style="color:#75715e">// 找到可用的input标签
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// option 例子
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">select</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;s1&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;beijing&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">北京市</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/option&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shanghai&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">上海市</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/option&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">option</span> <span style="color:#a6e22e">selected</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;guangzhou&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">广州市</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/option&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shenzhen&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">深圳市</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/option&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/select&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;:selected&#34;</span>)  <span style="color:#75715e">// 找到所有被选中的option
+</span></span></span></code></pre></div><h3 id="筛选器方法">筛选器方法</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JavaScript" data-lang="JavaScript"><span style="display:flex;"><span><span style="color:#ae81ff">7.</span><span style="color:#a6e22e">筛选器方法</span>
+</span></span><span style="display:flex;"><span>	 <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#id&#34;</span>).<span style="color:#a6e22e">next</span>()  <span style="color:#75715e">// 查找id的下一个元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#id&#34;</span>).<span style="color:#a6e22e">nextAll</span>()	 <span style="color:#75715e">// 查找该id下的所有元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#id&#34;</span>).<span style="color:#a6e22e">nextUntil</span>(<span style="color:#e6db74">&#34;#i2&#34;</span>)  <span style="color:#75715e">// 查找id与id之间的元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	 <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#id&#34;</span>).<span style="color:#a6e22e">prev</span>()  <span style="color:#75715e">// 查找该ID的上一个元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#id&#34;</span>).<span style="color:#a6e22e">prevAll</span>()  <span style="color:#75715e">// 查找该ID上的所有元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#id&#34;</span>).<span style="color:#a6e22e">prevUntil</span>(<span style="color:#e6db74">&#34;#i2&#34;</span>)  <span style="color:#75715e">// 查找ID到ID为i2的上面之间的元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#id&#34;</span>).<span style="color:#a6e22e">parent</span>()   <span style="color:#75715e">// 查询当前iD的父标签  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#id&#34;</span>).<span style="color:#a6e22e">parents</span>()  <span style="color:#75715e">// 查找当前元素的所有的父辈元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#id&#34;</span>).<span style="color:#a6e22e">parentsUntil</span>() <span style="color:#75715e">// 查找当前元素的所有的父辈元素，直到遇到匹配的那个元素为止。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#id&#34;</span>).<span style="color:#a6e22e">children</span>();<span style="color:#75715e">// 儿子们
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>   <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#id&#34;</span>).<span style="color:#a6e22e">siblings</span>();<span style="color:#75715e">// 兄弟们
+</span></span></span></code></pre></div><h3 id="操作标签">操作标签</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JavaScript" data-lang="JavaScript"><span style="display:flex;"><span><span style="color:#ae81ff">1.</span><span style="color:#a6e22e">class操作</span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">addClass</span>()     <span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">添加指定的css类名</span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">removeClass</span>()  <span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">移除指定的css类名</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">hasClass</span>()      <span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">判断样式是否存在</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">toggleClass</span>()   <span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">切换css类名</span> <span style="color:#a6e22e">有移除</span> <span style="color:#a6e22e">没有添加</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span><span style="color:#a6e22e">位置操作</span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">$</span>(window).<span style="color:#a6e22e">scrollTop</span>() <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">获取匹配元素相对滚动条顶部的偏移</span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">offset</span>() 	   <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">获取匹配元素在当前窗口的相对偏移或设置元素位置</span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">position</span>()    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">获取匹配元素相对父元素的偏移</span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">scrollLeft</span>()  <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">获取匹配元素相对滚动条左侧的偏移</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span><span style="color:#a6e22e">文本操作</span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">text</span>() <span style="color:#f92672">==</span>  <span style="color:#a6e22e">innerText</span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">html</span>()  <span style="color:#f92672">==</span>  <span style="color:#a6e22e">innerHTML</span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">val</span>()   <span style="color:#f92672">==</span>  <span style="color:#a6e22e">value</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">jQuery对象</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">files</span>  <span style="color:#f92672">==</span>  <span style="color:#a6e22e">files</span>[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span><span style="color:#a6e22e">创建标签</span>
+</span></span><span style="display:flex;"><span> document.<span style="color:#a6e22e">createElement</span>() <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;&lt;a&gt;&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5.</span><span style="color:#a6e22e">属性操作</span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">attr</span>()<span style="color:#f92672">/</span><span style="color:#a6e22e">removeAattr</span>()
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">attr针对动态变化的属性获取会失真</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#a6e22e">prop</span>(<span style="color:#e6db74">&#39;checked&#39;</span>) <span style="color:#a6e22e">prop</span>(<span style="color:#e6db74">&#39;selected&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6.</span><span style="color:#a6e22e">文档处理</span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">$</span>(<span style="color:#a6e22e">A</span>).<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">B</span>)<span style="color:#75715e">// 把B追加到A
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#a6e22e">$</span>(<span style="color:#a6e22e">A</span>).<span style="color:#a6e22e">appendTo</span>(<span style="color:#a6e22e">B</span>)<span style="color:#75715e">// 把A追加到B
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">$</span>(<span style="color:#a6e22e">A</span>).<span style="color:#a6e22e">prepend</span>(<span style="color:#a6e22e">B</span>)<span style="color:#75715e">// 把B前置到A
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#a6e22e">$</span>(<span style="color:#a6e22e">A</span>).<span style="color:#a6e22e">prependTo</span>(<span style="color:#a6e22e">B</span>)<span style="color:#75715e">// 把A前置到B
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">$</span>(<span style="color:#a6e22e">A</span>).<span style="color:#a6e22e">after</span>(<span style="color:#a6e22e">B</span>)<span style="color:#75715e">// 把B放到A的后面
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#a6e22e">$</span>(<span style="color:#a6e22e">A</span>).<span style="color:#a6e22e">insertAfter</span>(<span style="color:#a6e22e">B</span>)<span style="color:#75715e">// 把A放到B的后面
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">$</span>(<span style="color:#a6e22e">A</span>).<span style="color:#a6e22e">before</span>(<span style="color:#a6e22e">B</span>)<span style="color:#75715e">// 把B放到A的前面
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#a6e22e">$</span>(<span style="color:#a6e22e">A</span>).<span style="color:#a6e22e">insertBefore</span>(<span style="color:#a6e22e">B</span>)<span style="color:#75715e">// 把A放到B的前面
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">remove</span>()<span style="color:#75715e">// 从DOM中删除所有匹配的元素。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">empty</span>()<span style="color:#75715e">// 删除匹配的元素集合中所有的子节点。
+</span></span></span></code></pre></div><h3 id="jquery事件">jQuery事件</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>JS绑定事件
+</span></span><span style="display:flex;"><span>	标签对象<span style="color:#f92672">.</span>on事件名 <span style="color:#f92672">=</span> function(){}
+</span></span><span style="display:flex;"><span>jQuery事件绑定
+</span></span><span style="display:flex;"><span>	方式1:
+</span></span><span style="display:flex;"><span>		jQuery对象<span style="color:#f92672">.</span>事件名(function(){})
+</span></span><span style="display:flex;"><span> 	方式2:
+</span></span><span style="display:flex;"><span>    	jQuery对象<span style="color:#f92672">.</span>on(<span style="color:#e6db74">&#39;事件名称&#39;</span>,function(){})
+</span></span><span style="display:flex;"><span> 	ps:默认就用方式1 不行了再用方式2
+</span></span><span style="display:flex;"><span>ps:补充
+</span></span><span style="display:flex;"><span>    clone属性
+</span></span><span style="display:flex;"><span>    	clone(true)  默认不克隆事件 加true就可以
+</span></span></code></pre></div><h3 id="事件相关补充">事件相关补充</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">1.</span>取消后续事件
+</span></span><span style="display:flex;"><span>	事件函数的最后return false即可
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span>阻止事件冒泡
+</span></span><span style="display:flex;"><span>	事件函数的最后return false即可
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span>等待页面加载完毕再执行代码
+</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">$</span>(function(){})				   缩略写法
+</span></span><span style="display:flex;"><span> 	<span style="color:#960050;background-color:#1e0010">$</span>(document)<span style="color:#f92672">.</span>ready(function(){})  完整写法
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span>事件委托
+</span></span><span style="display:flex;"><span>	主要针对动态创建的标签也可以使用绑定的事件
+</span></span><span style="display:flex;"><span> 	<span style="color:#960050;background-color:#1e0010">$</span>(<span style="color:#e6db74">&#39;body&#39;</span>)<span style="color:#f92672">.</span>on(<span style="color:#e6db74">&#39;click&#39;</span>,<span style="color:#e6db74">&#39;button&#39;</span>,function(){})
+</span></span><span style="display:flex;"><span> 	将body内所有的单击事件委托给button标签执行
+</span></span></code></pre></div><h3 id="jquery动画效果了解">jQuery动画效果(了解)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">//</span> 基本
+</span></span><span style="display:flex;"><span>show([s,[e],[fn]])
+</span></span><span style="display:flex;"><span>hide([s,[e],[fn]])
+</span></span><span style="display:flex;"><span>toggle([s],[e],[fn])
+</span></span><span style="display:flex;"><span><span style="color:#f92672">//</span> 滑动
+</span></span><span style="display:flex;"><span>slideDown([s],[e],[fn])
+</span></span><span style="display:flex;"><span>slideUp([s,[e],[fn]])
+</span></span><span style="display:flex;"><span>slideToggle([s],[e],[fn])
+</span></span><span style="display:flex;"><span><span style="color:#f92672">//</span> 淡入淡出
+</span></span><span style="display:flex;"><span>fadeIn([s],[e],[fn])
+</span></span><span style="display:flex;"><span>fadeOut([s],[e],[fn])
+</span></span><span style="display:flex;"><span>fadeTo([[s],o,[e],[fn]])
+</span></span><span style="display:flex;"><span>fadeToggle([s,[e],[fn]])
+</span></span><span style="display:flex;"><span><span style="color:#f92672">//</span> 自定义<span style="color:#960050;background-color:#1e0010">（</span>了解即可<span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex;"><span>animate(p,[s],[e],[fn])
+</span></span></code></pre></div><h3 id="bootstrap页面框架">Bootstrap页面框架</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>别人已经提前写好了一大堆css和js 我们只需要引入之后按照人家规定好的操作方式即可使用所有的样式和功能
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>版本有很多 使用V3即可
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>文件结构
+</span></span><span style="display:flex;"><span>	bootstrap<span style="color:#f92672">.</span>css
+</span></span><span style="display:flex;"><span> 	bootstrap<span style="color:#f92672">.</span>js
+</span></span><span style="display:flex;"><span>	ps:js部分是需要依赖于jQuery
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>CDN
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>link href<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css&#34;</span> <span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>script src<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js&#34;</span><span style="color:#f92672">&gt;&lt;/</span>script<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pycharm自动提示问题
+</span></span><span style="display:flex;"><span>	最好本地导入几次
+</span></span></code></pre></div><h3 id="核心部分讲解">核心部分讲解</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>使用bootstrap其实只需要操作标签的样式类即可
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>布局容器
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">= &#34;</span><span style="color:#a6e22e">container</span><span style="color:#e6db74">&#34;				有留白</span>
+</span></span><span style="display:flex;"><span> 	<span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">= &#34;</span><span style="color:#a6e22e">container</span><span style="color:#f92672">-</span>fluid<span style="color:#e6db74">&#34;		 没有留白</span>
+</span></span><span style="display:flex;"><span>栅格系统
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">= &#34;</span><span style="color:#a6e22e">row</span><span style="color:#e6db74">&#34;					一行均分12份</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">= &#34;</span><span style="color:#a6e22e">col</span><span style="color:#f92672">-</span>md<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span><span style="color:#e6db74">&#34;			 划分一行的12份</span>
+</span></span><span style="display:flex;"><span>屏幕参数
+</span></span><span style="display:flex;"><span>	col<span style="color:#f92672">-</span>md<span style="color:#f92672">-</span><span style="color:#ae81ff">6</span> col<span style="color:#f92672">-</span>xs<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span> col<span style="color:#f92672">-</span>sm<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span> col<span style="color:#f92672">-</span>lg<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>栅格偏移
+</span></span><span style="display:flex;"><span>	col<span style="color:#f92672">-</span>md<span style="color:#f92672">-</span>offset<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><h3 id="重要样式">重要样式</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">1.</span>表格样式
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;</span>table class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;table table-hover table-striped&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>	颜色
+</span></span><span style="display:flex;"><span> 	 <span style="color:#f92672">&lt;</span>tr class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;success&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span>表单标签
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">= &#34;</span><span style="color:#a6e22e">form</span><span style="color:#f92672">-</span>control<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span>按钮组
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">= &#34;</span><span style="color:#a6e22e">btn</span> btn<span style="color:#f92672">-</span>primary btn<span style="color:#f92672">-</span>block<span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><h3 id="组件">组件</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">1.</span>图标
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;</span>span class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;glyphicon glyphicon-search&#34;</span> aria<span style="color:#f92672">-</span>hidden<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">&gt;&lt;/</span>span<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>	https:<span style="color:#f92672">//</span>fontawesome<span style="color:#f92672">.</span>com<span style="color:#f92672">.</span>cn<span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span>导航条
+</span></span><span style="display:flex;"><span>	class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;navbar navbar-inverse&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span>其他
+</span></span></code></pre></div>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/databases">databases</a></li>
+         
+        <li><a href="/web">web</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
