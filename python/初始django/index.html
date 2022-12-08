@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 初始django | self-salvation</title>
+  <link rel = 'canonical' href = 'https://jinkes-li.github.io/python/%E5%88%9D%E5%A7%8Bdjango/'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="初始django" />
+<meta property="og:description" content="初识Django 前言： 本章主要是对web框架做一个基础了解，为了接下来学习前端框架做铺垫
+必备知识点： 什么是路由 路由简单的来说就是根据用户请求的 URL 链接来判断对应的处理程序，并返回处理结果，也就是 URL 与 Django 的视图建立映射关系。 Django 路由在 urls.py 配置，urls.py 中的每一条配置对应相应的处理方法。路由简单的来说就是根据用户请求的 URL 链接来判断对应的处理程序，并返回处理结果，也就是 URL 与 Django 的视图建立映射关系。
+Django 路由在 urls.py 配置，urls.py 中的每一条配置对应相应的处理方法。
+前端请求方式 GET，表示向服务器获取资源 POST，表示向服务器提交信息，通常用于产生新的数据，比如注册 PUT，表示希望修改服务器的数据，通常用于修改 DELETE，表示希望删除服务器的数据 OPTIONS，发生在跨域的预检请求中，表示客户端向服务器申请跨域提交 TRACE，回显服务器收到的请求，主要用于测试和诊断 CONNECT，用于建立连接管道，通常在代理场景中使用，网页中很少用到GET，表示向服务器获取资源 POST，表示向服务器提交信息，通常用于产生新的数据，比如注册 PUT，表示希望修改服务器的数据，通常用于修改 DELETE，表示希望删除服务器的数据 OPTIONS，发生在跨域的预检请求中，表示客户端向服务器申请跨域提交 TRACE，回显服务器收到的请求，主要用于测试和诊断 CONNECT，用于建立连接管道，通常在代理场景中使用，网页中很少用到 GET和POST的区别
+从 http 协议的角度来说，GET 和 POST 它们都只是请求行中的第一个单词，除了语义不同，其实没有本质的区别。 之所以在实际开发中会产生各种区别，主要是因为浏览器的默认行为造成的。 受浏览器的影响，在实际开发中，GET 和 POST 有以下区别：
+浏览器在发送 GET 请求时，不会附带请求体 GET 请求的传递信息量有限，适合传递少量数据；POST 请求的传递信息量是没有限制的，适合传输大量数据。 GET 请求只能传递 ASCII 数据，遇到非 ASCII 数据需要进行编码；POST 请求没有限制 大部分 GET 请求传递的数据都附带在 path 参数中，能够通过分享地址完整的重现页面，但同时也暴露了数据，若有敏感数据传递，不应该使用 GET 请求，至少不应该放到 path 中 刷新页面时，若当前的页面是通过 POST 请求得到的，则浏览器会提示用户是否重新提交。若是 GET 请求得到的页面则没有提示。 GET 请求的地址可以被保存为浏览器书签，POST 不可以 纯手撸web框架 在写代码之前需要先了解web框架的本质是什么？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinkes-li.github.io/python/%E5%88%9D%E5%A7%8Bdjango/" /><meta property="article:section" content="python" />
+<meta property="article:published_time" content="2022-12-08T22:45:44+08:00" />
+<meta property="article:modified_time" content="2022-12-08T22:45:44+08:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="初始django"/>
+<meta name="twitter:description" content="初识Django 前言： 本章主要是对web框架做一个基础了解，为了接下来学习前端框架做铺垫
+必备知识点： 什么是路由 路由简单的来说就是根据用户请求的 URL 链接来判断对应的处理程序，并返回处理结果，也就是 URL 与 Django 的视图建立映射关系。 Django 路由在 urls.py 配置，urls.py 中的每一条配置对应相应的处理方法。路由简单的来说就是根据用户请求的 URL 链接来判断对应的处理程序，并返回处理结果，也就是 URL 与 Django 的视图建立映射关系。
+Django 路由在 urls.py 配置，urls.py 中的每一条配置对应相应的处理方法。
+前端请求方式 GET，表示向服务器获取资源 POST，表示向服务器提交信息，通常用于产生新的数据，比如注册 PUT，表示希望修改服务器的数据，通常用于修改 DELETE，表示希望删除服务器的数据 OPTIONS，发生在跨域的预检请求中，表示客户端向服务器申请跨域提交 TRACE，回显服务器收到的请求，主要用于测试和诊断 CONNECT，用于建立连接管道，通常在代理场景中使用，网页中很少用到GET，表示向服务器获取资源 POST，表示向服务器提交信息，通常用于产生新的数据，比如注册 PUT，表示希望修改服务器的数据，通常用于修改 DELETE，表示希望删除服务器的数据 OPTIONS，发生在跨域的预检请求中，表示客户端向服务器申请跨域提交 TRACE，回显服务器收到的请求，主要用于测试和诊断 CONNECT，用于建立连接管道，通常在代理场景中使用，网页中很少用到 GET和POST的区别
+从 http 协议的角度来说，GET 和 POST 它们都只是请求行中的第一个单词，除了语义不同，其实没有本质的区别。 之所以在实际开发中会产生各种区别，主要是因为浏览器的默认行为造成的。 受浏览器的影响，在实际开发中，GET 和 POST 有以下区别：
+浏览器在发送 GET 请求时，不会附带请求体 GET 请求的传递信息量有限，适合传递少量数据；POST 请求的传递信息量是没有限制的，适合传输大量数据。 GET 请求只能传递 ASCII 数据，遇到非 ASCII 数据需要进行编码；POST 请求没有限制 大部分 GET 请求传递的数据都附带在 path 参数中，能够通过分享地址完整的重现页面，但同时也暴露了数据，若有敏感数据传递，不应该使用 GET 请求，至少不应该放到 path 中 刷新页面时，若当前的页面是通过 POST 请求得到的，则浏览器会提示用户是否重新提交。若是 GET 请求得到的页面则没有提示。 GET 请求的地址可以被保存为浏览器书签，POST 不可以 纯手撸web框架 在写代码之前需要先了解web框架的本质是什么？"/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://jinkes-li.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://jinkes-li.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="https://jinkes-li.github.io/">
+  
+    <div id="logo" style="background-image: url(https://jinkes-li.github.io/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>self-salvation</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/posts/">All posts</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+        <li><a href="/python">Python</a></li>
+      
+        <li><a href="/databases">databases</a></li>
+      
+        <li><a href="/web">web</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h3 id="初识django">初识Django</h3>
+<h4 id="前言">前言：</h4>
+<p>本章主要是对web框架做一个基础了解，为了接下来学习前端框架做铺垫</p>
+<h3 id="必备知识点">必备知识点：</h3>
+<ul>
+<li>什么是路由
+路由简单的来说就是根据用户请求的 URL 链接来判断对应的处理程序，并返回处理结果，也就是 URL 与 Django 的视图建立映射关系。</li>
+</ul>
+<p>Django 路由在 urls.py 配置，urls.py 中的每一条配置对应相应的处理方法。路由简单的来说就是根据用户请求的 URL 链接来判断对应的处理程序，并返回处理结果，也就是 URL 与 Django 的视图建立映射关系。</p>
+<p>Django 路由在 urls.py 配置，urls.py 中的每一条配置对应相应的处理方法。</p>
+<ul>
+<li>前端请求方式
+GET，表示向服务器获取资源
+POST，表示向服务器提交信息，通常用于产生新的数据，比如注册
+PUT，表示希望修改服务器的数据，通常用于修改
+DELETE，表示希望删除服务器的数据
+OPTIONS，发生在跨域的预检请求中，表示客户端向服务器申请跨域提交
+TRACE，回显服务器收到的请求，主要用于测试和诊断
+CONNECT，用于建立连接管道，通常在代理场景中使用，网页中很少用到GET，表示向服务器获取资源
+POST，表示向服务器提交信息，通常用于产生新的数据，比如注册
+PUT，表示希望修改服务器的数据，通常用于修改
+DELETE，表示希望删除服务器的数据
+OPTIONS，发生在跨域的预检请求中，表示客户端向服务器申请跨域提交
+TRACE，回显服务器收到的请求，主要用于测试和诊断
+CONNECT，用于建立连接管道，通常在代理场景中使用，网页中很少用到</li>
+</ul>
+<p>GET和POST的区别</p>
+<p>从 http 协议的角度来说，GET 和 POST 它们都只是请求行中的第一个单词，除了语义不同，其实没有本质的区别。
+之所以在实际开发中会产生各种区别，主要是因为浏览器的默认行为造成的。
+受浏览器的影响，在实际开发中，GET 和 POST 有以下区别：</p>
+<ol>
+<li>浏览器在发送 GET 请求时，不会附带请求体</li>
+<li>GET 请求的传递信息量有限，适合传递少量数据；POST 请求的传递信息量是没有限制的，适合传输大量数据。</li>
+<li>GET 请求只能传递 ASCII 数据，遇到非 ASCII 数据需要进行编码；POST 请求没有限制</li>
+<li>大部分 GET 请求传递的数据都附带在 path 参数中，能够通过分享地址完整的重现页面，但同时也暴露了数据，若有敏感数据传递，不应该使用 GET 请求，至少不应该放到 path 中</li>
+<li>刷新页面时，若当前的页面是通过 POST 请求得到的，则浏览器会提示用户是否重新提交。若是 GET 请求得到的页面则没有提示。</li>
+<li>GET 请求的地址可以被保存为浏览器书签，POST 不可以</li>
+</ol>
+<ul>
+<li>纯手撸web框架</li>
+</ul>
+<blockquote>
+<p>在写代码之前需要先了解web框架的本质是什么？</p>
+<ol>
+<li>本质上web框架就是将前端与后端串联起来的一个中间介质，这是代码实现web的本质</li>
+<li>框架的本质就好像是房子的主体结构一样，规定了这个放在必须按照这个规格建造，而框架也是如此</li>
+</ol>
+</blockquote>
+<p>在写web框架之前需要先理一下如何写web框架的思路，思路如下</p>
+<ol>
+<li>编写Socket服务端代码
+服务端代码在返回信息时需要使用http协议返回</li>
+<li>根据URL路由获取不同的页面内容
+获取用户输入的后缀&raquo;&gt;: 请求数据信息GET信息
+3.处理请求数据获取路由</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 文件 socket_server.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> socket
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>server <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket()  <span style="color:#75715e"># TCP</span>
+</span></span><span style="display:flex;"><span>server<span style="color:#f92672">.</span>bind((<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#ae81ff">8888</span>))  <span style="color:#75715e"># IP PORT</span>
+</span></span><span style="display:flex;"><span>server<span style="color:#f92672">.</span>listen(<span style="color:#ae81ff">5</span>)  <span style="color:#75715e"># 半连接池</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>    sock, address <span style="color:#f92672">=</span> server<span style="color:#f92672">.</span>accept()  <span style="color:#75715e"># 等待链接</span>
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)  <span style="color:#75715e"># 字节(bytes)</span>
+</span></span><span style="display:flex;"><span>    sock<span style="color:#f92672">.</span>send(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;HTTP/1.1 200 OK</span><span style="color:#ae81ff">\r\n\r\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    data_str <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf8&#39;</span>)  <span style="color:#75715e"># 先转换成字符串</span>
+</span></span><span style="display:flex;"><span>    target_url <span style="color:#f92672">=</span> data_str<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)[<span style="color:#ae81ff">1</span>]  <span style="color:#75715e"># 按照空格切割得到路由</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> target_url <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;/index&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;index.html&#39;</span>, <span style="color:#e6db74">&#39;rb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>            sock<span style="color:#f92672">.</span>send(f<span style="color:#f92672">.</span>read())
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> target_url <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;/login&#39;</span>:
+</span></span><span style="display:flex;"><span>        sock<span style="color:#f92672">.</span>send(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;login page&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        sock<span style="color:#f92672">.</span>send(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;home page!&#39;</span>)
+</span></span></code></pre></div><ul>
+<li>基于wsgire模块</li>
+</ul>
+<blockquote>
+<p>wsgiref模块其实就是将整个请求信息给封装了起来，就不需要你自己处理了，假如它将所有请求信息封装成了一个叫做request的对象，
+那么你直接request.path就能获取到用户这次请求的路径，request.method就能获取到本次用户请求的请求方式(get还是post)等，</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">wsgire 是内置模块，现在很多主流的web框架都使用了这个模块
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">功能：
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	1 . 封装了socket代码
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	2. 处理请求数据
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">使用这个模块主要用来解决上面使用socket模块带来的一些问题
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1. 固定代码启动服务端
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2. 查看处理之后的request字典分析数据
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3. 根据不同的路由返回不同的内容：根据request返回的数据处理
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">4. 针对于上述的 1 3 问题使用下列代码处理
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(request, response):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param request:  请求相关数据，是有模块处理好的大字典信息
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param response: 响应相关的数据
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return:   返回给客户端的真实数据
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    response(<span style="color:#e6db74">&#39;200 OK&#39;</span>, [])  <span style="color:#75715e"># 固定格式</span>
+</span></span><span style="display:flex;"><span>    path_info <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;PATH_INFO&#39;</span>)  <span style="color:#75715e"># 请求头的信息</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> path_info <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;/index&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> [<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;index&#39;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> path_info <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;/login&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> [<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;login&#39;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;hello wsgiref module&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    server <span style="color:#f92672">=</span> make_server(<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#ae81ff">8080</span>, run)  <span style="color:#75715e"># 实时监听服务端运行的端口，一旦有请求过来自动给第三个参数加括号传参并调用</span>
+</span></span><span style="display:flex;"><span>    server<span style="color:#f92672">.</span>serve_forever()  <span style="color:#75715e"># 启动服务端def run(request, response):</span>
+</span></span></code></pre></div><p>通过上述代码我们解决了 1 和 3 的问题也就是固定启动服务端，也可以得到request处理之后的大字典，关于最后我们需要对代码做优化和封装继续向下看</p>
+<ul>
+<li>代码封装优化</li>
+</ul>
+<blockquote>
+<p>为什么需要优化</p>
+<ol>
+<li>路由匹配问题：如果路由很多如何匹配？代码重复率过高</li>
+<li>匹配成功后执行的代码或页面有多有少，如何处理？</li>
+</ol>
+</blockquote>
+<p>#####上面说了为什么要优化代码，以及上面代码带来的问题，接下来考虑如何优化</p>
+<ol>
+<li>使用函数封装和模块拆分的方式拆分代码</li>
+<li>将分支代码封装为一个一个的函数</li>
+<li>将路由和函数名做对应关系</li>
+<li>获取路由循环匹配</li>
+</ol>
+<p>根据上述优化完成之后，向增加新的功能只需要添加对应函数和对应关系即可
+文件的拆分：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>views<span style="color:#f92672">.</span>py   <span style="color:#75715e"># 对应核心业务逻辑（功能函数）</span>
+</span></span><span style="display:flex;"><span>urls<span style="color:#f92672">.</span>py  <span style="color:#75715e"># 存储路由和功能函数的存储关系</span>
+</span></span><span style="display:flex;"><span>templates目录  <span style="color:#75715e"># 为了防止html文件太多太乱，创建相应的文件夹存放</span>
+</span></span></code></pre></div><p>代码优化的准备工作已经可以了 ，接下来在优化代码之前，需要先了解一下什么是动静态网页和jinja2模版的语法和使用</p>
+<ul>
+<li>动静态网页</li>
+</ul>
+<blockquote>
+<p>简单来说静态页面就是与后端无交互，动态就是有交互，在优化时就需要将静态返回做为动态返回</p>
+</blockquote>
+<ol>
+<li>静态网页：
+静态网页
+一般是编写好不会改变的，或者改变会从新编写的，数据来源是编写时就已经确定了，比如说宣传中的海报，请求方式为GET获取</li>
+<li>动态网页：
+在编写时数据来源并不固定，一般指的的来源于数据库，比如说网页上的登录时间展示等，需要向后端提交一定的信息，请求方式一般为POST</li>
+</ol>
+<ul>
+<li>jinja2模版语法与使用
+这里是 Jinja2 通用模板语言的文档。 Jinja2 在其是一个 Python 2.4 库之前，被设计 为是灵活、快速和安全的这里是 Jinja2 通用模板语言的文档。 Jinja2 在其是一个 Python 2.4 库之前，被设计 为是灵活、快速和安全的
+jinja2 在使用时可以处理接收的字典信息，并且可以使用句垫符，中括号，以及get的方式取值</li>
+</ul>
+<h3 id="代码优化">代码优化</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 使用文件分离和jinja2对代码进行优化</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.</span> 服务端代码 socket_server<span style="color:#f92672">.</span>py
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> wsgiref.simple_server <span style="color:#f92672">import</span> make_server
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> views <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> urls <span style="color:#f92672">import</span> urls
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(request, response):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param request:  请求相关数据，是有模块处理好的大字典信息
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param response: 响应相关的数据
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return:   返回给客户端的真实数据
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    response(<span style="color:#e6db74">&#39;200 OK&#39;</span>, [])  <span style="color:#75715e"># 固定格式</span>
+</span></span><span style="display:flex;"><span>    path_info <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;PATH_INFO&#39;</span>)  <span style="color:#75715e"># 请求头的信息</span>
+</span></span><span style="display:flex;"><span>    func_name <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>  <span style="color:#75715e"># 定义一个用于后续存储用户函数名的变量</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> url_tuple <span style="color:#f92672">in</span> urls:  <span style="color:#75715e"># 函数名</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> path_info <span style="color:#f92672">==</span> url_tuple[<span style="color:#ae81ff">0</span>]:
+</span></span><span style="display:flex;"><span>            func_name <span style="color:#f92672">=</span> url_tuple[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>  <span style="color:#75715e"># 匹配成功后无需再向后匹配</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> func_name:
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> func_name(request)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> error_func(request)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [res<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf8&#39;</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    server <span style="color:#f92672">=</span> make_server(<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#ae81ff">8080</span>, run)  <span style="color:#75715e"># 实时监听服务端运行的端口，一旦有请求过来自动给第三个参数加括号传参并调用</span>
+</span></span><span style="display:flex;"><span>    server<span style="color:#f92672">.</span>serve_forever()  <span style="color:#75715e"># 启动服务端</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2.</span> views<span style="color:#f92672">.</span>py
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> jinja2 <span style="color:#f92672">import</span> Template
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_dict</span>(request):
+</span></span><span style="display:flex;"><span>    user_dict <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;jason&#39;</span>, <span style="color:#e6db74">&#39;age&#39;</span>: <span style="color:#ae81ff">18</span>, <span style="color:#e6db74">&#39;person_list&#39;</span>: [<span style="color:#e6db74">&#39;阿珍&#39;</span>, <span style="color:#e6db74">&#39;阿强&#39;</span>, <span style="color:#e6db74">&#39;阿香&#39;</span>, <span style="color:#e6db74">&#39;阿红&#39;</span>]}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;templates/get_dict_page.html&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>        date <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>    temp_obj <span style="color:#f92672">=</span> Template(date)  <span style="color:#75715e"># 将页面数据使用模版处理</span>
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> temp_obj<span style="color:#f92672">.</span>render({<span style="color:#e6db74">&#39;user_dict&#39;</span>: user_dict})  <span style="color:#75715e"># 给页面传了一个 变量名是user_dict值是字典数据的数据</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">error_func</span>(request):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;not a page&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>(request):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;hello index&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">login</span>(request):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;hello login&#39;</span><span style="color:#f92672">from</span> jinja2 <span style="color:#f92672">import</span> Template
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.</span> urls<span style="color:#f92672">.</span>py
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> views <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>urls <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;/index&#39;</span>, index),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;/login&#39;</span>, login),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;/get_dict&#39;</span>, get_dict)
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4.</span> get_dict_page<span style="color:#f92672">.</span>html
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">!</span>DOCTYPE html<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>html lang<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>head<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>meta charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>title<span style="color:#f92672">&gt;</span>Title<span style="color:#f92672">&lt;/</span>title<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/</span>head<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>body<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>{{ user_dict }}<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>{{  user_dict<span style="color:#f92672">.</span>name }}<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>{{ user_dict[<span style="color:#e6db74">&#39;age&#39;</span>] }}<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>{{ user_dict<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;person_list&#39;</span>) }}<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/</span>body<span style="color:#f92672">&gt;</span>
+</span></span></code></pre></div><ul>
+<li>前端后端数据库联动</li>
+</ul>
+<blockquote>
+<p>将数据库中的表以表格的形式在web前端展示</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span> 数据表及数据
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> desc userinfo;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+-------+-------------+------+-----+---------+----------------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> Field <span style="color:#f92672">|</span> Type        <span style="color:#f92672">|</span> Null <span style="color:#f92672">|</span> Key <span style="color:#f92672">|</span> Default <span style="color:#f92672">|</span> Extra          <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+-------+-------------+------+-----+---------+----------------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> id    <span style="color:#f92672">|</span> int(<span style="color:#ae81ff">11</span>)     <span style="color:#f92672">|</span> NO   <span style="color:#f92672">|</span> PRI <span style="color:#f92672">|</span> NULL    <span style="color:#f92672">|</span> auto_increment <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> name  <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">32</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> NULL    <span style="color:#f92672">|</span>                <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> age   <span style="color:#f92672">|</span> int(<span style="color:#ae81ff">11</span>)     <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> NULL    <span style="color:#f92672">|</span>                <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+-------+-------------+------+-----+---------+----------------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> rows <span style="color:#f92672">in</span> set (<span style="color:#ae81ff">0.02</span> sec)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mysql<span style="color:#f92672">&gt;</span> select <span style="color:#f92672">*</span> <span style="color:#f92672">from</span> userinfo;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+----+-----------+-----+</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> id <span style="color:#f92672">|</span> name      <span style="color:#f92672">|</span> age <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+----+-----------+-----+</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> xiaocheng <span style="color:#f92672">|</span>  <span style="color:#ae81ff">38</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> wesley    <span style="color:#f92672">|</span>  <span style="color:#ae81ff">18</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span> xiaowang  <span style="color:#f92672">|</span>  <span style="color:#ae81ff">28</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span> wesleyaaa <span style="color:#f92672">|</span>  <span style="color:#ae81ff">18</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">5</span> <span style="color:#f92672">|</span> wang      <span style="color:#f92672">|</span>  <span style="color:#ae81ff">28</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">6</span> <span style="color:#f92672">|</span> wesley55  <span style="color:#f92672">|</span>  <span style="color:#ae81ff">18</span> <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+----+-----------+-----+</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span> rows <span style="color:#f92672">in</span> set (<span style="color:#ae81ff">0.01</span> sec)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">------------------------------</span>联动代码<span style="color:#f92672">----------------------</span>
+</span></span><span style="display:flex;"><span>目录文件:
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">├──</span> index<span style="color:#f92672">.</span>html
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">├──</span> socket_server<span style="color:#f92672">.</span>py
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">├──</span> templates
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">└──</span> get_dict_page<span style="color:#f92672">.</span>html
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">├──</span> urls<span style="color:#f92672">.</span>py
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">└──</span> views<span style="color:#f92672">.</span>py
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-----------</span>socket_server<span style="color:#f92672">.</span>py<span style="color:#f92672">-----------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> wsgiref.simple_server <span style="color:#f92672">import</span> make_server
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> views <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> urls <span style="color:#f92672">import</span> urls
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(request, response):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param request:  请求相关数据，是有模块处理好的大字典信息
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param response: 响应相关的数据
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return:   返回给客户端的真实数据
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    response(<span style="color:#e6db74">&#39;200 OK&#39;</span>, [])  <span style="color:#75715e"># 固定格式</span>
+</span></span><span style="display:flex;"><span>    path_info <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;PATH_INFO&#39;</span>)  <span style="color:#75715e"># 请求头的信息</span>
+</span></span><span style="display:flex;"><span>    func_name <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>  <span style="color:#75715e"># 定义一个用于后续存储用户函数名的变量</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> url_tuple <span style="color:#f92672">in</span> urls:  <span style="color:#75715e"># 函数名</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> path_info <span style="color:#f92672">==</span> url_tuple[<span style="color:#ae81ff">0</span>]:
+</span></span><span style="display:flex;"><span>            func_name <span style="color:#f92672">=</span> url_tuple[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>  <span style="color:#75715e"># 匹配成功后无需再向后匹配</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> func_name:
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> func_name(request)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> error_func(request)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [res<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf8&#39;</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    server <span style="color:#f92672">=</span> make_server(<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#ae81ff">8080</span>, run)  <span style="color:#75715e"># 实时监听服务端运行的端口，一旦有请求过来自动给第三个参数加括号传参并调用</span>
+</span></span><span style="display:flex;"><span>    server<span style="color:#f92672">.</span>serve_forever()  <span style="color:#75715e"># 启动服务端</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">----------------------</span>templates<span style="color:#f92672">/</span>get_dict_page<span style="color:#f92672">.</span>html<span style="color:#f92672">----------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">!</span>DOCTYPE html<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>html lang<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>head<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>meta charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>title<span style="color:#f92672">&gt;</span>Title<span style="color:#f92672">&lt;/</span>title<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>script src<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.js&#34;</span><span style="color:#f92672">&gt;&lt;/</span>script<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>link rel<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> href<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/</span>head<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>body<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>div class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;container&#34;</span><span style="color:#f92672">&gt;&lt;/</span>div<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>div class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;row&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span>h1 class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text-center&#34;</span><span style="color:#f92672">&gt;</span>数据展示<span style="color:#f92672">&lt;/</span>h1<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;</span>a href<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/index&#34;</span><span style="color:#f92672">&gt;</span>点击跳转index<span style="color:#f92672">&lt;/</span>a<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;</span>div class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;col-md-8 col-md-offset-2&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;</span>table class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;table table-hover table-striped&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;</span>thead<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;</span>tr<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&lt;</span>th<span style="color:#f92672">&gt;</span>id<span style="color:#f92672">&lt;/</span>th<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&lt;</span>th<span style="color:#f92672">&gt;</span>name<span style="color:#f92672">&lt;/</span>th<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&lt;</span>th<span style="color:#f92672">&gt;</span>age<span style="color:#f92672">&lt;/</span>th<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;/</span>tr<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;/</span>thead<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;</span>tbody<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">!</span><span style="color:#f92672">--</span>                        [{}{}{}]<span style="color:#f92672">--&gt;</span>
+</span></span><span style="display:flex;"><span>                        {<span style="color:#f92672">%</span> <span style="color:#66d9ef">for</span> user_dict <span style="color:#f92672">in</span> user_data_list <span style="color:#f92672">%</span>}
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;</span>tr<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&lt;</span>td<span style="color:#f92672">&gt;</span>{{ user_dict<span style="color:#f92672">.</span>id }}<span style="color:#f92672">&lt;/</span>td<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&lt;</span>td<span style="color:#f92672">&gt;</span>{{ user_dict<span style="color:#f92672">.</span>name }}<span style="color:#f92672">&lt;/</span>td<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&lt;</span>td<span style="color:#f92672">&gt;</span>{{ user_dict<span style="color:#f92672">.</span>age }}<span style="color:#f92672">&lt;/</span>td<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&lt;/</span>tr<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                        {<span style="color:#f92672">%</span> endfor <span style="color:#f92672">%</span>}
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&lt;/</span>tbody<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;/</span>table<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;/</span>div<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/</span>div<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/</span>body<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/</span>html<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-----------------</span>views<span style="color:#f92672">.</span>py<span style="color:#f92672">--------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pymysql
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_user</span>(request):
+</span></span><span style="display:flex;"><span>    conn <span style="color:#f92672">=</span> pymysql<span style="color:#f92672">.</span>connect(
+</span></span><span style="display:flex;"><span>        user<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;root&#39;</span>,
+</span></span><span style="display:flex;"><span>        password<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Videojet2029@&#39;</span>,
+</span></span><span style="display:flex;"><span>        host<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;121.4.86.62&#39;</span>,
+</span></span><span style="display:flex;"><span>        port<span style="color:#f92672">=</span><span style="color:#ae81ff">3306</span>,
+</span></span><span style="display:flex;"><span>        db<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;django&#39;</span>,
+</span></span><span style="display:flex;"><span>        charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>,
+</span></span><span style="display:flex;"><span>        autocommit<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    cursor <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor(cursor<span style="color:#f92672">=</span>pymysql<span style="color:#f92672">.</span>cursors<span style="color:#f92672">.</span>DictCursor)
+</span></span><span style="display:flex;"><span>    sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;select * from userinfo;&#34;</span>
+</span></span><span style="display:flex;"><span>    cursor<span style="color:#f92672">.</span>execute(sql)
+</span></span><span style="display:flex;"><span>    user_data <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>fetchall()
+</span></span><span style="display:flex;"><span>    print(user_data)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 读取数据</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;templates/get_dict_page.html&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>    temp_obj <span style="color:#f92672">=</span> Template(data)
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> temp_obj<span style="color:#f92672">.</span>render({<span style="color:#e6db74">&#39;user_data_list&#39;</span>: user_data})
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> resimport pymysql
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">----------------</span>urls<span style="color:#f92672">---------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> views <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>urls <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;/index&#39;</span>, index),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;/login&#39;</span>, login),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;/get_dict&#39;</span>, get_dict),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;/get_user&#39;</span>, get_user)
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><ul>
+<li>
+<p>web主流框架介绍
+1.django
+大而全 自身自带的功能组件非常的多 类似于航空母舰 	
+2.flask
+小而精 自身自带的功能组件非常的少 类似于游骑兵
+几乎所有的功能都需要依赖于第三方模块
+3.tornado
+异步非阻塞 速度极快效率极高甚至可以充当游戏服务端
+ps:sanic、fastapi&hellip;</p>
+</li>
+<li>
+<p>django框架简介</p>
+</li>
+</ul>
+<blockquote>
+<p>注意事项
+1.django项目中所有的文件名目录名不要出现中文
+2.计算机名称尽量也不要出现中文
+3.一个pycharm尽量就是一个完整的项目(不要嵌套 不要叠加)
+4.不同版本的python解释器与不同版本的django可能会出现小问题</p>
+</blockquote>
+<p>Python下有许多款不同的 Web 框架。Django是重量级选手中最有代表性的一位。许多成功的网站和APP都基于Django。
+Django 是一个开放源代码的 Web 应用框架，由 Python 写成。
+Django 遵守 BSD 版权，初次发布于 2005 年 7 月, 并于 2008 年 9 月发布了第一个正式版本 1.0 。
+Django 采用了 MVT 的软件设计模式，即模型（Model），视图（View）和模板（Template）</p>
+<ul>
+<li>名词解释</li>
+</ul>
+<ol>
+<li>路由  用于判断用户需要请求页面的url后缀</li>
+<li>函数  视图函数</li>
+<li>视图类</li>
+</ol>
+<ul>
+<li>djando中的重要层级</li>
+</ul>
+<ol>
+<li>urls.py 路由层</li>
+<li>views.py 视图层</li>
+<li>models.py 模型层</li>
+<li>templates 模版层</li>
+</ol>
+<ul>
+<li>django基本操作命令</li>
+</ul>
+<ol>
+<li>下载</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pip3 install django  <span style="color:#75715e"># 如果输入太慢可以使用 -i 参数临时使用国内源</span>
+</span></span></code></pre></div><ol start="2">
+<li>验证是否安装成功</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span> wesley<span style="color:#f92672">@*****</span> <span style="color:#960050;background-color:#1e0010">⮀</span> <span style="color:#f92672">~</span> <span style="color:#960050;background-color:#1e0010">⮀</span> django<span style="color:#f92672">-</span>admin
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">····</span>
+</span></span><span style="display:flex;"><span>[django]
+</span></span><span style="display:flex;"><span>    check
+</span></span><span style="display:flex;"><span>    compilemessages
+</span></span><span style="display:flex;"><span>    createcachetable
+</span></span><span style="display:flex;"><span>    dbshell
+</span></span><span style="display:flex;"><span>    diffsettings
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">····</span>
+</span></span></code></pre></div><ol start="3">
+<li>常用指令</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1. 创建django项目
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">django-admin startproject [projectname]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2. 启动项目
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">cd projectname &amp;&amp; python3 manage.py runserver ip:port
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3. 创建app
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">python3 manage.py startapp [appname]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">注意：使用命令新创建的app应用需要注册
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">创建的app一定要去settings.py中注册
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	INSTALLED_APPS = [
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    	&#39;app01.apps.App01Config&#39;,  # 写法一
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		&#39;app02&#39;  # 写法二
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">使用Pycharm创建项目的注意事项
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1. 会自动创建templates文件夹，配置文件中可能会报错
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">更改/符号为：os.path.join(BASE_DRT, &#39;templates&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>django app 概念
+django整体就类似是一所大学，app类似于大学中的各个学院，每个都是独立的
+django里面的app类似于某个具体的功能模块
+user app 所有的用户相关的都写在user app下
+goods app 所有的商品相关的都卸载goods app下</p>
+</li>
+<li>
+<p>django主要目录结构</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span> wesley<span style="color:#a6e22e">@wesley</span> <span style="color:#960050;background-color:#1e0010">⮀</span> <span style="color:#f92672">~/</span>PycharmProjects<span style="color:#f92672">/</span>django_test <span style="color:#960050;background-color:#1e0010">⮀</span> tree <span style="color:#f92672">-</span>L <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">├──</span> django_test  <span style="color:#75715e"># django 项目名</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">├──</span> __init__<span style="color:#f92672">.</span>py  <span style="color:#75715e"># 包文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">├──</span> settings<span style="color:#f92672">.</span>py  <span style="color:#75715e"># 配置文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">├──</span> urls<span style="color:#f92672">.</span>py  <span style="color:#75715e">#  路由文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">└──</span> wsgi<span style="color:#f92672">.</span>py  <span style="color:#75715e"># wsgiref网关文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">├──</span> manage<span style="color:#f92672">.</span>py  <span style="color:#75715e"># 入口文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">└──</span> templates  <span style="color:#75715e"># 存储html文件</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>django  项目目录名
+</span></span><span style="display:flex;"><span>django  项目同名目录
+</span></span><span style="display:flex;"><span>	settings<span style="color:#f92672">.</span>py		 配置文件
+</span></span><span style="display:flex;"><span>    urls<span style="color:#f92672">.</span>py			存储网址后缀与函数名对应关系(不严谨)
+</span></span><span style="display:flex;"><span>   	wsgi<span style="color:#f92672">.</span>py			wsgiref网关文件
+</span></span><span style="display:flex;"><span>	db<span style="color:#f92672">.</span>sqlite3文件	   django自带的小型数据库(项目启动之后才会出现)
+</span></span><span style="display:flex;"><span>	manage<span style="color:#f92672">.</span>py			 入口文件(命令提供)
+</span></span><span style="display:flex;"><span>应用目录
+</span></span><span style="display:flex;"><span>    migrations目录 存储数据库相关记录
+</span></span><span style="display:flex;"><span>    admin<span style="color:#f92672">.</span>py  django内置的admin后台管理功能
+</span></span><span style="display:flex;"><span>    apps<span style="color:#f92672">.</span>py			注册app相关
+</span></span><span style="display:flex;"><span>   	models<span style="color:#f92672">.</span>py		 与数据库打交道的(非常重要)
+</span></span><span style="display:flex;"><span>    tests<span style="color:#f92672">.</span>py		 测试文件
+</span></span><span style="display:flex;"><span>    views<span style="color:#f92672">.</span>py		 存储功能函数(不严谨)
+</span></span><span style="display:flex;"><span>   	templates目录			存储html文件(命令行不会自动创建 pycharm会)
+</span></span><span style="display:flex;"><span>    配置文件中还需要配置路径
+</span></span><span style="display:flex;"><span>    [os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(BASE_DIR,<span style="color:#e6db74">&#39;templates&#39;</span>),]
+</span></span></code></pre></div><ul>
+<li>diango小白必会三板斧</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 需要导入模块</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render, HttpResponse, redirect
+</span></span><span style="display:flex;"><span>HttpResponse  <span style="color:#75715e"># 返回字符串类型的数据</span>
+</span></span><span style="display:flex;"><span>render  <span style="color:#75715e"># 返回html页面并支持传值</span>
+</span></span><span style="display:flex;"><span>redirect  <span style="color:#75715e"># 重定向</span>
+</span></span></code></pre></div>
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  self-salvation 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts/">All posts</a></li>
+         
+        <li><a href="/tags">Tags</a></li>
+         
+        <li><a href="/python">Python</a></li>
+         
+        <li><a href="/databases">databases</a></li>
+         
+        <li><a href="/web">web</a></li>
+         
+        <li><a href="/about">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
