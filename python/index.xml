@@ -6,7 +6,25 @@
     <description>Recent content in Pythons on self-salvation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Dec 2022 22:45:44 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Dec 2022 18:10:41 +0800</lastBuildDate><atom:link href="https://jinkes-li.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>初始Django2</title>
+      <link>https://jinkes-li.github.io/python/%E5%88%9D%E5%A7%8Bdjango2/</link>
+      <pubDate>Sun, 11 Dec 2022 18:10:41 +0800</pubDate>
+      
+      <guid>https://jinkes-li.github.io/python/%E5%88%9D%E5%A7%8Bdjango2/</guid>
+      <description>初始Django-2 前言： 静态文件配置
+request对象方法
+pycharm连接MySQL
+django连接MySQL
+django模型层初识
+基本ORM操作静态文件配置
+静态文件
+什么是静态文件，一般网页上使用的不经常变化的文件属于静态文件，主要针对于css文件，js文件，img文件和其他的一些框架文件等
+静态文件配置 django针对静态文件资源需要单独开始一个目录统一存放，一般命名为statuc目录 static目录下可以对不同的资源文件进行分类，比如 css目录 js目录 img目录 libs目录 资源访问： 在浏览器中的地址栏中之所以可以通过url后面不同的路由找到相应的资源，是因为程序员提前开了对应的资源的接口 在Django中访问静态资源需要更改默认配置
+├── django666 # 项目目录 │ ├── __init__.py │ ├── settings.py # 配置文件 │ ├── urls.py │ └── wsgi.py └── manage.py 1. 如果在Django中想使用静态文件，则需要对settings.py 文件做出对应的修改 vim settings.py # 访问静态文件资源的接口前缀(通行证) STATIC_URL = &amp;#39;/static/&amp;#39; # 需要添加的配置文件，名称必须大写，不然会被默认过滤掉，并且使用逗号隔开可以写多个 STATICFILES_DIRS = [ os.path.join(BASH_DIR, &amp;#39;static&amp;#39;) # 存储静态文件资源的目录名称 ] 2. 在接口前缀正确之后会拿着好哦吗的路径依次去上述添加的列表中，从上向下寻找，找到则返回 3. 如何动态的匹配前缀（使用Django提供的语法） {% load static %} # 使用关键字load定义前缀为static，调用如下 &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;{% static &amp;#39;bootstrap-3.</description>
+    </item>
+    
     <item>
       <title>初始django</title>
       <link>https://jinkes-li.github.io/python/%E5%88%9D%E5%A7%8Bdjango/</link>
